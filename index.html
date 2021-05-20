@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Website</title>
+  </head>
+  <body>
+    <section class="container-fluid">
+      <div class="row min-vh-100">
+        <div class="col-sm-6 d-none d-lg-block imagePict"></div>
+        <div
+          class="
+            col-sm-12 col-lg-6
+            d-flex
+            justify-content-center
+            align-items-center
+          "
+        >
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-md-8 col-xl-8">
+                <h1 class="text-center mb-3 title">Masuk</h1>
+                <div class="mb-3">
+                  <select
+                    name="jenisAkun"
+                    id="jenisAkun"
+                    class="form-select boxShadowNone"
+                  >
+                    <option class="d-none" value="0" selected>
+                      Ingin masuk sebagai
+                    </option>
+                    <option value="pertama">Dosen kepala UPIK3</option>
+                    <option value="kedua">Kabeng dan Teknisi</option>
+                    <option value="ketiga">Mahasiswa</option>
+                    <option value="keempat">Tamu</option>
+                  </select>
+                </div>
+                <form novalidate>
+                  <div class="mb-3 d-none" id="formId">
+                    <label for="nomorInduk" class="form-label"
+                      >nomorInduk</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control borderBottom boxShadowNone"
+                      id="nomorInduk"
+                      spellcheck="false"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3 d-none" id="formNama">
+                    <label for="nama" class="form-label">Nama</label>
+                    <input
+                      type="text"
+                      class="form-control borderBottom boxShadowNone"
+                      id="nama"
+                      required
+                      spellcheck="false"
+                    />
+                  </div>
+
+                  <div
+                    class="text-center text-lg-start d-none mt-5"
+                    id="submitButton"
+                  >
+                    <button type="submit" class="btn btn-dark w-100">
+                      Masuk
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
