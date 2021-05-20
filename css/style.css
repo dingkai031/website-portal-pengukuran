@@ -31,6 +31,12 @@
   box-shadow: none !important;
 }
 
+.fixed-bottom-custom {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+}
+
 a,
 a:hover {
   text-decoration: none;
@@ -56,12 +62,15 @@ a:hover {
 }
 
 .pilihan {
-  transition: all 0.2s ease-in;
-  background-size: 100vh;
+  background-size: cover;
 }
 
-.pilihan:hover {
-  background-size: 105vh;
+.pilihan a {
+  transition: all 0.5s;
+}
+
+.pilihan a:hover {
+  transform: translateY(-10px);
 }
 
 .backdropFilterBlur {
@@ -79,4 +88,16 @@ a:hover {
   .salam p {
     font-size: 0.9em;
   }
+}
+
+@media (min-width: 992px) {
+  #keatas {
+    opacity: 0;
+  }
+}
+
+#keatas {
+  font-size: 1.4em;
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }

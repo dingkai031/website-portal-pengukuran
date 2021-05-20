@@ -55,3 +55,7 @@ form.addEventListener(
   },
   false
 );
+
+toTop.addEventListener("click", () => {
+  console.log("test");
+});
