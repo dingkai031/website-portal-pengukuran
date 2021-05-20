@@ -8,25 +8,6 @@ const submitButton = document.querySelector("#submitButton");
 
 const form = document.querySelector("form");
 
-const feedBack = {
-  nomorInduk: {
-    isInvalidNomor: function () {
-      const elementFeedBack = document.createElement("div");
-      elementFeedBack.classList.add("invalid-feedback");
-      elementFeedBack.innerText = "Silahkan diperiksa lagi";
-      formId.appendChild(elementFeedBack);
-    }
-  },
-  nama: {
-    isInvalidNama: function () {
-      const elementFeedBack = document.createElement("div");
-      elementFeedBack.classList.add("invalid-feedback");
-      elementFeedBack.innerText = "Silahkan diperiksa lagi";
-      formNama.appendChild(elementFeedBack);
-    }
-  }
-};
-
 akun.addEventListener("change", e => {
   const pilihan = e.target.value;
 
@@ -71,8 +52,6 @@ form.addEventListener(
       e.stopPropagation();
     }
     form.classList.add("was-validated");
-    feedBack.nomorInduk.isInvalidNomor();
-    feedBack.nama.isInvalidNama();
   },
   false
 );
