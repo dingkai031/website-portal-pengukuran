@@ -101,3 +101,31 @@ a:hover {
   opacity: 0;
   transition: opacity 0.4s ease;
 }
+
+#sidemenu {
+  width: 280px;
+  transition: 0.25s width ease-in-out;
+}
+
+#titleInspeksiPlk {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.menu-item {
+  padding: 0;
+  display: block;
+}
+
+.keluar .btn:hover,
+.keluar .btn:active,
+.keluar .btn:focus {
+  background-color: #e03444;
+  color: #fff;
+}
+
+.text-clip {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+}
