@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- ===== BOOTSTRAP 5 ===== -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+
+    <!-- ===== Font Awesome ===== -->
+    <link
+      rel="stylesheet"
+      href="/@fortawesome/fontawesome-free/css/all.min.css"
+    />
+	 <!-- ===== flatpickr ===== -->
+    <link rel="stylesheet" href="/flatpickr/dist/flatpickr.min.css" />
+	
+	 <!-- ===== select2 ===== -->
+    <link rel="stylesheet" href="/select2/dist/css/select2.min.css" />
+	
+	<!-- ===== select2 - Bootstrap Theme ===== -->
+    <link rel="stylesheet" href="/@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css" />
+
+    <!-- ===== STYLE ===== -->
+    <link rel="stylesheet" href="/css/p3k.css" />
+    <title>P3K PPNS</title>
+  </head>
+  <body class="bg-white-custom d-flex justify-content-center align-items-center">
+    <nav class="navbar fixed-top navbar-expand-lg bg-red-custom navbar-dark shadow-sm">
+      <div class="container-fluid">
+        <a class="navbar-brand color-white-custom" href="/p3k"
+          ><img src="/img/logo.png" alt="" width="30" class="me-1" /> P3K
+          PPNS</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav color-white-custom">
+            <div class="nav-item dropdown mx-2">
+              <a
+                class="nav-link dropdown-toggle color-white-custom active"
+                href="javascript:void(0)"
+                data-bs-toggle="dropdown"
+                >Pelaporan Kecelakaan</a
+              >
+              <div class="dropdown-menu">
+                <a href="/p3k/pelaporan-kependidikan" class="dropdown-item"
+                  >Tenaga Kependidikan (minor atau mayor)</a
+                >
+                <a href="/p3k/pelaporan-mahasiswa" class="dropdown-item"
+                  >Mahasiswa (minor atau mayor)</a
+                >
+              </div>
+            </div>
+            <div class="nav-item dropdown mx-2">
+              <a
+                class="nav-link dropdown-toggle active"
+                href="javascript:void(0)"
+                data-bs-toggle="dropdown"
+                >Pendataan Ketersediaan Perlengkapan Kotak P3K</a
+              >
+              <div class="dropdown-menu">
+                <a href="/p3k/kotak-p3k-b" class="dropdown-item">Kotak P3K tipe B</a>
+                <a href="/p3k/kotak-p3k-C" class="dropdown-item">Kotak P3K tipe C</a>
+              </div>
+            </div>
+            <div class="nav-item dropdown ms-2">
+              <a
+                class="nav-link dropdown-toggle active"
+                href="javascript:void(0)"
+                data-bs-toggle="dropdown"
+                >Lain-lain</a
+              >
+              <div class="dropdown-menu">
+                <a href="#" class="dropdown-item"
+                  >Pendataan ketersediaan alat evakuasi korban</a
+                >
+                <a href="#" class="dropdown-item"
+                  >Formulir Pemulihan Perlengkapan P3K dan Alat Evakuasi yang
+                  Rusak</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="container">

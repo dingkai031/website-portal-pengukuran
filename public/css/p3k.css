@@ -1,0 +1,132 @@
+/*===== GOOGLE FONTS =====*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+/*===== VARIABLES CSS =====*/
+:root {
+  --header-height: 4rem;
+
+  /*===== Colors =====*/
+  --first-color: #34495e;
+  --first-color-light: #99abd5;
+  --white-color: #fff;
+
+  /*===== Font and typography =====*/
+  --body-font: "Poppins", sans-serif;
+  --normal-font-size: 1rem;
+
+  /*===== z index =====*/
+  --z-fixed: 100;
+}
+
+/*===== BASE =====*/
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  transition: 0.5s;
+  padding-top: calc(var(--header-height) + 1rem);
+  padding-bottom: 1rem;
+}
+
+/* do not group these rules */
+*::-webkit-input-placeholder {
+  color: #a1a5b7 !important;
+}
+
+*::placeholder {
+  /* modern browser */
+  color: #a1a5b7 !important;
+}
+
+a {
+  text-decoration: none;
+}
+
+.bg-red-custom {
+  background-color: #f05945;
+}
+
+.bg-white-custom {
+  background-color: #eeebdd;
+}
+
+.bg-black-custom {
+  background-color: #1b1717;
+}
+
+.color-white-custom {
+  color: #eeebdd;
+}
+
+.navbar-brand {
+  letter-spacing: 3px;
+  font-weight: 600;
+}
+
+.custom-border-radius {
+  border-radius: 0.476rem;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+.form-control {
+  background-color: #f5f8fa;
+  transition: 0.2s background-color;
+  border: none;
+  box-shadow: none;
+}
+
+.form-control:focus {
+  background-color: #eef3f7;
+  box-shadow: none;
+}
+
+.form-select {
+  background-color: #f5f8fa;
+  transition: 0.2s background-color;
+  border: none;
+  box-shadow: none;
+}
+
+.form-select:focus {
+  background-color: #eef3f7;
+  box-shadow: none;
+}
+
+.input-group-text {
+  border: none;
+  box-shadow: none;
+}
+
+.select2-selection {
+  background-color: #f5f8fa !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.select2-selection:focus {
+  background-color: #eef3f7 !important;
+}
+
+.select2-search {
+  background-color: #eef3f7;
+}
+.select2-search input {
+  background-color: #fff;
+}
+.select2-results {
+  background-color: #eef3f7;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

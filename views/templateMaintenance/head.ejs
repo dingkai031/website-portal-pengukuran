@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ===== BOX ICONS ===== -->
+    <link rel="stylesheet" href="/boxicons/css/boxicons.min.css" />
+
+    <!-- ===== BOOTSTRAP 5 ===== -->
+
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <!-- ===== CSS ===== -->
+    <link rel="stylesheet" href="/css/stylesSidebar.css" />
+    <!-- ===== flat pickr ===== -->
+    <link rel="stylesheet" href="/flatpickr/dist/flatpickr.min.css" />
+
+    <title>Maintenance K3 PPNS</title>
+  </head>
+  <body id="body-pd" class="bg-light">
+    <header class="header shadow" id="header">
+      <a class="header__toggle">
+        <i class="bx bx-menu" id="header-toggle"></i>
+      </a>
+
+      <div style="display: flex; align-items: center; justify-content: s">
+        <div class="header__img">
+          <img src="/img/perfil.jpg" alt="" />
+        </div>
+      </div>
+    </header>
+
+    <div class="l-navbar" id="nav-bar">
+      <nav class="nav">
+        <div>
+          <a href="/maintenance" class="nav__logo">
+            <i class="bx bx-analyse nav__logo-icon"></i>
+            <span class="nav__logo-name"
+              >Inspeksi dan <br />
+              Maintenance K3</span
+            >
+          </a>
+          <div class="nav__list">
+            <a href="/maintenance" class="nav__link active">
+              <i class="bx bx-border-all"></i>
+              <span class="nav__name">Dashboard</span>
+            </a>
+
+            <a
+              href="javascript:void(0)"
+              class="nav__link"
+              data-bs-toggle="collapse"
+              data-bs-target="#submenu"
+              id="toggle2"
+            >
+              <i class="bx bx-spreadsheet"></i>
+              <span class="nav__name">Inspeksi</span>
+              <i class="bx bxs-chevron-down" id="chevron"></i>
+            </a>
+            <div id="submenu" class="collapse">
+              <div class="d-flex flex-column">
+                <a
+                  href="#"
+                  class="nav__link my-1 ini"
+                  download="Form Inspeksi Pengukuran Lingkungan Kerja Kebisingan"
+                >
+                  <i class="bx bx-radio-circle-marked"></i>
+                  <span class="nav__name">Form Inspeksi</span>
+                </a>
+                <a
+                  href="#"
+                  class="nav__link my-1 ini"
+                  download="Form Inspeksi Pengukuran Lingkungan Kerja Getaran"
+                >
+                  <i class="bx bx-radio-circle-marked"></i>
+                  <span class="nav__name">Form Inspeksi Alat</span>
+                </a>
+                <a
+                  href="#"
+                  class="nav__link my-1 ini mb-4"
+                  download="Form Inspeksi Pengukuran Lingkungan Kerja Ventilasi"
+                >
+                  <i class="bx bx-radio-circle-marked"></i>
+                  <span class="nav__name">Cek Inspeksi</span>
+                </a>
+              </div>
+            </div>
+            <a href="/maintenance/data-alat" class="nav__link">
+              <i class="bx bx-git-compare"></i>
+              <span class="nav__name">Data Alat</span>
+            </a>
+            <a href="/maintenance/maintenance" class="nav__link">
+              <i class="bx bxs-wrench"></i>
+              <span class="nav__name">Maintenance</span>
+            </a>
+          </div>
+        </div>
+
+        <a href="#" class="nav__link">
+          <i class="bx bx-log-out nav__icon"></i>
+          <span class="nav__name">Keluar</span>
+        </a>
+      </nav>
+    </div>
+
+    <div class="container-fluid"></div>
+  </body>
+</html>

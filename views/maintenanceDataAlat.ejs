@@ -1,0 +1,259 @@
+<%- include("templateMaintenance/head") %>
+<div class="card border-0 custom-shadow">
+  <div
+    class="
+      card-header
+      border-0
+      pt-3
+      px-4
+      bg-white
+      d-flex
+      justify-content-between
+    "
+  >
+    <h3 class="card-title fw-bolder fs-3 m-0 d-flex align-items-center">
+      Data Alat
+    </h3>
+    <div class="card-toolbar">
+      <a
+        href="#"
+        class="
+          btn btn-sm btn-light-primary
+          p-2
+          custom-border-radius
+          d-flex
+          align-items-center
+        "
+      >
+        <i class="bx bx-plus-circle me-2 fs-4"></i>
+        Tambah Barang
+      </a>
+    </div>
+  </div>
+  <div class="card-body py-3">
+    <div class="table-responsive">
+      <table class="table table-borderless align-middle gy-4 align-midle">
+        <thead>
+          <tr class="text-muted fw-bolder bg-light">
+            <th class="min-width-50px text-center rounded-start">No</th>
+            <th class="min-width-100px">Nama</th>
+            <th class="min-width-250px">Tanggal Perolehan</th>
+            <th>Spesifikasi</th>
+            <th>Jumlah</th>
+            <th>Satuan</th>
+            <th>Lokasi</th>
+            <th>Kategori</th>
+            <th
+              class="min-width-200px text-center text-lg-end rounded-end"
+            ></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-center">1</td>
+            <td>test</td>
+            <td>test</td>
+            <td>test</td>
+            <td>test</td>
+            <td>test</td>
+            <td>test</td>
+            <td>test</td>
+            <td class="text-center text-lg-end pe-0">
+              <div
+                class="modal fade"
+                id="exampleModal"
+                tabindex="-1"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header border-0">
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body px-5">
+                      <form
+                        action=""
+                        class="form"
+                        spellcheck="false"
+                        autocomplete="off"
+                      >
+                        <div class="mb-3 text-center">
+                          <h3 class="mb-2">Edit alat -</h3>
+                          <div class="text-muted">
+                            Harap masukkan data dengan benar.
+                          </div>
+                        </div>
+                        <div class="d-flex flex-column mb-3">
+                          <label
+                            for="nama"
+                            class="d-flex align-items-center fw-bold mb-2"
+                          >
+                            Nama
+                          </label>
+                          <input
+                            type="text"
+                            id="nama"
+                            class="form-control border-0"
+                            name="name"
+                            required
+                            title="Harap isi form ini"
+                          />
+                        </div>
+                        <div class="d-flex flex-column mb-3">
+                          <label
+                            for="tanggal"
+                            class="d-flex align-items-center fs-6 fw-bold mb-2"
+                          >
+                            Tanggal Perolehan
+                          </label>
+                          <div class="input-group border-0 datepicker">
+                            <input
+                              type="text"
+                              id="tanggal"
+                              class="form-control border-0"
+                              name="tanggal"
+                              required
+                              title="Harap isi form ini"
+                              data-input
+                            />
+                            <span class="input-group-text border-0" data-toggle>
+                              <i class="bx bx-calendar"></i>
+                            </span>
+                          </div>
+                        </div>
+                        <div class="d-flex flex-column mb-3">
+                          <label
+                            for="spesifikasi"
+                            class="d-flex align-items-center fs-6 fw-bold mb-2"
+                          >
+                            Spesifikasi
+                          </label>
+                          <input
+                            type="text"
+                            id="spesifikasi"
+                            class="form-control border-0"
+                            name="spesifikasi"
+                            required
+                            title="Harap isi form ini"
+                          />
+                        </div>
+                        <div class="d-flex flex-column mb-3">
+                          <label
+                            for="jumlah"
+                            class="d-flex align-items-center fw-bold mb-2"
+                          >
+                            Jumlah
+                          </label>
+                          <div class="input-group">
+                            <input
+                              type="text"
+                              id="jumlah"
+                              name="jumlah"
+                              class="form-control border-0"
+                              title="Harap isi form ini"
+                              required
+                            />
+                            <span class="input-group-text border-0">unit</span>
+                          </div>
+                        </div>
+                        <div class="d-flex flex-column mb-3">
+                          <label
+                            for="lokasi"
+                            class="d-flex align-items-center fs-6 fw-bold mb-2"
+                          >
+                            Lokasi
+                          </label>
+                          <input
+                            type="text"
+                            id="lokasi"
+                            class="form-control border-0"
+                            name="lokasi"
+                            required
+                            title="Harap isi form ini"
+                          />
+                        </div>
+                        <div class="d-flex flex-column mb-4">
+                          <label
+                            for="kategori"
+                            class="d-flex align-items-center fs-6 fw-bold mb-2"
+                          >
+                            Kategori
+                          </label>
+                          <input
+                            type="text"
+                            id="kategori"
+                            class="form-control border-0"
+                            name="kategori"
+                            required
+                            title="Harap isi form ini"
+                          />
+                        </div>
+                        <div class="text-center">
+                          <button type="reset" class="btn btn-white me-3">
+                            Reset
+                          </button>
+                          <button type="submit" class="btn btn-primary">
+                            Submit
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a
+                href="#"
+                class="
+                  btn btn-action btn-action-edit
+                  d-inline-flex
+                  align-items-center
+                  justify-content-center
+                  btn-sm
+                  me-1
+                  rounded
+                "
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                <i class="bx bxs-edit fs-4"></i>
+              </a>
+              <a
+                href="#"
+                class="
+                  btn btn-action btn-action-print
+                  d-inline-flex
+                  align-items-center
+                  justify-content-center
+                  btn-sm
+                  me-1
+                  rounded
+                "
+              >
+                <i class="bx bx-printer fs-4"></i>
+              </a>
+              <a
+                href="#"
+                class="
+                  btn btn-action btn-action-delete
+                  d-inline-flex
+                  align-items-center
+                  justify-content-center
+                  btn-sm
+                  rounded
+                "
+              >
+                <i class="bx bx-trash-alt fs-4"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<%- include("templateMaintenance/footer") %>

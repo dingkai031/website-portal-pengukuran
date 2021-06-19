@@ -1,0 +1,32 @@
+{
+  "name": "web-ppns",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.3",
+    "@ttskch/select2-bootstrap4-theme": "^1.5.2",
+    "bootstrap-fileinput": "^5.2.1",
+    "boxicons": "^2.0.7",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "flatpickr": "^4.6.9",
+    "jquery": "^3.6.0",
+    "mongoose": "^5.12.12",
+    "select2": "^4.1.0-rc.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dingkai031/website-portal-pengukuran.git"
+  },
+  "author": "yovan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dingkai031/website-portal-pengukuran/issues"
+  },
+  "homepage": "https://github.com/dingkai031/website-portal-pengukuran#readme"
+}

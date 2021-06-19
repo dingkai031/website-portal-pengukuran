@@ -1,0 +1,808 @@
+<%- include("templateP3k/head") %>
+<div class="modal fade" id="minor" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bolder">Mahasiswa - Minor</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" spellcheck="false" autocomplete="off">
+          <div class="row">
+            <div class="col-12">
+              <div class="mb-3 row">
+                <div class="col-sm-6 d-flex flex-column mb-2 mb-sm-1">
+                  <label for="tanggal" class="form-label"
+                    >Tanggal</label
+                  >
+                  <div class="input-group border-0 datepicker">
+                    <input
+                      type="text"
+                      id="tanggal"
+                      class="form-control border-0"
+                      name="tanggal"
+                      required
+                      title="Harap isi form ini"
+                      data-input
+                    />
+                    <span class="input-group-text border-0" data-toggle>
+                      <i class="far fa-calendar"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-sm-6 d-flex flex-column mb-2 mb-sm-1">
+                  <label for="namakorban" class="form-label">Nama Korban</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="namakorban"
+                    name="namakorban"
+                    title="Harap isi form ini"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
+                  <label for="alamatkorban" class="form-label">Alamat</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="alamatkorban"
+                    name="alamatkorban"
+                    title="Harap isi form ini"
+                    required
+                  />
+                </div>
+                <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
+                  <label for="notelp" class="form-label">Nomor Telepon</label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    id="notelp"
+                    name="notelp"
+                    pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}"
+                    required
+                    placeholder="0811-2233-4455"
+                    title="Harap isi form ini"
+                  />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
+                  <label for="jabatan" class="form-label">Program Studi</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="jabatan"
+                    name="jabatan"
+                    title="Harap isi form ini"
+                    required
+                  />
+                </div>
+                <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
+                  <label for="nip" class="form-label">NRP</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="nip"
+                    name="nip"
+                    title="Harap isi form ini"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="tempatKecelakaan" class="form-label">Tempat Kecelakaan</label>
+                <input type="text" name="tempatKecelakaan" id="tempatKecelakaan" class="form-control" required>
+              </div>
+              <div class="mb-3 row">
+                <div class="d-flex flex-column mb-3 mb-sm-1">
+                  <label for="bagaimana" class="form-label"
+                    >Bagaimana terjadinya kecelakaan</label
+                  >
+                  <textarea
+                    name="bagaimana"
+                    id="bagaimana"
+                    rows="2"
+                    class="form-control"
+                    required
+                    title="Harap isi form ini"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <div class="d-flex flex-column mb-3 mb-sm-1">
+                  <label for="jenispekerjaan" class="form-label"
+                    >Jenis pekerjaan waktu kecelakaan</label
+                  >
+                  <textarea
+                    name="jenispekerjaan"
+                    id="jenispekerjaan"
+                    rows="2"
+                    class="form-control"
+                    required
+                    title="Harap isi form ini"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <div class="d-flex flex-column mb-3 mb-sm-1">
+                  <label for="saksi" class="form-label"
+                    >Siapa saksi yang melihat kecelakaan?</label
+                  >
+                  <textarea
+                    name="saksi"
+                    id="saksi"
+                    rows="2"
+                    class="form-control"
+                    required
+                    title="Harap isi form ini"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
+                  <label for="penyebabKecelakaanMesin" class="form-label"
+                    >Sebutkan yang menyebabkan kecelakaan mesin</label
+                  >
+                  <select
+                    name="penyebabKecelakaanMesin"
+                    id="penyebabKecelakaanMesin"
+                    class="form-select"
+                    required
+                  >
+                    <option selected class="d-none">Silahkan pilih</option>
+                    <option value="mesin">Mesin</option>
+                    <option value="pesawatInstalasi">Pesawat Instalasi</option>
+                    <option value="alatProses">Alat Proses</option>
+                    <option value="caraKerja">Cara Kerja</option>
+                    <option value="bahan">Bahan</option>
+                    <option value="lingkungan">Lingkungan</option>
+                  </select>
+                </div>
+                <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
+                  <label for="penyebabPenyakitMesin" class="form-label"
+                    >Sebutkan yang menyebabkan penyakit akibat kerja</label
+                  >
+                  <select
+                    name="penyebabPenyakitMesin"
+                    id="penyebabPenyakitMesin"
+                    class="form-select"
+                    required
+                  >
+                    <option selected class="d-none">Silahkan pilih</option>
+                    <option value="bahan">Bahan</option>
+                    <option value="proses">Proses</option>
+                    <option value="lingkungan">Lingkungan</option>
+                    <option value="caraKerja">Cara Kerja</option>
+                    <option value="sifatPekerjaan">Sifat Pekerjaan</option>
+                  </select>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
+                  <label for="akibat" class="form-label"
+                    >Akibat yang diderita korban</label
+                  >
+                  <select
+                    name="akibat"
+                    id="akibat"
+                    class="form-select"
+                    required
+                  >
+                    <option selected class="d-none">Silahkan pilih</option>
+                    <option value="meninggal">Meninggal</option>
+                    <option value="sakit">Sakit</option>
+                    <option value="luka">Luka luka</option>
+                  </select>
+                </div>
+                <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
+                  <label for="berobatJalan" class="form-label"
+                    >Berobat jalan</label
+                  >
+                  <select
+                    name="berobatJalan"
+                    id="berobatJalan"
+                    class="form-select"
+                    required
+                  >
+                    <option selected class="d-none">Silahkan pilih</option>
+                    <option value="bekerja">Sambil Bekerja</option>
+                    <option value="tidakBekerja">Tidak Bekerja</option>
+                  </select>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <div class="d-flex flex-column mb-3 mb-sm-1">
+                  <label for="perkiraanKerugian" class="form-label"
+                    >Perkiraan Kerugian</label
+                  >
+                  <div id="perkiraanKerugian" class="row">
+                    <div class="col-sm-6">
+                      <div class="input-group mb-3">
+                        <input
+                          type="number"
+                          min="0"
+                          class="form-control"
+                          name="perkiraanKerugian"
+                          required
+                          title="Harap isi form ini"
+                        />
+                        <span class="input-group-text">Jam</span>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <input
+                        type="text"
+                        class="form-control"
+                        required
+                        placeholder="Material"
+                        name="material"
+                        title="Harap isi form ini"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="d-flex flex-column mb-3 mb-sm-1">
+                  <h5 class="form-label mb-2 text-justify"
+                    >Pemulihan Mahasiswa yang sakit (diisi di tempat
+                    pemeriksaan atas kordinasi dengan petugas pemeriksa
+                    setempat) :</h5
+                  >
+
+                  <div>
+                    <label " class="form-label"
+                      >Dirawat dimana, beserta alamat</label
+                    >
+                    <div class="row mb-3">
+                      <div class="col-sm-4">
+                        <select class="form-select mb-1">
+                          <option selected class="d-none">Jenis tempat</option>
+                          <option value="rumahSakit">Rumah Sakit</option>
+                          <option value="puskesmas">Puskesmas</option>
+                          <option value="poliklinik">Poliklinik</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-4">
+                        <input
+                          type="text"
+                          name="namaTempat"
+                          class="form-control mb-1"
+                          required
+                          placeholder="nama tempat"
+                        />
+                      </div>
+                      <div class="col-sm-4">
+                        <input
+                          type="text"
+                          name="alamatRawat"
+                          class="form-control"
+                          required
+                          placeholder="alamat perawatan"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label  class="form-label"
+                      >Nama dan alamat dokter/tenaga medik yang memberikan
+                      pertolongan pertama</label
+                    >
+                    <div class="row mb-3">
+                      <div class="col-sm-6">
+                        <input
+                          type="text"
+                          name="namaDokter"
+                          class="form-control mb-1"
+                          required
+                          placeholder="nama dokter"
+                        />
+                      </div>
+                      <div class="col-sm-6">
+                        <input
+                          type="text"
+                          name="alamatDokter"
+                          class="form-control"
+                          required
+                          placeholder="alamat dokter"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <label id="jenisObat"  class="form-label">Nama/jenis obat apa saja yang digunakan saat proses pengobatan</label>
+                    <input type="text" name="jenisObat" class="form-control" id="jenisObat" required placeholder="jenis obat">
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mb-3 row">
+                <div class="col-sm-4 mb-2">
+                  <label for="namaSaksi" class="form-label">Nama saksi yang mengisi form kecelakaan</label>
+                  <input type="text" name="namaSaksi" id="namaSaksi" class="form-control" required>
+                </div>
+                <div class="col-sm-4 mb-2">
+                  <label for="jabatanSaksi" class="form-label">Jabatan</label>          
+                  <select name="jabatanSaksi" id="jabatanSaksi" class="form-select" required>
+                    <option selected class="d-none">Pilih Jabatan</option>
+                    <option value="jabatanSaksiDosen">Dosen</option>
+                    <option value="jabatanSaksiMahasiswa">Mahasiswa</option>
+                    <option value="jabatanSaksiTeknisi">Teknisi</option>
+                  </select>
+                </div>
+                <div class="col-sm-4">
+                  <label for="nikSaksi" class="form-label">NRP/NIK</label>
+                  <input type="text" name="nikSaksi" id="nikSaksi" class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex flex-column d-lg-block text-start text-lg-center">
+            <button type="reset" id="reset" class="btn btn-danger mt-3">
+              Clear
+            </button>
+            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="mayor" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bolder">Mahasiswa - Mayor</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" spellcheck="false" autocomplete="off">
+          <div class="row">
+            <div class="col-12">
+              <div class="mb-3 row">
+                <div class="col-sm-6 d-flex flex-column mb-2 mb-sm-1">
+                  <label for="tanggal" class="form-label"
+                    >Tanggal</label
+                  >
+                  <div class="input-group border-0 datepicker">
+                    <input
+                      type="text"
+                      id="tanggal"
+                      class="form-control border-0"
+                      name="tanggal"
+                      required
+                      title="Harap isi form ini"
+                      data-input
+                    />
+                    <span class="input-group-text border-0" data-toggle>
+                      <i class="far fa-calendar"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-sm-6 d-flex flex-column mb-2 mb-sm-1">
+                  <label for="namakorban" class="form-label">Nama Korban</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="namakorban"
+                    name="namakorban"
+                    title="Harap isi form ini"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
+                  <label for="alamatkorban" class="form-label">Alamat</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="alamatkorban"
+                    name="alamatkorban"
+                    title="Harap isi form ini"
+                    required
+                  />
+                </div>
+                <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
+                  <label for="notelp" class="form-label">Nomor Telepon</label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    id="notelp"
+                    name="notelp"
+                    pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}"
+                    required
+                    placeholder="0811-2233-4455"
+                    title="Harap isi form ini"
+                  />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
+                  <label for="jabatan" class="form-label">Program Studi</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="jabatan"
+                    name="jabatan"
+                    title="Harap isi form ini"
+                    required
+                  />
+                </div>
+                <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
+                  <label for="nip" class="form-label">NRP</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="nip"
+                    name="nip"
+                    title="Harap isi form ini"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="mb-3">
+                  <label for="tempatKecelakaan" class="form-label">Tempat Kecelakaan</label>
+                  <input type="text" name="tempatKecelakaan" id="tempatKecelakaan" class="form-control" required>
+              </div>
+              <div class="mb-3 row">
+                <div class="d-flex flex-column mb-3 mb-sm-1">
+                  <label for="bagaimana" class="form-label"
+                    >Bagaimana terjadinya kecelakaan</label
+                  >
+                  <textarea
+                    name="bagaimana"
+                    id="bagaimana"
+                    rows="2"
+                    class="form-control"
+                    required
+                    title="Harap isi form ini"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <div class="d-flex flex-column mb-3 mb-sm-1">
+                  <label for="jenispekerjaan" class="form-label"
+                    >Jenis pekerjaan waktu kecelakaan</label
+                  >
+                  <textarea
+                    name="jenispekerjaan"
+                    id="jenispekerjaan"
+                    rows="2"
+                    class="form-control"
+                    required
+                    title="Harap isi form ini"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <div class="d-flex flex-column mb-3 mb-sm-1">
+                  <label for="saksi" class="form-label"
+                    >Siapa saksi yang melihat kecelakaan?</label
+                  >
+                  <textarea
+                    name="saksi"
+                    id="saksi"
+                    rows="2"
+                    class="form-control"
+                    required
+                    title="Harap isi form ini"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
+                  <label for="penyebabKecelakaanMesin" class="form-label"
+                    >Sebutkan yang menyebabkan kecelakaan mesin</label
+                  >
+                  <select
+                    name="penyebabKecelakaanMesin"
+                    id="penyebabKecelakaanMesin"
+                    class="form-select"
+                    required
+                  >
+                    <option selected class="d-none">Silahkan pilih</option>
+                    <option value="mesin">Mesin</option>
+                    <option value="pesawatInstalasi">Pesawat Instalasi</option>
+                    <option value="alatProses">Alat Proses</option>
+                    <option value="caraKerja">Cara Kerja</option>
+                    <option value="bahan">Bahan</option>
+                    <option value="lingkungan">Lingkungan</option>
+                  </select>
+                </div>
+                <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
+                  <label for="penyebabPenyakitMesin" class="form-label"
+                    >Sebutkan yang menyebabkan penyakit akibat kerja</label
+                  >
+                  <select
+                    name="penyebabPenyakitMesin"
+                    id="penyebabPenyakitMesin"
+                    class="form-select"
+                    required
+                  >
+                    <option selected class="d-none">Silahkan pilih</option>
+                    <option value="bahan">Bahan</option>
+                    <option value="proses">Proses</option>
+                    <option value="lingkungan">Lingkungan</option>
+                    <option value="caraKerja">Cara Kerja</option>
+                    <option value="sifatPekerjaan">Sifat Pekerjaan</option>
+                  </select>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
+                  <label for="akibat" class="form-label"
+                    >Akibat yang diderita korban</label
+                  >
+                  <select
+                    name="akibat"
+                    id="akibat"
+                    class="form-select"
+                    required
+                  >
+                    <option selected class="d-none">Silahkan pilih</option>
+                    <option value="meninggal">Meninggal</option>
+                    <option value="sakit">Sakit</option>
+                    <option value="luka">Luka luka</option>
+                  </select>
+                </div>
+                <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
+                  <label for="berobatJalan" class="form-label"
+                    >Berobat jalan</label
+                  >
+                  <select
+                    name="berobatJalan"
+                    id="berobatJalan"
+                    class="form-select"
+                    required
+                  >
+                    <option selected class="d-none">Silahkan pilih</option>
+                    <option value="bekerja">Sambil Bekerja</option>
+                    <option value="tidakBekerja">Tidak Bekerja</option>
+                  </select>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <div class="d-flex flex-column mb-3 mb-sm-1">
+                  <label for="perkiraanKerugian" class="form-label"
+                    >Perkiraan Kerugian</label
+                  >
+                  <div id="perkiraanKerugian" class="row">
+                    <div class="col-sm-6">
+                      <div class="input-group mb-3">
+                        <input
+                          type="number"
+                          min="0"
+                          class="form-control"
+                          name="perkiraanKerugian"
+                          required
+                          title="Harap isi form ini"
+                        />
+                        <span class="input-group-text">Jam</span>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <input
+                        type="text"
+                        class="form-control"
+                        required
+                        placeholder="Material"
+                        name="material"
+                        title="Harap isi form ini"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="d-flex flex-column mb-3 mb-sm-1">
+                  <label class="form-label mb-2 text-justify"
+                    >Pemulihan Mahasiswa yang sakit (diisi di tempat
+                    pemeriksaan atas kordinasi dengan petugas pemeriksa
+                    setempat) :</label
+                  >
+
+                  <div>
+                    <label " class="form-label"
+                      >Dirawat dimana, beserta alamat</label
+                    >
+                    <div class="row mb-3">
+                      <div class="col-sm-4">
+                        <select class="form-select mb-1">
+                          <option selected class="d-none">Jenis tempat</option>
+                          <option value="rumahSakit">Rumah Sakit</option>
+                          <option value="puskesmas">Puskesmas</option>
+                          <option value="poliklinik">Poliklinik</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-4">
+                        <input
+                          type="text"
+                          name="namaTempat"
+                          class="form-control mb-1"
+                          required
+                          placeholder="nama tempat"
+                        />
+                      </div>
+                      <div class="col-sm-4">
+                        <input
+                          type="text"
+                          name="alamatRawat"
+                          class="form-control"
+                          required
+                          placeholder="alamat perawatan"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label  class="form-label"
+                      >Nama dan alamat dokter/tenaga medik yang memberikan
+                      pertolongan pertama</label
+                    >
+                    <div class="row mb-3">
+                      <div class="col-sm-6">
+                        <input
+                          type="text"
+                          name="namaDokter"
+                          class="form-control mb-1"
+                          required
+                          placeholder="nama dokter"
+                        />
+                      </div>
+                      <div class="col-sm-6">
+                        <input
+                          type="text"
+                          name="alamatDokter"
+                          class="form-control"
+                          required
+                          placeholder="alamat dokter"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <label id="jenisObat"  class="form-label">Nama/jenis obat apa saja yang digunakan saat proses pengobatan</label>
+                    <input type="text" name="jenisObat" class="form-control" id="jenisObat" required placeholder="jenis obat">
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="alatEvakuasi" class="form-label">Alat evakuasi apa saja yang digunakan</label>
+                <select name="alatEvakuasi" class="form-select" id="alatEvakuasi" required>
+                  <option class="d-none" selected>Pilih alat</option>
+                  <option value="tandu">Tandu</option>
+                  <option value="kursiRoda">Kursi Roda</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="alatEvakuasi" class="form-label">Alat evakuasi apa saja yang digunakan</label>
+                <select name="alatEvakuasi" class="form-select" id="alatEvakuasi" required>
+                  <option class="d-none" selected>Pilih alat</option>
+                  <option value="tandu">Tandu</option>
+                  <option value="kursiRoda">Kursi Roda</option>
+                </select>
+              </div>
+              <div class="mb-3 row">
+                <div class="col-sm-4 mb-2">
+                  <label for="namaSaksi" class="form-label">Nama saksi yang mengisi form kecelakaan</label>
+                  <input type="text" name="namaSaksi" id="namaSaksi" class="form-control" required>
+                </div>
+                
+                <div class="col-sm-4 mb-2">
+                  <label for="jabatanSaksi" class="form-label">Jabatan</label>          
+                  <select name="jabatanSaksi" id="jabatanSaksi" class="form-select" required>
+                    <option selected class="d-none">Pilih Jabatan</option>
+                    <option value="jabatanSaksiDosen">Dosen</option>
+                    <option value="jabatanSaksiMahasiswa">Mahasiswa</option>
+                    <option value="jabatanSaksiTeknisi">Teknisi</option>
+                  </select>
+                </div>
+                <div class="col-sm-4">
+                  <label for="nikSaksi" class="form-label">NRP/NIK</label>
+                  <input type="text" name="nikSaksi" id="nikSaksi" class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex flex-column d-lg-block text-start text-lg-center">
+            <button type="reset" id="reset" class="btn btn-danger mt-3">
+              Clear
+            </button>
+            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card custom-border-radius bg-white">
+  <div class="card-body py-3">
+    <h3 class="card-title fw-bolder fs-3 m-0 mb-3 text-center text-md-start">
+      Pelaporan Kecelakaan - Mahasiswa
+    </h3>
+    <p class="text-justify mb-1">
+      Sebelum pengisian form data kecelakaan, akan muncul prosedur investigasi
+      kecelakaan dan prosedur pemulihan mahasiswa atau tenaga kependidikan yang
+      sakit. Berikut ini adalah prosedur investigasi kecelakaan :
+    </p>
+    <ul class="mb-3">
+      <li>
+        Saksi melaporkan adanya insiden kecelakaan di bengkel/lab. PPNS dengan
+        mengisi form pelaporan kecelakaan PPNS sampai nomor 13.
+      </li>
+      <li>
+        Saksi memastikan korban tergolong sebagai korban kecelakaan minor/mayor.
+      </li>
+      <li>Saksi segera membawa dan mendampingi korban ke tempat pemeriksaan</li>
+    </ul>
+    <p class="text-justify mb-1">
+      Berikut ini adalah prosedur pemulihan mahasiswa atau tenaga kependidikan
+      yang sakit:
+    </p>
+    <ul class="mb-3">
+      <li>
+        Setelah saksi membawa korban ke tempat pemeriksaan, saksi berkordinasi
+        dengan petugas pemeriksa setempat untuk mengisi form pelaporan
+        kecelakaan nomor 14, yaitu bagian Pemulihan Mahasiswa/Tenaga
+        Kependidikan yang Sakit.
+      </li>
+      <li>
+        Saksi mengisi form pelaporan kecelakaan sampai selesai dan mengirimkan
+        data pelaporan kecelakaan.
+      </li>
+    </ul>
+    <p class="text-justify">
+      Kemudian akan ada opsi form kecelakaan (Korban kecelakaan termasuk korban
+      yang bersifat minor/Korban kecelakaan termasuk korban yang bersifat
+      mayor).
+    </p>
+    <p class="text-justify">
+      Dalam Investigasi Kecelakaan yang terjadi di bengkel/lab. PPNS korban
+      kecelakaan digolongkan menjadi 2, yaitu korban kecelakaan yang bersifat
+      minor dan korban kecelakaan yang bersifat mayor.
+    </p>
+    <ul>
+      <li>
+        Korban kecelakaan dapat dikatakan sebagai korban kecelakaan minor jika
+        korban tidak mengalami akibat yang serius.
+      </li>
+      <li>
+        Sedangkan korban kecelakaan dapat dikatakan sebagai korbaan kecelakaan
+        mayor ketika korban kecelakaan mengalami akibat yang serius dan
+        membutuhkan alat evakuasi dalam menuju tempat pemeriksaan.
+      </li>
+    </ul>
+
+    <p>Dalam kasus ini, korban kecelakaan termasuk korban yang bersifat :</p>
+    <div class="d-flex flex-column flex-md-row">
+      <button
+        class="btn btn-success m-1"
+        data-bs-toggle="modal"
+        data-bs-target="#minor"
+      >
+        Minor
+      </button>
+      <button 
+        class="btn btn-primary m-1"
+        data-bs-toggle="modal"
+        data-bs-target="#mayor">Mayor</button>
+    </div>
+  </div>
+</div>
+<%- include("templateP3k/footer") %>

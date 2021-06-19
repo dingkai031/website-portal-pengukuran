@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ===== BOX ICONS ===== -->
+    <link rel="stylesheet" href="/boxicons/css/boxicons.min.css" />
+
+    <!-- ===== BOOTSTRAP 5 ===== -->
+
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <!-- ===== CSS ===== -->
+    <link rel="stylesheet" href="/css/stylesSidebar.css" />
+    <link rel="stylesheet" href="/css/stylesInspeksi.css" />
+
+    <!-- ===== Font Awesome ===== -->
+    <link
+      rel="stylesheet"
+      href="/@fortawesome/fontawesome-free/css/all.min.css"
+    />
+
+    <!-- ===== File Input ===== -->
+    <link rel="stylesheet" href="/bootstrap-fileinput/css/fileinput.min.css" />
+
+    <!-- ===== flatpickr ===== -->
+    <link rel="stylesheet" href="/flatpickr/dist/flatpickr.min.css" />
+
+    <title>Inspeksi K3 PPNS</title>
+  </head>
+  <body id="body-pd" class="bg-light">
+    <header class="header shadow" id="header">
+      <div class="header__toggle">
+        <i class="bx bx-menu" id="header-toggle"></i>
+      </div>
+
+      <div style="display: flex; align-items: center; justify-content: s">
+        <div class="header__img">
+          <img src="/img/perfil.jpg" alt="" />
+        </div>
+      </div>
+    </header>
+
+    <div class="l-navbar" id="nav-bar">
+      <nav class="nav">
+        <div>
+          <a href="#" class="nav__logo">
+            <i class="bx bx-briefcase nav__logo-icon"></i>
+            <span class="nav__logo-name">Inspeksi K3 PPNS</span>
+          </a>
+
+          <div class="nav__list">
+            <a href="#" class="nav__link active">
+              <i class="bx bx-search-alt"></i>
+              <span class="nav__name">Inspeksi PLK</span>
+            </a>
+
+            <a
+              href="#"
+              class="nav__link"
+              data-bs-toggle="collapse"
+              data-bs-target="#submenu"
+              id="toggle2"
+            >
+              <i class="bx bx-spreadsheet"></i>
+              <span class="nav__name">Form Inspeksi</span>
+            </a>
+            <div id="submenu" class="collapse">
+              <div class="d-flex flex-column">
+                <a
+                  href="/forms/kebisingan.pdf"
+                  class="nav__link my-1 ini"
+                  download="Form Inspeksi Pengukuran Lingkungan Kerja Kebisingan"
+                >
+                  <i class="bx bx-headphone"></i>
+                  <span class="nav__name">Form Kebisingan</span>
+                </a>
+                <a
+                  href="/forms/getaran.pdf"
+                  class="nav__link my-1 ini"
+                  download="Form Inspeksi Pengukuran Lingkungan Kerja Getaran"
+                >
+                  <i class="bx bx-chair"></i>
+                  <span class="nav__name">Form Getaran</span>
+                </a>
+                <a
+                  href="/forms/ventilasi.pdf"
+                  class="nav__link my-1 ini"
+                  download="Form Inspeksi Pengukuran Lingkungan Kerja Ventilasi"
+                >
+                  <i class="bx bx-braille"></i>
+                  <span class="nav__name">Form Ventilasi</span>
+                </a>
+                <a
+                  href="/forms/pencahayaan.pdf"
+                  class="nav__link my-1 ini"
+                  download="Form Inspeksi Pengukuran Lingkungan Kerja Pencahayaan"
+                >
+                  <i class="bx bx-sun"></i>
+                  <span class="nav__name">Form Pencahayaan</span>
+                </a>
+                <a
+                  href="/forms/iklimKerja.pdf"
+                  class="nav__link my-1 ini mb-4"
+                  download="Form Inspeksi Pengukuran Lingkungan Kerja Iklim Kerja"
+                >
+                  <i class="bx bx-wind"></i>
+                  <span class="nav__name">Form Iklim Kerja</span>
+                </a>
+              </div>
+            </div>
+            <a href="#" class="nav__link">
+              <i class="bx bx-history"></i>
+              <span class="nav__name">Riwayat Pengukuran</span>
+            </a>
+          </div>
+        </div>
+
+        <a href="#" class="nav__link">
+          <i class="bx bx-log-out nav__icon"></i>
+          <span class="nav__name">Keluar</span>
+        </a>
+      </nav>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <h3
+                class="card-title fw-bolder fs-3 mb-4 d-flex align-items-center"
+              >
+                Form Inspeksi
+              </h3>
+              <form spellcheck="false" autocomplete="off">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="mb-3">
+                      <label for="namapengukur" class="form-label"
+                        >Nama Pengukur</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="namapengukur"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="lokasi" class="form-label"
+                        >Lokasi Pengukuran</label
+                      >
+                      <select
+                        class="form-select"
+                        id="lokasi"
+                        aria-label="Default select example"
+                      >
+                        <option selected class="d-none">
+                          Pilih Lokasi Pengukuran
+                        </option>
+                        <option value="1">tempat1</option>
+                        <option value="2">tempat12</option>
+                        <option value="3">tempat13</option>
+                      </select>
+                    </div>
+                    <div class="mb-3 row">
+                      <div class="col-sm-6 d-flex flex-column mb-3">
+                        <label for="tanggal" class="form-label"
+                          >Tanggal Pengukuran</label
+                        >
+                        <div class="input-group border-0 datepicker">
+                          <input
+                            type="text"
+                            id="tanggal"
+                            class="form-control border-0"
+                            name="tanggal"
+                            required
+                            title="Harap isi form ini"
+                            data-input
+                          />
+                          <span class="input-group-text border-0" data-toggle>
+                            <i class="bx bx-calendar"></i>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 d-flex flex-column mb-3">
+                        <label for="waktu" class="form-label">Waktu</label>
+                        <div class="input-group border-0 datepicker-time">
+                          <input
+                            type="text"
+                            id="waktu"
+                            class="form-control border-0"
+                            name="waktu"
+                            required
+                            title="Harap isi form ini"
+                            data-input
+                          />
+                          <span class="input-group-text border-0" data-toggle>
+                            <i class="bx bx-time"></i>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="dokumentasi" class="form-label"
+                        >Dokumentasi</label
+                      >
+                      <input
+                        class="form-control"
+                        type="file"
+                        id="dokumentasi"
+                        name="dokumentasi"
+                        multiple
+                      />
+                    </div>
+                    <div class="row mb-3">
+                      <div class="col-lg-6 mb-3" id="wrapper-kebisingan">
+                        <label class="form-label">Kebisingan</label>
+                        <div class="input-group mb-2 newField">
+                          <span class="input-group-text">Ke-1</span>
+                          <input
+                            type="number"
+                            name="kebisingan-ke-1"
+                            class="form-control"
+                            min="0"
+                          />
+                          <button
+                            class="
+                              btn btn-outline-secondary
+                              d-flex
+                              align-items-center
+                              justify-content-center
+                            "
+                            type="button"
+                            id="tambah-kebisingan"
+                          >
+                            <i class="bx bx-plus-circle fs-5"></i>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 mb-3" id="wrapper-getaran">
+                        <label class="form-label">Getaran</label>
+                        <div class="input-group mb-2 newField">
+                          <span class="input-group-text">Ke-1</span>
+                          <input
+                            type="number"
+                            name="getaran-ke-1"
+                            class="form-control"
+                            min="0"
+                          />
+                          <button
+                            class="
+                              btn btn-outline-secondary
+                              d-flex
+                              align-items-center
+                              justify-content-center
+                            "
+                            type="button"
+                            id="tambah-getaran"
+                          >
+                            <i class="bx bx-plus-circle fs-5"></i>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 mb-3" id="wrapper-ventilasi">
+                        <label class="form-label">Ventilasi</label>
+                        <div class="input-group mb-2 newField">
+                          <span class="input-group-text">Ke-1</span>
+                          <input
+                            type="number"
+                            name="ventilasi-ke-1"
+                            class="form-control"
+                            min="0"
+                          />
+                          <button
+                            class="
+                              btn btn-outline-secondary
+                              d-flex
+                              align-items-center
+                              justify-content-center
+                            "
+                            type="button"
+                            id="tambah-ventilasi"
+                          >
+                            <i class="bx bx-plus-circle fs-5"></i>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 mb-3" id="wrapper-pencahayaan">
+                        <label class="form-label">Pencahayaan</label>
+                        <div class="input-group mb-2 newField">
+                          <span class="input-group-text">Ke-1</span>
+                          <input
+                            type="number"
+                            name="pencahayaan-ke-1"
+                            class="form-control"
+                            min="0"
+                          />
+                          <button
+                            class="
+                              btn btn-outline-secondary
+                              d-flex
+                              align-items-center
+                              justify-content-center
+                            "
+                            type="button"
+                            id="tambah-pencahayaan"
+                          >
+                            <i class="bx bx-plus-circle fs-5"></i>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 mb-3" id="wrapper-iklimkerja">
+                        <label class="form-label">Iklim Kerja</label>
+                        <div class="input-group mb-2 newField">
+                          <span class="input-group-text">Ke-1</span>
+                          <input
+                            type="number"
+                            name="iklimkerja-ke-1"
+                            class="form-control"
+                            min="0"
+                          />
+                          <button
+                            class="
+                              btn btn-outline-secondary
+                              d-flex
+                              align-items-center
+                              justify-content-center
+                            "
+                            type="button"
+                            id="tambah-iklimkerja"
+                          >
+                            <i class="bx bx-plus-circle fs-5"></i>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 mb-3" id="wrapper-jamkerja">
+                        <label class="form-label">Jam Kerja</label>
+                        <div class="input-group mb-2 newField">
+                          <span class="input-group-text">Ke-1</span>
+                          <input
+                            type="number"
+                            name="jamkerja-ke-1"
+                            class="form-control"
+                            min="0"
+                          />
+                          <button
+                            class="
+                              btn btn-outline-secondary
+                              d-flex
+                              align-items-center
+                              justify-content-center
+                            "
+                            type="button"
+                            id="tambah-jamkerja"
+                          >
+                            <i class="bx bx-plus-circle fs-5"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="
+                      col-12
+                      row
+                      align-items-center
+                      justify-content-center
+                      mb-3
+                    "
+                  >
+                    <div class="mb-3 text-center">
+                      <label for="rekomendasi" class="form-label fs-4"
+                        >Rekomendasi</label
+                      >
+                      <textarea
+                        class="form-control"
+                        id="rekomendasi"
+                        rows="6"
+                        name="rekomendasi"
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="
+                    d-flex
+                    flex-column
+                    d-lg-block
+                    text-start text-lg-center
+                  "
+                >
+                  <button type="reset" id="reset" class="btn btn-danger mt-3">
+                    Clear
+                  </button>
+                  <button type="submit" class="btn btn-primary mt-3">
+                    Submit
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="jquery/dist/jquery.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/bootstrap-fileinput/js/fileinput.min.js"></script>
+    <script src="/bootstrap-fileinput/js/locales/id.js"></script>
+    <script src="/bootstrap-fileinput/themes/fas/theme.js"></script>
+    <script src="/js/sidebarJs.js"></script>
+    <script src="/js/inspeksiJs.js"></script>
+    <script src="/flatpickr/dist/flatpickr.min.js"></script>
+    <script src="/flatpickr/dist/l10n/id.js"></script>
+    <script src="/js/flatpicker-command.js"></script>
+  </body>
+</html>
