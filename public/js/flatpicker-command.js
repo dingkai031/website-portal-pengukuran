@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (datePicker) {
     for (let dp of datePicker) {
       flatpickr(dp, {
-        dateFormat: "Y-m-d",
+        dateFormat: "d-m-Y",
         static: true,
         wrap: true
       });

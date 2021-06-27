@@ -1,4 +1,155 @@
 <%- include("templateMaintenance/head") %>
+<div
+  class="modal fade"
+  id="newAlat"
+  tabindex="-1"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body px-5">
+        <form
+          action="/maintenance/data-alat/"
+          class="form"
+          spellcheck="false"
+          autocomplete="off"
+          method="POST"
+        >
+          <div class="mb-3 text-center">
+            <h3 class="mb-2">Tambah Alat</h3>
+            <div class="text-muted">
+              Harap masukkan data dengan benar.
+            </div>
+          </div>
+          <div class="d-flex flex-column mb-3">
+            <label
+              for="nama"
+              class="d-flex align-items-center fw-bold mb-2"
+            >
+              Nama
+            </label>
+            <input
+              type="text"
+              id="nama"
+              class="form-control border-0"
+              name="name"
+              required
+              title="Harap isi form ini"
+        
+            />
+          </div>
+          <div class="d-flex flex-column mb-3">
+            <label
+              for="tanggal"
+              class="d-flex align-items-center fs-6 fw-bold mb-2"
+            >
+              Tanggal Perolehan
+            </label>
+            <div class="input-group border-0 datepicker">
+              <input
+                type="text"
+                id="tanggal"
+                class="form-control border-0"
+                name="tanggal"
+                required
+                title="Harap isi form ini"
+                data-input
+              />
+              <span class="input-group-text border-0" data-toggle>
+                <i class="bx bx-calendar"></i>
+              </span>
+            </div>
+          </div>
+          <div class="d-flex flex-column mb-3">
+            <label
+              for="spesifikasi"
+              class="d-flex align-items-center fs-6 fw-bold mb-2"
+            >
+              Spesifikasi
+            </label>
+            <input
+              type="text"
+              id="spesifikasi"
+              class="form-control border-0"
+              name="spesifikasi"
+              required
+              title="Harap isi form ini"
+         
+            />
+          </div>
+          <div class="d-flex flex-column mb-3">
+            <label
+              for="jumlah"
+              class="d-flex align-items-center fw-bold mb-2"
+            >
+              Jumlah
+            </label>
+            <div class="input-group">
+              <input
+                type="number"
+                id="jumlah"
+                name="jumlah"
+                class="form-control border-0"
+                title="Harap isi form ini"
+                min="0"
+                required
+              />
+              <span class="input-group-text border-0">unit</span>
+            </div>
+          </div>
+          <div class="d-flex flex-column mb-3">
+            <label
+              for="lokasi"
+              class="d-flex align-items-center fs-6 fw-bold mb-2"
+            >
+              Lokasi
+            </label>
+            <input
+              type="text"
+              id="lokasi"
+              class="form-control border-0"
+              name="lokasi"
+              required
+              title="Harap isi form ini"
+            />
+          </div>
+          <div class="d-flex flex-column mb-4">
+            <label
+              for="kategori"
+              class="d-flex align-items-center fs-6 fw-bold mb-2"
+            >
+              Kategori
+            </label>
+            <input
+              type="text"
+              id="kategori"
+              class="form-control border-0"
+              name="kategori"
+              required
+              title="Harap isi form ini"
+            />
+          </div>
+          <div class="text-center">
+            <button type="reset" class="btn btn-white me-3">
+              Reset
+            </button>
+            <button type="submit" class="btn btn-primary">
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="card border-0 custom-shadow">
   <div
     class="
@@ -24,6 +175,7 @@
           d-flex
           align-items-center
         "
+        data-bs-toggle="modal" data-bs-target="#newAlat"
       >
         <i class="bx bx-plus-circle me-2 fs-4"></i>
         Tambah Barang
@@ -49,19 +201,32 @@
           </tr>
         </thead>
         <tbody>
+          <% for (let i = 0;i<alats.length;i++) { %>
+            <% let tanggal = alats[i].tanggalPeroleh;
+              let tahun = tanggal.getFullYear();
+              let bulan = tanggal.getMonth() + 1;
+              let hari = tanggal.getDate();
+              if (hari < 10) {
+                hari = `0${hari}`;
+              }
+              if (bulan < 10) {
+                bulan = `0${bulan}`;
+              }
+              
+            %> 
           <tr>
-            <td class="text-center">1</td>
-            <td>test</td>
-            <td>test</td>
-            <td>test</td>
-            <td>test</td>
-            <td>test</td>
-            <td>test</td>
-            <td>test</td>
+            <td class="text-center"><%= i+1 %></td>
+            <td><%= alats[i].nama %></td>
+            <td><%= `${hari}-${bulan}-${tahun}` %></td>
+            <td><%= alats[i].spesifikasi %></td>
+            <td><%= alats[i].jumlah %></td>
+            <td><%= alats[i].satuan %></td>
+            <td><%= alats[i].lokasi %></td>
+            <td><%= alats[i].kategori %></td>
             <td class="text-center text-lg-end pe-0">
               <div
                 class="modal fade"
-                id="exampleModal"
+                id="<%= `id${alats[i]._id}` %>"
                 tabindex="-1"
                 aria-hidden="true"
               >
@@ -83,7 +248,7 @@
                         autocomplete="off"
                       >
                         <div class="mb-3 text-center">
-                          <h3 class="mb-2">Edit alat -</h3>
+                          <h3 class="mb-2">Edit alat - <%= alats[i].nama %></h3>
                           <div class="text-muted">
                             Harap masukkan data dengan benar.
                           </div>
@@ -102,6 +267,7 @@
                             name="name"
                             required
                             title="Harap isi form ini"
+                            value="<%= alats[i].nama %>"
                           />
                         </div>
                         <div class="d-flex flex-column mb-3">
@@ -119,6 +285,7 @@
                               name="tanggal"
                               required
                               title="Harap isi form ini"
+                              value="<%= `${hari}-${bulan}-${tahun}` %>"
                               data-input
                             />
                             <span class="input-group-text border-0" data-toggle>
@@ -140,6 +307,7 @@
                             name="spesifikasi"
                             required
                             title="Harap isi form ini"
+                            value="<%= alats[i].spesifikasi %>"
                           />
                         </div>
                         <div class="d-flex flex-column mb-3">
@@ -151,11 +319,13 @@
                           </label>
                           <div class="input-group">
                             <input
-                              type="text"
+                              type="number"
                               id="jumlah"
                               name="jumlah"
                               class="form-control border-0"
                               title="Harap isi form ini"
+                              value="<%= alats[i].jumlah %>"
+                              min="0"
                               required
                             />
                             <span class="input-group-text border-0">unit</span>
@@ -175,6 +345,7 @@
                             name="lokasi"
                             required
                             title="Harap isi form ini"
+                            value="<%= alats[i].lokasi %>"
                           />
                         </div>
                         <div class="d-flex flex-column mb-4">
@@ -191,6 +362,7 @@
                             name="kategori"
                             required
                             title="Harap isi form ini"
+                            value="<%= alats[i].kategori %>"
                           />
                         </div>
                         <div class="text-center">
@@ -218,7 +390,7 @@
                   rounded
                 "
                 data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
+                data-bs-target="#<%= `id${alats[i]._id}` %>"
               >
                 <i class="bx bxs-edit fs-4"></i>
               </a>
@@ -251,6 +423,7 @@
               </a>
             </td>
           </tr>
+          <% } %>
         </tbody>
       </table>
     </div>

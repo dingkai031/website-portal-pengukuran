@@ -34,27 +34,27 @@ mongoose
 
 // User.insertMany(tempUsers);
 
-const tempAlat = [
-  {
-    nama: "Tang Ampere",
-    tanggalPeroleh: new Date("1999-08-10T00:00:00.000Z"),
-    spesifikasi: "Fluke 355 AC DC 2000A",
-    jumlah: 3,
-    satuan: "unit",
-    lokasi: "Bengkel Las",
-    kategori: "Alat"
-  },
-  {
-    nama: "Tang Ampere",
-    tanggalPeroleh: new Date("1999-08-25T00:00:00.000Z"),
-    spesifikasi: "ACI 45",
-    jumlah: 4,
-    satuan: "unit",
-    lokasi: "Bengkel Las",
-    kategori: "Alat"
-  }
-];
+// const tempAlat = [
+//   {
+//     nama: "dummy",
+//     tanggalPeroleh: new Date("2018-08-10"),
+//     spesifikasi: "dummy",
+//     jumlah: 3,
+//     satuan: "unit",
+//     lokasi: "ya",
+//     kategori: "Alat"
+//   },
+//   {
+//     nama: "dummy2",
+//     tanggalPeroleh: new Date("1929-08-25"),
+//     spesifikasi: "ACI 45",
+//     jumlah: 4,
+//     satuan: "unit",
+//     lokasi: "hmmm",
+//     kategori: "Alat"
+//   }
+// ];
 
-Alat.insertMany(tempAlat)
-  .then(p => console.log(p))
-  .catch(e => console.log(`Error ${e}`));
+// Alat.insertMany(tempAlat)
+//   .then(p => console.log(p))
+//   .catch(e => console.log(`Error ${e}`));

@@ -10,11 +10,9 @@ const showNavbar = (toggleId, navId, bodyId, headerId) => {
   if (toggle && nav && bodypd && headerpd) {
     toggle.addEventListener("click", () => {
       if (!toggle2.classList.contains("collapsed")) {
-        console.log("MASUK IF");
         toggle.setAttribute("data-bs-toggle", "collapse");
         toggle.setAttribute("data-bs-target", "#submenu");
       } else {
-        console.log("Masuk else");
         toggle.setAttribute("data-bs-target", " ");
         toggle.setAttribute("data-bs-toggle", " ");
       }

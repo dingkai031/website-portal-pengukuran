@@ -130,3 +130,11 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+.letterSpacing-2 {
+  letter-spacing: 2px;
+}
+
+.dropdown-item {
+  white-space: normal;
+}

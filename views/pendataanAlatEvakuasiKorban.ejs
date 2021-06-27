@@ -1,0 +1,456 @@
+<%- include("templateP3k/head") %>
+<div class="card shadow-sm pt-3 px-3">
+  <div class="card-body">
+    <h3 class="card-title fw-bolder mb-5">
+      Pendataan Alat Ketersediaan Alat Evakuasi Korban
+    </h3>
+    <form action="#" method="POST" spellcheck="false" autocomplete="off">
+      <div class="mb-3 row justify-content-center">
+        <div class="col-sm-6 d-flex flex-column">
+          <label for="tanggalInspeksi" class="form-label"
+            >Tanggal Inspeksi</label
+          >
+          <div class="input-group datepicker">
+            <input
+              type="text"
+              id="tanggalInspeksi"
+              class="form-control"
+              name="tanggalInspeksi"
+              required
+              title="Harap isi form ini"
+              data-input
+            />
+            <span class="input-group-text" data-toggle>
+              <i class="far fa-calendar"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="mb-3 row justify-content-center">
+        <div class="col-sm-6 d-flex flex-column">
+          <label for="namaInspektor" class="form-label">Nama Inspektor</label>
+          <input
+            type="text"
+            name="namaInspektor"
+            id="namaInspektor"
+            class="form-control"
+            required
+            title="Harap isi form ini"
+          />
+        </div>
+      </div>
+      <div class="mb-4 row justify-content-center">
+        <div class="col-sm-6 d-flex flex-column">
+          <label for="nrp" class="form-label">NRP/NIK</label>
+          <input
+            type="number"
+            name="nrp"
+            id="nrp"
+            title="Harap isi form ini"
+            class="form-control"
+            required
+          />
+        </div>
+      </div>
+      <div class="mb-1 row justify-content-center">
+        <div class="col-sm-auto">
+          <h5 class="text-center">Jenis alat evakuasi - Tandu</h5>
+        </div>
+      </div>
+      <div
+        class="
+          mb-3
+          row
+          flex-column flex-lg-row
+          align-items-center
+          justify-content-center
+        "
+      >
+        <div class="col-sm-6">
+          <div class="row">
+            <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+              <label for="elektronikaDaya" class="form-label"
+                >Lab. Elektronika Daya</label
+              >
+              <div class="input-group">
+                <input
+                  type="number"
+                  name="elektronikaDaya"
+                  id="elektronikaDaya"
+                  class="form-control"
+                  required
+                  title="Harap isi form ini"
+                  min="0"
+                />
+                <span class="input-group-text">/1</span>
+              </div>
+            </div>
+            <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+              <label for="pengbisMaritimDanInvestasi" class="form-label"
+                >Lab. Pengembangan Bisnis Maritim dan Galeri Investasi</label
+              >
+              <div class="input-group">
+                <input
+                  type="number"
+                  name="pengbisMaritimDanInvestasi"
+                  id="pengbisMaritimDanInvestasi"
+                  class="form-control"
+                  required
+                  title="Harap isi form ini"
+                  min="0"
+                />
+                <span class="input-group-text">/1</span>
+              </div>
+            </div>
+            <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+              <label for="navKom" class="form-label"
+                >Lab. Navigasi dan Komunikasi</label
+              >
+              <div class="input-group">
+                <input
+                  type="number"
+                  name="navKom"
+                  id="navKom"
+                  class="form-control"
+                  required
+                  title="Harap isi form ini"
+                  min="0"
+                />
+                <span class="input-group-text">/1</span>
+              </div>
+            </div>
+            <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+              <label for="logistikMaritim" class="form-label"
+                >Lab. Logistik Maritim</label
+              >
+              <div class="input-group">
+                <input
+                  type="number"
+                  name="logistikMaritim"
+                  id="logistikMaritim"
+                  class="form-control"
+                  required
+                  title="Harap isi form ini"
+                  min="0"
+                />
+                <span class="input-group-text">/1</span>
+              </div>
+            </div>
+            <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+              <label for="cnc" class="form-label">Lab. CNC</label>
+              <div class="input-group">
+                <input
+                  type="number"
+                  name="cnc"
+                  id="cnc"
+                  class="form-control"
+                  required
+                  title="Harap isi form ini"
+                  min="0"
+                />
+                <span class="input-group-text">/1</span>
+              </div>
+            </div>
+            <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+              <label for="Pneumatik" class="form-label"
+                >Lab Pneumatik dan Hidrolik</label
+              >
+              <div class="input-group">
+                <input
+                  type="number"
+                  name="Pneumatik"
+                  id="Pneumatik"
+                  class="form-control"
+                  required
+                  title="Harap isi form ini"
+                  min="0"
+                />
+                <span class="input-group-text">/1</span>
+              </div>
+            </div>
+            <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+              <label for="motorBakar" class="form-label"
+                >Lab. Motor Bakar</label
+              >
+              <div class="input-group">
+                <input
+                  type="number"
+                  name="motorBakar"
+                  id="motorBakar"
+                  class="form-control"
+                  required
+                  title="Harap isi form ini"
+                  min="0"
+                />
+                <span class="input-group-text">/1</span>
+              </div>
+            </div>
+            <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+              <label for="cadd" class="form-label">Lab. CADD</label>
+              <div class="input-group">
+                <input
+                  type="number"
+                  name="cadd"
+                  id="cadd"
+                  class="form-control"
+                  required
+                  title="Harap isi form ini"
+                  min="0"
+                />
+                <span class="input-group-text">/1</span>
+              </div>
+            </div>
+            <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+              <label for="ujiBahan" class="form-label">Lab. Uji Bahan</label>
+              <div class="input-group">
+                <input
+                  type="number"
+                  name="ujiBahan"
+                  id="ujiBahan"
+                  class="form-control"
+                  required
+                  title="Harap isi form ini"
+                  min="0"
+                />
+                <span class="input-group-text">/1</span>
+              </div>
+            </div>
+            <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+              <label for="pengolahanLimbah" class="form-label"
+                >Lab. Pengolahan Limbah</label
+              >
+              <div class="input-group">
+                <input
+                  type="number"
+                  name="pengolahanLimbah"
+                  id="pengolahanLimbah"
+                  class="form-control"
+                  required
+                  title="Harap isi form ini"
+                  min="0"
+                />
+                <span class="input-group-text">/1</span>
+              </div>
+            </div>
+            <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+              <label for="reparasiMesin" class="form-label"
+                >Bengkel Reparasi Mesin</label
+              >
+              <div class="input-group">
+                <input
+                  type="number"
+                  name="reparasiMesin"
+                  id="reparasiMesin"
+                  class="form-control"
+                  required
+                  title="Harap isi form ini"
+                  min="0"
+                />
+                <span class="input-group-text">/1</span>
+              </div>
+            </div>
+            <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+              <label for="permesinanSheetMetal" class="form-label">
+                Bengkel Permesinan dan Sheet Metal (perkakas)</label
+              >
+              <div class="input-group">
+                <input
+                  type="number"
+                  name="permesinanSheetMetal"
+                  id="permesinanSheetMetal"
+                  class="form-control"
+                  required
+                  title="Harap isi form ini"
+                  min="0"
+                />
+                <span class="input-group-text">/1</span>
+              </div>
+            </div>
+            <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+              <label for="las" class="form-label">Bengkel Las</label>
+              <div class="input-group">
+                <input
+                  type="number"
+                  name="las"
+                  id="las"
+                  class="form-control"
+                  required
+                  title="Harap isi form ini"
+                  min="0"
+                />
+                <span class="input-group-text">/1</span>
+              </div>
+            </div>
+            <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+              <label for="kontruksi" class="form-label"
+                >Bengkel Kontruksi</label
+              >
+              <div class="input-group">
+                <input
+                  type="number"
+                  name="kontruksi"
+                  id="kontruksi"
+                  class="form-control"
+                  required
+                  title="Harap isi form ini"
+                  min="0"
+                />
+                <span class="input-group-text">/1</span>
+              </div>
+            </div>
+            <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+              <label for="nonMetal" class="form-label">Bengkel Non Metal</label>
+              <div class="input-group">
+                <input
+                  type="number"
+                  name="nonMetal"
+                  id="nonMetal"
+                  class="form-control"
+                  required
+                  title="Harap isi form ini"
+                  min="0"
+                />
+                <span class="input-group-text">/1</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mb-1 row justify-content-center">
+        <div class="col-sm-auto">
+          <h5 class="text-center">Jenis alat evakuasi - Kursi Roda</h5>
+        </div>
+      </div>
+      <div
+        class="
+          mb-3
+          row
+          flex-column flex-lg-row
+          align-items-center
+          justify-content-center
+        "
+      >
+        <div class="col-sm-6">
+          <div class="row justify-content-center">
+            <div class="col-lg-6 mb-3">
+              <label for="gedungJ1" class="form-label">Gedung J lantai 1</label>
+              <div class="input-group">
+                <input
+                  type="number"
+                  name="gedungJ1"
+                  id="gedungJ1"
+                  class="form-control"
+                  required
+                  title="Harap isi form ini"
+                  min="0"
+                />
+                <span class="input-group-text">/1</span>
+              </div>
+            </div>
+            <div class="col-lg-6 mb-3">
+              <label for="gedungJ2" class="form-label">Gedung J lantai 2</label>
+              <div class="input-group">
+                <input
+                  type="number"
+                  name="gedungJ2"
+                  id="gedungJ2"
+                  class="form-control"
+                  required
+                  title="Harap isi form ini"
+                  min="0"
+                />
+                <span class="input-group-text">/1</span>
+              </div>
+            </div>
+            <div class="col-lg-6 mb-3">
+              <label for="gedungJ3" class="form-label">Gedung J lantai 3</label>
+              <div class="input-group">
+                <input
+                  type="number"
+                  name="gedungJ3"
+                  id="gedungJ3"
+                  class="form-control"
+                  required
+                  title="Harap isi form ini"
+                  min="0"
+                />
+                <span class="input-group-text">/1</span>
+              </div>
+            </div>
+            <div class="col-lg-6 mb-3">
+              <label for="gedungJ4" class="form-label">Gedung J lantai 4</label>
+              <div class="input-group">
+                <input
+                  type="number"
+                  name="gedungJ4"
+                  id="gedungJ4"
+                  class="form-control"
+                  required
+                  title="Harap isi form ini"
+                  min="0"
+                />
+                <span class="input-group-text">/1</span>
+              </div>
+            </div>
+            <div class="col-lg-6 mb-3">
+              <label for="gedungJ5" class="form-label">Gedung J lantai 5</label>
+              <div class="input-group">
+                <input
+                  type="number"
+                  name="gedungJ5"
+                  id="gedungJ5"
+                  class="form-control"
+                  required
+                  title="Harap isi form ini"
+                  min="0"
+                />
+                <span class="input-group-text">/1</span>
+              </div>
+            </div>
+            <div class="col-lg-6 mb-3">
+              <label for="gedungJ6" class="form-label">Gedung J lantai 6</label>
+              <div class="input-group">
+                <input
+                  type="number"
+                  name="gedungJ6"
+                  id="gedungJ6"
+                  class="form-control"
+                  required
+                  title="Harap isi form ini"
+                  min="0"
+                />
+                <span class="input-group-text">/1</span>
+              </div>
+            </div>
+            <div class="col-lg-6 mb-3">
+              <label for="gedungJ7" class="form-label">Gedung J lantai 7</label>
+              <div class="input-group">
+                <input
+                  type="number"
+                  name="gedungJ7"
+                  id="gedungJ7"
+                  class="form-control"
+                  required
+                  title="Harap isi form ini"
+                  min="0"
+                />
+                <span class="input-group-text">/1</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row d-flex flex-column align-items-center">
+        <div class="col-sm-6">
+          <button type="reset" class="btn btn-danger mt-3 w-100">Clear</button>
+        </div>
+        <div class="col-sm-6">
+          <button type="submit" class="btn btn-success mt-3 w-100">
+            Submit
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<%- include("templateP3k/footer") %>

@@ -52,8 +52,34 @@ app.get("/maintenance", (req, res) => {
   res.render("maintenance");
 });
 
-app.get("/maintenance/data-alat", (req, res) => {
-  res.render("maintenanceDataAlat");
+app.get("/maintenance/data-alat", async (req, res) => {
+  const alats = await Alat.find({});
+  res.render("maintenanceDataAlat", { alats });
+});
+
+app.post("/maintenance/data-alat", async (req, res) => {
+  const {
+    name: nameBaru,
+    tanggal: tanggalBaru,
+    spesifikasi: spesifikasiBaru,
+    jumlah: jumlahBaru,
+    lokasi: lokasiBaru,
+    kategori: kategoriBaru
+  } = req.body;
+  const newDate = tanggalBaru.split("-");
+  const validDate = `${newDate[2]}-${newDate[1]}-${newDate[0]}`;
+  const isoDate = new Date(validDate);
+  const newAlatObject = {
+    nama: nameBaru,
+    tanggalPeroleh: isoDate,
+    spesifikasi: spesifikasiBaru,
+    jumlah: jumlahBaru,
+    lokasi: lokasiBaru,
+    kategori: kategoriBaru
+  };
+  const newAlat = new Alat(newAlatObject);
+  await newAlat.save();
+  res.redirect("/maintenance/data-alat");
 });
 
 app.get("/maintenance/maintenance", (req, res) => {
@@ -78,6 +104,14 @@ app.get("/p3k/kotak-p3k-b", (req, res) => {
 
 app.get("/p3k/kotak-p3k-c", (req, res) => {
   res.render("p3kKotakP3kC");
+});
+
+app.get("/p3k/pendataan-ketersediaan-alat-evakuasi-korban", (req, res) => {
+  res.render("pendataanAlatEvakuasiKorban");
+});
+
+app.get("/p3k/formulir-pemulihan", (req, res) => {
+  res.render("formulirPemulihan");
 });
 
 //========Error Handling===============

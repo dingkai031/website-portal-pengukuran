@@ -1,0 +1,140 @@
+<%- include("templateP3k/head") %>
+<div class="modal fade" id="form" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bolder">Tenaga Kependidikan - Mayor</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" spellcheck="false" autocomplete="off">
+          <div class="row">
+            <div class="col-12">
+              <div class="mb-3 row">
+                <div class="col-sm-6 d-flex flex-column mb-2 mb-sm-1">
+                  <label for="tanggalInspeksi" class="form-label"
+                    >Tanggal inspeksi</label
+                  >
+                  <div class="input-group border-0 datepicker">
+                    <input
+                      type="text"
+                      id="tanggalInspeksi"
+                      class="form-control border-0"
+                      name="tanggalInspeksi"
+                      required
+                      title="Harap isi form ini"
+                      data-input
+                    />
+                    <span class="input-group-text border-0" data-toggle>
+                      <i class="far fa-calendar"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-sm-6 d-flex flex-column mb-2 mb-sm-1">
+                  <label for="namaInspektor" class="form-label"
+                    >Nama Inspektor</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="namaInspektor"
+                    name="namaInspektor"
+                    title="Harap isi form ini"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
+                  <label for="nrp" class="form-label">NRP/NIK</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nrp"
+                    name="nrp"
+                    title="Harap isi form ini"
+                    required
+                  />
+                </div>
+                <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
+                  <label for="tempatInspeksi" class="form-label"
+                    >Tempat Inspeksi</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="tempatInspeksi"
+                    name="tempatInspeksi"
+                    title="Harap isi form ini"
+                  />
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="d-flex flex-column">
+                  <label for="namaPerlengkapanYangRusak" class="form-label"
+                    >Nama perlengkapan P3K/Alat evakuasi yang rusak</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="namaPerlengkapanYangRusak"
+                    name="namaPerlengkapanYangRusak"
+                    title="Harap isi form ini"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex flex-column d-lg-block text-start text-lg-center">
+            <button type="reset" id="reset" class="btn btn-danger mt-3">
+              Clear
+            </button>
+            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card custom-border-radius bg-white">
+  <div class="card-body py-3">
+    <h3 class="card-title fw-bolder fs-3 m-0 mb-3 text-center text-md-start">
+      Formulir Pemulihan Perlengkapan P3K dan Alat Evakuasi yang Rusak
+    </h3>
+    <p class="text-justify mb-1">
+      Sebelum pengisian form Pemulihan Perlengkapan P3K dan Alat Evakuasi yang
+      Rusak, akan muncul prosedur Pemulihan Perlengkapan P3K dan Alat Evakuasi
+      yang Rusak. Berikut ini adalah Prosedur Pemulihan Perlengkapan P3K dan
+      Alat Evakuasi yang Rusak :
+    </p>
+    <ul class="mb-3">
+      <li>Inspektor memeriksa kondisi perlengkapan P3K dan alat evakuasi.</li>
+      <li>
+        Jika ada perlengkapan P3K dan alat evakuasi yang rusak, maka inspektor
+        mengisi formulir pemulihan perlengkapan P3K dan Alat evakuasi yang
+        rusak.
+      </li>
+      <li>
+        Setelah selesai, inspektor mengirimkan data pemulihan perlengkapan P3K
+        dan Alat evakuasi yang rusak.
+      </li>
+    </ul>
+
+    <div class="d-flex flex-column flex-md-row">
+      <button
+        class="btn btn-primary m-1 letterSpacing-2"
+        data-bs-toggle="modal"
+        data-bs-target="#form"
+      >
+        FORMULIR
+      </button>
+    </div>
+  </div>
+</div>
+<%- include("templateP3k/footer") %>
