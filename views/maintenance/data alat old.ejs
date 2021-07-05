@@ -128,14 +128,14 @@
             >
               Kategori
             </label>
-            <input
-              type="text"
-              id="kategori"
-              class="form-control border-0"
-              name="kategori"
-              required
-              title="Harap isi form ini"
-            />
+            <select name="kategori" id="kategori" class="select2" title="Harap isi form ini" required>
+              <option></option>
+              <option value="Alat">Alat</option>
+              <option value="Bahan Habis">Bahan Habis</option>
+              <option value="Sarana">Sarana</option>
+              <option value="Meubelair">Meubelair</option>
+              <option value="Lain-lain">Lain-lain</option>
+            </select>
           </div>
           <div class="text-center">
             <button type="reset" class="btn btn-white me-3">
@@ -183,6 +183,7 @@
     </div>
   </div>
   <div class="card-body py-3">
+    <% if (alats.length !== 0) { %> 
     <div class="table-responsive">
       <table class="table table-borderless align-middle gy-4 align-midle">
         <thead>
@@ -242,10 +243,11 @@
                     </div>
                     <div class="modal-body px-5">
                       <form
-                        action=""
+                        action="/maintenance/data-alat?_method=PUT"
                         class="form"
                         spellcheck="false"
                         autocomplete="off"
+                        method="POST"
                       >
                         <div class="mb-3 text-center">
                           <h3 class="mb-2">Edit alat - <%= alats[i].nama %></h3>
@@ -365,6 +367,7 @@
                             value="<%= alats[i].kategori %>"
                           />
                         </div>
+                        <input type="text" name="idAlat" class="d-none" value="<%= alats[i]._id %>" readonly required>
                         <div class="text-center">
                           <button type="reset" class="btn btn-white me-3">
                             Reset
@@ -376,7 +379,7 @@
                       </form>
                     </div>
                   </div>
-                </div>
+                </div> 
               </div>
               <a
                 href="#"
@@ -408,6 +411,47 @@
               >
                 <i class="bx bx-printer fs-4"></i>
               </a>
+              <div
+                class="modal fade"
+                id="<%= `delete${alats[i]._id}` %>"
+                tabindex="-1"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header border-0">
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body px-5">
+                      <form
+                        action="/maintenance/data-alat?_method=DELETE"
+                        class="form"
+                        spellcheck="false"
+                        autocomplete="off"
+                        method="POST"
+                      >
+                        <div class="mb-5 text-center">
+                          <h3 class="mb-2">Hapus <span class="text-danger"><%= alats[i].nama %></span>?</h3>
+                        </div>
+                        <input type="text" name="idAlat" class="d-none" value="<%= alats[i]._id %>" readonly required>
+                        <div class="text-center">
+                          <button type="reset" class="btn btn-white me-3">
+                            Tidak
+                          </button>
+                          <button type="submit" class="btn btn-danger">
+                            Hapus
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div> 
+              </div>
               <a
                 href="#"
                 class="
@@ -418,6 +462,8 @@
                   btn-sm
                   rounded
                 "
+                data-bs-toggle="modal"
+                data-bs-target="#<%= `delete${alats[i]._id}` %>"
               >
                 <i class="bx bx-trash-alt fs-4"></i>
               </a>
@@ -427,6 +473,9 @@
         </tbody>
       </table>
     </div>
+    <% }else { %> 
+      <div class="text-center"><h2 class=" my-5 text-primary d-inline-block" style="letter-spacing: 3px;border-bottom: 5px solid #0d6efd;">Data tidak ditemukan</h2></div>
+      <% } %> 
   </div>
 </div>
 <%- include("templateMaintenance/footer") %>

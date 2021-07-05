@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ===== BOX ICONS ===== -->
+    <link rel="stylesheet" href="/boxicons/css/boxicons.min.css" />
+
+    <!-- ===== BOOTSTRAP 5 ===== -->
+
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <!-- ===== CSS ===== -->
+    <link rel="stylesheet" href="/css/stylesSidebar.css" />
+    <!-- ===== flat pickr ===== -->
+    <link rel="stylesheet" href="/flatpickr/dist/flatpickr.min.css" />
+	
+	<!-- ===== select2 ===== -->
+    <link rel="stylesheet" href="/select2/dist/css/select2.min.css" />
+	
+	<!-- ===== select2 - Bootstrap Theme ===== -->
+    <link rel="stylesheet" href="/@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css" />
+
+    <title>Maintenance K3 PPNS</title>
+  </head>
+  <body id="body-pd" class="bg-light">
+    <header class="header shadow" id="header">
+      <a class="header__toggle">
+        <i class="bx bx-menu" id="header-toggle"></i>
+      </a>
+
+      <div style="display: flex; align-items: center; justify-content: s">
+        <div class="header__img">
+          <img src="/img/perfil.jpg" alt="" />
+        </div>
+      </div>
+    </header>
+
+    <div class="l-navbar" id="nav-bar">
+      <nav class="nav">
+        <div>
+          <a href="/maintenance" class="nav__logo">
+            <i class="bx bx-analyse nav__logo-icon"></i>
+            <span class="nav__logo-name"
+              >Inspeksi dan <br />
+              Maintenance K3</span
+            >
+          </a>
+          <div class="nav__list">
+            <a href="/maintenance" class="nav__link <%= jenisTempatQuery ? "" : "active" %>">
+              <i class="bx bx-border-all"></i>
+              <span class="nav__name">Dashboard</span>
+            </a>
+            <a href="/maintenance/maintenancebengkel" class="nav__link <%= jenisTempatQuery === "maintenancebengkel" ? "active" : "" %>">
+              <i class="bx bx-git-compare"></i>
+              <span class="nav__name">Bengkel</span>
+            </a>
+            <a href="/maintenance/maintenancelab" class="nav__link <%= jenisTempatQuery === "maintenancelab" ? "active" : "" %>">
+              <i class="bx bxs-wrench"></i>
+              <span class="nav__name">Laboratorium</span>
+            </a>
+          </div>
+        </div>
+
+        <a href="#" class="nav__link">
+          <i class="bx bx-log-out nav__icon"></i>
+          <span class="nav__name">Keluar</span>
+        </a>
+      </nav>
+    </div>
+
+    <div class="container-fluid">

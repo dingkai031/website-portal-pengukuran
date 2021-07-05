@@ -1,0 +1,25 @@
+<%- include("templateMaintenance/head") %>
+<div class="card custom-shadow">
+  <div
+    class="card-header pt-3 px-4 bg-white border-0 text-center text-sm-start"
+  >
+    <h3 class="card-title fw-bolder fs-3 m-0"><%= tempatTerpilih.nama %></h3>
+  </div>
+  <div class="card-body py-3 my-3">
+    <div class="row">
+      <div class="col-sm-6 p-1 text-center">
+        <a
+          href="<%= `/maintenance/${jenisTempatQuery}/${tempatTerpilih.alamat}/data-alat` %>"
+          class="btn btn-primary w-100 py-5"
+          ><p class="fs-3 m-0">Data Alat</p></a
+        >
+      </div>
+      <div class="col-sm-6 p-1 text-center">
+        <a href="" class="btn btn-primary w-100 py-5"
+          ><p class="fs-3 m-0">Inspeksi</p></a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+<%- include("templateMaintenance/footer") %>

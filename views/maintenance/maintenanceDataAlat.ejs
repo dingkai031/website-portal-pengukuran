@@ -1,0 +1,327 @@
+<%- include("templateMaintenance/head") %>
+<div class="modal fade" id="newAlat" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body px-5">
+        <form
+          action="data-alat"
+          class="form"
+          spellcheck="false"
+          autocomplete="off"
+          method="POST"
+        >
+          <div class="mb-3 text-center">
+            <h3 class="mb-2">Tambah Alat</h3>
+            <div class="text-muted">Harap masukkan data dengan benar.</div>
+          </div>
+          <div class="d-flex flex-column mb-3">
+            <label for="nama" class="d-flex align-items-center fw-bold mb-2">
+              Nama
+            </label>
+            <input
+              type="text"
+              id="nama"
+              class="form-control border-0"
+              name="name"
+              required
+              title="Harap isi form ini"
+            />
+          </div>
+          <div class="d-flex flex-column mb-3">
+            <label
+              for="tanggal"
+              class="d-flex align-items-center fs-6 fw-bold mb-2"
+            >
+              Tanggal Perolehan
+            </label>
+            <div class="input-group border-0 datepicker">
+              <input
+                type="text"
+                id="tanggal"
+                class="form-control border-0"
+                name="tanggal"
+                required
+                title="Harap isi form ini"
+                data-input
+              />
+              <span class="input-group-text border-0" data-toggle>
+                <i class="bx bx-calendar"></i>
+              </span>
+            </div>
+          </div>
+          <div class="d-flex flex-column mb-3">
+            <label
+              for="spesifikasi"
+              class="d-flex align-items-center fs-6 fw-bold mb-2"
+            >
+              Spesifikasi
+            </label>
+            <input
+              type="text"
+              id="spesifikasi"
+              class="form-control border-0"
+              name="spesifikasi"
+              required
+              title="Harap isi form ini"
+            />
+          </div>
+          <div class="d-flex flex-column mb-3">
+            <label
+              for="konsumsiTenaga"
+              class="d-flex align-items-center fw-bold mb-2"
+            >
+              Konsumsi Tenaga
+            </label>
+            <div class="input-group" id="konsumsiTenaga">
+              <input
+                type="number"
+                name="konsumsiTenagaMin"
+                class="form-control border-0"
+                title="Harap isi form ini"
+                min="0"
+                placeholder="Min"
+                required
+              />
+              <input
+                type="number"
+                name="konsumsiTenagaMax"
+                class="form-control border-0"
+                title="Harap isi form ini"
+                min="0"
+                placeholder="Max"
+                required
+              />
+              <span class="input-group-text border-0">Volt</span>
+            </div>
+          </div>
+          <div class="d-flex flex-column mb-3">
+            <label
+              for="kemampuanAlat"
+              class="d-flex align-items-center fw-bold mb-2"
+            >
+              Kemampuan Alat
+            </label>
+            <div class="input-group" id="kemampuanAlat">
+              <input
+                type="number"
+                name="kemampuanAlatMin"
+                class="form-control border-0"
+                title="Harap isi form ini"
+                min="0"
+                placeholder="Min"
+                required
+              />
+              <input
+                type="number"
+                name="kemampuanAlatMax"
+                class="form-control border-0"
+                title="Harap isi form ini"
+                min="0"
+                placeholder="Max"
+                required
+              />
+              <span class="input-group-text border-0">Volt</span>
+            </div>
+          </div>
+          <div class="d-flex flex-column mb-3">
+            <label for="jumlah" class="d-flex align-items-center fw-bold mb-2">
+              Jumlah
+            </label>
+            <div class="input-group">
+              <input
+                type="number"
+                id="jumlah"
+                name="jumlah"
+                class="form-control border-0"
+                title="Harap isi form ini"
+                min="0"
+                required
+              />
+              <span class="input-group-text border-0">unit</span>
+            </div>
+          </div>
+
+          <input
+            type="text"
+            name="lokasi"
+            class="d-none"
+            value="<%= tempatTerpilih.nama %>"
+            required
+            readonly
+          />
+          <div class="d-flex flex-column mb-4">
+            <label
+              for="kategori"
+              class="d-flex align-items-center fs-6 fw-bold mb-2"
+            >
+              Kategori
+            </label>
+            <select
+              name="kategori"
+              id="kategori"
+              class="select2"
+              title="Harap isi form ini"
+              required
+            >
+              <option></option>
+              <option value="Alat">Alat</option>
+              <option value="Bahan Habis">Bahan Habis</option>
+              <option value="Sarana">Sarana</option>
+              <option value="Meubelair">Meubelair</option>
+              <option value="Lain-lain">Lain-lain</option>
+            </select>
+          </div>
+          <div class="text-center">
+            <button type="reset" class="btn btn-white me-3">Reset</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card custom-shadow">
+  <div
+    class="
+      card-header
+      pt-3
+      px-4
+      bg-white
+      border-0
+      d-flex
+      justify-content-between
+    "
+  >
+    <h3 class="card-title fw-bolder fs-3 m-0 d-flex align-items-center">
+      Data Alat di<span class="text-primary ms-2"
+        ><%= tempatTerpilih.nama %></span
+      >
+    </h3>
+    <div class="card-toolbar">
+      <a
+        href="#"
+        class="
+          btn btn-sm btn-light-primary
+          p-2
+          custom-border-radius
+          d-flex
+          align-items-center
+          fs-5
+        "
+        data-bs-toggle="modal"
+        data-bs-target="#newAlat"
+      >
+        <i class="bx bx-plus-circle me-2 fs-3"></i>
+        Tambah Alat
+      </a>
+    </div>
+  </div>
+  <div class="card-body py-3 my-3">
+    <div class="row">
+      <% for (const alat of kumpulanAlat){ %>
+      <div class="col-md-6 col-lg-4 col-xl-3 p-1 text-center">
+        <div class="card shadow-sm h-100">
+          <div class="card-header pt-3 px-4 bg-white text-center">
+            <h3
+              class="card-title fw-bolder fs-5"
+              style="text-transform: capitalize"
+            >
+              <%= alat.nama %>
+            </h3>
+            <h3 class="card-title fw-bolder fs-5 text-primary">
+              <%= alat.spesifikasi %>
+            </h3>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-4 p-1">
+                <a href="" class="btn btn-primary w-100 h-100"
+                  >Deskripsi Alat</a
+                >
+              </div>
+              <div class="col-4 p-1">
+                <a href="" class="btn btn-secondary w-100 h-100">Maintenance</a>
+              </div>
+              <div class="col-4 p-1">
+                <a href="" class="btn btn-primary w-100 h-100">History</a>
+              </div>
+              <div class="col-6 p-1">
+                <a href="" class="btn btn-info text-white w-100 h-100">Edit</a>
+              </div>
+              <div class="col-6 p-1">
+                <div
+                  class="modal fade"
+                  id="<%= `delete${alat._id}` %>"
+                  tabindex="-1"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header border-0">
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div class="modal-body px-5">
+                        <form
+                          action="data-alat?_method=DELETE"
+                          class="form"
+                          spellcheck="false"
+                          autocomplete="off"
+                          method="POST"
+                        >
+                          <div class="mb-5 text-center">
+                            <h3 class="mb-2">
+                              Hapus
+                              <span class="text-danger"><%= alat.nama %></span>?
+                            </h3>
+                          </div>
+                          <input
+                            type="text"
+                            name="idAlat"
+                            class="d-none"
+                            value="<%= alat._id %>"
+                            readonly
+                            required
+                          />
+                          <div class="text-center">
+                            <button type="reset" class="btn btn-white me-3">
+                              Tidak
+                            </button>
+                            <button type="submit" class="btn btn-danger">
+                              Hapus
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <a
+                  href="#"
+                  class="btn btn-danger w-100"
+                  data-bs-toggle="modal"
+                  data-bs-target="#delete<%= alat._id %>"
+                  >Delete</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+<%- include("templateMaintenance/footer") %>

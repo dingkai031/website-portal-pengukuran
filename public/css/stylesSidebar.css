@@ -311,3 +311,23 @@ textarea:focus {
 .nav-logo-custom {
   display: flex;
 }
+
+.select2-selection {
+  background-color: #f5f8fa !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.select2-selection:focus {
+  background-color: #eef3f7 !important;
+}
+
+.select2-search {
+  background-color: #eef3f7;
+}
+.select2-search input {
+  background-color: #fff;
+}
+.select2-results {
+  background-color: #eef3f7;
+}
