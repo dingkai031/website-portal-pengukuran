@@ -1,17 +1,17 @@
 const mongoose = require("mongoose");
-const User = require("../models/users");
+const User = require("../models/user");
 const Alat = require("../models/alat");
 const Tempat = require("../models/tempat");
 
 mongoose
   .connect("mongodb://localhost:27017/pendidikan", {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   })
   .then(() => {
     console.log("koneksi sukses ke Database port 27017 Sukses");
   })
-  .catch(e => {
+  .catch((e) => {
     console.log(`koneksike data base tidak berhasil : ${e}`);
   });
 
@@ -19,153 +19,412 @@ const tempTempat = [
   {
     nama: "Bengkel Reparasi Mesin",
     alamat: "Bengkel-Reparasi-Mesin",
-    jenis: "maintenanceBengkel"
+    jenis: "maintenanceBengkel",
+    jumlahTitikPengukuran: {
+      ventilasi: 4,
+      getaran: 0,
+      penerangan: 17,
+      kebisingan: 0,
+      iklimKerja: 1,
+    },
   },
   {
     nama: "Bengkel Permesinan dan Sheet Metal (Perkakas)",
     alamat: "Bengkel-Permesinan-dan-Sheet-Metal",
-    jenis: "maintenanceBengkel"
+    jenis: "maintenanceBengkel",
+    jumlahTitikPengukuran: {
+      ventilasi: 8,
+      getaran: 12,
+      penerangan: 10,
+      kebisingan: 6,
+      iklimKerja: 4,
+    },
   },
   {
     nama: "Bengkel Las",
     alamat: "Bengkel-Las",
-    jenis: "maintenanceBengkel"
+    jenis: "maintenanceBengkel",
+    jumlahTitikPengukuran: {
+      ventilasi: 5,
+      getaran: 2,
+      penerangan: 12,
+      kebisingan: 5,
+      iklimKerja: 3,
+    },
   },
   {
     nama: "Bengkel Konstruksi",
     alamat: "Bengkel-konstruksi",
-    jenis: "maintenanceBengkel"
+    jenis: "maintenanceBengkel",
+    jumlahTitikPengukuran: {
+      ventilasi: 8,
+      getaran: 4,
+      penerangan: 9,
+      kebisingan: 4,
+      iklimKerja: 2,
+    },
   },
   {
     nama: "Bengkel Non Metal",
     alamat: "Bengkel-Non-Metal",
-    jenis: "maintenanceBengkel"
+    jenis: "maintenanceBengkel",
+    jumlahTitikPengukuran: {
+      ventilasi: 7,
+      getaran: 3,
+      penerangan: 9,
+      kebisingan: 3,
+      iklimKerja: 1,
+    },
   },
   {
     nama: "Lab Elektronika Daya",
     alamat: "Lab-Elektronika-Daya",
-    jenis: "maintenanceLab"
+    jenis: "maintenanceLab",
+    jumlahTitikPengukuran: {
+      ventilasi: 5,
+      getaran: 0,
+      penerangan: 12,
+      kebisingan: 0,
+      iklimKerja: 1,
+    },
   },
   {
     nama: "Lab Bahasa",
     alamat: "Lab-Bahasa",
-    jenis: "maintenanceLab"
+    jenis: "maintenanceLab",
+    jumlahTitikPengukuran: {
+      ventilasi: 6,
+      getaran: 0,
+      penerangan: 15,
+      kebisingan: 0,
+      iklimKerja: 1,
+    },
   },
   {
     nama: "Lab Komputer",
     alamat: "Lab-Komputer",
-    jenis: "maintenanceLab"
+    jenis: "maintenanceLab",
+    jumlahTitikPengukuran: {
+      ventilasi: 3,
+      getaran: 0,
+      penerangan: 12,
+      kebisingan: 0,
+      iklimKerja: 1,
+    },
   },
   {
-    nama: "Lab Elektronika dan Sistem-Kontrol",
+    nama: "Lab Elektronika dan Sistem Kontrol",
     alamat: "Lab-Elektronika-dan-Sistem-Kontrol",
-    jenis: "maintenanceLab"
+    jenis: "maintenanceLab",
+    jumlahTitikPengukuran: {
+      ventilasi: 7,
+      getaran: 0,
+      penerangan: 18,
+      kebisingan: 0,
+      iklimKerja: 2,
+    },
   },
   {
     nama: "Lab Kimia",
     alamat: "Lab-Kimia",
-    jenis: "maintenanceLab"
+    jenis: "maintenanceLab",
+    jumlahTitikPengukuran: {
+      ventilasi: 2,
+      getaran: 0,
+      penerangan: 12,
+      kebisingan: 0,
+      iklimKerja: 1,
+    },
   },
   {
     nama: "Lab Fisika",
     alamat: "Lab-Fisika",
-    jenis: "maintenanceLab"
+    jenis: "maintenanceLab",
+    jumlahTitikPengukuran: {
+      ventilasi: 0,
+      getaran: 0,
+      penerangan: 0,
+      kebisingan: 0,
+      iklimKerja: 0,
+    },
   },
   {
     nama: "Lab Instrumentasi",
     alamat: "Lab-Instrumentasi",
-    jenis: "maintenanceLab"
+    jenis: "maintenanceLab",
+    jumlahTitikPengukuran: {
+      ventilasi: 0,
+      getaran: 0,
+      penerangan: 0,
+      kebisingan: 0,
+      iklimKerja: 0,
+    },
   },
   {
     nama: "Lab Pengembangan Bisnis Maritim dan Galeri Investasi",
     alamat: "Lab-Pengembangan-Bisnis-Maritim-dan-Galeri-Investasi",
-    jenis: "maintenanceLab"
+    jenis: "maintenanceLab",
+    jumlahTitikPengukuran: {
+      ventilasi: 0,
+      getaran: 0,
+      penerangan: 0,
+      kebisingan: 0,
+      iklimKerja: 0,
+    },
   },
   {
     nama: "Lab Navigasi dan Komunikasi",
     alamat: "Lab-Navigasi-dan-Komunikasi",
-    jenis: "maintenanceLab"
+    jenis: "maintenanceLab",
+    jumlahTitikPengukuran: {
+      ventilasi: 0,
+      getaran: 0,
+      penerangan: 0,
+      kebisingan: 0,
+      iklimKerja: 0,
+    },
   },
   {
     nama: "Lab Logistik Maritim",
     alamat: "Lab-Logistik-Maritim",
-    jenis: "maintenanceLab"
+    jenis: "maintenanceLab",
+    jumlahTitikPengukuran: {
+      ventilasi: 0,
+      getaran: 0,
+      penerangan: 0,
+      kebisingan: 0,
+      iklimKerja: 0,
+    },
   },
   {
     nama: "Lab Reparasi Listrik",
     alamat: "Lab-Reparasi-Listrik",
-    jenis: "maintenanceLab"
+    jenis: "maintenanceLab",
+    jumlahTitikPengukuran: {
+      ventilasi: 0,
+      getaran: 0,
+      penerangan: 0,
+      kebisingan: 0,
+      iklimKerja: 0,
+    },
   },
   {
     nama: "Lab Mesin Listrik",
     alamat: "Lab-Mesin-Listrik",
-    jenis: "maintenanceLab"
+    jenis: "maintenanceLab",
+    jumlahTitikPengukuran: {
+      ventilasi: 3,
+      getaran: 0,
+      penerangan: 20,
+      kebisingan: 0,
+      iklimKerja: 1,
+    },
   },
   {
     nama: "Lab Otomasi dan Robotik",
     alamat: "Lab-Otomasi-dan-Robotik",
-    jenis: "maintenanceLab"
+    jenis: "maintenanceLab",
+    jumlahTitikPengukuran: {
+      ventilasi: 4,
+      getaran: 0,
+      penerangan: 17,
+      kebisingan: 0,
+      iklimKerja: 1,
+    },
   },
   {
     nama: "Lab Plumbing dan Pemodelan Sistem Perpipaan",
     alamat: "Lab Plumbing dan Pemodelan Sistem Perpipaan",
-    jenis: "maintenanceLab"
+    jenis: "maintenanceLab",
+    jumlahTitikPengukuran: {
+      ventilasi: 9,
+      getaran: 0,
+      penerangan: 18,
+      kebisingan: 0,
+      iklimKerja: 3,
+    },
   },
   {
     nama: "Lab CNC",
     alamat: "Lab CNC",
-    jenis: "maintenanceLab"
+    jenis: "maintenanceLab",
+    jumlahTitikPengukuran: {
+      ventilasi: 7,
+      getaran: 0,
+      penerangan: 21,
+      kebisingan: 0,
+      iklimKerja: 1,
+    },
   },
   {
     nama: "Lab Pemadam Kebakaran",
     alamat: "Lab-Pemadam-Kebakaran",
-    jenis: "maintenanceLab"
+    jenis: "maintenanceLab",
+    jumlahTitikPengukuran: {
+      ventilasi: 0,
+      getaran: 0,
+      penerangan: 0,
+      kebisingan: 0,
+      iklimKerja: 0,
+    },
   },
   {
     nama: "Lab Pneumatik dan Hidrolik",
     alamat: "Lab-Pneumatik-dan-Hidrolik",
-    jenis: "maintenanceLab"
+    jenis: "maintenanceLab",
+    jumlahTitikPengukuran: {
+      ventilasi: 2,
+      getaran: 0,
+      penerangan: 12,
+      kebisingan: 0,
+      iklimKerja: 1,
+    },
   },
   {
     nama: "Lab Motor Bakar",
     alamat: "Lab-Motor-Bakar",
-    jenis: "maintenanceLab"
+    jenis: "maintenanceLab",
+    jumlahTitikPengukuran: {
+      ventilasi: 0,
+      getaran: 0,
+      penerangan: 0,
+      kebisingan: 0,
+      iklimKerja: 0,
+    },
   },
   {
     nama: "Lab CADD",
     alamat: "Lab-CADD",
-    jenis: "maintenanceLab"
+    jenis: "maintenanceLab",
+    jumlahTitikPengukuran: {
+      ventilasi: 2,
+      getaran: 0,
+      penerangan: 14,
+      kebisingan: 0,
+      iklimKerja: 1,
+    },
   },
   {
     nama: "Lab Uji Bahan",
     alamat: "Lab-Uji-Bahan",
-    jenis: "maintenanceLab"
+    jenis: "maintenanceLab",
+    jumlahTitikPengukuran: {
+      ventilasi: 2,
+      getaran: 0,
+      penerangan: 13,
+      kebisingan: 0,
+      iklimKerja: 2,
+    },
   },
   {
     nama: "Lab Pengolahan Limbah",
     alamat: "Lab-Pengolahan-Limbah",
-    jenis: "maintenanceLab"
-  }
-];
-
-const tempUsers = [
-  {
-    nomorInduk: 222222222222,
-    nama: "dummy 2",
-    status: "kabeng"
+    jenis: "maintenanceLab",
+    jumlahTitikPengukuran: {
+      ventilasi: 5,
+      getaran: 0,
+      penerangan: 21,
+      kebisingan: 0,
+      iklimKerja: 2,
+    },
   },
   {
-    nomorInduk: 333333333333,
-    nama: "dummy 3",
-    status: "Teknisi"
+    nama: "Lab Ergonomi",
+    alamat: "Lab-Ergonomi",
+    jenis: "maintenanceLab",
+    jumlahTitikPengukuran: {
+      ventilasi: 3,
+      getaran: 0,
+      penerangan: 12,
+      kebisingan: 0,
+      iklimKerja: 1,
+    },
   },
   {
-    nomorInduk: 444444444444,
-    nama: "dummy 4",
-    status: "Mahasiswa"
-  }
+    nama: "Lab Fluida",
+    alamat: "Lab-Fluida",
+    jenis: "maintenanceLab",
+    jumlahTitikPengukuran: {
+      ventilasi: 5,
+      getaran: 0,
+      penerangan: 18,
+      kebisingan: 0,
+      iklimKerja: 1,
+    },
+  },
+  {
+    nama: "Lab PLK",
+    alamat: "Lab-PLK",
+    jenis: "maintenanceLab",
+    jumlahTitikPengukuran: {
+      ventilasi: 3,
+      getaran: 0,
+      penerangan: 18,
+      kebisingan: 0,
+      iklimKerja: 1,
+    },
+  },
+  {
+    nama: "Lab SPPK",
+    alamat: "Lab-SPPK",
+    jenis: "maintenanceLab",
+    jumlahTitikPengukuran: {
+      ventilasi: 3,
+      getaran: 0,
+      penerangan: 12,
+      kebisingan: 0,
+      iklimKerja: 1,
+    },
+  },
+  {
+    nama: "Lab Boiler",
+    alamat: "Lab-Boiler",
+    jenis: "maintenanceLab",
+    jumlahTitikPengukuran: {
+      ventilasi: 7,
+      getaran: 0,
+      penerangan: 12,
+      kebisingan: 0,
+      iklimKerja: 1,
+    },
+  },
+  {
+    nama: "Studio Gambar",
+    alamat: "Studio-Gambar",
+    jenis: "maintenanceStudio",
+    jumlahTitikPengukuran: {
+      ventilasi: 12,
+      getaran: 0,
+      penerangan: 33,
+      kebisingan: 0,
+      iklimKerja: 4,
+    },
+  },
 ];
 
+const tempUser = [
+  {
+    nama: "dummy kabeng",
+    email: "dummyKabeng@ppns.ac.id",
+    username: "dummyKabeng@ppns.ac.id",
+    status: "kabeng",
+    lokasi: "Bengkel Reparasi Mesin",
+  },
+  {
+    nama: "dummy admin",
+    email: "dummyAdmin@ppns.ac.id",
+    username: "dummyAdmin@ppns.ac.id",
+    status: "admin",
+    lokasi: "semua",
+  },
+  {
+    nama: "dummy teknisi",
+    email: "dummyTeknisi@ppns.ac.id",
+    username: "dummyTeknisi@ppns.ac.id",
+    status: "teknisi",
+    lokasi: "Bengkel Reparasi Mesin",
+  },
+];
 const tempAlat = [
   {
     nama: "Tang Ampere",
@@ -174,17 +433,17 @@ const tempAlat = [
     satuan: "unit",
     lokasi: {
       namaLokasi: "Bengkel Reparasi Mesin",
-      jumlah: 6
+      jumlah: 6,
     },
     kategori: "Alat",
     konsumsiTenaga: {
       minimal: 3,
-      maksimal: 8
+      maksimal: 8,
     },
     kemampuanAlat: {
       minimal: 3,
-      maksimal: 8
-    }
+      maksimal: 8,
+    },
   },
   {
     nama: "Mesin Las LORCH",
@@ -193,17 +452,17 @@ const tempAlat = [
     satuan: "unit",
     lokasi: {
       namaLokasi: "Bengkel Reparasi Mesin",
-      jumlah: 10
+      jumlah: 10,
     },
     kategori: "Alat",
     konsumsiTenaga: {
       minimal: 3,
-      maksimal: 8
+      maksimal: 8,
     },
     kemampuanAlat: {
       minimal: 3,
-      maksimal: 8
-    }
+      maksimal: 8,
+    },
   },
   {
     nama: "CNC Gas & Plasma",
@@ -212,17 +471,17 @@ const tempAlat = [
     satuan: "unit",
     lokasi: {
       namaLokasi: "Bengkel Reparasi Mesin",
-      jumlah: 6
+      jumlah: 6,
     },
     kategori: "Alat",
     konsumsiTenaga: {
       minimal: 3,
-      maksimal: 8
+      maksimal: 8,
     },
     kemampuanAlat: {
       minimal: 3,
-      maksimal: 8
-    }
+      maksimal: 8,
+    },
   },
   {
     nama: "Tang Ampere 2",
@@ -231,17 +490,17 @@ const tempAlat = [
     satuan: "unit",
     lokasi: {
       namaLokasi: "Bengkel Permesinan dan Sheet Metal (Perkakas)",
-      jumlah: 6
+      jumlah: 6,
     },
     kategori: "Alat",
     konsumsiTenaga: {
       minimal: 3,
-      maksimal: 8
+      maksimal: 8,
     },
     kemampuanAlat: {
       minimal: 3,
-      maksimal: 8
-    }
+      maksimal: 8,
+    },
   },
   {
     nama: "Mesin Las LORCH 2",
@@ -250,17 +509,17 @@ const tempAlat = [
     satuan: "unit",
     lokasi: {
       namaLokasi: "Bengkel Permesinan dan Sheet Metal (Perkakas)",
-      jumlah: 10
+      jumlah: 10,
     },
     kategori: "Alat",
     konsumsiTenaga: {
       minimal: 3,
-      maksimal: 8
+      maksimal: 8,
     },
     kemampuanAlat: {
       minimal: 3,
-      maksimal: 8
-    }
+      maksimal: 8,
+    },
   },
   {
     nama: "CNC Gas & Plasma 2",
@@ -269,17 +528,17 @@ const tempAlat = [
     satuan: "unit",
     lokasi: {
       namaLokasi: "Bengkel Permesinan dan Sheet Metal (Perkakas)",
-      jumlah: 6
+      jumlah: 6,
     },
     kategori: "Alat",
     konsumsiTenaga: {
       minimal: 3,
-      maksimal: 8
+      maksimal: 8,
     },
     kemampuanAlat: {
       minimal: 3,
-      maksimal: 8
-    }
+      maksimal: 8,
+    },
   },
   {
     nama: "Tang Ampere 3",
@@ -288,17 +547,17 @@ const tempAlat = [
     satuan: "unit",
     lokasi: {
       namaLokasi: "Lab Elektronika Daya",
-      jumlah: 6
+      jumlah: 6,
     },
     kategori: "Alat",
     konsumsiTenaga: {
       minimal: 3,
-      maksimal: 8
+      maksimal: 8,
     },
     kemampuanAlat: {
       minimal: 3,
-      maksimal: 8
-    }
+      maksimal: 8,
+    },
   },
   {
     nama: "Mesin Las LORCH 3",
@@ -307,17 +566,17 @@ const tempAlat = [
     satuan: "unit",
     lokasi: {
       namaLokasi: "Lab Elektronika Daya",
-      jumlah: 10
+      jumlah: 10,
     },
     kategori: "Alat",
     konsumsiTenaga: {
       minimal: 3,
-      maksimal: 8
+      maksimal: 8,
     },
     kemampuanAlat: {
       minimal: 3,
-      maksimal: 8
-    }
+      maksimal: 8,
+    },
   },
   {
     nama: "CNC Gas & Plasma 3",
@@ -326,32 +585,44 @@ const tempAlat = [
     satuan: "unit",
     lokasi: {
       namaLokasi: "Lab Elektronika Daya",
-      jumlah: 6
+      jumlah: 6,
     },
     kategori: "Alat",
     konsumsiTenaga: {
       minimal: 3,
-      maksimal: 8
+      maksimal: 8,
     },
     kemampuanAlat: {
       minimal: 3,
-      maksimal: 8
-    }
-  }
+      maksimal: 8,
+    },
+  },
 ];
 
 const seedDb = async (model, arrOfObj) => {
   await model.deleteMany({});
   await model
     .insertMany(arrOfObj)
-    .then(data => {
+    .then((data) => {
       console.log(data);
     })
-    .catch(e => {
+    .catch((e) => {
       console.log(`ERROR : ${e}`);
     });
 };
 
-seedDb(Alat, tempAlat).then(() => {
+seedDb(Tempat, tempTempat).then(() => {
   mongoose.connection.close();
 });
+
+// const newUser = async function (model, arrObj, pass) {
+//   const terhapus = await model.deleteMany({});
+//   for (obj of arrObj) {
+//     const registeredUser = await User.register(obj, pass);
+//     console.log(registeredUser);
+//   }
+// };
+
+// newUser(User, tempUser, "111111111111").then(() => {
+//   mongoose.connection.close();
+// });

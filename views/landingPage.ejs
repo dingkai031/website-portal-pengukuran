@@ -21,7 +21,10 @@
             <a href="/"><h5 class="m-0 title">SMK3 PPNS</h5></a>
           </div>
           <div class="salam d-flex align-items-center">
-            <p class="lead text-white m-0">Halo, John Doe</p>
+            <p class="lead text-white m-0 me-2">
+              Halo, <%= currentUser.nama %>
+            </p>
+            <a href="/logout" class="btn btn-danger">Keluar</a>
           </div>
         </div>
       </div>
