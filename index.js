@@ -6,7 +6,8 @@ const Tempat = require("./models/tempat");
 
 //==========Definisi Routes===============
 const maintenanceRoutes = require("./routes/maintenance");
-const inspeksiRoutes = require("./routes/p3k2");
+const p3k2Routes = require("./routes/p3k2");
+const inspeksiRoutes = require("./routes/inspeksi");
 
 //========Global Setting===============
 const mongoose = require("mongoose");
@@ -113,16 +114,11 @@ app.get("/portal", isLoggedIn, (req, res) => {
   res.render("landingPage");
 });
 //===================================================================
-app.get("/inspeksi", async (req, res) => {
-  const tempats = await Tempat.find({});
-  res.render("inspeksi/inspeksi", { tempats });
-});
+app.use("/inspeksi", inspeksiRoutes);
 //===================================================================
 app.use("/maintenance", maintenanceRoutes);
 //===================================================================
-
-app.use("/p3k", inspeksiRoutes);
-
+app.use("/p3k", p3k2Routes);
 // ========Error Handling===============
 app.all("*", (req, res) => {
   res.status(404).send("<h1>TIDAK DITEMUKAN </h1>");

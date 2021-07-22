@@ -1,275 +1,641 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- ===== BOX ICONS ===== -->
-    <link rel="stylesheet" href="/boxicons/css/boxicons.min.css" />
-
-    <!-- ===== BOOTSTRAP 5 ===== -->
-
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
-    <!-- ===== select2 ===== -->
-    <link rel="stylesheet" href="/select2/dist/css/select2.min.css" />
-
-    <!-- ===== select2 - Bootstrap Theme ===== -->
-    <link
-      rel="stylesheet"
-      href="/@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css"
-    />
-    <!-- ===== CSS ===== -->
-    <link rel="stylesheet" href="/css/stylesSidebar.css" />
-    <link rel="stylesheet" href="/css/stylesInspeksi.css" />
-
-    <!-- ===== Font Awesome ===== -->
-    <link
-      rel="stylesheet"
-      href="/@fortawesome/fontawesome-free/css/all.min.css"
-    />
-
-    <!-- ===== File Input ===== -->
-    <link rel="stylesheet" href="/bootstrap-fileinput/css/fileinput.min.css" />
-
-    <!-- ===== flatpickr ===== -->
-    <link rel="stylesheet" href="/flatpickr/dist/flatpickr.min.css" />
-
-    <title>Inspeksi K3 PPNS</title>
-  </head>
-  <body id="body-pd" class="bg-light">
-    <header class="header shadow" id="header">
-      <div class="header__toggle">
-        <i class="bx bx-menu" id="header-toggle"></i>
-      </div>
-
-      <div style="display: flex; align-items: center; justify-content: s">
-        <div class="header__img">
-          <img src="/img/perfil.jpg" alt="" />
-        </div>
-      </div>
-    </header>
-
-    <div class="l-navbar" id="nav-bar">
-      <nav class="nav">
-        <div>
-          <a href="#" class="nav__logo">
-            <i class="bx bx-briefcase nav__logo-icon"></i>
-            <span class="nav__logo-name">Inspeksi K3 PPNS</span>
-          </a>
-
-          <div class="nav__list">
-            <a href="#" class="nav__link active">
-              <i class="bx bx-search-alt"></i>
-              <span class="nav__name">Inspeksi PLK</span>
-            </a>
-            <a href="#" class="nav__link">
-              <i class="bx bx-history"></i>
-              <span class="nav__name">Riwayat Pengukuran</span>
-            </a>
-          </div>
-        </div>
-
-        <a href="#" class="nav__link">
-          <i class="bx bx-log-out nav__icon"></i>
-          <span class="nav__name">Keluar</span>
-        </a>
-      </nav>
-    </div>
-
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-12">
-          <div class="card shadow-sm h-100 pb-5">
-            <div class="card-body">
-              <h3
-                class="card-title fw-bolder fs-3 mb-4 d-flex align-items-center"
-              >
-                Form Inspeksi
-              </h3>
-              <form spellcheck="false" autocomplete="off">
-                <!-- ======================================MODAL============================================================================ -->
-                <div class="modal fade" id="iklimkerja" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered modal-xl">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">FORM IKLIM KERJA</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        <div class="table-responsive">
-                          <table class="table">
-                            <thead>
-                              <tr >
-                                <th class="align-middle text-center min-width-100">Usia</th>
-                                <th class="align-middle text-center min-width-100">BB</th>
-                                <th class="align-middle text-center min-width-100">Lokasi Pengukuran</th>
-                                <th class="align-middle text-center min-width-100">Suhu Basah (<span>&#176;</span>C)</th>
-                                <th class="align-middle text-center min-width-100">Suhu Kering (<span>&#176;</span>C)</th>
-                                <th class="align-middle text-center min-width-100">Suhu Bola (<span>&#176;</span>C)</th>
-                                <th class="align-middle text-center min-width-100">WGBT(ISBB) (<span>&#176;</span>C)</th>
-                                <th class="align-middle text-center min-width-100">RH (%)</th>
-                                <th class="align-middle text-center min-width-100">Beban Kerja (KG)</th>
-                              </tr>
-                            </thead>
-                            <tbody id="wadahFormIklimKerja">
-                              
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
- 
-                      </div>
+<%- include("templateInspeksi/head") %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card shadow-sm h-100 pb-5">
+        <div class="card-body">
+          <h3 class="card-title fw-bolder fs-3 mb-4 d-flex align-items-center">
+            Form Inspeksi
+          </h3>
+          <form
+            action="/inspeksi/tambah"
+            method="POST"
+            spellcheck="false"
+            autocomplete="off"
+          >
+            <!-- ======================================MODAL============================================================================ -->
+            <div class="modal fade" id="iklimkerja" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                      FORM IKLIM KERJA
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th class="align-middle text-center min-width-100">
+                              Usia
+                            </th>
+                            <th class="align-middle text-center min-width-100">
+                              BB
+                            </th>
+                            <th class="align-middle text-center min-width-100">
+                              Lokasi Pengukuran
+                            </th>
+                            <th class="align-middle text-center min-width-100">
+                              Suhu Basah (<span>&#176;</span>C)
+                            </th>
+                            <th class="align-middle text-center min-width-100">
+                              Suhu Kering (<span>&#176;</span>C)
+                            </th>
+                            <th class="align-middle text-center min-width-100">
+                              Suhu Bola (<span>&#176;</span>C)
+                            </th>
+                            <th class="align-middle text-center min-width-100">
+                              WGBT(ISBB) (<span>&#176;</span>C)
+                            </th>
+                            <th class="align-middle text-center min-width-100">
+                              RH (%)
+                            </th>
+                            <th class="align-middle text-center min-width-100">
+                              Beban Kerja (KG)
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody id="wadahFormIklimKerja"></tbody>
+                      </table>
                     </div>
                   </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Tutup
+                    </button>
+                  </div>
                 </div>
-                <!-- ======================================/MODAL============================================================================ -->
-                <div class="row">
-                  <div class="mb-3">
-                    <label for="namapengukur" class="form-label"
-                        >Nama Pengukur</label
+              </div>
+            </div>
+            <!-- ------------------------------------------------------------------------------------------------------------- -->
+            <div class="modal fade" id="getaran" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">FORM GETARAN</h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th class="align-middle text-center min-width-100">
+                              No
+                            </th>
+                            <th class="align-middle text-center min-width-100">
+                              Sumber Getaran
+                            </th>
+                            <th class="align-middle text-center min-width-100">
+                              Percepatan (A)
+                            </th>
+                            <th class="align-middle text-center min-width-100">
+                              Kecepatan (cm/s)
+                            </th>
+                            <th class="align-middle text-center min-width-100">
+                              Perpindahan (mm)
+                            </th>
+                            <th class="align-middle text-center min-width-100">
+                              Frekuensi (Hz)
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody id="wadahFormGetaran"></tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Tutup
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- =============================================================================================================== -->
+            <div class="modal fade" id="kebisingan" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">FORM KEBISINGAN</h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th class="align-middle text-center min-width-100">
+                              Lokasi
+                            </th>
+                            <th
+                              class="align-middle text-center min-width-100"
+                              colspan="3"
+                            >
+                              Intensitas Bising
+                            </th>
+                            <th class="align-middle text-center min-width-100">
+                              Rata-Rata
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody id="wadahFormKebisingan"></tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Tutup
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- ------------------------------------------------------------------------------------------------------------- -->
+            <div class="modal fade" id="pencahayaan" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">FORM PENCAHAYAAN</h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="mb-3">
+                      <label for="pencahayaanPanjang" class="form-label"
+                        >Panjang</label
+                      >
+                      <input
+                        type="numer"
+                        class="form-control"
+                        name="pencahayaanPanjang"
+                        id="pencahayaanPanjang"
+                        value="0"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="pencahayaanLebar" class="form-label"
+                        >Lebar</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        name="pencahayaanLebar"
+                        id="pencahayaanLebar"
+                        value="0"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="pencahayaanTinggi" class="form-label"
+                        >Tinggi</label
+                      >
+                      <input
+                        type="numer"
+                        class="form-control"
+                        name="pencahayaanTinggi"
+                        id="pencahayaanTinggi"
+                        value="0"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label
+                        for="pencahayaanJenisPencahayaan"
+                        class="form-label"
+                        >Jenis Pencahayaan</label
                       >
                       <input
                         type="text"
                         class="form-control"
-                        id="namapengukur"
-                        required
+                        name="pencahayaanJenisPencahayaan"
+                        id="pencahayaanJenisPencahayaan"
                       />
-                  </div>
-                  <div class="mb-3">
-                    <label for="lokasi" class="form-label"
-                      >Lokasi Pengukuran
-                    </label>
-                    <select
-                      class="form-select select2"
-                      id="lokasiPengukuran"
-                      name="lokasiPengukuran"
-                      aria-label="Default select example"
-                    >
-                      <option></option>
-                      <% for (const tempat of tempats) { %>
-                      <option value="<%= tempat.nama %>">
-                        <%= tempat.nama %>
-                      </option>
-                      <% } %>
-                    </select>
-                  </div>
-                  <div class="mb-3 row">
-                    <div class="col-sm-6 d-flex flex-column mb-3">
-                      <label for="tanggal" class="form-label"
-                        >Tanggal Pengukuran</label
-                      >
-                      <div class="input-group border-0 datepicker">
-                        <input
-                          type="text"
-                          id="tanggal"
-                          class="form-control border-0"
-                          name="tanggal"
-                          required
-                          title="Harap isi form ini"
-                          data-input
-                        />
-                        <span class="input-group-text border-0" data-toggle>
-                          <i class="bx bx-calendar"></i>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="col-sm-6 d-flex flex-column mb-3">
-                      <label for="waktu" class="form-label">Waktu</label>
-                      <div class="input-group border-0 datepicker-time">
-                        <input
-                          type="text"
-                          id="waktu"
-                          class="form-control border-0"
-                          name="waktu"
-                          required
-                          title="Harap isi form ini"
-                          data-input
-                        />
-                        <span class="input-group-text border-0" data-toggle>
-                          <i class="bx bx-time"></i>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="mb-3">
-                    <label for="dokumentasi" class="form-label"
-                      >Dokumentasi</label
-                    >
-                    <input
-                      class="form-control"
-                      type="file"
-                      id="dokumentasi"
-                      name="dokumentasi"
-                      multiple
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <div class="row justify-content-center">
-                      <div class="col-sm-8 d-flex justify-content-center">
-                        <img src="" class="img-fluid denah" alt="" />
-                      </div>
-                      <div class="col-sm-4 d-flex align-items-center">
-                        <img src="" class="img-fluid keterangan" alt="" />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                      <div class="col-lg-6 mb-3 d-flex flex-column" id="wrapper-kebisingan">
-                        <label class="form-label">Kebisingan</label>
-                        <a href="#" class="btn btn-primary">FORM KEBISINGAN  </a>
-                      </div>
-                      <div class="col-lg-6 mb-3 d-flex flex-column" id="wrapper-getaran">
-                        <label class="form-label">Getaran</label>
-                        <a href="#" class="btn btn-primary">FORM GETARAN</a>
-                      </div>
-                      <div class="col-lg-6 mb-3 d-flex flex-column" id="wrapper-ventilasi">
-                        <label class="form-label">Ventilasi</label>
-                        <a href="#" class="btn btn-primary">FORM VENTILASI</a>
-                      </div>
-                      <div class="col-lg-6 mb-3 d-flex flex-column" id="wrapper-pencahayaan">
-                        <label class="form-label">Pencahayaan</label>
-                        <a href="#" class="btn btn-primary">FORM PENCAHAYAAN</a>
-                      </div>
-                      <div class="col-lg-6 mb-3 d-flex flex-column" id="wrapper-iklimkerja">
-                        <label class="form-label">Iklim Kerja</label>
-                        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#iklimkerja">FORM IKLIM KERJA</a>
-                      </div>
                     </div>
                     <div class="mb-3">
-                      <label for="rekomendasi" class="form-label"
-                          >Rekomendasi</label
-                        >
-                        <textarea name="rekomendasi" id="rekomendasi" class="form-control" rows="3"></textarea>
+                      <label
+                        for="pencahayaanJumlahPencahayaan"
+                        class="form-label"
+                        >Jumlah Pencahayaan</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        name="pencahayaanJumlahPencahayaan"
+                        id="pencahayaanJumlahPencahayaan"
+                        value="0"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label
+                        for="pencahayaanJumlahPencahayaanRusak"
+                        class="form-label"
+                        >Jumlah Pencahayaan Rusak</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        name="pencahayaanJumlahPencahayaanRusak"
+                        id="pencahayaanJumlahPencahayaanRusak"
+                        value="0"
+                      />
+                    </div>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th class="align-middle text-center min-width-100">
+                              Sumber Getaran
+                            </th>
+                            <th class="align-middle text-center min-width-100">
+                              Pengukuran 1
+                            </th>
+                            <th class="align-middle text-center min-width-100">
+                              Pengukuran 2
+                            </th>
+                            <th class="align-middle text-center min-width-100">
+                              Pengukuran 3
+                            </th>
+                            <th class="align-middle text-center min-width-100">
+                              Rata-rata
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody id="wadahFormPencahayaan">
+                          <tr id="tableRowRatarata">
+                            <th class="text-center align-middle" colspan="4">
+                              Total rata-rata
+                            </th>
+                            <td>
+                              <input
+                                type="text"
+                                name="totalratarata"
+                                id="totalratarata"
+                                class="form-control"
+                                value="0"
+                                readonly
+                              />
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Tutup
+                    </button>
+                  </div>
                 </div>
-                <button type="reset" class="btn btn-danger">Clear</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
+              </div>
             </div>
-          </div>
+            <!-- ------------------------------------------------------------------------------------------------------------- -->
+            <div class="modal fade" id="ventilasi" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">FORM VENTILASI</h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="mb-3">
+                      <label for="ventilasiRuangan" class="form-label"
+                        >Ruangan</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="ventilasiRuangan"
+                        id="ventilasiRuangan"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="ventilasiPanjang" class="form-label"
+                        >Panjang</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        name="ventilasiPanjang"
+                        id="ventilasiPanjang"
+                        value="0"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="ventilasiLebar" class="form-label"
+                        >Lebar</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        name="ventilasiLebar"
+                        id="ventilasiLebar"
+                        value="0"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="ventilasiTinggi" class="form-label"
+                        >Tinggi</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        name="ventilasiTinggi"
+                        id="ventilasiTinggi"
+                        value="0"
+                      />
+                    </div>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th class="align-middle text-center min-width-100">
+                              Jenis Ventilasi
+                            </th>
+                            <th class="align-middle text-center min-width-100">
+                              Panjang Ventilasi (m)
+                            </th>
+                            <th class="align-middle text-center min-width-100">
+                              Lebar Ventilasi (m)
+                            </th>
+                            <th class="align-middle text-center min-width-100">
+                              V(m/s)
+                            </th>
+                            <th class="align-middle text-center min-width-100">
+                              Jumlah Pekerja
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody id="wadahFormVentilasi"></tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Tutup
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- ======================================/MODAL============================================================================ -->
+            <div>
+              <div class="mb-3">
+                <label for="namaPengukur" class="form-label"
+                  >Nama Pengukur</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="namaPengukur"
+                  name="namaPengukur"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="lokasi" class="form-label"
+                  >Lokasi Pengukuran
+                </label>
+                <select
+                  class="form-select select2"
+                  id="lokasiPengukuran"
+                  name="lokasiPengukuran"
+                  aria-label="Default select example"
+                >
+                  <option></option>
+                  <% for (const tempat of tempats) { %>
+                  <option value="<%= tempat.nama %>"><%= tempat.nama %></option>
+                  <% } %>
+                </select>
+              </div>
+              <!-- <div class="mb-3 row">
+                <div class="col-sm-6 d-flex flex-column mb-3">
+                  <label for="tanggalPengukuran" class="form-label"
+                    >Tanggal Pengukuran</label
+                  >
+                  <div class="input-group border-0 datepicker">
+                    <input
+                      type="text"
+                      id="tanggalPengukuran"
+                      class="form-control border-0"
+                      name="tanggalPengukuran"
+                      title="Harap isi form ini"
+                      data-input
+                    />
+                    <span class="input-group-text border-0" data-toggle>
+                      <i class="bx bx-calendar"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-sm-6 d-flex flex-column mb-3">
+                  <label for="waktuPengukuran" class="form-label">Waktu</label>
+                  <div class="input-group border-0 datepicker-time">
+                    <input
+                      type="text"
+                      id="waktuPengukuran"
+                      class="form-control border-0"
+                      name="waktuPengukuran"
+                      title="Harap isi form ini"
+                      data-input
+                    />
+                    <span class="input-group-text border-0" data-toggle>
+                      <i class="bx bx-time"></i>
+                    </span>
+                  </div>
+                </div>
+              </div> -->
+              <div class="mb-3">
+                <label for="dokumentasiPengukuran" class="form-label"
+                  >Dokumentasi</label
+                >
+                <input
+                  class="form-control"
+                  type="file"
+                  id="dokumentasiPengukuran"
+                  name="dokumentasiPengukuran"
+                  multiple
+                />
+              </div>
+              <div class="mb-3">
+                <div class="row justify-content-center">
+                  <div class="col-sm-8 d-flex justify-content-center">
+                    <img src="" class="img-fluid denah" alt="" />
+                  </div>
+                  <div class="col-sm-4 d-flex align-items-center">
+                    <img src="" class="img-fluid keterangan" alt="" />
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div
+                  class="col-lg-6 mb-3 d-flex flex-column"
+                  id="wrapper-kebisingan"
+                >
+                  <label class="form-label">Kebisingan</label>
+                  <a
+                    href="#"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#kebisingan"
+                    >FORM KEBISINGAN</a
+                  >
+                </div>
+                <div
+                  class="col-lg-6 mb-3 d-flex flex-column"
+                  id="wrapper-getaran"
+                >
+                  <label class="form-label">Getaran</label>
+                  <a
+                    href="#"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#getaran"
+                    >FORM GETARAN</a
+                  >
+                </div>
+                <div
+                  class="col-lg-6 mb-3 d-flex flex-column"
+                  id="wrapper-ventilasi"
+                >
+                  <label class="form-label">Ventilasi</label>
+                  <a
+                    href="#"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#ventilasi"
+                    >FORM VENTILASI</a
+                  >
+                </div>
+                <div
+                  class="col-lg-6 mb-3 d-flex flex-column"
+                  id="wrapper-pencahayaan"
+                >
+                  <label class="form-label">Pencahayaan</label>
+                  <a
+                    href="#"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#pencahayaan"
+                    >FORM PENCAHAYAAN</a
+                  >
+                </div>
+                <div
+                  class="col-lg-6 mb-3 d-flex flex-column"
+                  id="wrapper-iklimkerja"
+                >
+                  <label class="form-label">Iklim Kerja</label>
+                  <a
+                    href="#"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#iklimkerja"
+                    >FORM IKLIM KERJA</a
+                  >
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="rekomendasiPengukuran" class="form-label"
+                  >Rekomendasi</label
+                >
+                <textarea
+                  name="rekomendasiPengukuran"
+                  id="rekomendasiPengukuran"
+                  class="form-control"
+                  rows="3"
+                ></textarea>
+              </div>
+            </div>
+            <input
+              type="number"
+              id="jumlahTitikIklimKerja"
+              name="jumlahTitikIklimKerja"
+              readonly
+              value="0"
+              class="d-none"
+            />
+            <input
+              type="number"
+              id="jumlahTitikGetaran"
+              name="jumlahTitikGetaran"
+              value="0"
+              readonly
+              class="d-none"
+            />
+            <input
+              type="number"
+              id="jumlahTitikKebisingan"
+              name="jumlahTitikKebisingan"
+              value="0"
+              readonly
+              class="d-none"
+            />
+            <input
+              type="number"
+              id="jumlahTitikPencahayaan"
+              name="jumlahTitikPencahayaan"
+              value="0"
+              readonly
+              class="d-none"
+            />
+            <input
+              type="number"
+              id="jumlahTitikVentilasi"
+              name="jumlahTitikVentilasi"
+              value="0"
+              readonly
+              class="d-none"
+            />
+            <button id="tombolReset" type="reset" class="btn btn-danger">
+              Clear
+            </button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
         </div>
       </div>
     </div>
-    <script src="jquery/dist/jquery.min.js"></script>
-    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/bootstrap-fileinput/js/fileinput.min.js"></script>
-    <script src="/bootstrap-fileinput/js/locales/id.js"></script>
-    <script src="/bootstrap-fileinput/themes/fas/theme.js"></script>
-    <script src="/js/sidebarJs.js"></script>
-    <script>
-      const tempats = `<%- JSON.stringify(tempats) %>`
-      const parsed = JSON.parse(tempats)
-    </script>
-    <script src="/js/inspeksiJs.js"></script>
-    <script src="/js/perhitunganInspeksi.js"></script>
-    <script src="/flatpickr/dist/flatpickr.min.js"></script>
-    <script src="/flatpickr/dist/l10n/id.js"></script>
-    <script src="/js/flatpicker-command.js"></script>
-    <script src="/select2/dist/js/select2.min.js"></script>
-    
-    
-  </body>
-</html>
+  </div>
+  <%- include("templateInspeksi/footer") %>
+</div>

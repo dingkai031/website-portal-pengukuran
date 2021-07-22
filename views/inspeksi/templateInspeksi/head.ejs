@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ===== BOX ICONS ===== -->
+    <link rel="stylesheet" href="/boxicons/css/boxicons.min.css" />
+
+    <!-- ===== BOOTSTRAP 5 ===== -->
+
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <!-- ===== select2 ===== -->
+    <link rel="stylesheet" href="/select2/dist/css/select2.min.css" />
+
+    <!-- ===== select2 - Bootstrap Theme ===== -->
+    <link
+      rel="stylesheet"
+      href="/@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css"
+    />
+    <!-- ===== CSS ===== -->
+    <link rel="stylesheet" href="/css/stylesSidebar.css" />
+    <link rel="stylesheet" href="/css/stylesInspeksi.css" />
+
+    <!-- ===== Font Awesome ===== -->
+    <link
+      rel="stylesheet"
+      href="/@fortawesome/fontawesome-free/css/all.min.css"
+    />
+
+    <!-- ===== File Input ===== -->
+    <link rel="stylesheet" href="/bootstrap-fileinput/css/fileinput.min.css" />
+
+    <!-- ===== flatpickr ===== -->
+    <link rel="stylesheet" href="/flatpickr/dist/flatpickr.min.css" />
+	
+	
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" />
+
+    <title>Inspeksi K3 PPNS</title>
+  </head>
+  <body id="body-pd" class="bg-light">
+    <header class="header shadow" id="header">
+      <div class="header__toggle">
+        <i class="bx bx-menu" id="header-toggle"></i>
+      </div>
+
+      <div style="display: flex; align-items: center; justify-content: s">
+        <div class="header__img">
+          <img src="/img/perfil.jpg" alt="" />
+        </div>
+      </div>
+    </header>
+
+    <div class="l-navbar" id="nav-bar">
+      <nav class="nav">
+        <div>
+          <a href="#" class="nav__logo">
+            <i class="bx bx-briefcase nav__logo-icon"></i>
+            <span class="nav__logo-name">Inspeksi K3 PPNS</span>
+          </a>
+
+          <div class="nav__list">
+            <a href="/inspeksi" class="nav__link <%= menu === "inspeksi" ? "active" : "" %>">
+              <i class="bx bx-search-alt"></i>
+              <span class="nav__name">Inspeksi PLK</span>
+            </a>
+            <a href="/inspeksi/riwayat" class="nav__link <%= menu === "riwayat" ? "active" : "" %>">
+              <i class="bx bx-history"></i>
+              <span class="nav__name">Riwayat Pengukuran</span>
+            </a>
+          </div>
+        </div>
+
+        <a href="#" class="nav__link">
+          <i class="bx bx-log-out nav__icon"></i>
+          <span class="nav__name">Keluar</span>
+        </a>
+      </nav>
+    </div>

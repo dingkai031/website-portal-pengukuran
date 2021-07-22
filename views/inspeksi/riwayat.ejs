@@ -1,0 +1,261 @@
+<%- include("templateInspeksi/head") %>
+<div class="card custom-shadow">
+  <div
+    class="
+      card-header
+      pt-3
+      px-4
+      bg-white
+      d-flex
+      justify-content-between
+      border-0
+    "
+  >
+    <h3 class="card-title fw-bolder fs-3 m-0 d-flex align-items-center">
+      Riwayat Pengukuran
+    </h3>
+  </div>
+  <div class="card-body py-3 my-3">
+    <div class="table-responsive">
+      <table id="table_id" class="display responsive nowrap">
+        <thead>
+          <tr>
+            <th>Tempat</th>
+            <th>Pengukur</th>
+            <th>Tanggal</th>
+            <th class="text-center">Form</th>
+            <th class="text-center">status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (const riwayat of riwayats) { %>
+          <tr>
+            <td><%= riwayat.lokasiPengukuran %></td>
+            <td><%= riwayat.namaPengukur %></td>
+            <td>
+              <%=
+              `${riwayat.createdAt.getDate()}-${riwayat.createdAt.getMonth()+1}-${riwayat.createdAt.getFullYear()}`
+              %>
+            </td>
+            <td class="d-flex justify-content-between">
+              <a href="#" class="btn btn-primary m-2 m-sm-0">Dokumentasi</a>
+              <a href="#" class="btn btn-primary m-2 m-sm-0">Rekomendasi</a>
+              <!-- ======================MODAL KEBISINGAN======================= -->
+              <div
+                class="modal fade"
+                id="kebisingan<%=riwayat._id%>"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title"">
+                        Inspeksi Kebisingan
+                      </h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th>
+                                Lokasi Pengukuran
+                              </th>
+                              <th>
+                                Intensitas Bising 1
+                              </th>
+                              <th>
+                                Intensitas Bising 2
+                              </th>
+                              <th>
+                                Intensitas Bising 3
+                              </th>
+                              <th>
+                                Rata-rata
+                              </th>
+                              <th>NAB</th>
+                              <th>
+                                Status
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% for (const bising of riwayat.bagianKebisingan) { %>
+                              <tr>
+                                <td>
+                                  <%= bising.lokasiPengukuran %> 
+                                </td>
+                                <td>
+                                  <%= bising.intensitasBising1 %> 
+                                </td>
+                                <td>
+                                  <%= bising.intensitasBising2 %> 
+                                </td>
+                                <td>
+                                  <%= bising.intensitasBising3 %> 
+                                </td>
+                                <td>
+                                  <%= bising.ratarataBising %> 
+                                </td>
+                                <td>
+                                  85
+                                </td>
+                                <td>
+                                  <% if (parseInt(bising.ratarataBising) < 85) { %> 
+                                    <a href="javascript:void(0)" class="btn btn-success">AMAN</a>
+                                  <% }else { %>
+                                    <a href="javascript:void(0)" class="btn btn-danger">TIDAK AMAN</a>
+                                  <% } %>  
+                                </td>
+                              </tr> 
+                            <% } %> 
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Tutup
+                      </button>
+                      <button type="button" class="btn btn-primary">
+                        Download
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- ======================END MODAL KEBISINGAN======================= -->
+              <a
+                href="#"
+                class="btn btn-primary m-2 m-sm-0"
+                data-bs-toggle="modal"
+                data-bs-target="#kebisingan<%=riwayat._id%>"
+                >Kebisingan</a
+              >
+              <!-- ======================MODAL GETARAN======================= -->
+              <div
+                class="modal fade"
+                id="getaran<%=riwayat._id%>"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title"">
+                        Inspeksi Getaran
+                      </h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th>Sumber Getaran</th>
+                              <th>Percepatan</th>
+                              <th>Kecepatan</th>
+                              <th>Perpindahan</th>
+                              <th>Frekuensi</th>
+                              <th class="text-center">NAB</th>
+                              <th class="text-center">Status</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% for (getaran of riwayat.bagianGetaran) { %>
+                              <tr>
+                                <td rowspan="3" class="align-middle text-center table-warning"><%= getaran.lokasiPengukuran %></td>
+                                <td><%= getaran.percepatan1 %></td>
+                                <td><%= getaran.kecepatan1 %></td>
+                                <td><%= getaran.perpindahan1 %></td>
+                                <td rowspan="4" class="align-middle text-center table-warning"><%= getaran.frekuensi %></td>
+                                <td rowspan="4" class="align-middle text-center">6m/det<sup>2</sup></td>
+                                <td rowspan="4" class="align-middle text-center">
+                                  <% if (getaran.percepatanMax < 6) {%> 
+                                    <a href="javascript:void(0)" class="btn btn-success">AMAN</a>
+                                  <% }else{ %> 
+                                    <a href="javascript:void(0)" class="btn btn-danger">TIDAK AMAN</a>
+                                  <% } %> 
+                                </td>
+                              </tr>
+                              <tr>
+                                <td><%= getaran.percepatan2 %></td>
+                                <td><%= getaran.kecepatan2 %></td>
+                                <td><%= getaran.perpindahan2 %></td>
+                              </tr>
+                              <tr>
+                                <td><%= getaran.percepatan3 %></td>
+                                <td><%= getaran.kecepatan3 %></td>
+                                <td><%= getaran.perpindahan3 %></td>
+                              </tr>
+                              <tr class="table-primary">
+                                <th class="text-center">MAX</th>
+                                <td><%= getaran.percepatanMax %></td>
+                                <td><%= getaran.kecepatanMax %></td>
+                                <td><%= getaran.perpindahanMax %></td>
+                              </tr>
+
+                            <% } %>  
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Tutup
+                      </button>
+                      <button type="button" class="btn btn-primary">
+                        Download
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- ======================END MODAL GETARAN======================= -->
+              <a 
+                href="#"
+                class="btn btn-primary m-2 m-sm-0"
+                data-bs-toggle="modal"
+                data-bs-target="#getaran<%=riwayat._id%>"
+                >Getaran</a>
+              <a href="#" class="btn btn-primary m-2 m-sm-0">Iklim Kerja</a>
+              <a href="#" class="btn btn-primary m-2 m-sm-0">Pencahayaan</a>
+              <a href="#" class="btn btn-primary m-2 m-sm-0">Ventilasi</a>
+            </td>
+            <td class="text-center">
+              <% if (!riwayat.approve) { %>
+              <a href="#" class="btn btn-danger">Belum disetujui</a>
+              <% }else { %>
+              <a href="#" class="btn btn-success">Sudah distujui</a>
+              <% } %>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<%- include("templateInspeksi/footer") %>

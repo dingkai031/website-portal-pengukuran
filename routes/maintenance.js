@@ -100,8 +100,7 @@ router.post(
       kategori,
     } = req.body;
     const newDate = tanggal.split("-");
-    const validDate = `${newDate[2]}-${newDate[1]}-${newDate[0]}`;
-    const isoDate = new Date(validDate);
+    const isoDate = new Date(`${newDate[2]}-${newDate[1]}-${newDate[0]}`);
     const newAlatObject = {
       nama: name,
       tanggalPeroleh: isoDate,

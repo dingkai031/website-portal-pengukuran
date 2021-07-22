@@ -5,20 +5,20 @@ const alatSchema = new Schema({
   nama: {
     type: String,
     required: true,
-    lowercase: true
+    lowercase: true,
   },
   tanggalPeroleh: {
     type: Date,
-    required: true
+    required: true,
   },
   spesifikasi: {
     type: String,
-    required: true
+    required: true,
   },
   satuan: {
     type: String,
     required: true,
-    default: "unit"
+    default: "unit",
   },
   lokasi: {
     namaLokasi: {
@@ -50,44 +50,50 @@ const alatSchema = new Schema({
         "Lab Motor Bakar",
         "Lab CADD",
         "Lab Uji Bahan",
-        "Lab Pengolahan Limbah"
-      ]
+        "Lab Pengolahan Limbah",
+        "Lab Ergonomi",
+        "Lab Fluida",
+        "Lab PLK",
+        "Lab SPPK",
+        "Lab Boiler",
+        "Studio Gambar",
+      ],
     },
     jumlah: {
       type: Number,
       required: true,
-      min: 0
-    }
+      min: 0,
+    },
   },
   kategori: {
     type: String,
     required: true,
-    enum: ["Alat", "Bahan Habis", "Sarana", "Meubelair", "Lain-lain"]
+    enum: ["Alat", "Bahan Habis", "Sarana", "Meubelair", "Lain-lain"],
   },
   konsumsiTenaga: {
     minimal: {
       type: Number,
       required: true,
-      min: 0
+      min: 0,
     },
     maksimal: {
       type: Number,
       required: true,
-      min: 0
-    }
+      min: 0,
+    },
   },
   kemampuanAlat: {
     minimal: {
       type: Number,
       required: true,
-      min: 0
+      min: 0,
     },
     maksimal: {
       type: Number,
       required: true,
-      min: 0
-    }
-  }
+      min: 0,
+    },
+  },
 });
 
 module.exports = mongoose.model("Alat", alatSchema);
