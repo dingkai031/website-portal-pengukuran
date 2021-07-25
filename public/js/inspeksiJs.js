@@ -185,17 +185,37 @@ $("#lokasiPengukuran").on("select2:select", function (e) {
     //------------------------------------------------------------
     //======================Beban Kerja=========================
     const tdBebanKerja = document.createElement("td");
-    const inputBebanKerja = document.createElement("input");
-    inputBebanKerja.setAttribute("type", "number");
+    const inputBebanKerja = document.createElement("select");
     inputBebanKerja.setAttribute("name", `iklimKerjaBebanKerja${i}`);
-    inputBebanKerja.setAttribute("value", 0);
-    inputBebanKerja.classList.add("form-control");
+    inputBebanKerja.setAttribute("id", `iklimKerjaBebanKerja${i}`);
+    inputBebanKerja.classList.add("form-select", "select3");
+    const optionKosong = document.createElement("option");
+    const optionRingan = document.createElement("option");
+    optionRingan.setAttribute("value", "ringan");
+    optionRingan.innerText = "Ringan";
+    const optionSedang = document.createElement("option");
+    optionSedang.setAttribute("value", "sedang");
+    optionSedang.innerText = "Sedang";
+    const optionBerat = document.createElement("option");
+    optionBerat.setAttribute("value", "berat");
+    optionBerat.innerText = "Berat";
+    inputBebanKerja.appendChild(optionKosong);
+    inputBebanKerja.appendChild(optionRingan);
+    inputBebanKerja.appendChild(optionSedang);
+    inputBebanKerja.appendChild(optionBerat);
     tdBebanKerja.appendChild(inputBebanKerja);
     tr.appendChild(tdBebanKerja);
     //------------------------------------------------
     //====================masukkan seluruh elemen yang dibuat ke tr===========
     wadahIklimKerja.appendChild(tr);
     //----------------------------------------------------------------------
+    $(".select3").select2({
+      placeholder: "Silahkan pilih",
+      theme: "bootstrap4",
+      width: "100%",
+      dropdownParent: $("#iklimkerja"),
+      minimumResultsForSearch: -1,
+    });
   }
   const wadahInputSuhuBasah = document.querySelectorAll(".suhu-basah");
   const wadahInputSuhuKering = document.querySelectorAll(".suhu-kering");

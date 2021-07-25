@@ -15,7 +15,7 @@ const userSchema = new Schema({
   status: {
     type: String,
     required: true,
-    enum: ["admin", "dosen", "kabeng", "teknisi", "mahasiswa", "tamu"],
+    enum: ["admin", "upik3", "dosen", "kabeng", "teknisi", "mahasiswa", "tamu"],
     lowercase: true,
   },
   lokasi: {

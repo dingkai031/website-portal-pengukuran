@@ -1,0 +1,716 @@
+<%- include("templateInspeksi/head") %>
+<div class="row">
+  <form action="/inspeksi/riwayat/edit?_method=PUT" method="POST" spellcheck="false" autocomplete="off">
+    <div class="col-12 p-3">
+      <div class="card shadow">
+        <div
+          class="
+            card-header
+            pt-3
+            px-4
+            bg-white
+            d-flex
+            justify-content-between
+            border-0
+          "
+        >
+          <h3 class="card-title fw-bolder fs-3 m-0 d-flex align-items-center">
+            Edit Riwayat
+          </h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+              <div class="col-sm-6 ">
+                <label for="namaPengukur" class="form-label">Nama Pengukur</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="namaPengukur"
+                  name="namaPengukur"
+                  value="<%= riwayat.namaPengukur %>"
+                />
+              </div>
+              <div class="col-sm-6 ">
+                <label for="lokasiPengukuranEdit" class="form-label">Lokasi Pengukuran </label>
+                <select
+                  class="form-select select2"
+                  id="lokasiPengukuranEdit"
+                  name="lokasiPengukuran"
+                  aria-label="Default select example"
+                >
+                  <option></option>
+                  <% for (const tempat of tempats) { %>
+                  <option value="<%= tempat.nama %>" <%= (tempat.nama.toLowerCase() === riwayat.lokasiPengukuran.toLowerCase()) ? "selected" : ""%>><%= tempat.nama %></option>
+                  <% } %>
+                </select>
+              </div>
+              <div class="col-12">
+                  <label for="rekomendasi" class="form-label">Rekomendasi</label>
+                  <textarea name="rekomendasi" class="form-control" id="rekomendasi" rows="1"><%= riwayat.rekomendasi %></textarea>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 p-3">
+      <div class="card shadow">
+        <div
+          class="
+            card-header
+            pt-3
+            px-4
+            bg-white
+            d-flex
+            justify-content-between
+            border-0
+          "
+        >
+          <h3 class="card-title fw-bolder fs-3 m-0 d-flex align-items-center">
+            Kebisingan
+          </h3>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Lokasi Pengukuran</th>
+                  <th>Intensitas Bising 1</th>
+                  <th>Intensitas Bising 2</th>
+                  <th>Intensitas Bising 3</th>
+                  <th>Rata-rata Bising</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (let i = 0; i < riwayat.bagianKebisingan.length ; i++) { %>
+                  <tr>
+                    <td>
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="<%= `lokasiPengukuranKebisingan${i}` %>"
+                      name="<%= `lokasiPengukuranKebisingan${i}` %>"
+                      value="<%= riwayat.bagianKebisingan[i].lokasiPengukuran %>"/>
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="<%= `intensitasBising1-${i}` %>"
+                        name="<%= `intensitasBising1-${i}` %>"
+                        value="<%= riwayat.bagianKebisingan[i].intensitasBising1 %>"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="<%= `intensitasBising2-${i}` %>"
+                        name="<%= `intensitasBising2-${i}` %>"
+                        value="<%= riwayat.bagianKebisingan[i].intensitasBising2 %>"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="<%= `intensitasBising3-${i}` %>"
+                        name="<%= `intensitasBising3-${i}` %>"
+                        value="<%= riwayat.bagianKebisingan[i].intensitasBising3 %>"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="<%= `ratarataBising-${i}` %>"
+                        name="<%= `ratarataBising-${i}` %>"
+                        value="<%= riwayat.bagianKebisingan[i].ratarataBising %>"
+                      />
+                    </td>
+                  </tr>
+                  <% } %> 
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 p-3">
+      <div class="card shadow">
+        <div
+          class="
+            card-header
+            pt-3
+            px-4
+            bg-white
+            d-flex
+            justify-content-between
+            border-0
+          "
+        >
+          <h3 class="card-title fw-bolder fs-3 m-0 d-flex align-items-center">
+            Iklim Kerja
+          </h3>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Lokasi Pengukuran</th>
+                  <th>Usia</th>
+                  <th>BB</th>
+                  <th>Suhu Basah</th>
+                  <th>Suhu Kering</th>
+                  <th>Suhu Bola</th>
+                  <th>Beban Kerja</th>
+                  <th>ISBB</th>
+                  <th>RH</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (let i = 0; i < riwayat.bagianIklimKerja.length ; i++) { %>
+                  <tr>
+                    <td>
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="<%= `lokasiPengukuranIklimKerja${i}` %>"
+                      name="<%= `lokasiPengukuranIklimKerja${i}` %>"
+                      value="<%= riwayat.bagianIklimKerja[i].lokasiPengukuran %>"/>
+                    </td>
+                    <td>
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="<%= `usia${i}` %>"
+                      name="<%= `usia${i}` %>"
+                      value="<%= riwayat.bagianIklimKerja[i].usia %>"/>
+                    </td>
+                    <td>
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="<%= `bb${i}` %>"
+                      name="<%= `bb${i}` %>"
+                      value="<%= riwayat.bagianIklimKerja[i].bb %>"/>
+                    </td>
+                    <td>
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="<%= `suhuBasah${i}` %>"
+                      name="<%= `suhuBasah${i}` %>"
+                      value="<%= riwayat.bagianIklimKerja[i].suhuBasah %>"/>
+                    </td>
+                    <td>
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="<%= `suhuKering${i}` %>"
+                      name="<%= `suhuKering${i}` %>"
+                      value="<%= riwayat.bagianIklimKerja[i].suhuKering %>"/>
+                    </td>
+                    <td>
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="<%= `suhuBola${i}` %>"
+                      name="<%= `suhuBola${i}` %>"
+                      value="<%= riwayat.bagianIklimKerja[i].suhuBola %>"/>
+                    </td>
+                    <td>
+                      <select
+                      class="form-select select2"
+                      id="<%=`bebanKerja${i}`%>"
+                      name="<%=`bebanKerja${i}`%>"
+                      >
+                      <option></option>
+                      <option value="ringan" <%= (riwayat.bagianIklimKerja[i].bebankerja).toLowerCase() === "ringan" ? "selected" : ""%> >Ringan</option>
+                      <option value="sedang" <%= (riwayat.bagianIklimKerja[i].bebankerja).toLowerCase() === "sedang" ? "selected" : ""%> >Sedang</option>
+                      <option value="berat" <%= (riwayat.bagianIklimKerja[i].bebankerja).toLowerCase() === "berat" ? "selected" : ""%> >Berat</option>
+                      </select>
+                    </td>
+                    <td>
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="<%= `isbb${i}` %>"
+                      name="<%= `isbb${i}` %>"
+                      value="<%= riwayat.bagianIklimKerja[i].isbb %>"/>
+                    </td>
+                    <td>
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="<%= `rh${i}` %>"
+                      name="<%= `rh${i}` %>"
+                      value="<%= riwayat.bagianIklimKerja[i].rh %>"/>
+                    </td>
+                  </tr>
+                  <% } %> 
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 p-3">
+      <div class="card shadow">
+        <div
+          class="
+            card-header
+            pt-3
+            px-4
+            bg-white
+            d-flex
+            justify-content-between
+            border-0
+          "
+        >
+          <h3 class="card-title fw-bolder fs-3 m-0 d-flex align-items-center">
+            Getaran
+          </h3>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr class="align-middle text-center">
+                  <th>Lokasi Pengukuran</th>
+                  <th>Percepatan 1</th>
+                  <th>Percepatan 2</th>
+                  <th>Percepatan 3</th>
+                  <th>Percepatan Max</th>
+                  <th>Kecepatan 1</th>
+                  <th>Kecepatan 2</th>
+                  <th>Kecepatan 3</th>
+                  <th>Kecepatan Max</th>
+                  <th>Perpindahan 1</th>
+                  <th>Perpindahan 2</th>
+                  <th>Perpindahan 3</th>
+                  <th>Perpindahan Max</th>
+                  <th>Frekuensi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (let i = 0; i < riwayat.bagianGetaran.length ; i++) { %>
+                  <tr>
+                    <td>
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="<%= `lokasiPengukuranGetaran${i}` %>"
+                      name="<%= `lokasiPengukuranGetaran${i}` %>"
+                      value="<%= riwayat.bagianGetaran[i].lokasiPengukuran %>"/>
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="<%= `percepatan1-${i}` %>"
+                        name="<%= `percepatan1-${i}` %>"
+                        value="<%= riwayat.bagianGetaran[i].percepatan1 %>"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="<%= `percepatan2-${i}` %>"
+                        name="<%= `percepatan2-${i}` %>"
+                        value="<%= riwayat.bagianGetaran[i].percepatan2 %>"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="<%= `percepatan3-${i}` %>"
+                        name="<%= `percepatan3-${i}` %>"
+                        value="<%= riwayat.bagianGetaran[i].percepatan3 %>"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="<%= `percepatanMax${i}` %>"
+                        name="<%= `percepatanMax${i}` %>"
+                        value="<%= riwayat.bagianGetaran[i].percepatanMax %>"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="<%= `kecepatan1-${i}` %>"
+                        name="<%= `kecepatan1-${i}` %>"
+                        value="<%= riwayat.bagianGetaran[i].kecepatan1 %>"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="<%= `kecepatan2-${i}` %>"
+                        name="<%= `kecepatan2-${i}` %>"
+                        value="<%= riwayat.bagianGetaran[i].kecepatan2 %>"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="<%= `kecepatan3-${i}` %>"
+                        name="<%= `kecepatan3-${i}` %>"
+                        value="<%= riwayat.bagianGetaran[i].kecepatan3 %>"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="<%= `kecepatanMax${i}` %>"
+                        name="<%= `kecepatanMax${i}` %>"
+                        value="<%= riwayat.bagianGetaran[i].kecepatanMax %>"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="<%= `perpindahan1-${i}` %>"
+                        name="<%= `perpindahan1-${i}` %>"
+                        value="<%= riwayat.bagianGetaran[i].perpindahan1 %>"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="<%= `perpindahan2-${i}` %>"
+                        name="<%= `perpindahan2-${i}` %>"
+                        value="<%= riwayat.bagianGetaran[i].perpindahan2 %>"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="<%= `perpindahan3-${i}` %>"
+                        name="<%= `perpindahan3-${i}` %>"
+                        value="<%= riwayat.bagianGetaran[i].perpindahan3 %>"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="<%= `perpindahanMax${i}` %>"
+                        name="<%= `perpindahanMax${i}` %>"
+                        value="<%= riwayat.bagianGetaran[i].perpindahanMax %>"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="<%= `frekuensi${i}` %>"
+                        name="<%= `frekuensi${i}` %>"
+                        value="<%= riwayat.bagianGetaran[i].frekuensi %>"
+                      />
+                    </td>
+                  </tr>
+                  <% } %> 
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 p-3">
+      <div class="card shadow">
+        <div
+          class="
+            card-header
+            pt-3
+            px-4
+            bg-white
+            d-flex
+            justify-content-between
+            border-0
+          "
+        >
+          <h3 class="card-title fw-bolder fs-3 m-0 d-flex align-items-center">
+            Pencahayaan
+          </h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-4 mb-3">
+              <label for="pencahayaanPanjang" class="form-label">Panjang Lokasi</label>
+              <input
+                type="text"
+                class="form-control"
+                id="pencahayaanPanjang"
+                name="pencahayaanPanjang"
+                value="<%= riwayat.bagianPencahayaan.pencahayaanPanjang %>"
+              />
+            </div>
+            <div class="col-sm-4 mb-3">
+              <label for="pencahayaanLebar" class="form-label">Lebar Lokasi</label>
+              <input
+                type="text"
+                class="form-control"
+                id="pencahayaanLebar"
+                name="pencahayaanLebar"
+                value="<%= riwayat.bagianPencahayaan.pencahayaanLebar %>"
+              />
+            </div>
+            <div class="col-sm-4 mb-3">
+              <label for="pencahayaanTinggi" class="form-label">Tinggi Lokasi</label>
+              <input
+                type="text"
+                class="form-control"
+                id="pencahayaanTinggi"
+                name="pencahayaanTinggi"
+                value="<%= riwayat.bagianPencahayaan.pencahayaanTinggi %>"
+              />
+            </div>
+            <div class="col-sm-4 mb-3">
+              <label for="pencahayaanJenisPencahayaan" class="form-label">Jenis Pencahayaan</label>
+              <input
+                type="text"
+                class="form-control"
+                id="pencahayaanJenisPencahayaan"
+                name="pencahayaanJenisPencahayaan"
+                value="<%= riwayat.bagianPencahayaan.pencahayaanJenisPencahayaan %>"
+              />
+            </div>
+            <div class="col-sm-4 mb-3">
+              <label for="pencahayaanJumlahPencahayaan" class="form-label">Jumlah Pencahayaan</label>
+              <input
+                type="text"
+                class="form-control"
+                id="pencahayaanJumlahPencahayaan"
+                name="pencahayaanJumlahPencahayaan"
+                value="<%= riwayat.bagianPencahayaan.pencahayaanJumlahPencahayaan %>"
+              />
+            </div>
+            <div class="col-sm-4 mb-3">
+              <label for="pencahayaanJumlahPencahayaanRusak" class="form-label">Jumlah Pencahayaan Rusak</label>
+              <input
+                type="text"
+                class="form-control"
+                id="pencahayaanJumlahPencahayaanRusak"
+                name="pencahayaanJumlahPencahayaanRusak"
+                value="<%= riwayat.bagianPencahayaan.pencahayaanJumlahPencahayaanRusak %>"
+              />
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr class="table-primary">
+                  <th>Lokasi Pengukuran</th>
+                  <th>Pengukuran 1</th>
+                  <th>Pengukuran 2</th>
+                  <th>Pengukuran 3</th>
+                  <th>Rata-rata</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (let i = 0; i < riwayat.bagianPencahayaan.data.length ; i++) { %>
+                  <tr>
+                    <td>
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="<%= `lokasiPengukuranPencahayaan${i}` %>"
+                      name="<%= `lokasiPengukuranPencahayaan${i}` %>"
+                      value="<%= riwayat.bagianPencahayaan.data[i].lokasiPengukuran %>"/>
+                    </td>
+                    <td>
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="<%= `pengukuranPencahayaan1-${i}` %>"
+                      name="<%= `pengukuranPencahayaan1-${i}` %>"
+                      value="<%= riwayat.bagianPencahayaan.data[i].pengukuran1 %>"/>
+                    </td>
+                    <td>
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="<%= `pengukuranPencahayaan2-${i}` %>"
+                      name="<%= `pengukuranPencahayaan2-${i}` %>"
+                      value="<%= riwayat.bagianPencahayaan.data[i].pengukuran2 %>"/>
+                    </td>
+                    <td>
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="<%= `pengukuranPencahayaan3-${i}` %>"
+                      name="<%= `pengukuranPencahayaan3-${i}` %>"
+                      value="<%= riwayat.bagianPencahayaan.data[i].pengukuran3 %>"/>
+                    </td>
+                    <td>
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="<%= `ratarataPencahayaan${i}` %>"
+                      name="<%= `ratarataPencahayaan${i}` %>"
+                      value="<%= riwayat.bagianPencahayaan.data[i].ratarata %>"/>
+                    </td>
+                  </tr>
+                  <% } %>
+                  <tr class="table-success text-center align-middle">
+                    <th colspan="4">Total Rata-rata</th>
+                    <td>
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="totalRatarataPencahayaan"
+                      name="totalRatarataPencahayaan"
+                      value="<%= riwayat.bagianPencahayaan.totalRatarata %>"/>
+                    </td>
+                  </tr> 
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 p-3">
+      <div class="card shadow">
+        <div
+          class="
+            card-header
+            pt-3
+            px-4
+            bg-white
+            d-flex
+            justify-content-between
+            border-0
+          "
+        >
+          <h3 class="card-title fw-bolder fs-3 m-0 d-flex align-items-center">
+            Ventilasi
+          </h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12 mb-3">
+              <label for="ventilasiRuangan" class="form-label">Ruangan</label>
+              <input
+                type="text"
+                class="form-control"
+                id="ventilasiRuangan"
+                name="ventilasiRuangan"
+                value="<%= riwayat.bagianVentilasi.ventilasiRuangan %>"
+              />
+            </div>
+            <div class="col-sm-4 mb-3">
+              <label for="ventilasiPanjang" class="form-label">Panjang Ruangan</label>
+              <input
+                type="text"
+                class="form-control"
+                id="ventilasiPanjang"
+                name="ventilasiPanjang"
+                value="<%= riwayat.bagianVentilasi.ventilasiPanjang %>"
+              />
+            </div>
+            <div class="col-sm-4 mb-3">
+              <label for="ventilasiLebar" class="form-label">Lebar Ruangan</label>
+              <input
+                type="text"
+                class="form-control"
+                id="ventilasiLebar"
+                name="ventilasiLebar"
+                value="<%= riwayat.bagianVentilasi.ventilasiLebar %>"
+              />
+            </div>
+            <div class="col-sm-4 mb-3">
+              <label for="ventilasiTinggi" class="form-label">Tinggi Ruangan</label>
+              <input
+                type="text"
+                class="form-control"
+                id="ventilasiTinggi"
+                name="ventilasiTinggi"
+                value="<%= riwayat.bagianVentilasi.ventilasiTinggi %>"
+              />
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr class="table-primary">
+                  <th>Jenis Pengukuran</th>
+                  <th>Panjang</th>
+                  <th>Lebar</th>
+                  <th>V</th>
+                  <th>Jumlah Pekerja</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (let i = 0; i < riwayat.bagianVentilasi.data.length ; i++) { %>
+                  <tr>
+                    <td>
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="<%= `ventilasiJenis${i}` %>"
+                      name="<%= `ventilasiJenis${i}` %>"
+                      value="<%= riwayat.bagianVentilasi.data[i].jenis %>"/>
+                    </td>
+                    <td>
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="<%= `ventilasiPanjang${i}` %>"
+                      name="<%= `ventilasiPanjang${i}` %>"
+                      value="<%= riwayat.bagianVentilasi.data[i].panjang %>"/>
+                    </td>
+                    <td>
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="<%= `ventilasiLebar${i}` %>"
+                      name="<%= `ventilasiLebar${i}` %>"
+                      value="<%= riwayat.bagianVentilasi.data[i].lebar %>"/>
+                    </td>
+                    <td>
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="<%= `ventilasiVelocity${i}` %>"
+                      name="<%= `ventilasiVelocity${i}` %>"
+                      value="<%= riwayat.bagianVentilasi.data[i].velocity %>"/>
+                    </td>
+                    <td>
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="<%= `jumlahPekerja${i}` %>"
+                      name="<%= `jumlahPekerja${i}` %>"
+                      value="<%= riwayat.bagianVentilasi.data[i].jumlahPekerja %>"/>
+                    </td>
+                    
+                  </tr>
+                  <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 p-3"> 
+      <input type="text" name="targetId" class="d-none" readonly value="<%= riwayat._id %>">
+      <button type="reset" class="btn btn-secondary shadow w-100 my-1">Reset</button>
+      <button type="submit" class="btn btn-success shadow w-100 my-1">Update</button>
+    </div>
+  </form>
+</div>
+<%- include("templateInspeksi/footer") %>

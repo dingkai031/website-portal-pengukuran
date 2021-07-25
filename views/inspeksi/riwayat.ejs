@@ -15,8 +15,9 @@
       Riwayat Pengukuran
     </h3>
   </div>
+  <%- include("../flash") %>
   <div class="card-body py-3 my-3">
-    <div class="table-responsive">
+    <div class="table-responsive p-3">
       <table id="table_id" class="display responsive nowrap">
         <thead>
           <tr>
@@ -25,6 +26,9 @@
             <th>Tanggal</th>
             <th class="text-center">Form</th>
             <th class="text-center">status</th>
+            <% if (currentUser.status === "upik3") {%> 
+              <th class="text-center">Opsi</th>
+            <% } %> 
           </tr>
         </thead>
         <tbody>
@@ -38,8 +42,109 @@
               %>
             </td>
             <td class="d-flex justify-content-between">
-              <a href="#" class="btn btn-primary m-2 m-sm-0">Dokumentasi</a>
-              <a href="#" class="btn btn-primary m-2 m-sm-0">Rekomendasi</a>
+              <!-- ======================MODAL DOKUMENTASI======================= -->
+              <div
+                class="modal fade"
+                id="dokumentai<%=riwayat._id%>"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog modal-dialog-centered modal-xl" >
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title"">
+                        Dokumentasi Pengukuran
+                      </h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                      <table class="table" id="wadahDokumentasi<%=riwayat._id%>">
+                        <tbody>
+                          <tr class="row">
+                            <% for (const image of riwayat.dokumentasi) {%> 
+                              <td class="col-sm-4 p-0">
+                                <img src="/img/dokumentasi/<%= image %>" alt="<%= image %> " class="img-fluid w-100 p-1">
+                              </td>
+                            <% } %> 
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Tutup
+                      </button>
+                      <!-- <button type="button" class="btn btn-primary tombolDownload" name="Inspeksi Kebisingan" dataTarget="#wadahDokumentasi<%=riwayat._id%>" dataTanggal = "<%=`${riwayat.createdAt.getDate()}-${riwayat.createdAt.getMonth()+1}-${riwayat.createdAt.getFullYear()}`%>" dataTempat="<%= riwayat.lokasiPengukuran %>">
+                        Download
+                      </button> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a href="#" data-bs-toggle="modal" data-bs-target="#dokumentai<%=riwayat._id%>" class="btn btn-primary m-2 m-sm-0">Dokumentasi</a>
+              <!-- ======================MODAL DOKUMENTASI======================= -->
+              <div
+                class="modal fade"
+                id="rekomendasi<%=riwayat._id%>"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog modal-dialog-centered modal-xl" >
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title"">
+                        Rekomendasi Pengukuran
+                      </h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                      <table class="table" id="wadahRekomendasi<%=riwayat._id%>">
+                        <thead>
+                          <tr>
+                            <th>Rekomendasi</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                              <td>
+                                <textarea rows="2" class="form-control"><%= riwayat.rekomendasi %></textarea>
+                              </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Tutup
+                      </button>
+                      <button type="button" class="btn btn-primary tombolDownload" name="Rekomendasi Pengukuran" dataTarget="#wadahRekomendasi<%=riwayat._id%>" dataTanggal = "<%=`${riwayat.createdAt.getDate()}-${riwayat.createdAt.getMonth()+1}-${riwayat.createdAt.getFullYear()}`%>" dataTempat="<%= riwayat.lokasiPengukuran %>">
+                        Download
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a href="#" data-bs-toggle="modal" data-bs-target="#rekomendasi<%=riwayat._id%>" class="btn btn-primary m-2 m-sm-0">Rekomendasi</a>
               <!-- ======================MODAL KEBISINGAN======================= -->
               <div
                 class="modal fade"
@@ -48,7 +153,7 @@
                 aria-labelledby="exampleModalLabel"
                 aria-hidden="true"
               >
-                <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-dialog modal-dialog-centered modal-xl" >
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title"">
@@ -63,7 +168,7 @@
                     </div>
                     <div class="modal-body">
                       <div class="table-responsive">
-                        <table class="table">
+                        <table class="table" id="wadahFormKebisingan<%=riwayat._id%>">
                           <thead>
                             <tr>
                               <th>
@@ -129,7 +234,7 @@
                       >
                         Tutup
                       </button>
-                      <button type="button" class="btn btn-primary">
+                      <button type="button" class="btn btn-primary tombolDownload" name="Inspeksi Kebisingan" dataTarget="#wadahFormKebisingan<%=riwayat._id%>" dataTanggal = "<%=`${riwayat.createdAt.getDate()}-${riwayat.createdAt.getMonth()+1}-${riwayat.createdAt.getFullYear()}`%>" dataTempat="<%= riwayat.lokasiPengukuran %>">
                         Download
                       </button>
                     </div>
@@ -141,9 +246,9 @@
                 href="#"
                 class="btn btn-primary m-2 m-sm-0"
                 data-bs-toggle="modal"
-                data-bs-target="#kebisingan<%=riwayat._id%>"
-                >Kebisingan</a
-              >
+                data-bs-target="#kebisingan<%=riwayat._id%>">
+                Kebisingan
+              </a>
               <!-- ======================MODAL GETARAN======================= -->
               <div
                 class="modal fade"
@@ -167,7 +272,7 @@
                     </div>
                     <div class="modal-body">
                       <div class="table-responsive">
-                        <table class="table">
+                        <table class="table" id="wadahFormGetaran<%=riwayat._id%>">
                           <thead>
                             <tr>
                               <th>Sumber Getaran</th>
@@ -226,7 +331,7 @@
                       >
                         Tutup
                       </button>
-                      <button type="button" class="btn btn-primary">
+                      <button type="button" class="btn btn-primary tombolDownload" name="Inspeksi Getaran" dataTarget="#wadahFormGetaran<%=riwayat._id%>" dataTanggal = "<%=`${riwayat.createdAt.getDate()}-${riwayat.createdAt.getMonth()+1}-${riwayat.createdAt.getFullYear()}`%>" dataTempat="<%= riwayat.lokasiPengukuran %>">
                         Download
                       </button>
                     </div>
@@ -238,19 +343,481 @@
                 href="#"
                 class="btn btn-primary m-2 m-sm-0"
                 data-bs-toggle="modal"
-                data-bs-target="#getaran<%=riwayat._id%>"
-                >Getaran</a>
-              <a href="#" class="btn btn-primary m-2 m-sm-0">Iklim Kerja</a>
-              <a href="#" class="btn btn-primary m-2 m-sm-0">Pencahayaan</a>
-              <a href="#" class="btn btn-primary m-2 m-sm-0">Ventilasi</a>
+                data-bs-target="#getaran<%=riwayat._id%>">
+                Getaran
+              </a>
+              <!-- ======================MODAL IKLIM KERJA======================= -->
+              <div
+              class="modal fade"
+              id="iklimKerja<%=riwayat._id%>"
+              tabindex="-1"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title"">
+                      Inspeksi Iklim Kerja
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="table-responsive">
+                      <table class="table table-bordered border-secondary" id="wadahFormIklimKerja<%=riwayat._id%>">
+                        <thead class="text-center align-middle">
+                          <tr>
+                            <th rowspan="2">Lokasi Pengukuran</th>
+                            <th rowspan="2">Beban Kerja</th>
+                            <th rowspan="2">Pengaturan Waktu Kerja</th>
+                            <th colspan="2">ISBB (°C)</th>
+                            <th rowspan="2">Keterangan</th>
+                          </tr>
+                          <tr>
+                            <th>Pengukuran</th>
+                            <th>Standar</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <% for (const suhu of riwayat.bagianIklimKerja) { %>
+                            <tr class="align-middle text-center">
+                              <td>
+                                <%= suhu.lokasiPengukuran %> 
+                              </td>
+                              <td class="text-capitalize">
+                                <%= suhu.bebankerja %> 
+                              </td>
+                              <td>75% - 100%</td>
+                              <td class="text-center"><%= `${suhu.isbb}°C` %></td>
+                              <td class="text-center">31°C</td>
+                              <td>
+                                <% if (parseInt(suhu.isbb) < 31) { %> 
+                                  <a href="javascript:void(0)" class="btn btn-success w-100">AMAN</a>
+                                <% }else { %>
+                                  <a href="javascript:void(0)" class="btn btn-danger w-100">TIDAK AMAN</a>
+                                <% } %>  
+                              </td>
+                            </tr> 
+                          <% } %> 
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Tutup
+                    </button>
+                    <button type="button" class="btn btn-primary tombolDownload" name="Inspeksi Iklim Kerja" dataTarget="#wadahFormIklimKerja<%=riwayat._id%>" dataTanggal = "<%=`${riwayat.createdAt.getDate()}-${riwayat.createdAt.getMonth()+1}-${riwayat.createdAt.getFullYear()}`%>" dataTempat="<%= riwayat.lokasiPengukuran %>">
+                      Download
+                    </button>
+                  </div>
+                </div>
+              </div>
+              </div>
+              <!-- ======================END MODAL IKLIM KERJA======================= -->
+              <a 
+                href="#" 
+                class="btn btn-primary m-2 m-sm-0"
+                data-bs-toggle="modal"
+                data-bs-target="#iklimKerja<%=riwayat._id%>">
+                Iklim Kerja
+              </a>
+              <!-- ======================MODAL PENCAHAYAAN======================= -->
+              <div
+              class="modal fade"
+              id="pencahayaan<%=riwayat._id%>"
+              tabindex="-1"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title"">
+                      Inspeksi Pencahayaan
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <h3 class="mb-4 text-center">Karakteristik Tempat Kerja</h3>
+                    <div class="container-fluid">
+                      <div class="row mb-3">
+                        <div class="col-sm-4 mb-3">
+                          <label for="panjang" class="form-label"
+                          >Panjang</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="panjang"
+                            readonly
+                            value="<%= riwayat.bagianPencahayaan.pencahayaanPanjang %>"
+                          />
+                        </div>
+                        <div class="col-sm-4 mb-3">
+                          <label for="lebar" class="form-label"
+                          >Lebar</label
+                          >
+                          <input
+                            id="lebar"
+                            type="text"
+                            class="form-control"
+                            readonly
+                            value="<%= riwayat.bagianPencahayaan.pencahayaanLebar %>"
+                          />
+                        </div>
+                        <div class="col-sm-4 mb-3">
+                          <label for="tinggi" class="form-label"
+                          >Tinggi</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="tinggi"
+                            readonly
+                            value="<%= riwayat.bagianPencahayaan.pencahayaanTinggi %>"
+                          />
+                        </div>
+                        <div class="col-sm-4 mb-3">
+                          <label for="jenisPencahayaan" class="form-label"
+                          >Jenis Pencahayaan</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="jenisPencahayaan"
+                            readonly
+                            value="<%= riwayat.bagianPencahayaan.pencahayaanJenisPencahayaan %>"
+                          />
+                        </div>
+                        <div class="col-sm-4 mb-3">
+                          <label for="jumlahPencahayaan" class="form-label"
+                          >Jumlah Pencahayaan</label
+                          >
+                          <input
+                            type="text"
+                            id="jumlahPencahayaan"
+                            class="form-control"
+                            readonly
+                            value="<%= riwayat.bagianPencahayaan.pencahayaanJumlahPencahayaan %>"
+                          />
+                        </div>
+                        <div class="col-sm-4 mb-3">
+                          <label for="jumlahPencahayaanRusak" class="form-label"
+                          >Jumlah Pencahayaan Rusak</label
+                          >
+                          <input
+                            type="text"
+                            id="jumlahPencahayaanRusak"
+                            class="form-control"
+                            readonly
+                            value="<%= riwayat.bagianPencahayaan.pencahayaanJumlahPencahayaanRusak %> "
+                          />
+                        </div>
+                      </div>
+                      <div class="table-responsive">
+                        <table class="table table-bordered" id="wadahFormPencahayaan<%= riwayat._id %>">
+                          <thead>
+                            <tr>
+                              <th>Titik Pengukuran</th>
+                              <th>Pengukuran 1</th>
+                              <th>Pengukuran 2</th>
+                              <th>Pengukuran 3</th>
+                              <th>Rata-rata</th>
+                              <th>Total Rata-rata</th>
+                              <th>NAB</th>
+                              <th>Status</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% let start = true %> 
+                            <% for (cahaya of riwayat.bagianPencahayaan.data) {%> 
+                              <tr>
+                                <td>
+                                  <%= cahaya.lokasiPengukuran %> 
+                                </td>
+                                <td>
+                                  <%= cahaya.pengukuran1 %> 
+                                </td>
+                                <td>
+                                  <%= cahaya.pengukuran2 %> 
+                                </td>
+                                <td>
+                                  <%= cahaya.pengukuran3 %> 
+                                </td>
+                                <td>
+                                  <%= cahaya.ratarata %> 
+                                </td>
+                                <% if (start) {%>
+                                  <td rowspan="<%= riwayat.bagianPencahayaan.data.length %>" class="align-middle text-center"><%= riwayat.bagianPencahayaan.totalRatarata %></td>
+                                  <td rowspan="<%= riwayat.bagianPencahayaan.data.length %>" class="align-middle text-center">200Lux</td>
+                                  <% if (parseInt(riwayat.bagianPencahayaan.totalRatarata) < 200) {%> 
+                                    <td rowspan="<%= riwayat.bagianPencahayaan.data.length %>" class="align-middle text-center"><a href="javascript:void(0)" class="btn btn-success w-100">AMAN</a></td>
+                                  <% }else { %>
+                                    <td rowspan="<%= riwayat.bagianPencahayaan.data.length %>" class="align-middle text-center"><a href="javascript:void(0)" class="btn btn-danger w-100">TIDAK AMAN</a></td>
+                                  <% } %> 
+                                  
+                                  <% start = false %>  
+                                <% } %> 
+                              </tr>
+                            <% } %> 
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Tutup
+                    </button>
+                    <button 
+                      type="button" 
+                      class="btn btn-primary tombolDownload" 
+                      name="Inspeksi Pencahayaan"
+                      dataTarget="#wadahFormPencahayaan<%=riwayat._id%>" 
+                      dataTanggal = "<%=`${riwayat.createdAt.getDate()}-${riwayat.createdAt.getMonth()+1}-${riwayat.createdAt.getFullYear()}`%>" 
+                      dataTempat="<%= riwayat.lokasiPengukuran %>"
+                      dataPanjang = "<%= riwayat.bagianPencahayaan.pencahayaanPanjang %>"
+                      dataLebar = "<%= riwayat.bagianPencahayaan.pencahayaanLebar %>"
+                      dataTinggi = "<%= riwayat.bagianPencahayaan.pencahayaanTinggi %>"
+                      dataJenis = "<%= riwayat.bagianPencahayaan.pencahayaanJenisPencahayaan %>"
+                      dataJumlah = "<%= riwayat.bagianPencahayaan.pencahayaanJumlahPencahayaan %>"
+                      dataRusak = "<%= riwayat.bagianPencahayaan.pencahayaanJumlahPencahayaanRusak %>"
+                      >
+                      Download
+                    </button>
+                  </div>
+                </div>
+              </div>
+              </div>
+              <!-- ======================END MODAL PENCAHAYAAN======================= -->
+              <a 
+                href="javascript:void(0)" 
+                class="btn btn-primary m-2 m-sm-0" 
+                data-bs-toggle="modal" 
+                data-bs-target="#pencahayaan<%=riwayat._id%>">
+                Pencahayaan
+              </a>
+              <!-- ======================MODAL VENTILASI======================= -->
+              <div
+              class="modal fade"
+              id="ventilasi<%=riwayat._id%>"
+              tabindex="-1"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title"">
+                      Inspeksi Ventilasi
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <h3 class="mb-4 text-center">Karakteristik Tempat Kerja</h3>
+                    <div class="container-fluid">
+                      <div class="row mb-3">
+                        <div class="col-sm-12 mb-3">
+                          <label for="ruangan" class="form-label"
+                          >Ruangan</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="ruangan"
+                            readonly
+                            value="<%= riwayat.bagianVentilasi.ventilasiRuangan %> "
+                          />
+                        </div>
+                        <div class="col-sm-4 mb-3">
+                          <label for="panjang2" class="form-label"
+                          >Panjang</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="panjang2"
+                            readonly
+                            value="<%= riwayat.bagianVentilasi.ventilasiPanjang %> "
+                          />
+                        </div>
+                        <div class="col-sm-4 mb-3">
+                          <label for="lebar2" class="form-label"
+                          >Lebar</label
+                          >
+                          <input
+                            id="lebar2"
+                            type="text"
+                            class="form-control"
+                            readonly
+                            value="<%= riwayat.bagianVentilasi.ventilasiLebar %> "
+                          />
+                        </div>
+                        <div class="col-sm-4 mb-3">
+                          <label for="tinggi2" class="form-label"
+                          >Tinggi</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="tinggi2"
+                            readonly
+                            value="<%= riwayat.bagianVentilasi.ventilasiTinggi %> "
+                          />
+                        </div>
+                      </div>
+                      <div class="table-responsive">
+                        <table class="table table-bordered" id="wadahFormVentilasi<%=riwayat._id%>">
+                          <thead>
+                            <tr>
+                              <th>Jenis Ventilasi</th>
+                              <th>Panjang Ventilasi (m)</th>
+                              <th>Lebar Ventilasi (m)</th>
+                              <th>V(m/s)</th>
+                              <th>Jumlah Pekerja</th>
+                              <th>GVR</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% let startKedua %> 
+                            <% let gvr %> 
+                            <% let arrOfGvr = [] %> 
+                            <% let totalGvr %> 
+                            <% for (ventilasi of riwayat.bagianVentilasi.data) {%> 
+                              <tr>
+                                <td>
+                                  <%= ventilasi.jenis %> 
+                                </td>
+                                <td>
+                                  <%= ventilasi.panjang %> 
+                                </td>
+                                <td>
+                                  <%= ventilasi.lebar %> 
+                                </td>
+                                <td>
+                                  <%= ventilasi.velocity %> 
+                                </td>
+                                <td>
+                                  <%= ventilasi.jumlahPekerja %> 
+                                </td>
+                                <td>
+                                  <% gvr = (0.5 * (ventilasi.panjang * ventilasi.lebar) * ventilasi.velocity).toFixed(2) %>
+                                  <%= gvr %> 
+                                  <% arrOfGvr.push(parseFloat(gvr)) %> 
+                                </td>
+                                <% totalGvr = arrOfGvr.reduce((total, num)=>{return total + num}) %> 
+                              </tr>
+                            <% } %> 
+                            <tr class="table-dark">
+                              <th colspan="5">Total GVR</th>
+                              <td><%= totalGvr %> m<sup>3</sup>/jam </td>
+                            </tr>
+                            <tr class="table-dark">
+                              <th colspan="5">Volume Ruangan</th>
+                              <td>
+                                <% const volumeRuangan = 
+                                  riwayat.bagianVentilasi.ventilasiPanjang
+                                  *riwayat.bagianVentilasi.ventilasiLebar
+                                  *riwayat.bagianVentilasi.ventilasiTinggi 
+                                %>
+                                <%= volumeRuangan %> m<sup>3</sup> 
+                              </td>
+                            </tr>
+                            <tr class="table-dark">
+                              <th colspan="5">Pergantian Udara/jam</th>
+                              <td><%= totalGvr/volumeRuangan %>/jam </td>
+                            </tr>
+                            <tr class="table-dark">
+                              <th colspan="5">NAB</th>
+                              <td >6/jam</td>
+                            </tr>
+                            <tr class="table-dark">
+                              <th colspan="5">Status</th>
+                              <td class="text-center">
+                                <% if (totalGvr/volumeRuangan < 6) { %>
+                                  <a href="javascript:void(0)" class="btn btn-success">AMAN</a>
+                                <% }else { %>
+                                  <a href="javascript:void(0)" class="btn btn-danger">TIDAK AMAN</a> 
+                                <% } %> 
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Tutup
+                    </button>
+                    <button 
+                      type="button" 
+                      class="btn btn-primary tombolDownload" 
+                      name="Inspeksi Pencahayaan"
+                      dataTarget="#wadahFormVentilasi<%=riwayat._id%>" 
+                      dataTanggal = "<%=`${riwayat.createdAt.getDate()}-${riwayat.createdAt.getMonth()+1}-${riwayat.createdAt.getFullYear()}`%>" 
+                      dataTempat="<%= riwayat.lokasiPengukuran %>"
+                      dataPanjang = "<%= riwayat.bagianVentilasi.ventilasiPanjang %>"
+                      dataLebar = "<%= riwayat.bagianVentilasi.ventilasiLebar %>"
+                      dataTinggi = "<%= riwayat.bagianVentilasi.ventilasiTinggi %>"
+                      dataRuangan = "<%= riwayat.bagianVentilasi.ventilasiRuangan %> "
+                      >
+                      Download
+                    </button>
+                  </div>
+                </div>
+              </div>
+              </div>
+              <!-- ======================END MODAL VENTILASI======================= -->
+              <a 
+              href="javascript:void(0)" 
+              class="btn btn-primary m-2 m-sm-0"
+              data-bs-toggle="modal"
+              data-bs-target="#ventilasi<%=riwayat._id%>">
+              Ventilasi
+            </a>
             </td>
             <td class="text-center">
               <% if (!riwayat.approve) { %>
-              <a href="#" class="btn btn-danger">Belum disetujui</a>
+                <form action="/inspeksi/riwayat?_method=PUT" method="POST">
+                  <input type="text" name="idData" class="d-none" readonly value="<%= riwayat._id %>">
+                  <button type="<%= currentUser.status !== "kabeng" ? "submit" : "button" %>"  class="btn btn-danger">Belum disetujui</button>
+                </form>
+              
               <% }else { %>
               <a href="#" class="btn btn-success">Sudah distujui</a>
               <% } %>
             </td>
+            <% if (currentUser.status === "upik3") { %> 
+            <td class="text-center">
+              <a href="/inspeksi/riwayat/edit?id=<%= riwayat._id %> " class="btn btn-secondary">Edit</a>
+            </td>
+            <% } %> 
           </tr>
           <% } %>
         </tbody>

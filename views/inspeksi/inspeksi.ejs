@@ -7,11 +7,13 @@
           <h3 class="card-title fw-bolder fs-3 mb-4 d-flex align-items-center">
             Form Inspeksi
           </h3>
+          <%- include("../flash") %>
           <form
-            action="/inspeksi/tambah"
+            action="/inspeksi"
             method="POST"
             spellcheck="false"
             autocomplete="off"
+            enctype="multipart/form-data"
           >
             <!-- ======================================MODAL============================================================================ -->
             <div class="modal fade" id="iklimkerja" tabindex="-1">
@@ -58,7 +60,7 @@
                               RH (%)
                             </th>
                             <th class="align-middle text-center min-width-100">
-                              Beban Kerja (KG)
+                              Beban Kerja
                             </th>
                           </tr>
                         </thead>
@@ -276,7 +278,7 @@
                         <thead>
                           <tr>
                             <th class="align-middle text-center min-width-100">
-                              Sumber Getaran
+                              Sumber Pencahayaan
                             </th>
                             <th class="align-middle text-center min-width-100">
                               Pengukuran 1
@@ -422,7 +424,551 @@
                 </div>
               </div>
             </div>
-            <!-- ======================================/MODAL============================================================================ -->
+            <!-- ------------------------------------------------------------------------------------------------------------- -->
+            <div class="modal fade" id="panduanGetaran" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Panduan Pengukuran Getaran</h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="mb-3">
+                      <h5>
+                        Panduan Melakukan Pengukuran Lingkungan Kerja Getaran
+                      </h5>
+                      <ul>
+                        <li>
+                          Siapkan alat pengukur kebisingan (Vibrationmeter)
+                        </li>
+                        <li>
+                          Lihat layout yang berada pada sistem informasi
+                          pengukuran lingkungan kerja
+                        </li>
+                        <li>
+                          <span class="me-2"
+                            ><img
+                              src="/img/logoTitik/getaran.jpg"
+                              height="20px"
+                              alt="" /></span
+                          >adalah simbol titik getaran berada, dan pengukuran
+                          lingkungan kerja di lakukan pada titik tersebut
+                        </li>
+                        <li>
+                          Masukkan rekomendasi pada kotak rekomendasi jika ada
+                          kekurangan atau hal yang harus diperbaiki
+                        </li>
+                        <li>
+                          Titik pengukuran bisa berubah sesuai dengan potensi
+                          bahaya kebisingan di tempat kerja
+                        </li>
+                        <li>
+                          Jika Pengukuran lingkungan kerja getaran sudah selesai
+                          di lakukan, submit data pengukuran lingkungan kerja
+                          agar data terekam oleh sistem informasi
+                        </li>
+                        <li>
+                          Cek pada menu riwayat inspeksi apakah data pengukuran
+                          sudah terekam
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="mb-3">
+                      <h5 class="mb-3">Cara Mengoperasikan VibrationMeter</h5>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <img
+                            src="/img/alatPengukuran/vMeter.jpg"
+                            alt="Vibration Meter"
+                            class="img-fluid w-100"
+                          />
+                        </div>
+                        <div class="col-sm-6">
+                          <ul>
+                            <li>
+                              Nyalakan alat dengan menekan tombol power pada
+                              vibrationmeter
+                            </li>
+                            <li>
+                              Tempelkan sensor magnet pada vibrationmeter pada
+                              sumber getaran
+                            </li>
+                            <li>
+                              Tekan tombol tengah (<span
+                                ><img
+                                  src="/img/logoTitik/tombolTengah.jpg"
+                                  height="20px"
+                                  alt="" /></span
+                              >) pada vibrationmeter, lalu Biarkan selama 3
+                              detik lalu tekan lagi tombol di tengah (<span
+                                ><img
+                                  src="/img/logoTitik/tombolTengah.jpg"
+                                  height="20px"
+                                  alt="" /></span
+                              >) vibrationmeter tersebut
+                            </li>
+                            <li>
+                              Lalu tekan tombol enter di vibrationmeter, maka
+                              akan muncul grafik pada vibrationmeter lalu catat
+                              pada sistem informasi pengukuran lingkungan kerja.
+                            </li>
+                            <li>
+                              Ambil data sebanyak 3 kali agar mendapat hasil
+                              yang akurat.
+                            </li>
+                            <li>
+                              Jika proses pengukuran sudah selesai, tekan submit
+                              pada sistem informasi pengukuran lingkungan kerja
+                              agar data terekam oleh sistem informasi
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Tutup
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- ------------------------------------------------------------------------------------------------------------- -->
+            <div class="modal fade" id="panduanKebisingan" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Panduan Pengukuran Kebisingan</h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="mb-3">
+                      <h5>
+                        Panduan Melakukan pengukuran lingkungan kerja Kebisingan
+                      </h5>
+                      <ul>
+                        <li>
+                          Siapkan alat pengukur kebisingan (Sound Level Meter)
+                        </li>
+                        <li>
+                          Lihat layout yang berada pada sistem informasi
+                          pengukuran lingkungan kerja
+                        </li>
+                        <li>
+                          <span class="me-2"
+                            ><img
+                              src="/img/logoTitik/kebisingan.jpg"
+                              height="20px"
+                              alt="" /></span
+                          >adalah simbol titik kebisingan berada, dan pengukuran
+                          lingkungan kerja di lakukan pada titik tersebut
+                        </li>
+                        <li>
+                          Masukkan rekomendasi pada kotak rekomendasi jika ada
+                          kekurangan atau hal yang harus diperbaiki
+                        </li>
+                        <li>
+                          Titik pengukuran bisa berubah sesuai dengan potensi
+                          bahaya kebisingan di tempat kerja
+                        </li>
+                        <li>
+                          Jika Pengukuran lingkungan kerja kebisingan sudah
+                          selesai di lakukan, submit data pengukuran lingkungan
+                          kerja agar data terekam oleh sistem informasi
+                        </li>
+                        <li>
+                          Cek pada menu riwayat inspeksi apakah data pengukuran
+                          sudah terekam
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="mb-3">
+                      <h5 class="mb-3">
+                        Cara Mengoperasikan Sound Level Meter
+                      </h5>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <img
+                            src="/img/alatPengukuran/SLmeter.jpg"
+                            alt="Sound Level Meter"
+                            class="img-fluid w-100"
+                          />
+                        </div>
+                        <div class="col-sm-6">
+                          <ul>
+                            <li>
+                              Nyalakan alat dengan menekan tombol power pada
+                              sound level meter
+                            </li>
+                            <li>
+                              Dekatkan sensor kebisingan yang berbentuk seperti
+                              microphone pada sumber kebisingan
+                            </li>
+                            <li>
+                              Biarkan selama 3 detik lalu tekan hold pada sound
+                              level meter, lalu inputkan pada sistem informasi
+                              pengukuran lingkungan kerja
+                            </li>
+                            <li>
+                              Ambil data sebanyak 3 kali agar mendapat hasil
+                              yang akurat
+                            </li>
+                            <li>
+                              Jika proses pengukuran sudah selesai, tekan submit
+                              pada sistem informasi pengukuran lingkungan kerja
+                              agar data terekam oleh sistem informasi
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Tutup
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- ------------------------------------------------------------------------------------------------------------- -->
+            <div class="modal fade" id="panduanVentilasi" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Panduan Pengukuran Ventilasi</h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="mb-3">
+                      <h5>
+                        Panduan Melakukan pengukuran lingkungan kerja Ventilasi
+                      </h5>
+                      <ul>
+                        <li>Siapkan alat pengukur ventilasi (Anemometer)</li>
+                        <li>
+                          Lihat layout yang berada pada sistem informasi
+                          pengukuran lingkungan kerja
+                        </li>
+                        <li>
+                          <span class="me-2"
+                            ><img
+                              src="/img/logoTitik/ventilasi.jpg"
+                              height="20px"
+                              alt="" /></span
+                          >adalah simbol titik ventilasi yang akan di ukur, dan
+                          pengukuran lingkungan kerja di lakukan pada titik
+                          tersebut.
+                        </li>
+                        <li>
+                          Masukkan rekomendasi pada kotak rekomendasi jika ada
+                          kekurangan atau hal yang harus diperbaiki
+                        </li>
+                        <li>
+                          Titik pengukuran bisa berubah sesuai dengan potensi
+                          bahaya kebisingan di tempat kerja
+                        </li>
+                        <li>
+                          Jika Pengukuran lingkungan kerja ventilasi sudah
+                          selesai di lakukan, submit data pengukuran lingkungan
+                          kerja agar data terekam oleh sistem informasi
+                        </li>
+                        <li>
+                          Cek pada menu riwayat inspeksi apakah data pengukuran
+                          sudah terekam
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="mb-3">
+                      <h5 class="mb-3">Cara Mengoperasikan Anemometer</h5>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <img
+                            src="/img/alatPengukuran/aMeter.jpg"
+                            alt="Vibration Meter"
+                            class="img-fluid w-100"
+                          />
+                        </div>
+                        <div class="col-sm-6">
+                          <ul>
+                            <li>
+                              Nyalakan alat dengan menekan tombol power pada
+                              anemometer
+                            </li>
+                            <li>
+                              Dekatkan sensor anemometer yang berbentuk seperti
+                              kipas pada ventilasi
+                            </li>
+                            <li>
+                              Biarkan selama 3 detik lalu tekan hold pada
+                              anemometer, lalu inputkan pada sistem informasi
+                              pengukuran lingkungan kerja
+                            </li>
+                            <li>
+                              Ambil data sebanyak 3 kali agar mendapat hasil
+                              yang akurat
+                            </li>
+                            <li>
+                              Jika proses pengukuran sudah selesai, tekan submit
+                              pada sistem informasi pengukuran lingkungan kerja
+                              agar data terekam oleh sistem informasi
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Tutup
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- ------------------------------------------------------------------------------------------------------------- -->
+            <div class="modal fade" id="panduanPencahayaan" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Panduan Pengukuran Pencahayaan</h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="mb-3">
+                      <h5>
+                        Panduan Melakukan pengukuran lingkungan kerja
+                        pencahayaan
+                      </h5>
+                      <ul>
+                        <li>Siapkan alat pengukur pencahayaan (luxmeter)</li>
+                        <li>
+                          Lihat layout yang berada pada sistem informasi
+                          pengukuran lingkungan kerja
+                        </li>
+                        <li>
+                          <span class="me-2"
+                            ><img
+                              src="/img/logoTitik/pencahayaan.jpg"
+                              height="20px"
+                              alt="" /></span
+                          >adalah simbol titik pencahayaan yang akan di ukur,
+                          dan pengukuran lingkungan kerja di lakukan pada titik
+                          tersebut.
+                        </li>
+                        <li>
+                          Masukkan rekomendasi pada kotak rekomendasi jika ada
+                          kekurangan atau hal yang harus diperbaiki
+                        </li>
+                        <li>
+                          Titik pengukuran bisa berubah sesuai dengan potensi
+                          bahaya kebisingan di tempat kerja
+                        </li>
+                        <li>
+                          Jika Pengukuran lingkungan kerja pencahayaan sudah
+                          selesai di lakukan, submit data pengukuran lingkungan
+                          kerja agar data terekam oleh sistem informasi
+                        </li>
+                        <li>
+                          Cek pada menu riwayat inspeksi apakah data pengukuran
+                          sudah terekam
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="mb-3">
+                      <h5 class="mb-3">Cara Mengoperasikan Luxmeter</h5>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <img
+                            src="/img/alatPengukuran/lMeter.jpg"
+                            alt="Vibration Meter"
+                            class="img-fluid w-100"
+                          />
+                        </div>
+                        <div class="col-sm-6">
+                          <ul>
+                            <li>
+                              Nyalakan alat dengan menekan tombol power pada
+                              luxmeter
+                            </li>
+                            <li>
+                              Dekatkan sensor luxmeter pada sumber pencahayaan
+                            </li>
+                            <li>
+                              Biarkan selama 3 detik lalu tekan hold pada
+                              luxmeter, lalu inputkan pada sistem informasi
+                              pengukuran lingkungan kerja
+                            </li>
+                            <li>
+                              Ambil data sebanyak 3 kali agar mendapat hasil
+                              yang akurat
+                            </li>
+                            <li>
+                              Jika proses pengukuran sudah selesai, tekan submit
+                              pada sistem informasi pengukuran lingkungan kerja
+                              agar data terekam oleh sistem informasi
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Tutup
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- ------------------------------------------------------------------------------------------------------------- -->
+            <div class="modal fade" id="panduanIklimKerja" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Panduan Pengukuran Iklim Kerja</h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="mb-3">
+                      <h5>
+                        Panduan Melakukan pengukuran lingkungan kerja iklim
+                        kerja
+                      </h5>
+                      <ul>
+                        <li>
+                          Siapkan alat pengukur iklim kerja (Wet Bulb Globe
+                          Temperature)
+                        </li>
+                        <li>
+                          Lihat layout yang berada pada sistem informasi
+                          pengukuran lingkungan kerja
+                        </li>
+                        <li>
+                          <span class="me-2"
+                            ><img
+                              src="/img/logoTitik/iklimKerja.jpg"
+                              height="20px"
+                              alt="" /></span
+                          >adalah simbol titik iklim kerja yang akan di ukur,
+                          dan pengukuran lingkungan kerja di lakukan pada titik
+                          tersebut.
+                        </li>
+                        <li>
+                          Masukkan rekomendasi pada kotak rekomendasi jika ada
+                          kekurangan atau hal yang harus diperbaiki
+                        </li>
+                        <li>
+                          Titik pengukuran bisa berubah sesuai dengan potensi
+                          bahaya kebisingan di tempat kerja
+                        </li>
+                        <li>
+                          Jika Pengukuran lingkungan kerja iklim kerja sudah
+                          selesai di lakukan, submit data pengukuran lingkungan
+                          kerja agar data terekam oleh sistem informasi
+                        </li>
+                        <li>
+                          Cek pada menu riwayat inspeksi apakah data pengukuran
+                          sudah terekam
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="mb-3">
+                      <h5 class="mb-3">
+                        Cara Mengoperasikan Wet Bulb Globe Temperature
+                      </h5>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <img
+                            src="/img/alatPengukuran/wbgt.jpg"
+                            alt="Vibration Meter"
+                            class="img-fluid w-100"
+                          />
+                        </div>
+                        <div class="col-sm-6">
+                          <ul>
+                            <li>
+                              Isi bagian tengah (suhu basah) pada WBGT dengan
+                              air sedikit saja
+                            </li>
+                            <li>
+                              Dekatkan WBGT di tengah-tengah lingkungan para
+                              pekerja
+                            </li>
+                            <li>
+                              Biarkan selama 3 detik lalu tekan hold pada WBGT,
+                              lalu inputkan pada sistem informasi pengukuran
+                              lingkungan kerja
+                            </li>
+                            <li>
+                              Ambil data sebanyak 3 kali agar mendapat hasil
+                              yang akurat
+                            </li>
+                            <li>
+                              Jika proses pengukuran sudah selesai, tekan submit
+                              pada sistem informasi pengukuran lingkungan kerja
+                              agar data terekam oleh sistem informasi
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Tutup
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- =====================================MODAL===================================================================== -->
             <div>
               <div class="mb-3">
                 <label for="namaPengukur" class="form-label"
@@ -451,42 +997,6 @@
                   <% } %>
                 </select>
               </div>
-              <!-- <div class="mb-3 row">
-                <div class="col-sm-6 d-flex flex-column mb-3">
-                  <label for="tanggalPengukuran" class="form-label"
-                    >Tanggal Pengukuran</label
-                  >
-                  <div class="input-group border-0 datepicker">
-                    <input
-                      type="text"
-                      id="tanggalPengukuran"
-                      class="form-control border-0"
-                      name="tanggalPengukuran"
-                      title="Harap isi form ini"
-                      data-input
-                    />
-                    <span class="input-group-text border-0" data-toggle>
-                      <i class="bx bx-calendar"></i>
-                    </span>
-                  </div>
-                </div>
-                <div class="col-sm-6 d-flex flex-column mb-3">
-                  <label for="waktuPengukuran" class="form-label">Waktu</label>
-                  <div class="input-group border-0 datepicker-time">
-                    <input
-                      type="text"
-                      id="waktuPengukuran"
-                      class="form-control border-0"
-                      name="waktuPengukuran"
-                      title="Harap isi form ini"
-                      data-input
-                    />
-                    <span class="input-group-text border-0" data-toggle>
-                      <i class="bx bx-time"></i>
-                    </span>
-                  </div>
-                </div>
-              </div> -->
               <div class="mb-3">
                 <label for="dokumentasiPengukuran" class="form-label"
                   >Dokumentasi</label
@@ -514,7 +1024,14 @@
                   class="col-lg-6 mb-3 d-flex flex-column"
                   id="wrapper-kebisingan"
                 >
-                  <label class="form-label">Kebisingan</label>
+                  <label class="form-label"
+                    >Kebisingan<a
+                      href="#"
+                      data-bs-toggle="modal"
+                      data-bs-target="#panduanKebisingan"
+                      class="ms-1 far fa-question-circle"
+                    ></a
+                  ></label>
                   <a
                     href="#"
                     class="btn btn-primary"
@@ -527,7 +1044,15 @@
                   class="col-lg-6 mb-3 d-flex flex-column"
                   id="wrapper-getaran"
                 >
-                  <label class="form-label">Getaran</label>
+                  <label class="form-label"
+                    >Getaran
+                    <a
+                      href="#"
+                      data-bs-toggle="modal"
+                      data-bs-target="#panduanGetaran"
+                      class="ms-1 far fa-question-circle"
+                    ></a
+                  ></label>
                   <a
                     href="#"
                     class="btn btn-primary"
@@ -540,7 +1065,14 @@
                   class="col-lg-6 mb-3 d-flex flex-column"
                   id="wrapper-ventilasi"
                 >
-                  <label class="form-label">Ventilasi</label>
+                  <label class="form-label"
+                    >Ventilasi<a
+                      href="#"
+                      data-bs-toggle="modal"
+                      data-bs-target="#panduanVentilasi"
+                      class="ms-1 far fa-question-circle"
+                    ></a
+                  ></label>
                   <a
                     href="#"
                     class="btn btn-primary"
@@ -553,7 +1085,14 @@
                   class="col-lg-6 mb-3 d-flex flex-column"
                   id="wrapper-pencahayaan"
                 >
-                  <label class="form-label">Pencahayaan</label>
+                  <label class="form-label"
+                    >Pencahayaan<a
+                      href="#"
+                      data-bs-toggle="modal"
+                      data-bs-target="#panduanPencahayaan"
+                      class="ms-1 far fa-question-circle"
+                    ></a
+                  ></label>
                   <a
                     href="#"
                     class="btn btn-primary"
@@ -566,7 +1105,14 @@
                   class="col-lg-6 mb-3 d-flex flex-column"
                   id="wrapper-iklimkerja"
                 >
-                  <label class="form-label">Iklim Kerja</label>
+                  <label class="form-label"
+                    >Iklim Kerja<a
+                      href="#"
+                      data-bs-toggle="modal"
+                      data-bs-target="#panduanIklimKerja"
+                      class="ms-1 far fa-question-circle"
+                    ></a
+                  ></label>
                   <a
                     href="#"
                     class="btn btn-primary"
@@ -637,5 +1183,5 @@
       </div>
     </div>
   </div>
-  <%- include("templateInspeksi/footer") %>
 </div>
+<%- include("templateInspeksi/footer") %>

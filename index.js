@@ -28,7 +28,7 @@ app.set("views", path.join(__dirname, "/views"));
 const session = require("express-session");
 
 const sessionConfig = {
-  secret: "thisisasecret",
+  secret: "i34ftyni(&NXCT)MY#(joie(@V*NY",
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -66,6 +66,7 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
+    useFindAndModify: false,
   })
   .then(() => {
     console.log("koneksi sukses ke Database port 27017 Sukses");

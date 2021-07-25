@@ -48,7 +48,6 @@ const riwayatSchema = new Schema(
     dokumentasi: [
       {
         type: String,
-        lowercase: true,
       },
     ],
     bagianKebisingan: [
@@ -88,7 +87,10 @@ const riwayatSchema = new Schema(
         suhuBola: Number,
         isbb: Number,
         rh: Number,
-        bebankerja: Number,
+        bebankerja: {
+          type: String,
+          enum: ["ringan", "sedang", "berat"],
+        },
       },
     ],
     bagianPencahayaan: {
@@ -96,8 +98,9 @@ const riwayatSchema = new Schema(
       pencahayaanLebar: Number,
       pencahayaanTinggi: Number,
       pencahayaanJenisPencahayaan: String,
-      pencahayaanJumlahPencahayaan: String,
-      pencahayaanJumlahPencahayaanRusak: String,
+      pencahayaanJumlahPencahayaan: Number,
+      pencahayaanJumlahPencahayaanRusak: Number,
+      totalRatarata: Number,
       data: [
         {
           lokasiPengukuran: String,
