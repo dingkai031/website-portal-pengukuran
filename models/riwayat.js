@@ -45,11 +45,7 @@ const riwayatSchema = new Schema(
         "Studio Gambar",
       ],
     },
-    dokumentasi: [
-      {
-        type: String,
-      },
-    ],
+    dokumentasi: [String],
     bagianKebisingan: [
       {
         lokasiPengukuran: String,

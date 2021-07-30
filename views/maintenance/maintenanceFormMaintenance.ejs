@@ -1,0 +1,229 @@
+<%- include("templateMaintenance/head") %>
+
+<div
+  class="modal fade"
+  id="newFormMaintenance"
+  tabindex="-1"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body px-5">
+        <form
+          action="/maintenance/<%= jenisTempatQuery %>/<%= foundedTempat.alamat %>/data-alat/<%= foundedAlat._id %>"
+          class="form"
+          spellcheck="false"
+          autocomplete="off"
+          method="POST"
+        >
+          <div class="mb-3 text-center">
+            <h3 class="mb-2">Tambah Permintaan Maintenance</h3>
+            <div class="text-muted">Harap masukkan data dengan benar.</div>
+          </div>
+          <div class="d-flex flex-column mb-3">
+            <label for="teknisi" class="d-flex align-items-center fw-bold mb-2">
+              Teknisi
+            </label>
+            <select required name="teknisi" id="teknisi" class="form-select select2FormMaintenance" <%= foundTeknisi.length === 0 ? "disabled" : "" %> >
+              <% if (foundTeknisi.length > 0) { %> 
+                <option></option>
+                <% for( const teknisi of foundTeknisi ) { %>
+                  <option value="<%= teknisi._id %>"> <%= teknisi.nama %> - <%= teknisi.nip %> </option>
+                <% } %> 
+              <% } else { %>
+                <option selected> Tidak ditemukan teknisi</option>
+              <% } %>
+            </select>
+          </div>
+          <div class="d-flex flex-column mb-3">
+            <label
+              for="permintaanMaintenance"
+              class="d-flex align-items-center fs-6 fw-bold mb-2"
+            >
+              Permintaan Maintenance
+            </label>
+            <div class="input-group border-0 datepicker">
+              <input
+                type="text"
+                id="permintaanMaintenance"
+                class="form-control border-0"
+                name="permintaanMaintenance"
+                required
+                title="Harap isi form ini"
+                data-input
+              />
+              <span class="input-group-text border-0" data-toggle>
+                <i class="bx bx-calendar"></i>
+              </span>
+            </div>
+          </div>
+          <div class="text-center">
+            <button type="reset" class="btn btn-white me-3">Reset</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card shadow">
+  <div
+    class="
+      card-header
+      pt-3
+      px-4
+      bg-white
+      border-0
+      d-flex
+      flex-column flex-lg-row
+      justify-content-between
+    "
+  >
+    <h3 class="card-title fw-bolder fs-3 m-0 my-auto">
+      Daftar Maintenance
+      <span class="text-primary text-capitalize"><%= foundedAlat.nama %> </span>
+      di
+      <span class="text-primary text-capitalize"
+        ><%= foundedTempat.nama %></span
+      >
+    </h3>
+    <div class="card-toolbar justify-content-center">
+      <a
+        href="#"
+        class="
+          btn btn-sm btn-light-primary
+          p-2
+          custom-border-radius
+          d-flex
+          align-items-center
+          fs-5
+        "
+        data-bs-toggle="modal"
+        data-bs-target="#newFormMaintenance"
+      >
+        <i class="bx bx-plus-circle me-2 fs-3"></i>
+        Tambah Permintaan Maintenance
+      </a>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>NIP Teknisi</th>
+            <th>Tanggal Maintenance</th>
+            <th class="text-center">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (const maintenance of foundedAlat.permintaanMaintenance) { %> 
+            <tr>
+              <td class="align-middle">
+                <%= maintenance.teknisi.nip %> 
+              </td>
+              <td class="align-middle">
+                <%= `${maintenance.tanggalPermintaanMaintenance.getDate()}-${maintenance.tanggalPermintaanMaintenance.getMonth()+1}-${maintenance.tanggalPermintaanMaintenance.getFullYear()}` %> 
+              </td>
+              <td class="text-center">
+                <div
+                  class="modal fade"
+                  id="editMaintenance<%= foundedAlat._id %>"
+                  tabindex="-1"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header border-0">
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div class="modal-body px-5">
+                        <form
+                          action="/maintenance/<%= jenisTempatQuery %>/<%= foundedTempat.alamat %>/data-alat/<%= foundedAlat._id %>?_method=PUT"
+                          class="form"
+                          spellcheck="false"
+                          autocomplete="off"
+                          method="POST"
+                        >
+                          <div class="mb-3 text-center">
+                            <h3 class="mb-2">Edit Permintaan Maintenance</h3>
+                            <div class="text-muted">Harap masukkan data dengan benar.</div>
+                          </div>
+                          <div class="d-flex flex-column mb-3">
+                            <label for="teknisi" class="d-flex align-items-center fw-bold mb-2">
+                              Teknisi
+                            </label>
+                            <select required name="teknisi" id="teknisi<%= foundedAlat._id %> " class="form-select select2FormMaintenanceEdit" <%= foundTeknisi.length === 0 ? "disabled" : "" %> >
+                              <% if (foundTeknisi.length > 0) { %> 
+                                <option class="d-none" selected> Silahkan Pilih</option>
+                                <% for( const teknisi of foundTeknisi ) { %>
+                                  <option value="<%= teknisi._id %>"  <%= teknisi._id.toString() === maintenance.teknisi._id.toString() ? "selected" : "" %> > <%= teknisi.nama %> - <%= teknisi.nip %> </option>
+                                <% } %> 
+                              <% } else { %>
+                                <option selected> Tidak ditemukan teknisi</option>
+                              <% } %>
+                            </select>
+                          </div>
+                          <div class="d-flex flex-column mb-3">
+                            <label
+                              for="permintaanMaintenance"
+                              class="d-flex align-items-center fs-6 fw-bold mb-2"
+                            >
+                              Permintaan Maintenance
+                            </label>
+                            <div class="input-group border-0 datepicker">
+                              <input
+                                type="text"
+                                id="permintaanMaintenanceEdit"
+                                class="form-control border-0"
+                                name="permintaanMaintenanceEdit"
+                                required
+                                title="Harap isi form ini"
+                                data-input
+                                value="<%= `${maintenance.tanggalPermintaanMaintenance.getDate()}-${maintenance.tanggalPermintaanMaintenance.getMonth()+1}-${maintenance.tanggalPermintaanMaintenance.getFullYear()}` %>"
+                              />
+                              <span class="input-group-text border-0" data-toggle>
+                                <i class="bx bx-calendar"></i>
+                              </span>
+                            </div>
+                          </div>
+                          <input name="oldTeknisi" type="text" readonly class="d-none" required value="<%= maintenance.teknisi._id %>">
+                          <input name="oldDate" type="text" readonly class="d-none" required value="<%= maintenance.tanggalPermintaanMaintenance %>">
+                          <div class="text-center">
+                            <button type="reset" class="btn btn-white me-3">Reset</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#editMaintenance<%= foundedAlat._id %>" class="btn btn-secondary">Edit</a>
+                <form action="/maintenance/<%= jenisTempatQuery %>/<%= foundedTempat.alamat %>/data-alat/<%= foundedAlat._id %>?_method=DELETE" method="POST" class="d-inline-block">
+                  <input name="idTeknisi" type="text" readonly class="d-none" required value="<%= maintenance.teknisi._id %>">
+                  <input name="tanggalMaintenance" type="text" readonly class="d-none" required value="<%= maintenance.tanggalPermintaanMaintenance %>">
+                  <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+              </td>
+            </tr>
+          <% } %> 
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<%- include("templateMaintenance/footer") %>

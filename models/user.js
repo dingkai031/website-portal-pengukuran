@@ -12,6 +12,10 @@ const userSchema = new Schema({
     required: true,
     unique: true,
   },
+  nip: {
+    type: String,
+    required: true,
+  },
   status: {
     type: String,
     required: true,

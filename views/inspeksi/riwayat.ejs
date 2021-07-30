@@ -455,23 +455,23 @@
                     <div class="container-fluid">
                       <div class="row mb-3">
                         <div class="col-sm-4 mb-3">
-                          <label for="panjang" class="form-label"
+                          <label for="panjang<%= riwayat._id %>" class="form-label"
                           >Panjang</label
                           >
                           <input
                             type="text"
                             class="form-control"
-                            id="panjang"
+                            id="panjang<%= riwayat._id %>"
                             readonly
                             value="<%= riwayat.bagianPencahayaan.pencahayaanPanjang %>"
                           />
                         </div>
                         <div class="col-sm-4 mb-3">
-                          <label for="lebar" class="form-label"
+                          <label for="lebar<%= riwayat._id %>" class="form-label"
                           >Lebar</label
                           >
                           <input
-                            id="lebar"
+                            id="lebar<%= riwayat._id %>"
                             type="text"
                             class="form-control"
                             readonly
@@ -479,48 +479,48 @@
                           />
                         </div>
                         <div class="col-sm-4 mb-3">
-                          <label for="tinggi" class="form-label"
+                          <label for="tinggi<%= riwayat._id %>" class="form-label"
                           >Tinggi</label
                           >
                           <input
                             type="text"
                             class="form-control"
-                            id="tinggi"
+                            id="tinggi<%= riwayat._id %>"
                             readonly
                             value="<%= riwayat.bagianPencahayaan.pencahayaanTinggi %>"
                           />
                         </div>
                         <div class="col-sm-4 mb-3">
-                          <label for="jenisPencahayaan" class="form-label"
+                          <label for="jenisPencahayaan<%= riwayat._id %>" class="form-label"
                           >Jenis Pencahayaan</label
                           >
                           <input
                             type="text"
                             class="form-control"
-                            id="jenisPencahayaan"
+                            id="jenisPencahayaan<%= riwayat._id %>"
                             readonly
                             value="<%= riwayat.bagianPencahayaan.pencahayaanJenisPencahayaan %>"
                           />
                         </div>
                         <div class="col-sm-4 mb-3">
-                          <label for="jumlahPencahayaan" class="form-label"
+                          <label for="jumlahPencahayaan<%= riwayat._id %>" class="form-label"
                           >Jumlah Pencahayaan</label
                           >
                           <input
                             type="text"
-                            id="jumlahPencahayaan"
+                            id="jumlahPencahayaan<%= riwayat._id %>"
                             class="form-control"
                             readonly
                             value="<%= riwayat.bagianPencahayaan.pencahayaanJumlahPencahayaan %>"
                           />
                         </div>
                         <div class="col-sm-4 mb-3">
-                          <label for="jumlahPencahayaanRusak" class="form-label"
+                          <label for="jumlahPencahayaanRusak<%= riwayat._id %>" class="form-label"
                           >Jumlah Pencahayaan Rusak</label
                           >
                           <input
                             type="text"
-                            id="jumlahPencahayaanRusak"
+                            id="jumlahPencahayaanRusak<%= riwayat._id %>"
                             class="form-control"
                             readonly
                             value="<%= riwayat.bagianPencahayaan.pencahayaanJumlahPencahayaanRusak %> "
@@ -639,35 +639,35 @@
                     <div class="container-fluid">
                       <div class="row mb-3">
                         <div class="col-sm-12 mb-3">
-                          <label for="ruangan" class="form-label"
+                          <label for="ruangan<%= riwayat._id %>" class="form-label"
                           >Ruangan</label
                           >
                           <input
                             type="text"
                             class="form-control"
-                            id="ruangan"
+                            id="ruangan<%= riwayat._id %>"
                             readonly
                             value="<%= riwayat.bagianVentilasi.ventilasiRuangan %> "
                           />
                         </div>
                         <div class="col-sm-4 mb-3">
-                          <label for="panjang2" class="form-label"
+                          <label for="panjang2<%= riwayat._id %>" class="form-label"
                           >Panjang</label
                           >
                           <input
                             type="text"
                             class="form-control"
-                            id="panjang2"
+                            id="panjang2<%= riwayat._id %>"
                             readonly
                             value="<%= riwayat.bagianVentilasi.ventilasiPanjang %> "
                           />
                         </div>
                         <div class="col-sm-4 mb-3">
-                          <label for="lebar2" class="form-label"
+                          <label for="lebar2<%= riwayat._id %>" class="form-label"
                           >Lebar</label
                           >
                           <input
-                            id="lebar2"
+                            id="lebar2<%= riwayat._id %>"
                             type="text"
                             class="form-control"
                             readonly
@@ -675,13 +675,13 @@
                           />
                         </div>
                         <div class="col-sm-4 mb-3">
-                          <label for="tinggi2" class="form-label"
+                          <label for="tinggi2<%= riwayat._id %>" class="form-label"
                           >Tinggi</label
                           >
                           <input
                             type="text"
                             class="form-control"
-                            id="tinggi2"
+                            id="tinggi2<%= riwayat._id %>"
                             readonly
                             value="<%= riwayat.bagianVentilasi.ventilasiTinggi %> "
                           />
@@ -746,7 +746,8 @@
                             </tr>
                             <tr class="table-dark">
                               <th colspan="5">Pergantian Udara/jam</th>
-                              <td><%= totalGvr/volumeRuangan %>/jam </td>
+                              <% const udara  = (totalGvr/volumeRuangan).toFixed(2) %> 
+                              <td><%= udara %>/jam </td>
                             </tr>
                             <tr class="table-dark">
                               <th colspan="5">NAB</th>

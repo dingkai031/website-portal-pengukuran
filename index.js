@@ -79,7 +79,7 @@ app.use(flash());
 //=========Pesan Flash===========
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
-  res.locals.hapus = req.flash("delete");
+  res.locals.hapus = req.flash("hapus");
   res.locals.error = req.flash("error");
   res.locals.currentUser = req.user;
   next();
@@ -101,8 +101,11 @@ app.post(
   passport.authenticate("local", {
     failureFlash: "Email atau password salah",
     failureRedirect: "/",
-    successRedirect: "/portal",
-  })
+  }),
+  (req, res) => {
+    const redirectUrl = req.session.returnTo || "/portal";
+    res.redirect(redirectUrl);
+  }
 );
 
 app.get("/logout", (req, res) => {

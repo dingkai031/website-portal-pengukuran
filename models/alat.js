@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const alatSchema = new Schema({
   nama: {
@@ -94,6 +94,52 @@ const alatSchema = new Schema({
       min: 0,
     },
   },
+  permintaanMaintenance: [
+    {
+      teknisi: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        require: true,
+      },
+      tanggalPermintaanMaintenance: {
+        type: Date,
+        required: true,
+        default: Date.now,
+      },
+      tanggalTeknisiMaintenance: {
+        type: Date,
+        required: true,
+        default: Date.now,
+      },
+      tanggalMaintenanceBerikutnya: {
+        type: Date,
+        required: true,
+        default: Date.now,
+      },
+      dokumentasi: [String],
+      keterangan: {
+        type: String,
+      },
+      opsiCek: {
+        type: String,
+        required: true,
+        enum: ["harian", "mingguan", "bulanan", "selesai"],
+        default: "selesai",
+      },
+      kondisi: {
+        type: String,
+        required: true,
+        enum: [
+          "baik",
+          "rusak",
+          "rusak berat",
+          "rusak ringan",
+          "perlu perbaikan",
+        ],
+        default: "baik",
+      },
+    },
+  ],
 });
 
 module.exports = mongoose.model("Alat", alatSchema);

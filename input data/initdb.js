@@ -405,6 +405,7 @@ const tempTempat = [
 const tempUser = [
   {
     nama: "dummy kabeng",
+    nip: "1304185673",
     email: "dummyKabeng@ppns.ac.id",
     username: "dummyKabeng@ppns.ac.id",
     status: "kabeng",
@@ -412,6 +413,7 @@ const tempUser = [
   },
   {
     nama: "dummy admin",
+    nip: "13041235673",
     email: "dummyAdmin@ppns.ac.id",
     username: "dummyAdmin@ppns.ac.id",
     status: "admin",
@@ -419,13 +421,55 @@ const tempUser = [
   },
   {
     nama: "dummy teknisi",
+    nip: "1312304185673",
     email: "dummyTeknisi@ppns.ac.id",
     username: "dummyTeknisi@ppns.ac.id",
     status: "teknisi",
     lokasi: "Bengkel Reparasi Mesin",
   },
   {
+    nama: "dummy2 teknisi",
+    nip: "1312304185673",
+    email: "dummyTeknisi2@ppns.ac.id",
+    username: "dummyTeknisi2@ppns.ac.id",
+    status: "teknisi",
+    lokasi: "Bengkel Reparasi Mesin",
+  },
+  {
+    nama: "dummy3 teknisi",
+    nip: "1312304185673",
+    email: "dummyTeknisi3@ppns.ac.id",
+    username: "dummyTeknisi3@ppns.ac.id",
+    status: "teknisi",
+    lokasi: "Bengkel Reparasi Mesin",
+  },
+  {
+    nama: "dummy4 teknisi",
+    nip: "1312304185673",
+    email: "dummyTeknisi4@ppns.ac.id",
+    username: "dummyTeknisi4@ppns.ac.id",
+    status: "teknisi",
+    lokasi: "Bengkel Reparasi Mesin",
+  },
+  {
+    nama: "dummy5 teknisi",
+    nip: "1312304185673",
+    email: "dummyTeknisi5@ppns.ac.id",
+    username: "dummyTeknisi5@ppns.ac.id",
+    status: "teknisi",
+    lokasi: "Bengkel Las",
+  },
+  {
+    nama: "dummy6 teknisi",
+    nip: "1312304185673",
+    email: "dummyTeknisi6@ppns.ac.id",
+    username: "dummyTeknisi6@ppns.ac.id",
+    status: "teknisi",
+    lokasi: "Bengkel Las",
+  },
+  {
     nama: "dummy upik3",
+    nip: "2894185673",
     email: "dummyUpik3@ppns.ac.id",
     username: "dummyUpik3@ppns.ac.id",
     status: "upik3",
@@ -606,19 +650,19 @@ const tempAlat = [
   },
 ];
 
-const seedDb = async (model, arrOfObj) => {
-  await model.deleteMany({});
-  await model
-    .insertMany(arrOfObj)
-    .then((data) => {
-      console.log(data);
-    })
-    .catch((e) => {
-      console.log(`ERROR : ${e}`);
-    });
-};
+// const seedDb = async (model, arrOfObj) => {
+//   await model.deleteMany({});
+//   await model
+//     .insertMany(arrOfObj)
+//     .then((data) => {
+//       console.log(data);
+//     })
+//     .catch((e) => {
+//       console.log(`ERROR : ${e}`);
+//     });
+// };
 
-// seedDb(Tempat, tempTempat).then(() => {
+// seedDb(Alat, tempAlat).then(() => {
 //   mongoose.connection.close();
 // });
 
@@ -633,3 +677,15 @@ const newUser = async function (model, arrObj, pass) {
 newUser(User, tempUser, "111111111111").then(() => {
   mongoose.connection.close();
 });
+
+// const tambahUser = async () => {
+//   const foundUser = await User.findOne({ nama: "dummy kabeng" });
+
+//   const foundAlat = await Alat.findById("610137d624a1174470c6c87f");
+//   foundAlat.permintaanMaintenance.push({ teknisi: foundUser });
+//   console.log(foundAlat);
+//   const berhasil = await foundAlat.save();
+//   mongoose.connection.close();
+// };
+
+// tambahUser();

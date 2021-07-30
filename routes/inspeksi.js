@@ -187,9 +187,8 @@ router.post(
 
 router.get("/riwayat", isLoggedIn, async (req, res) => {
   const menu = "riwayat";
-  const tempats = await Tempat.find({});
   const riwayats = await Riwayat.find({});
-  res.render("inspeksi/riwayat", { tempats, menu, riwayats });
+  res.render("inspeksi/riwayat", { tempats: {}, menu, riwayats });
 });
 
 router.put("/riwayat", isLoggedIn, async (req, res) => {

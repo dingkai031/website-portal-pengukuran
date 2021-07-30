@@ -198,12 +198,11 @@
       border-0
       d-flex
       justify-content-between
+      flex-column flex-sm-row
     "
   >
-    <h3 class="card-title fw-bolder fs-3 m-0 d-flex align-items-center">
-      Data Alat di<span class="text-primary ms-2"
-        ><%= tempatTerpilih.nama %></span
-      >
+    <h3 class="card-title fw-bolder fs-3 m-0 my-auto">
+      Data Alat di <span class="text-primary"><%= tempatTerpilih.nama %></span>
     </h3>
     <div class="card-toolbar">
       <a
@@ -242,21 +241,27 @@
           </div>
           <div class="card-body">
             <div class="row">
-              <div class="col-4 p-1">
+              <div class="<%= currentUser.status === "teknisi" ? "col-sm-6" : "col-sm-4" %>  p-1">
                 <a href="" class="btn btn-primary w-100 h-100"
                   >Deskripsi Alat</a
                 >
               </div>
-              <div class="col-4 p-1">
-                <a href="" class="btn btn-secondary w-100 h-100">Maintenance</a>
+              <% if (currentUser.status !== "teknisi") { %>
+              <div class="col-sm-4 p-1">
+                <a
+                  href="/maintenance/<%= jenisTempatQuery %>/<%= tempatTerpilih.alamat %>/data-alat/<%= alat._id %>"
+                  class="btn btn-secondary w-100 h-100"
+                  >Maintenance</a
+                >
               </div>
-              <div class="col-4 p-1">
+              <% } %>
+              <div class="<%= currentUser.status === "teknisi" ? "col-sm-6" : "col-sm-4" %> p-1">
                 <a href="" class="btn btn-primary w-100 h-100">History</a>
               </div>
-              <div class="col-6 p-1">
+              <div class="col-sm-6 p-1">
                 <a href="" class="btn btn-info text-white w-100 h-100">Edit</a>
               </div>
-              <div class="col-6 p-1">
+              <div class="col-sm-6 p-1">
                 <div
                   class="modal fade"
                   id="<%= `delete${alat._id}` %>"
