@@ -179,7 +179,6 @@ $("#lokasiPengukuran").on("select2:select", function (e) {
     inputRH.setAttribute("name", `iklimKerjaRH${i}`);
     inputRH.setAttribute("id", `iklimKerjaRH${i}`);
 
-    inputRH.setAttribute("readonly", "");
     inputRH.classList.add("form-control", "rh");
     tdRH.appendChild(inputRH);
     tr.appendChild(tdRH);
@@ -230,18 +229,12 @@ $("#lokasiPengukuran").on("select2:select", function (e) {
         wadahInputSuhuBasah[i].value * 0.7 +
         wadahInputSuhuBola[i].value * 0.3
       ).toFixed(2);
-      wadahInputRH[i].value =
-        wadahInputSuhuKering[i].value - wadahInputSuhuBasah[i].value;
     });
     wadahInputSuhuBola[i].addEventListener("change", () => {
       wadahInputISBB[i].value = (
         wadahInputSuhuBasah[i].value * 0.7 +
         wadahInputSuhuBola[i].value * 0.3
       ).toFixed(2);
-    });
-    wadahInputSuhuKering[i].addEventListener("change", () => {
-      wadahInputRH[i].value =
-        wadahInputSuhuKering[i].value - wadahInputSuhuBasah[i].value;
     });
   }
   //==================End Iklim kerja=======================
@@ -1203,7 +1196,6 @@ tombolTambahIklimKerja.addEventListener("click", () => {
     inputRH.setAttribute("name", `iklimKerjaRH${keBarisTambah}`);
     inputRH.setAttribute("id", `iklimKerjaRH${keBarisTambah}`);
 
-    inputRH.setAttribute("readonly", "");
     inputRH.classList.add("form-control", "rh");
     tdRH.appendChild(inputRH);
     tr.appendChild(tdRH);
@@ -1258,18 +1250,12 @@ tombolTambahIklimKerja.addEventListener("click", () => {
         wadahInputSuhuBasah[i].value * 0.7 +
         wadahInputSuhuBola[i].value * 0.3
       ).toFixed(2);
-      wadahInputRH[i].value =
-        wadahInputSuhuKering[i].value - wadahInputSuhuBasah[i].value;
     });
     wadahInputSuhuBola[i].addEventListener("change", () => {
       wadahInputISBB[i].value = (
         wadahInputSuhuBasah[i].value * 0.7 +
         wadahInputSuhuBola[i].value * 0.3
       ).toFixed(2);
-    });
-    wadahInputSuhuKering[i].addEventListener("change", () => {
-      wadahInputRH[i].value =
-        wadahInputSuhuKering[i].value - wadahInputSuhuBasah[i].value;
     });
   }
 });

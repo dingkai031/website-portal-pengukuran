@@ -561,9 +561,9 @@
                                   <%= cahaya.ratarata %> 
                                 </td>
                                 <% if (start) {%>
-                                  <td rowspan="<%= riwayat.bagianPencahayaan.data.length %>" class="align-middle text-center"><%= riwayat.bagianPencahayaan.totalRatarata %></td>
+                                  <td rowspan="<%= riwayat.bagianPencahayaan.data.length %>" class="align-middle text-center"><%= riwayat.bagianPencahayaan.totalRatarata / riwayat.bagianPencahayaan.data.length %></td>
                                   <td rowspan="<%= riwayat.bagianPencahayaan.data.length %>" class="align-middle text-center">200Lux</td>
-                                  <% if (parseInt(riwayat.bagianPencahayaan.totalRatarata) < 200) {%> 
+                                  <% if (parseFloat(riwayat.bagianPencahayaan.totalRatarata / riwayat.bagianPencahayaan.data.length) < 200) {%> 
                                     <td rowspan="<%= riwayat.bagianPencahayaan.data.length %>" class="align-middle text-center"><a href="javascript:void(0)" class="btn btn-success w-100">AMAN</a></td>
                                   <% }else { %>
                                     <td rowspan="<%= riwayat.bagianPencahayaan.data.length %>" class="align-middle text-center"><a href="javascript:void(0)" class="btn btn-danger w-100">TIDAK AMAN</a></td>
