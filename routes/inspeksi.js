@@ -29,8 +29,8 @@ router.get("/", isLoggedIn, async (req, res) => {
 
 router.post(
   "/",
-  upload.array("dokumentasiPengukuran"),
   isLoggedIn,
+  upload.array("dokumentasiPengukuran"),
   async (req, res) => {
     const {
       jumlahTitikIklimKerja,
@@ -70,13 +70,13 @@ router.post(
       for (let i = 1; i < parseInt(jumlahTitikKebisingan) + 1; i++) {
         const obj = {
           lokasiPengukuran: submittedData[`lokasiKebisingan${i}`],
-          intensitasBising1: parseInt(
+          intensitasBising1: parseFloat(
             submittedData[`kebisinganIntensitasKebisingan${i}-1`]
           ),
-          intensitasBising2: parseInt(
+          intensitasBising2: parseFloat(
             submittedData[`kebisinganIntensitasKebisingan${i}-2`]
           ),
-          intensitasBising3: parseInt(
+          intensitasBising3: parseFloat(
             submittedData[`kebisinganIntensitasKebisingan${i}-3`]
           ),
           ratarataBising: parseFloat(submittedData[`ratarata${i}`]).toFixed(2),
@@ -88,19 +88,21 @@ router.post(
       for (let i = 1; i < parseInt(jumlahTitikGetaran) + 1; i++) {
         const obj = {
           lokasiPengukuran: submittedData[`lokasiGetaran${i}`],
-          percepatan1: parseInt(submittedData[`getaranPercepatan${i}-1`]),
-          percepatan2: parseInt(submittedData[`getaranPercepatan${i}-2`]),
-          percepatan3: parseInt(submittedData[`getaranPercepatan${i}-3`]),
-          percepatanMax: parseInt(submittedData[`getaranPercepatanMax${i}`]),
-          kecepatan1: parseInt(submittedData[`getaranKecepatan${i}-1`]),
-          kecepatan2: parseInt(submittedData[`getaranKecepatan${i}-2`]),
-          kecepatan3: parseInt(submittedData[`getaranKecepatan${i}-3`]),
-          kecepatanMax: parseInt(submittedData[`getaranKecepatanMax${i}`]),
-          perpindahan1: parseInt(submittedData[`getaranPerpindahan${i}-1`]),
-          perpindahan2: parseInt(submittedData[`getaranPerpindahan${i}-2`]),
-          perpindahan3: parseInt(submittedData[`getaranPerpindahan${i}-3`]),
-          perpindahanMax: parseInt(submittedData[`getaranPerpindahanMax${i}`]),
-          frekuensi: parseInt(submittedData[`getaranFrekuensi${i}`]),
+          percepatan1: parseFloat(submittedData[`getaranPercepatan${i}-1`]),
+          percepatan2: parseFloat(submittedData[`getaranPercepatan${i}-2`]),
+          percepatan3: parseFloat(submittedData[`getaranPercepatan${i}-3`]),
+          percepatanMax: parseFloat(submittedData[`getaranPercepatanMax${i}`]),
+          kecepatan1: parseFloat(submittedData[`getaranKecepatan${i}-1`]),
+          kecepatan2: parseFloat(submittedData[`getaranKecepatan${i}-2`]),
+          kecepatan3: parseFloat(submittedData[`getaranKecepatan${i}-3`]),
+          kecepatanMax: parseFloat(submittedData[`getaranKecepatanMax${i}`]),
+          perpindahan1: parseFloat(submittedData[`getaranPerpindahan${i}-1`]),
+          perpindahan2: parseFloat(submittedData[`getaranPerpindahan${i}-2`]),
+          perpindahan3: parseFloat(submittedData[`getaranPerpindahan${i}-3`]),
+          perpindahanMax: parseFloat(
+            submittedData[`getaranPerpindahanMax${i}`]
+          ),
+          frekuensi: parseFloat(submittedData[`getaranFrekuensi${i}`]),
         };
         getaran.push(obj);
       }
@@ -109,13 +111,13 @@ router.post(
       for (let i = 1; i < parseInt(jumlahTitikIklimKerja) + 1; i++) {
         const obj = {
           usia: parseInt(submittedData[`iklimKerjaUsia${i}`]),
-          bb: submittedData[`iklimKerjaBB${i}`],
+          bb: parseFloat(submittedData[`iklimKerjaBB${i}`]),
           lokasiPengukuran: submittedData[`lokasiIklimKerja${i}`],
-          suhuBasah: parseInt(submittedData[`iklimKerjaSuhuBasah${i}`]),
-          suhuKering: parseInt(submittedData[`iklimKerjaSuhuKering${i}`]),
-          suhuBola: submittedData[`iklimKerjaSuhuBola${i}`],
-          isbb: submittedData[`iklimKerjaISBB${i}`],
-          rh: submittedData[`iklimKerjaRH${i}`],
+          suhuBasah: parseFloat(submittedData[`iklimKerjaSuhuBasah${i}`]),
+          suhuKering: parseFloat(submittedData[`iklimKerjaSuhuKering${i}`]),
+          suhuBola: parseFloat(submittedData[`iklimKerjaSuhuBola${i}`]),
+          isbb: parseFloat(submittedData[`iklimKerjaISBB${i}`]),
+          rh: parseFloat(submittedData[`iklimKerjaRH${i}`]),
           bebankerja: submittedData[`iklimKerjaBebanKerja${i}`],
         };
         iklimKerja.push(obj);
@@ -137,10 +139,10 @@ router.post(
       for (let i = 1; i < parseInt(jumlahTitikVentilasi) + 1; i++) {
         const obj = {
           jenis: submittedData[`ventilasiJenisVentilasi${i}`],
-          panjang: submittedData[`ventilasiPanjang${i}`],
-          lebar: submittedData[`ventilasiLebar${i}`],
-          velocity: submittedData[`ventilasiVelocity${i}`],
-          jumlahPekerja: submittedData[`ventilasiJumlahPekerja${i}`],
+          panjang: parseFloat(submittedData[`ventilasiPanjang${i}`]),
+          lebar: parseFloat(submittedData[`ventilasiLebar${i}`]),
+          velocity: parseFloat(submittedData[`ventilasiVelocity${i}`]),
+          jumlahPekerja: parseInt(submittedData[`ventilasiJumlahPekerja${i}`]),
         };
         ventilasi.push(obj);
       }
@@ -178,7 +180,9 @@ router.post(
         console.log(data);
       })
       .catch((e) => {
-        console.log(`error : ${e}`);
+        console.log(e);
+        req.flash("error", e._message);
+        return res.redirect("/inspeksi");
       });
     req.flash("success", `Pengukuran Berhasil Disimpan`);
     res.redirect("/inspeksi");
