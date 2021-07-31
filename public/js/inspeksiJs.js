@@ -687,6 +687,11 @@ const tombolTambahKebisingan = document.querySelector(
   "#tombolTambahKebisingan"
 );
 tombolTambahKebisingan.addEventListener("click", () => {
+  const wadahJumlahTitikKebisingan = document.querySelector(
+    "#jumlahTitikKebisingan"
+  );
+  wadahJumlahTitikKebisingan.value =
+    parseInt(wadahJumlahTitikKebisingan.value) + 1;
   const baris = document.querySelectorAll(".baris-kebisingan");
   const jumlahBaris = baris.length;
   if (jumlahBaris === 0) {
@@ -773,6 +778,8 @@ tombolTambahKebisingan.addEventListener("click", () => {
 //==================LOGIKA TOMBOL TAMBAH TITIK GETARAN===================
 const tombolTambahGetaran = document.querySelector("#tombolTambahGetaran");
 tombolTambahGetaran.addEventListener("click", () => {
+  const wadahJumlahTitikGetaran = document.querySelector("#jumlahTitikGetaran");
+  wadahJumlahTitikGetaran.value = parseInt(wadahJumlahTitikGetaran.value) + 1;
   const baris = document.querySelectorAll(".baris-getaran");
   const jumlahBaris = baris.length;
   if (jumlahBaris === 0) {
@@ -1093,6 +1100,11 @@ const tombolTambahIklimKerja = document.querySelector(
   "#tombolTambahIklimKerja"
 );
 tombolTambahIklimKerja.addEventListener("click", () => {
+  const wadahJumlahTitikIklimKerja = document.querySelector(
+    "#jumlahTitikIklimKerja"
+  );
+  wadahJumlahTitikIklimKerja.value =
+    parseInt(wadahJumlahTitikIklimKerja.value) + 1;
   const baris = document.querySelectorAll(".baris-iklim-kerja");
   const jumlahBaris = baris.length;
   if (jumlahBaris === 0) {
@@ -1266,6 +1278,11 @@ const tombolTambahPencahayaan = document.querySelector(
   "#tombolTambahPencahayaan"
 );
 tombolTambahPencahayaan.addEventListener("click", () => {
+  const wadahJumlahTitikPencahayaan = document.querySelector(
+    "#jumlahTitikPencahayaan"
+  );
+  wadahJumlahTitikPencahayaan.value =
+    parseInt(wadahJumlahTitikPencahayaan.value) + 1;
   const baris = document.querySelectorAll(".baris-pencahayaan");
   const jumlahBaris = baris.length;
   if (jumlahBaris === 0) {
@@ -1369,6 +1386,11 @@ tombolTambahPencahayaan.addEventListener("click", () => {
 //==================LOGIKA TOMBOL TAMBAH TITIK VENTILASI===================
 const tombolTambahVentilasi = document.querySelector("#tombolTambahVentilasi");
 tombolTambahVentilasi.addEventListener("click", () => {
+  const wadahJumlahTitikVentilasi = document.querySelector(
+    "#jumlahTitikVentilasi"
+  );
+  wadahJumlahTitikVentilasi.value =
+    parseInt(wadahJumlahTitikVentilasi.value) + 1;
   const baris = document.querySelectorAll(".baris-ventilasi");
   const jumlahBaris = baris.length;
   if (jumlahBaris === 0) {
