@@ -677,15 +677,3 @@ const newUser = async function (model, arrObj, pass) {
 newUser(User, tempUser, "111111111111").then(() => {
   mongoose.connection.close();
 });
-
-// const tambahUser = async () => {
-//   const foundUser = await User.findOne({ nama: "dummy kabeng" });
-
-//   const foundAlat = await Alat.findById("610137d624a1174470c6c87f");
-//   foundAlat.permintaanMaintenance.push({ teknisi: foundUser });
-//   console.log(foundAlat);
-//   const berhasil = await foundAlat.save();
-//   mongoose.connection.close();
-// };
-
-// tambahUser();
