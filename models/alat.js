@@ -96,6 +96,11 @@ const alatSchema = new Schema({
   },
   permintaanMaintenance: [
     {
+      peminta: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        require: true,
+      },
       teknisi: {
         type: Schema.Types.ObjectId,
         ref: "User",
@@ -137,6 +142,23 @@ const alatSchema = new Schema({
           "perlu perbaikan",
         ],
         default: "baik",
+      },
+      validasi: {
+        kepalaTempat: {
+          type: Boolean,
+          required: true,
+          default: false,
+        },
+        buk: {
+          type: Boolean,
+          required: true,
+          default: false,
+        },
+        upik3: {
+          type: Boolean,
+          required: true,
+          default: false,
+        },
       },
     },
   ],

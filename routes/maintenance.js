@@ -168,8 +168,10 @@ router.post(
     const { teknisi, permintaanMaintenance } = req.body;
     const isoDate = convertDate(permintaanMaintenance);
     const teknisiTerpilih = await User.findById(teknisi);
+    const peminta = await User.findById(req.user._id);
     const alatMaintenance = await Alat.findById(idAlat);
     alatMaintenance.permintaanMaintenance.push({
+      peminta,
       teknisi: teknisiTerpilih,
       tanggalPermintaanMaintenance: isoDate,
     });
