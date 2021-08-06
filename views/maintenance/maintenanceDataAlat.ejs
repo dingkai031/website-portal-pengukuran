@@ -256,7 +256,7 @@
               </div>
               <% } %>
               <div class="<%= currentUser.status === "teknisi" ? "col-sm-6" : "col-sm-4" %> p-1">
-                <a href="" class="btn btn-primary w-100 h-100">History</a>
+                <a href="/maintenance/<%= jenisTempatQuery %>/<%= tempatTerpilih.alamat %>/data-alat/riwayat/<%= alat._id %>" class="btn btn-primary w-100 h-100">History</a>
               </div>
               <div class="col-sm-6 p-1">
                 <a href="" class="btn btn-info text-white w-100 h-100">Edit</a>

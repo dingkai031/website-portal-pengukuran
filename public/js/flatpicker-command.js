@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
       flatpickr(dp, {
         dateFormat: "d-m-Y",
         static: true,
-        wrap: true
+        wrap: true,
       });
     }
   }
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         noCalendar: true,
         dateFormat: "H:i",
         static: true,
-        wrap: true
+        wrap: true,
       });
     }
   }

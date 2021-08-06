@@ -21,6 +21,9 @@
 	<!-- ===== select2 - Bootstrap Theme ===== -->
     <link rel="stylesheet" href="/@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css" />
 
+    <!-- FILE INPUT -->
+    <link rel="stylesheet" href="/bootstrap-fileinput/css/fileinput.min.css" />
+
     <title>Maintenance K3 PPNS</title>
   </head>
   <body id="body-pd" class="bg-light">
@@ -51,14 +54,18 @@
               <i class="bx bx-border-all"></i>
               <span class="nav__name">Dashboard</span>
             </a>
-            <a href="/maintenance/maintenancebengkel" class="nav__link <%= jenisTempatQuery === "maintenancebengkel" ? "active" : "" %>">
-              <i class="bx bx-git-compare"></i>
-              <span class="nav__name">Bengkel</span>
+            <% if (currentUser.status !== "kalab") { %>
+				<a href="/maintenance/maintenancebengkel" class="nav__link <%= jenisTempatQuery === "maintenancebengkel" ? "active" : "" %>">
+				<i class="bx bx-git-compare"></i>
+				<span class="nav__name">Bengkel</span>
             </a>
+            <% } %>
+			<% if (currentUser.status !== "kabeng") { %>
             <a href="/maintenance/maintenancelab" class="nav__link <%= jenisTempatQuery === "maintenancelab" ? "active" : "" %>">
               <i class="bx bxs-wrench"></i>
               <span class="nav__name">Laboratorium</span>
             </a>
+			<% } %>
           </div>
         </div>
 

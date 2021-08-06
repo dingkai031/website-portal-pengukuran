@@ -1,0 +1,101 @@
+<%- include("templateMaintenance/head") %>
+<div class="card shadow pb-4">
+  <div class="card-header pt-3 px-4 bg-white border-0">
+    <h3 class="card-title fw-bolder fs-3 m-0">History Maintenance</h3>
+  </div>
+  <div class="card-body px-4">
+    <% if (foundAlat.permintaanMaintenance.length > 0) { %>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="text-center">
+                    <tr class="align-middle">
+                        <th rowspan="2">No</th>
+                        <th rowspan="2">Tanggal Permintaan Maintenance</th>
+                        <th rowspan="2">Data</th>
+                        <th rowspan="2">Peminta Maintenance</th>
+                        <th rowspan="2">Melakukan Maintenance</th>
+                        <th colspan="3">Validasi</th>
+                    </tr>
+                    <tr>
+                        <th>Kalab/Kabeng</th>
+                        <th>BUK</th>
+                        <th>UPIK3</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% let i = 1%> 
+                    <% for( const riwayat of foundAlat.permintaanMaintenance ) { %>
+                        <% if (riwayat.kondisiSelesai) { %>
+                            <tr class="text-center align-middle text-nowrap">
+                                <td>
+                                    <%= i %>
+                                    <% i = i + 1 %> 
+                                </td>
+                                <td>
+                                    <%= `${riwayat.tanggalPermintaanMaintenance.getDate()}-${riwayat.tanggalPermintaanMaintenance.getMonth()+1}-${riwayat.tanggalPermintaanMaintenance.getFullYear()}` %> 
+                                </td>
+                                <td>
+                                    <div class="modal fade" id="data<%= riwayat._id %>" tabindex="-1">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h5 class="modal-title">Perincian Maintenance</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-sm-6 mb-3 text-start">
+                                                            <label for="" class="form-label ">Tanggal Maintenance Selesai</label>
+                                                            <p class="text-capitalize form-control"><%= `${riwayat.tanggalTeknisiMaintenance.getDate()}-${riwayat.tanggalTeknisiMaintenance.getMonth()+1}-${riwayat.tanggalTeknisiMaintenance.getFullYear()}` %></p>
+                                                        </div>
+                                                        <div class="col-sm-6 mb-3 text-start">
+                                                            <label for="" class="form-label ">Kondisi</label>
+                                                            <p class="text-capitalize form-control"><%= riwayat.kondisi %></p>
+                                                        </div>
+                                                        <div class="col-12 mb-3 text-start">
+                                                            <label for="" class="form-label ">Keterangan</label>
+                                                            <p class="form-control"><%= riwayat.keterangan %></p>
+                                                        </div>
+                                                        <% for( const gambar of riwayat.dokumentasi ) { %>
+                                                            <div class="<%= riwayat.dokumentasi.length === 1 ? "col-12" : "col-sm-6" %> mb-3 text-start">
+                                                                <img src="/img/dokumentasiMaintenance/<%= gambar %>" alt="" class="img-fluid">
+                                                            </div>
+                                                        <% } %>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#data<%= riwayat._id %>">Data</button>
+                                </td>
+                                <td>
+                                    <%= riwayat.peminta.nama %>
+                                </td>
+                                <td>
+                                    <%= riwayat.teknisi.nama %> 
+                                </td>
+                                <td>
+                                    <form action="<%= `/maintenance/${jenisTempatQuery}/${alamatTempat}/data-alat/riwayat/${idAlat}/kepalaTempat/${riwayat._id}?_method=PUT` %>" method="POST">
+                                        <button type="<%= (currentUser.status === "kabeng" || currentUser.status === "kalab") && !riwayat.validasi.kepalaTempat.status ? "submit" : "button" %>" class="btn <%= riwayat.validasi.kepalaTempat.status ? "btn-success" : "btn-danger"%>"><%= riwayat.validasi.kepalaTempat.status ? `Approved By ${riwayat.validasi.kepalaTempat.user.nama}` : "Not Approved" %></button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="<%= `/maintenance/${jenisTempatQuery}/${alamatTempat}/data-alat/riwayat/${idAlat}/kepalaTempat/${riwayat._id}?_method=PUT` %>" method="POST">
+                                        <button type="<%= currentUser.status === "buk" && !riwayat.validasi.buk.status ? "submit" : "button" %>" class="btn <%= riwayat.validasi.buk.status ? "btn-success" : "btn-danger"%>"><%= riwayat.validasi.buk.status ? `Approved By ${riwayat.validasi.buk.user.nama}` : "Not Approved" %></button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="<%= `/maintenance/${jenisTempatQuery}/${alamatTempat}/data-alat/riwayat/${idAlat}/kepalaTempat/${riwayat._id}?_method=PUT` %>" method="POST">
+                                        <button type="<%= currentUser.status === "upik3" && !riwayat.validasi.upik3.status ? "submit" : "button" %>" class="btn <%= riwayat.validasi.upik3.status ? "btn-success" : "btn-danger"%>"><%= riwayat.validasi.upik3.status ? `Approved By ${riwayat.validasi.upik3.user.nama}` : "Not Approved" %></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% } %>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    <% } %>
+</div>
+</div>
+<%-include("templateMaintenance/footer") %>

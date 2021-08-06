@@ -1,8 +1,10 @@
 <%- include("templateMaintenance/head") %>
+
 <div class="card shadow pb-4">
   <div class="card-header pt-3 px-4 bg-white border-0">
     <h3 class="card-title fw-bolder fs-3 m-0">Dashboard Maintenance</h3>
   </div>
+  <% if (foundAlat && foundAlat.length > 0) { %>
   <div class="card-body px-4">
     <div class="card shadow-sm">
       <div class="card-header pt-3 px-4 bg-white border-0">
@@ -21,6 +23,213 @@
       <div class="card-body px-4">
         <div class="container my-3">
           <div class="row">
+            <% for( const alat of foundAlat ) { %> <% for( const riwayat of
+            alat.permintaanMaintenance ) { %> <% if
+            ((riwayat.teknisi._id).toString() === (currentUser._id).toString()
+            && riwayat.kondisiSelesai === false) { %>
+            <div
+              class="modal fade"
+              id="riwayat<%= riwayat._id %>"
+              tabindex="-1"
+            >
+              <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">
+                      Form Maintenance
+                      <span class="text-capitalize text-primary"
+                        ><%= alat.nama %></span
+                      >
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <form
+                    action="/maintenance?_method=PUT"
+                    method="post"
+                    autocomplete="off"
+                    spellcheck="false"
+                    enctype="multipart/form-data"
+                  >
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col-sm-6 mb-3 d-flex flex-column">
+                          <label for="tanggalPermintaan" class="form-label"
+                            >Tanggal Permintaan</label
+                          >
+                          <div class="input-group border-0 datepicker">
+                            <input
+                              type="text"
+                              id="tanggalPermintaan"
+                              class="form-control border-0"
+                              name="tanggalPermintaan"
+                              required
+                              readonly
+                              data-input
+                              value="<%= `${riwayat.tanggalPermintaanMaintenance.getDate()}-${riwayat.tanggalPermintaanMaintenance.getMonth()+1}-${riwayat.tanggalPermintaanMaintenance.getFullYear()}` %>"
+                            />
+                            <span class="input-group-text border-0" data-toggle>
+                              <i class="bx bx-calendar"></i>
+                            </span>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-6 mb-3 d-flex flex-column">
+                          <label for="nipTeknisi" class="form-label"
+                            >NIP Teknisi</label
+                          >
+                          <input
+                            type="text"
+                            id="nipTeknisi"
+                            class="form-control border-0"
+                            name="nipTeknisi"
+                            required
+                            readonly
+                            value="<%= currentUser.nip %>"
+                          />
+                        </div>
+
+                        <div class="col-sm-6 mb-3 d-flex flex-column">
+                          <label for="namaAlat" class="form-label"
+                            >Nama Alat</label
+                          >
+                          <input
+                            type="text"
+                            id="namaAlat"
+                            class="form-control border-0"
+                            name="namaAlat"
+                            required
+                            readonly
+                            value="<%= alat.nama %>"
+                          />
+                        </div>
+
+                        <div class="col-sm-6 mb-3 d-flex flex-column">
+                          <label for="merkAlat" class="form-label">Merk</label>
+                          <input
+                            type="text"
+                            id="merkAlat"
+                            class="form-control border-0"
+                            name="merkAlat"
+                            required
+                            readonly
+                            value="<%= alat.spesifikasi %>"
+                          />
+                        </div>
+
+                        <div class="col-sm-6 mb-3 d-flex flex-column">
+                          <label for="tanggalMaintenance" class="form-label">
+                            Tanggal Maintenance
+                          </label>
+                          <div class="input-group border-0 datepicker">
+                            <% const tanggalSekarang = new Date() %>
+                            <input
+                              type="text"
+                              id="tanggalMaintenance"
+                              class="form-control border-0"
+                              name="tanggalMaintenance"
+                              required
+                              title="Harap isi form ini"
+                              data-input
+                              value="<%= `${tanggalSekarang.getDate()}-${tanggalSekarang.getMonth()}-${tanggalSekarang.getFullYear()}` %>"
+                            />
+                            <span class="input-group-text border-0" data-toggle>
+                              <i class="bx bx-calendar"></i>
+                            </span>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-6 mb-3 d-flex flex-column">
+                          <label for="ketKondisi" class="form-label"
+                            >Keterangan Kondisi</label
+                          >
+                          <select
+                            name="ketKondisi"
+                            id="ketKondisi"
+                            class="form-select"
+                          >
+                            <option selected class="d-none">
+                              Silahkan Pilih
+                            </option>
+                            <option value="baik">Baik</option>
+                            <option value="rusak">Rusak</option>
+                            <option value="rusak berat">Rusak Berat</option>
+                            <option value="rusak ringan">Rusak Ringan</option>
+                            <option value="perlu perbaikan">
+                              Perlu Perbaikan
+                            </option>
+                          </select>
+                        </div>
+
+                        <div class="col-12 mb-3 d-flex flex-column">
+                          <label for="ketPerbaikan" class="form-label"
+                            >Keterangan Perbaikan</label
+                          >
+                          <textarea
+                            name="ketPerbaikan"
+                            id="ketPerbaikan"
+                            rows="2"
+                            class="form-control"
+                            required
+                          ></textarea>
+                        </div>
+
+                        <div class="col-sm-6 mb-3 d-flex flex-column">
+                          <label for="opsiCek" class="form-label"
+                            >Opsi Cek</label
+                          >
+                          <select
+                            name="opsiCek"
+                            id="opsiCek"
+                            class="form-select"
+                          >
+                            <option selected class="d-none">
+                              Silahkan Pilih
+                            </option>
+                            <option value="harian">Harian</option>
+                            <option value="mingguan">Mingguan</option>
+                            <option value="bulanan">Bulanan</option>
+                            <option value="selesai">Selesai</option>
+                          </select>
+                        </div>
+
+                        <div class="col-12 mb-3 d-flex flex-column">
+                          <label for="dokumentasiMaintenance" class="form-label"
+                            >Dokumentasi</label
+                          >
+                          <input
+                            class="form-control"
+                            type="file"
+                            id="dokumentasiMaintenance"
+                            name="dokumentasiMaintenance"
+                            multiple
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <input
+                        type="text"
+                        class="d-none"
+                        name="idAlat"
+                        value="<%= alat._id %>"
+                        required
+                      />
+                      <button type="reset" class="btn btn-secondary">
+                        Reset
+                      </button>
+                      <button type="Submit" class="btn btn-primary">
+                        Submit Form
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
             <div
               class="
                 col-12
@@ -36,14 +245,21 @@
               <p class="fs-5 m-0">Terdapat permintaan maintenance</p>
               <a
                 href="#"
+                data-bs-toggle="modal"
+                data-bs-target="#riwayat<%= riwayat._id %>"
                 class="text-uppercase fs-5 btn btn-primary rounded-pill px-3"
                 >Detail</a
               >
             </div>
+            <% } %> <% } %> <% } %>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <% } %>
+  <hr class="my-5" />
+  <h1>Maintenance</h1>
 </div>
+
 <%- include("templateMaintenance/footer") %>

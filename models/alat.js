@@ -96,6 +96,7 @@ const alatSchema = new Schema({
   },
   permintaanMaintenance: [
     {
+      default: [],
       peminta: {
         type: Schema.Types.ObjectId,
         ref: "User",
@@ -116,20 +117,27 @@ const alatSchema = new Schema({
         required: true,
         default: Date.now,
       },
-      tanggalMaintenanceBerikutnya: {
-        type: Date,
-        required: true,
-        default: Date.now,
-      },
       dokumentasi: [String],
       keterangan: {
         type: String,
+        required: true,
+        default: "-",
+      },
+      dilaksanakan: {
+        type: Boolean,
+        required: true,
+        default: false,
+      },
+      kondisiSelesai: {
+        type: Boolean,
+        required: true,
+        default: false,
       },
       opsiCek: {
         type: String,
         required: true,
         enum: ["harian", "mingguan", "bulanan", "selesai"],
-        default: "selesai",
+        default: "harian",
       },
       kondisi: {
         type: String,
@@ -145,19 +153,40 @@ const alatSchema = new Schema({
       },
       validasi: {
         kepalaTempat: {
-          type: Boolean,
-          required: true,
-          default: false,
+          user: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+            default: null,
+          },
+          status: {
+            type: Boolean,
+            required: true,
+            default: false,
+          },
         },
         buk: {
-          type: Boolean,
-          required: true,
-          default: false,
+          user: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+            default: null,
+          },
+          status: {
+            type: Boolean,
+            required: true,
+            default: false,
+          },
         },
         upik3: {
-          type: Boolean,
-          required: true,
-          default: false,
+          user: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+            default: null,
+          },
+          status: {
+            type: Boolean,
+            required: true,
+            default: false,
+          },
         },
       },
     },

@@ -120,7 +120,7 @@
       <table class="table">
         <thead>
           <tr>
-            <th>NIP Teknisi</th>
+            <th>Teknisi</th>
             <th>Tanggal Maintenance</th>
             <th class="text-center">Aksi</th>
           </tr>
@@ -129,7 +129,7 @@
           <% for (const maintenance of foundedAlat.permintaanMaintenance) { %> 
             <tr>
               <td class="align-middle">
-                <%= maintenance.teknisi.nip %> 
+                <%= maintenance.teknisi.nama %> - <%= maintenance.teknisi.nip %>
               </td>
               <td class="align-middle">
                 <%= `${maintenance.tanggalPermintaanMaintenance.getDate()}-${maintenance.tanggalPermintaanMaintenance.getMonth()+1}-${maintenance.tanggalPermintaanMaintenance.getFullYear()}` %> 

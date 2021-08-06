@@ -405,15 +405,39 @@ const tempTempat = [
 const tempUser = [
   {
     nama: "dummy kabeng",
-    nip: "1304185673",
+    nip: "1111111111111",
     email: "dummyKabeng@ppns.ac.id",
     username: "dummyKabeng@ppns.ac.id",
     status: "kabeng",
     lokasi: "Bengkel Reparasi Mesin",
   },
   {
+    nama: "dummy kabeng2",
+    nip: "1111111111112",
+    email: "dummyKaben2@ppns.ac.id",
+    username: "dummyKaben2@ppns.ac.id",
+    status: "kabeng",
+    lokasi: "Bengkel Las",
+  },
+  {
+    nama: "dummy kalab",
+    nip: "1111111111114",
+    email: "dummyKalab@ppns.ac.id",
+    username: "dummyKalab@ppns.ac.id",
+    status: "kalab",
+    lokasi: "Lab Bahasa",
+  },
+  {
+    nama: "dummy kalab2",
+    nip: "1111111111115",
+    email: "dummyKalab2@ppns.ac.id",
+    username: "dummyKalab2@ppns.ac.id",
+    status: "kalab",
+    lokasi: "Lab Komputer",
+  },
+  {
     nama: "dummy admin",
-    nip: "13041235673",
+    nip: "0000000000000",
     email: "dummyAdmin@ppns.ac.id",
     username: "dummyAdmin@ppns.ac.id",
     status: "admin",
@@ -421,7 +445,7 @@ const tempUser = [
   },
   {
     nama: "dummy teknisi",
-    nip: "1312304185673",
+    nip: "0000000000001",
     email: "dummyTeknisi@ppns.ac.id",
     username: "dummyTeknisi@ppns.ac.id",
     status: "teknisi",
@@ -429,7 +453,7 @@ const tempUser = [
   },
   {
     nama: "dummy2 teknisi",
-    nip: "1312304185673",
+    nip: "0000000000002",
     email: "dummyTeknisi2@ppns.ac.id",
     username: "dummyTeknisi2@ppns.ac.id",
     status: "teknisi",
@@ -437,7 +461,7 @@ const tempUser = [
   },
   {
     nama: "dummy3 teknisi",
-    nip: "1312304185673",
+    nip: "0000000000003",
     email: "dummyTeknisi3@ppns.ac.id",
     username: "dummyTeknisi3@ppns.ac.id",
     status: "teknisi",
@@ -445,7 +469,7 @@ const tempUser = [
   },
   {
     nama: "dummy4 teknisi",
-    nip: "1312304185673",
+    nip: "0000000000004",
     email: "dummyTeknisi4@ppns.ac.id",
     username: "dummyTeknisi4@ppns.ac.id",
     status: "teknisi",
@@ -453,7 +477,7 @@ const tempUser = [
   },
   {
     nama: "dummy5 teknisi",
-    nip: "1312304185673",
+    nip: "0000000000005",
     email: "dummyTeknisi5@ppns.ac.id",
     username: "dummyTeknisi5@ppns.ac.id",
     status: "teknisi",
@@ -461,7 +485,7 @@ const tempUser = [
   },
   {
     nama: "dummy6 teknisi",
-    nip: "1312304185673",
+    nip: "0000000000006",
     email: "dummyTeknisi6@ppns.ac.id",
     username: "dummyTeknisi6@ppns.ac.id",
     status: "teknisi",
@@ -469,10 +493,18 @@ const tempUser = [
   },
   {
     nama: "dummy upik3",
-    nip: "2894185673",
+    nip: "0000000000007",
     email: "dummyUpik3@ppns.ac.id",
     username: "dummyUpik3@ppns.ac.id",
     status: "upik3",
+    lokasi: "semua",
+  },
+  {
+    nama: "dummy buk",
+    nip: "0000000000007",
+    email: "dummyBuk@ppns.ac.id",
+    username: "dummyBuk@ppns.ac.id",
+    status: "buk",
     lokasi: "semua",
   },
 ];
@@ -650,30 +682,30 @@ const tempAlat = [
   },
 ];
 
-// const seedDb = async (model, arrOfObj) => {
-//   await model.deleteMany({});
-//   await model
-//     .insertMany(arrOfObj)
-//     .then((data) => {
-//       console.log(data);
-//     })
-//     .catch((e) => {
-//       console.log(`ERROR : ${e}`);
-//     });
-// };
-
-// seedDb(Alat, tempAlat).then(() => {
-//   mongoose.connection.close();
-// });
-
-const newUser = async function (model, arrObj, pass) {
-  const terhapus = await model.deleteMany({});
-  for (obj of arrObj) {
-    const registeredUser = await User.register(obj, pass);
-    console.log(registeredUser);
-  }
+const seedDb = async (model, arrOfObj) => {
+  await model.deleteMany({});
+  await model
+    .insertMany(arrOfObj)
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((e) => {
+      console.log(`ERROR : ${e}`);
+    });
 };
 
-newUser(User, tempUser, "111111111111").then(() => {
+seedDb(Alat, tempAlat).then(() => {
   mongoose.connection.close();
 });
+
+// const newUser = async function (model, arrObj, pass) {
+//   const terhapus = await model.deleteMany({});
+//   for (obj of arrObj) {
+//     const registeredUser = await User.register(obj, pass);
+//     console.log(registeredUser);
+//   }
+// };
+
+// newUser(User, tempUser, "111111111111").then(() => {
+//   mongoose.connection.close();
+// });
