@@ -1,3 +1,4 @@
-node_modules/
-public/img/dokumentasi/
+node_modules
+public/img/dokumentasi
+public/img/dokumentasiMaintenance
 
