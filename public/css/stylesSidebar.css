@@ -331,3 +331,23 @@ textarea:focus {
 .select2-results {
   background-color: #eef3f7;
 }
+
+.neumorphism {
+  border: none;
+  border-radius: 10px;
+  background: #f8f9fa;
+  box-shadow: 6px 6px 15px #eeeff0, -6px -6px 15px #ffffff;
+}
+
+.svg-primary {
+  filter: invert(27%) sepia(55%) saturate(391%) hue-rotate(161deg)
+    brightness(95%) contrast(90%);
+}
+
+.cursor-default {
+  cursor: default;
+}
+
+.height-400px {
+  height: 350px;
+}

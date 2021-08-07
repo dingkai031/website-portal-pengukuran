@@ -17,6 +17,7 @@
           spellcheck="false"
           autocomplete="off"
           method="POST"
+          enctype="multipart/form-data"
         >
           <div class="mb-3 text-center">
             <h3 class="mb-2">Tambah Alat</h3>
@@ -179,6 +180,19 @@
               <option value="Lain-lain">Lain-lain</option>
             </select>
           </div>
+          <div class="d-flex flex-column mb-3">
+            <label for="fotoAlat" class="d-flex align-items-center fw-bold mb-2">
+              Foto Alat
+            </label>
+            <input
+              type="file"
+              id="fotoAlat"
+              class="form-control border-0"
+              name="fotoAlat"
+              required
+              title="Harap isi form ini"
+            />
+          </div>
           <div class="text-center">
             <button type="reset" class="btn btn-white me-3">Reset</button>
             <button type="submit" class="btn btn-primary">Submit</button>
@@ -238,11 +252,158 @@
             <h3 class="card-title fw-bolder fs-5 text-primary">
               <%= alat.spesifikasi %>
             </h3>
+            <div class="w-100 height-400px overflow-hidden d-flex align-items-center">
+              <img src="/img/fotoAlat/<%= alat.foto %>" class="img-fluid" alt="">
+            </div>
           </div>
           <div class="card-body">
             <div class="row">
               <div class="<%= currentUser.status === "teknisi" ? "col-sm-6" : "col-sm-4" %>  p-1">
-                <a href="" class="btn btn-primary w-100 h-100"
+
+                <div class="modal fade" id="deskripsiAlat<%= alat._id %>" tabindex="-1" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header border-0">
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div class="modal-body px-5">
+          
+                          <div class="mb-3 text-center">
+                            <h3 class="mb-2">Deskripsi Alat</h3>
+                          </div>
+                          <div class="d-flex flex-column mb-3">
+                            <label for="nama" class="d-flex align-items-center fw-bold mb-2">
+                              Nama
+                            </label>
+                            <input
+                              type="text"
+                              id="nama"
+                              class="form-control border-0"
+                              value="<%= alat.nama %>"
+                              readonly
+                            />
+                          </div>
+                          <div class="d-flex flex-column mb-3">
+                            <label
+                              for="tanggal"
+                              class="d-flex align-items-center fs-6 fw-bold mb-2"
+                            >
+                              Tanggal Perolehan
+                            </label>
+                            <div class="input-group border-0 datepicker">
+                              <input
+                                type="text"
+                                class="form-control border-0"
+                                value="<%= `${("0" + alat.tanggalPeroleh.getDate()).slice(-2)}-${("0" + (alat.tanggalPeroleh.getMonth()+1)).slice(-2)}-${alat.tanggalPeroleh.getFullYear()}` %>"
+                                readonly
+                              />
+                              <span class="input-group-text border-0" data-toggle>
+                                <i class="bx bx-calendar"></i>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="d-flex flex-column mb-3">
+                            <label
+                              for="spesifikasi"
+                              class="d-flex align-items-center fs-6 fw-bold mb-2"
+                            >
+                              Spesifikasi
+                            </label>
+                            <input
+                              type="text"
+                              id="spesifikasi"
+                              class="form-control border-0"
+                              value="<%= alat.spesifikasi %>"
+                              readonly
+                            />
+                          </div>
+                          <div class="d-flex flex-column mb-3">
+                            <label
+                              for="konsumsiTenaga"
+                              class="d-flex align-items-center fw-bold mb-2"
+                            >
+                              Konsumsi Tenaga
+                            </label>
+                            <div class="input-group" id="konsumsiTenaga">
+                              <input
+                                type="number"
+
+                                class="form-control border-0"
+                                value="<%= alat.konsumsiTenaga.minimal %>"
+                                readonly
+                              />
+                              <input
+                                type="number"
+                                class="form-control border-0"
+                                value="<%= alat.konsumsiTenaga.maksimal %>"
+                                readonly
+                              />
+                              <span class="input-group-text border-0">Volt</span>
+                            </div>
+                          </div>
+                          <div class="d-flex flex-column mb-3">
+                            <label
+                              for="kemampuanAlat"
+                              class="d-flex align-items-center fw-bold mb-2"
+                            >
+                              Kemampuan Alat
+                            </label>
+                            <div class="input-group" id="kemampuanAlat">
+                              <input
+                                type="number"
+                                class="form-control border-0"
+                                value="<%= alat.kemampuanAlat.minimal %>"
+                                readonly
+                              />
+                              <input
+                                type="number"
+                                class="form-control border-0"
+                                value="<%= alat.kemampuanAlat.maksimal %>"
+                                readonly
+                              />
+                              <span class="input-group-text border-0">Volt</span>
+                            </div>
+                          </div>
+                          <div class="d-flex flex-column mb-3">
+                            <label for="jumlah" class="d-flex align-items-center fw-bold mb-2">
+                              Jumlah
+                            </label>
+                            <div class="input-group">
+                              <input
+                                type="number"
+                                id="jumlah"
+                                class="form-control border-0"
+                                value="<%= alat.lokasi.jumlah %>"
+                                readonly
+                              />
+                              <span class="input-group-text border-0">unit</span>
+                            </div>
+                          </div>
+
+                          <div class="d-flex flex-column mb-4">
+                            <label
+                              for="kategori"
+                              class="d-flex align-items-center fs-6 fw-bold mb-2"
+                            >
+                              Kategori
+                            </label>
+                            <input type="text" id="kategori" class="form-control" value="<%= alat.kategori %>" readonly>
+                            
+                          </div>
+                          <div class="text-center">
+                            <button type="button" data-bs-dismiss="modal" class="btn btn-white me-3">Tutup</button>
+                          </div>
+            
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#deskripsiAlat<%= alat._id %>" class="btn btn-primary w-100 h-100"
                   >Deskripsi Alat</a
                 >
               </div>
@@ -259,7 +420,204 @@
                 <a href="/maintenance/<%= jenisTempatQuery %>/<%= tempatTerpilih.alamat %>/data-alat/riwayat/<%= alat._id %>" class="btn btn-primary w-100 h-100">History</a>
               </div>
               <div class="col-sm-6 p-1">
-                <a href="" class="btn btn-info text-white w-100 h-100">Edit</a>
+                <div class="modal fade" id="editAlat<%= alat._id %>" tabindex="-1" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header border-0">
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div class="modal-body px-5">
+                        <form
+                          action="data-alat?_method=PUT"
+                          class="form"
+                          spellcheck="false"
+                          autocomplete="off"
+                          method="POST"
+                        >
+                          <div class="mb-3 text-center">
+                            <h3 class="mb-2">Edit Alat</h3>
+                            <div class="text-muted">Harap masukkan data dengan benar.</div>
+                          </div>
+                          <div class="d-flex flex-column mb-3">
+                            <label for="nama" class="d-flex align-items-center fw-bold mb-2">
+                              Nama
+                            </label>
+                            <input
+                              type="text"
+                              id="nama"
+                              class="form-control border-0"
+                              name="name"
+                              required
+                              title="Harap isi form ini"
+                              value="<%= alat.nama %>"
+                              
+                            />
+                          </div>
+                          <div class="d-flex flex-column mb-3">
+                            <label
+                              for="tanggal"
+                              class="d-flex align-items-center fs-6 fw-bold mb-2"
+                            >
+                              Tanggal Perolehan
+                            </label>
+                            <div class="input-group border-0 datepicker">
+                              <input
+                                type="text"
+                                id="tanggal"
+                                class="form-control border-0"
+                                name="tanggal"
+                                required
+                                title="Harap isi form ini"
+                                value="<%= alat.tanggalPeroleh %>"
+                                data-input
+                              />
+                              <span class="input-group-text border-0" data-toggle>
+                                <i class="bx bx-calendar"></i>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="d-flex flex-column mb-3">
+                            <label
+                              for="spesifikasi"
+                              class="d-flex align-items-center fs-6 fw-bold mb-2"
+                            >
+                              Spesifikasi
+                            </label>
+                            <input
+                              type="text"
+                              id="spesifikasi"
+                              class="form-control border-0"
+                              name="spesifikasi"
+                              required
+                              title="Harap isi form ini"
+                              value="<%= alat.spesifikasi %>"
+                            />
+                          </div>
+                          <div class="d-flex flex-column mb-3">
+                            <label
+                              for="konsumsiTenaga"
+                              class="d-flex align-items-center fw-bold mb-2"
+                            >
+                              Konsumsi Tenaga
+                            </label>
+                            <div class="input-group" id="konsumsiTenaga">
+                              <input
+                                type="number"
+                                name="konsumsiTenagaMin"
+                                class="form-control border-0"
+                                title="Harap isi form ini"
+                                min="0"
+                                placeholder="Min"
+                                value="<%= alat.konsumsiTenaga.minimal %>"
+                                required
+                              />
+                              <input
+                                type="number"
+                                name="konsumsiTenagaMax"
+                                class="form-control border-0"
+                                title="Harap isi form ini"
+                                min="0"
+                                placeholder="Max"
+                                value="<%= alat.konsumsiTenaga.maksimal %>"
+                                required
+                              />
+                              <span class="input-group-text border-0">Volt</span>
+                            </div>
+                          </div>
+                          <div class="d-flex flex-column mb-3">
+                            <label
+                              for="kemampuanAlat"
+                              class="d-flex align-items-center fw-bold mb-2"
+                            >
+                              Kemampuan Alat
+                            </label>
+                            <div class="input-group" id="kemampuanAlat">
+                              <input
+                                type="number"
+                                name="kemampuanAlatMin"
+                                class="form-control border-0"
+                                title="Harap isi form ini"
+                                min="0"
+                                placeholder="Min"
+                                value="<%= alat.kemampuanAlat.minimal %>"
+                                required
+                              />
+                              <input
+                                type="number"
+                                name="kemampuanAlatMax"
+                                class="form-control border-0"
+                                title="Harap isi form ini"
+                                min="0"
+                                placeholder="Max"
+                                value="<%= alat.kemampuanAlat.maksimal %>"
+                                required
+                              />
+                              <span class="input-group-text border-0">Volt</span>
+                            </div>
+                          </div>
+                          <div class="d-flex flex-column mb-3">
+                            <label for="jumlah" class="d-flex align-items-center fw-bold mb-2">
+                              Jumlah
+                            </label>
+                            <div class="input-group">
+                              <input
+                                type="number"
+                                id="jumlah"
+                                name="jumlah"
+                                class="form-control border-0"
+                                title="Harap isi form ini"
+                                min="0"
+                                value="<%= alat.lokasi.jumlah %>"
+                                required
+                              />
+                              <span class="input-group-text border-0">unit</span>
+                            </div>
+                          </div>
+                
+                          <input
+                            type="text"
+                            name="idAlat"
+                            class="d-none"
+                            value="<%= alat._id %>"
+                            required
+                            readonly
+                          />
+                          <div class="d-flex flex-column mb-4">
+                            <label
+                              for="kategori"
+                              class="d-flex align-items-center fs-6 fw-bold mb-2"
+                            >
+                              Kategori
+                            </label>
+                            <select
+                              name="kategori"
+                              title="Harap isi form ini"
+                              class="form-select"
+                              required
+                            >
+                              <option value="Alat" <%= alat.kategori === "Alat" ? "selected" : "" %> >Alat</option>
+                              <option value="Bahan Habis" <%= alat.kategori === "Bahan Habis" ? "selected" : "" %>>Bahan Habis</option>
+                              <option value="Sarana" <%= alat.kategori === "Sarana" ? "selected" : "" %>>Sarana</option>
+                              <option value="Meubelair" <%= alat.kategori === "Meubelair" ? "selected" : "" %> >Meubelair</option>
+                              <option value="Lain-lain" <%= alat.kategori === "Lain-lain" ? "selected" : "" %> >Lain-lain</option>
+                            </select>
+                            
+                          </div>
+                          <div class="text-center">
+                            <button type="reset" class="btn btn-white me-3">Reset</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#editAlat<%= alat._id %>" class="btn btn-info text-white w-100 h-100">Edit</a>
               </div>
               <div class="col-sm-6 p-1">
                 <div
@@ -309,7 +667,7 @@
                             required
                           />
                           <div class="text-center">
-                            <button type="reset" class="btn btn-white me-3">
+                            <button type="button" class="btn btn-white me-3" data-bs-dismiss="modal">
                               Tidak
                             </button>
                             <button type="submit" class="btn btn-danger">

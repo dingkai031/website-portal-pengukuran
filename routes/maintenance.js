@@ -9,15 +9,24 @@ const path = require("path");
 const { isLoggedIn } = require("../middleware");
 
 const multer = require("multer");
-const e = require("connect-flash");
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, "../public/img/dokumentasiMaintenance"));
+    if (file.fieldname === "fotoAlat") {
+      cb(null, path.join(__dirname, "../public/img/fotoAlat"));
+    } else if (file.fieldname === "dokumentasiMaintenance") {
+      cb(null, path.join(__dirname, "../public/img/dokumentasiMaintenance"));
+    }
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + "-" + Date.now() + ".jpg");
+    if (file.fieldname === "fotoAlat") {
+      cb(null, req.body.name + "-" + Date.now() + ".jpg");
+    } else {
+      cb(null, file.fieldname + "-" + Date.now() + ".jpg");
+    }
   },
 });
+
 const upload = multer({ storage });
 
 function convertDate(tanggal) {
@@ -47,7 +56,42 @@ router.get("/", isLoggedIn, async (req, res) => {
   if (foundIndexPermintaan === -1) {
     foundAlat = false;
   }
-  res.render("maintenance/maintenance", { jenisTempatQuery, foundAlat });
+
+  const foundTeknisi = (await User.find({ status: "teknisi" })).length;
+  const foundKabeng = (await User.find({ status: "kabeng" })).length;
+  const foundKalab = (await User.find({ status: "kalab" })).length;
+  const foundBauk = (await User.find({ status: "bauk" })).length;
+  const foundUpik3 = (await User.find({ status: "upik3" })).length;
+  const totalKetuaTempat = parseInt(foundKalab) + parseInt(foundKabeng);
+  const foundBengkel = (await Tempat.find({ jenis: "maintenancebengkel" }))
+    .length;
+  const foundLab = (await Tempat.find({ jenis: "maintenancelab" })).length;
+  const foundAlatNew = await Alat.find({});
+  const foundPermintaanMaintenance = [];
+  for (const alat of foundAlatNew) {
+    foundPermintaanMaintenance.push(
+      parseInt(alat.permintaanMaintenance.length)
+    );
+  }
+  const data = {
+    jumlahTeknisi: foundTeknisi,
+    jumlahKetuaTempat: totalKetuaTempat,
+    jumlahBauk: foundBauk,
+    jumlahUpik3: foundUpik3,
+    jumlahBengkel: foundBengkel,
+    jumlahLab: foundLab,
+    jumlahAlat: foundAlatNew.length,
+    jumlahPermintaanMaintenance: foundPermintaanMaintenance.reduce((x, y) => {
+      return x + y;
+    }),
+  };
+  const foundJenisTempat = await Tempat.findOne({ nama: req.user.lokasi });
+  res.render("maintenance/maintenance", {
+    foundJenisTempat,
+    jenisTempatQuery,
+    foundAlat,
+    data,
+  });
 });
 
 router.put(
@@ -129,40 +173,12 @@ router.put(
   }
 );
 
-// app.put("/maintenance/data-alat", async (req, res) => {
-//   const {
-//     name: nameBaru,
-//     tanggal: tanggalBaru,
-//     spesifikasi: spesifikasiBaru,
-//     jumlah: jumlahBaru,
-//     lokasi: lokasiBaru,
-//     kategori: kategoriBaru,
-//     idAlat: idBaru
-//   } = req.body;
-//   const newDate = tanggalBaru.split("-");
-//   const validDate = `${newDate[2]}-${newDate[1]}-${newDate[0]}`;
-//   const isoDate = new Date(validDate);
-//   const newAlatObject = {
-//     nama: nameBaru,
-//     tanggalPeroleh: isoDate,
-//     spesifikasi: spesifikasiBaru,
-//     jumlah: jumlahBaru,
-//     lokasi: lokasiBaru,
-//     kategori: kategoriBaru
-//   };
-//   const alatUpdated = await Alat.findByIdAndUpdate(idBaru, newAlatObject, {
-//     runValidators: true,
-//     new: true
-//   });
-//   res.redirect("/maintenance/data-alat");
-// });
-
 router.get("/:jenisTempatQuery", isLoggedIn, async (req, res) => {
   const { jenisTempatQuery } = req.params;
   const kumpulanTempat =
     req.user.status === "admin" ||
     req.user.status === "upik3" ||
-    req.user.status === "buk"
+    req.user.status === "bauk"
       ? await Tempat.find({
           jenis: jenisTempatQuery,
         })
@@ -171,7 +187,9 @@ router.get("/:jenisTempatQuery", isLoggedIn, async (req, res) => {
           nama: req.user.lokasi,
         });
   if (kumpulanTempat.length !== 0) {
+    const foundJenisTempat = await Tempat.findOne({ nama: req.user.lokasi });
     res.render("maintenance/maintenanceTempat", {
+      foundJenisTempat,
       jenisTempatQuery,
       kumpulanTempat,
     });
@@ -184,7 +202,9 @@ router.get("/:jenisTempatQuery/:namaTempat", isLoggedIn, async (req, res) => {
   const { jenisTempatQuery, namaTempat } = req.params;
   const tempatTerpilih = await Tempat.findOne({ alamat: namaTempat });
   if (tempatTerpilih) {
+    const foundJenisTempat = await Tempat.findOne({ nama: req.user.lokasi });
     res.render("maintenance/maintenanceTempatPilihan", {
+      foundJenisTempat,
       jenisTempatQuery,
       tempatTerpilih,
     });
@@ -202,7 +222,9 @@ router.get(
     const kumpulanAlat = await Alat.find({
       "lokasi.namaLokasi": `${tempatTerpilih.nama}`,
     });
+    const foundJenisTempat = await Tempat.findOne({ nama: req.user.lokasi });
     res.render("maintenance/maintenanceDataAlat", {
+      foundJenisTempat,
       jenisTempatQuery,
       tempatTerpilih,
       kumpulanAlat,
@@ -212,6 +234,7 @@ router.get(
 router.post(
   "/:jenisTempatQuery/:namaTempat/data-alat",
   isLoggedIn,
+  upload.single("fotoAlat"),
   async (req, res) => {
     const { jenisTempatQuery, namaTempat } = req.params;
     const {
@@ -226,8 +249,12 @@ router.post(
       lokasi,
       kategori,
     } = req.body;
+    console.log(req.file);
+    const { filename } = req.file;
     const isoDate = convertDate(tanggal);
+
     const newAlatObject = {
+      foto: filename,
       nama: name,
       tanggalPeroleh: isoDate,
       spesifikasi: spesifikasi,
@@ -258,6 +285,47 @@ router.post(
     res.redirect(`/maintenance/${jenisTempatQuery}/${namaTempat}/data-alat`);
   }
 );
+router.put(
+  "/:jenisTempatQuery/:namaTempat/data-alat",
+  isLoggedIn,
+  async (req, res) => {
+    const { jenisTempatQuery, namaTempat } = req.params;
+    const {
+      idAlat,
+      name,
+      tanggal,
+      spesifikasi,
+      konsumsiTenagaMin,
+      konsumsiTenagaMax,
+      kemampuanAlatMin,
+      kemampuanAlatMax,
+      jumlah,
+      kategori,
+    } = req.body;
+    const validDate = convertDate(tanggal);
+    const foundAlat = await Alat.findById(idAlat);
+    foundAlat.nama = name;
+    foundAlat.tanggalPeroleh = validDate;
+    foundAlat.spesifikasi = spesifikasi;
+    foundAlat.lokasi.jumlah = jumlah;
+    foundAlat.kategori = kategori;
+    foundAlat.konsumsiTenaga.minimal = konsumsiTenagaMin;
+    foundAlat.konsumsiTenaga.maksimal = konsumsiTenagaMax;
+    foundAlat.kemampuanAlat.minimal = kemampuanAlatMin;
+    foundAlat.kemampuanAlat.maksimal = kemampuanAlatMax;
+    await foundAlat
+      .save()
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((e) => {
+        console.log(`error : ${e}`);
+      });
+
+    req.flash("success", `Alat ${name} berhasil diubah`);
+    res.redirect(`/maintenance/${jenisTempatQuery}/${namaTempat}/data-alat`);
+  }
+);
 router.delete(
   "/:jenisTempatQuery/:namaTempat/data-alat",
   isLoggedIn,
@@ -282,7 +350,9 @@ router.get(
     const foundedAlat = await Alat.findById(idAlat).populate(
       "permintaanMaintenance.teknisi"
     );
+    const foundJenisTempat = await Tempat.findOne({ nama: req.user.lokasi });
     res.render("maintenance/maintenanceFormMaintenance", {
+      foundJenisTempat,
       jenisTempatQuery,
       foundedAlat,
       foundedTempat,
@@ -378,7 +448,7 @@ router.get(
       .populate("permintaanMaintenance.teknisi")
       .populate("permintaanMaintenance.peminta")
       .populate("permintaanMaintenance.validasi.kepalaTempat.user")
-      .populate("permintaanMaintenance.validasi.buk.user")
+      .populate("permintaanMaintenance.validasi.bauk.user")
       .populate("permintaanMaintenance.validasi.upik3.user")
       .catch((e) => {
         req.flash("hapus", "Alat tidak ditemukan");
@@ -387,7 +457,9 @@ router.get(
         );
       });
     if (foundAlat !== undefined) {
+      const foundJenisTempat = await Tempat.findOne({ nama: req.user.lokasi });
       res.render("maintenance/maintenanceHistory", {
+        foundJenisTempat,
         jenisTempatQuery,
         alamatTempat,
         foundAlat,
@@ -415,12 +487,12 @@ router.put(
       alatFound.permintaanMaintenance[
         foundPermintaan
       ].validasi.kepalaTempat.user = foundUser;
-    } else if (req.user.status === "buk") {
+    } else if (req.user.status === "bauk") {
       const foundUser = await User.findById(req.user._id);
       alatFound.permintaanMaintenance[
         foundPermintaan
-      ].validasi.buk.status = true;
-      alatFound.permintaanMaintenance[foundPermintaan].validasi.buk.user =
+      ].validasi.bauk.status = true;
+      alatFound.permintaanMaintenance[foundPermintaan].validasi.bauk.user =
         foundUser;
     } else if (req.user.status === "upik3") {
       const foundUser = await User.findById(req.user._id);

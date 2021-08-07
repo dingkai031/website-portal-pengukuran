@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const alatSchema = new Schema({
+  foto: {
+    type: String,
+    required: true,
+    default: "dummyAlat.png",
+  },
   nama: {
     type: String,
     required: true,
@@ -164,7 +169,7 @@ const alatSchema = new Schema({
             default: false,
           },
         },
-        buk: {
+        bauk: {
           user: {
             type: Schema.Types.ObjectId,
             ref: "User",

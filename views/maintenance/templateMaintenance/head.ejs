@@ -54,17 +54,31 @@
               <i class="bx bx-border-all"></i>
               <span class="nav__name">Dashboard</span>
             </a>
-            <% if (currentUser.status !== "kalab") { %>
+            <% if (foundJenisTempat !== null) { %>
+				<% if (foundJenisTempat.jenis === "maintenancebengkel") { %>
+					<a href="/maintenance/maintenancebengkel" class="nav__link <%= jenisTempatQuery === "maintenancebengkel" ? "active" : "" %>">
+						<i class="bx bx-git-compare"></i>
+						<span class="nav__name">Bengkel</span>
+					</a>
+				<% } %>
+            <% }else { %>
 				<a href="/maintenance/maintenancebengkel" class="nav__link <%= jenisTempatQuery === "maintenancebengkel" ? "active" : "" %>">
-				<i class="bx bx-git-compare"></i>
-				<span class="nav__name">Bengkel</span>
-            </a>
-            <% } %>
-			<% if (currentUser.status !== "kabeng") { %>
-            <a href="/maintenance/maintenancelab" class="nav__link <%= jenisTempatQuery === "maintenancelab" ? "active" : "" %>">
-              <i class="bx bxs-wrench"></i>
-              <span class="nav__name">Laboratorium</span>
-            </a>
+						<i class="bx bx-git-compare"></i>
+						<span class="nav__name">Bengkel</span>
+					</a>
+			<% } %>
+			<% if (foundJenisTempat !== null) { %>
+				<% if (foundJenisTempat.jenis === "maintenancelab") { %>
+				<a href="/maintenance/maintenancelab" class="nav__link <%= jenisTempatQuery === "maintenancelab" ? "active" : "" %>">
+					<i class="bx bxs-wrench"></i>
+					<span class="nav__name">Laboratorium</span>
+				</a>
+				<% } %>
+			<% }else { %>
+				<a href="/maintenance/maintenancelab" class="nav__link <%= jenisTempatQuery === "maintenancelab" ? "active" : "" %>">
+					<i class="bx bxs-wrench"></i>
+					<span class="nav__name">Laboratorium</span>
+				</a>
 			<% } %>
           </div>
         </div>

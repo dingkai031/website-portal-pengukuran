@@ -18,7 +18,7 @@
                     </tr>
                     <tr>
                         <th>Kalab/Kabeng</th>
-                        <th>BUK</th>
+                        <th>BAUK</th>
                         <th>UPIK3</th>
                     </tr>
                 </thead>
@@ -81,7 +81,7 @@
                                 </td>
                                 <td>
                                     <form action="<%= `/maintenance/${jenisTempatQuery}/${alamatTempat}/data-alat/riwayat/${idAlat}/kepalaTempat/${riwayat._id}?_method=PUT` %>" method="POST">
-                                        <button type="<%= currentUser.status === "buk" && !riwayat.validasi.buk.status ? "submit" : "button" %>" class="btn <%= riwayat.validasi.buk.status ? "btn-success" : "btn-danger"%>"><%= riwayat.validasi.buk.status ? `Approved By ${riwayat.validasi.buk.user.nama}` : "Not Approved" %></button>
+                                        <button type="<%= currentUser.status === "bauk" && !riwayat.validasi.bauk.status ? "submit" : "button" %>" class="btn <%= riwayat.validasi.bauk.status ? "btn-success" : "btn-danger"%>"><%= riwayat.validasi.bauk.status ? `Approved By ${riwayat.validasi.bauk.user.nama}` : "Not Approved" %></button>
                                     </form>
                                 </td>
                                 <td>

@@ -500,11 +500,11 @@ const tempUser = [
     lokasi: "semua",
   },
   {
-    nama: "dummy buk",
+    nama: "dummy bauk",
     nip: "0000000000007",
-    email: "dummyBuk@ppns.ac.id",
-    username: "dummyBuk@ppns.ac.id",
-    status: "buk",
+    email: "dummyBauk@ppns.ac.id",
+    username: "dummyBauk@ppns.ac.id",
+    status: "bauk",
     lokasi: "semua",
   },
 ];
