@@ -101,7 +101,6 @@ const alatSchema = new Schema({
   },
   permintaanMaintenance: [
     {
-      default: [],
       peminta: {
         type: Schema.Types.ObjectId,
         ref: "User",

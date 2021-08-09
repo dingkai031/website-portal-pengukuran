@@ -1,0 +1,115 @@
+<%- include("templateMaintenance/head") %>
+<div class="card custom-shadow">
+  <div
+    class="
+      card-header
+      pt-3
+      px-4
+      bg-white
+      d-flex
+      justify-content-between
+      border-0
+    "
+  >
+    <h3 class="card-title fw-bolder fs-3 m-0 d-flex align-items-center">
+      Pilihan Inspeksi di
+      <span class="text-primary"><%= foundTempat.nama %></span>
+    </h3>
+  </div>
+  <div class="card-body py-3 my-3">
+    <div class="row justify-content-sm-center justify-content-md-between">
+      <div
+        class="
+          col-md-4 col-lg-3 col-xl-2
+          d-flex
+          justify-content-center
+          align-items-center
+          flex-md-fill
+        "
+      >
+        <a
+          class="
+            btn btn-primary
+            w-100
+            h-100
+            d-flex
+            justify-content-center
+            align-items-center
+          "
+          href="<%= `/maintenance/${jenisTempatQuery}/${foundTempat.alamat}/inspeksi/apar` %>"
+          ><p class="m-0">Apar</p></a
+        >
+      </div>
+
+      <div
+        class="
+          col-md-4 col-lg-3 col-xl-2
+          d-flex
+          justify-content-center
+          align-items-center
+          flex-md-fill
+        "
+      >
+        <a
+          class="
+            btn btn-primary
+            w-100
+            h-100
+            d-flex
+            justify-content-center
+            align-items-center
+          "
+          href="<%= `/maintenance/${jenisTempatQuery}/${foundTempat.alamat}/inspeksi/hydrant` %>"
+          ><p class="m-0">Hydrant</p></a
+        >
+      </div>
+
+      <div
+        class="
+          col-md-4 col-lg-3 col-xl-2
+          d-flex
+          justify-content-center
+          align-items-center
+          flex-md-fill
+        "
+      >
+        <a
+          class="
+            btn btn-primary
+            w-100
+            h-100
+            d-flex
+            justify-content-center
+            align-items-center
+          "
+          href="<%= `/maintenance/${jenisTempatQuery}/${foundTempat.alamat}/inspeksi/apd` %>"
+          ><p class="m-0">APD</p></a
+        >
+      </div>
+
+      <div
+        class="
+          col-md-4 col-lg-3 col-xl-2
+          d-flex
+          justify-content-center
+          align-items-center
+          flex-md-fill
+        "
+      >
+        <a
+          class="
+            btn btn-primary
+            w-100
+            h-100
+            d-flex
+            justify-content-center
+            align-items-center
+          "
+          href="<%= `/maintenance/${jenisTempatQuery}/${foundTempat.alamat}/inspeksi/housekeeping` %>"
+          ><p class="m-0">House Keeping</p></a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+<%- include("templateMaintenance/footer") %>

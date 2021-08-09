@@ -694,7 +694,7 @@ const seedDb = async (model, arrOfObj) => {
     });
 };
 
-seedDb(Alat, tempAlat).then(() => {
+seedDb(Tempat, tempTempat).then(() => {
   mongoose.connection.close();
 });
 

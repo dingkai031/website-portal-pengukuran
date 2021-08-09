@@ -34,6 +34,10 @@ function convertDate(tanggal) {
   const isoDate = new Date(`${newDate[2]}-${newDate[1]}-${newDate[0]}`);
   return isoDate;
 }
+
+function capitallize(string) {
+  return `${string[0].toUpperCase()}${string.slice(1)}`;
+}
 //=========================================================================================================================
 router.get("/", isLoggedIn, async (req, res) => {
   const jenisTempatQuery = false;
@@ -67,7 +71,7 @@ router.get("/", isLoggedIn, async (req, res) => {
     .length;
   const foundLab = (await Tempat.find({ jenis: "maintenancelab" })).length;
   const foundAlatNew = await Alat.find({});
-  const foundPermintaanMaintenance = [];
+  const foundPermintaanMaintenance = [0];
   for (const alat of foundAlatNew) {
     foundPermintaanMaintenance.push(
       parseInt(alat.permintaanMaintenance.length)
@@ -510,6 +514,589 @@ router.put(
     res.redirect(
       `/maintenance/${jenisTempatQuery}/${alamatTempat}/data-alat/riwayat/${idAlat}`
     );
+  }
+);
+
+router.get(
+  "/:jenisTempatQuery/:alamatTempat/inspeksi",
+  isLoggedIn,
+  async (req, res) => {
+    const { jenisTempatQuery, alamatTempat } = req.params;
+    const foundJenisTempat = await Tempat.findOne({ nama: req.user.lokasi });
+    const foundTempat = await Tempat.findOne({
+      jenis: jenisTempatQuery,
+      alamat: alamatTempat,
+    });
+    res.render("maintenance/maintenanceInspeksi", {
+      foundJenisTempat,
+      jenisTempatQuery,
+      alamatTempat,
+      foundTempat,
+    });
+  }
+);
+
+router.get(
+  "/:jenisTempatQuery/:alamatTempat/inspeksi/:jenisInspeksi",
+  isLoggedIn,
+  async (req, res) => {
+    const { jenisTempatQuery, alamatTempat, jenisInspeksi } = req.params;
+    const foundJenisTempat = await Tempat.findOne({ nama: req.user.lokasi });
+    const foundTempat = await Tempat.findOne({
+      jenis: jenisTempatQuery,
+      alamat: alamatTempat,
+    })
+      .populate("inspeksi.apar.pekerja")
+      .populate("inspeksi.apar.validasi.buk.user")
+      .populate("inspeksi.apar.validasi.kepalaTempat.user")
+      .populate("inspeksi.apar.validasi.upik3.user")
+      .populate("inspeksi.hydrant.pekerja")
+      .populate("inspeksi.hydrant.validasi.buk.user")
+      .populate("inspeksi.hydrant.validasi.kepalaTempat.user")
+      .populate("inspeksi.hydrant.validasi.upik3.user")
+      .populate("inspeksi.apd.pekerja")
+      .populate("inspeksi.apd.validasi.buk.user")
+      .populate("inspeksi.apd.validasi.kepalaTempat.user")
+      .populate("inspeksi.apd.validasi.upik3.user")
+      .populate("inspeksi.housekeeping.pekerja")
+      .populate("inspeksi.housekeeping.validasi.buk.user")
+      .populate("inspeksi.housekeeping.validasi.kepalaTempat.user")
+      .populate("inspeksi.housekeeping.validasi.upik3.user");
+    let inspeksiPilihan;
+    if (jenisInspeksi === "apar") {
+      inspeksiPilihan = foundTempat.inspeksi.apar;
+    } else if (jenisInspeksi === "hydrant") {
+      inspeksiPilihan = foundTempat.inspeksi.hydrant;
+    } else if (jenisInspeksi === "apd") {
+      inspeksiPilihan = foundTempat.inspeksi.apd;
+    } else if (jenisInspeksi === "housekeeping") {
+      inspeksiPilihan = foundTempat.inspeksi.housekeeping;
+    } else {
+      return res.status(404).send("<h1>TIDAK DITEMUKAN </h1>");
+    }
+    res.render("maintenance/maintenanceFormInspeksi", {
+      alamatTempat,
+      foundJenisTempat,
+      jenisTempatQuery,
+      jenisInspeksi,
+      inspeksiPilihan,
+      foundTempat,
+    });
+  }
+);
+
+router.post(
+  "/:jenisTempatQuery/:alamatTempat/inspeksi/:jenisInspeksi",
+  isLoggedIn,
+  async (req, res) => {
+    function checkOnOFF(string) {
+      return string === "true" ? true : false;
+    }
+    const { jenisTempatQuery, alamatTempat, jenisInspeksi } = req.params;
+    const foundTempat = await Tempat.findOne({
+      jenis: jenisTempatQuery,
+      alamat: alamatTempat,
+    });
+    const foundUser = await User.findById(req.user._id);
+    if (jenisInspeksi === "apar") {
+      const object = {
+        pekerja: foundUser,
+        pertanyaan1: {
+          status: checkOnOFF(req.body.pertanyaan1),
+          keterangan: req.body.pertanyaan1ket || " ",
+        },
+        pertanyaan2: {
+          status: checkOnOFF(req.body.pertanyaan2),
+          keterangan: req.body.pertanyaan2ket || " ",
+        },
+        pertanyaan3: {
+          status: checkOnOFF(req.body.pertanyaan3),
+          keterangan: req.body.pertanyaan3ket || " ",
+        },
+        pertanyaan4: {
+          status: checkOnOFF(req.body.pertanyaan4),
+          keterangan: req.body.pertanyaan4ket || " ",
+        },
+        pertanyaan5: {
+          status: checkOnOFF(req.body.pertanyaan5),
+          keterangan: req.body.pertanyaan5ket || " ",
+        },
+        pertanyaan6: {
+          status: checkOnOFF(req.body.pertanyaan6),
+          keterangan: req.body.pertanyaan6ket || " ",
+        },
+        pertanyaan7: {
+          status: checkOnOFF(req.body.pertanyaan7),
+          keterangan: req.body.pertanyaan7ket || " ",
+        },
+        pertanyaan8: {
+          status: checkOnOFF(req.body.pertanyaan8),
+          keterangan: req.body.pertanyaan8ket || " ",
+        },
+        pertanyaan9: {
+          status: checkOnOFF(req.body.pertanyaan9),
+          keterangan: req.body.pertanyaan9ket || " ",
+        },
+        pertanyaan10: {
+          status: checkOnOFF(req.body.pertanyaan10),
+          keterangan: req.body.pertanyaan10ket || " ",
+        },
+        pertanyaan11: {
+          status: checkOnOFF(req.body.pertanyaan11),
+          keterangan: req.body.pertanyaan11ket || " ",
+        },
+        pertanyaan12: {
+          status: checkOnOFF(req.body.pertanyaan12),
+          keterangan: req.body.pertanyaan12ket || " ",
+        },
+        pertanyaan13: {
+          status: checkOnOFF(req.body.pertanyaan13),
+          keterangan: req.body.pertanyaan13ket || " ",
+        },
+        pertanyaan14: {
+          status: checkOnOFF(req.body.pertanyaan14),
+          keterangan: req.body.pertanyaan14ket || " ",
+        },
+        pertanyaan15: {
+          status: checkOnOFF(req.body.pertanyaan15),
+          keterangan: req.body.pertanyaan15ket || " ",
+        },
+      };
+      foundTempat.inspeksi.apar.push(object);
+      foundTempat.save();
+      req.flash(
+        "success",
+        `Inspeksi APAR di ${foundTempat.nama} berhasil ditambahkan`
+      );
+      return res.redirect(
+        `/maintenance/${jenisTempatQuery}/${alamatTempat}/inspeksi/${jenisInspeksi}`
+      );
+    } else if (jenisInspeksi === "hydrant") {
+      const object = {
+        pekerja: foundUser,
+        pertanyaan1: {
+          status: checkOnOFF(req.body.pertanyaan1),
+          keterangan: req.body.pertanyaan1ket || " ",
+        },
+        pertanyaan2: {
+          status: checkOnOFF(req.body.pertanyaan2),
+          keterangan: req.body.pertanyaan2ket || " ",
+        },
+        pertanyaan3: {
+          status: checkOnOFF(req.body.pertanyaan3),
+          keterangan: req.body.pertanyaan3ket || " ",
+        },
+        pertanyaan4: {
+          status: checkOnOFF(req.body.pertanyaan4),
+          keterangan: req.body.pertanyaan4ket || " ",
+        },
+        pertanyaan5: {
+          status: checkOnOFF(req.body.pertanyaan5),
+          keterangan: req.body.pertanyaan5ket || " ",
+        },
+        pertanyaan6: {
+          status: checkOnOFF(req.body.pertanyaan6),
+          keterangan: req.body.pertanyaan6ket || " ",
+        },
+        pertanyaan7: {
+          status: checkOnOFF(req.body.pertanyaan7),
+          keterangan: req.body.pertanyaan7ket || " ",
+        },
+        pertanyaan8: {
+          status: checkOnOFF(req.body.pertanyaan8),
+          keterangan: req.body.pertanyaan8ket || " ",
+        },
+        pertanyaan9: {
+          status: checkOnOFF(req.body.pertanyaan9),
+          keterangan: req.body.pertanyaan9ket || " ",
+        },
+        pertanyaan10: {
+          status: checkOnOFF(req.body.pertanyaan10),
+          keterangan: req.body.pertanyaan10ket || " ",
+        },
+        pertanyaan11: {
+          status: checkOnOFF(req.body.pertanyaan11),
+          keterangan: req.body.pertanyaan11ket || " ",
+        },
+        pertanyaan12: {
+          status: checkOnOFF(req.body.pertanyaan12),
+          keterangan: req.body.pertanyaan12ket || " ",
+        },
+        pertanyaan13: {
+          status: checkOnOFF(req.body.pertanyaan13),
+          keterangan: req.body.pertanyaan13ket || " ",
+        },
+        pertanyaan14: {
+          status: checkOnOFF(req.body.pertanyaan14),
+          keterangan: req.body.pertanyaan14ket || " ",
+        },
+        pertanyaan15: {
+          status: checkOnOFF(req.body.pertanyaan15),
+          keterangan: req.body.pertanyaan15ket || " ",
+        },
+        pertanyaan16: {
+          status: checkOnOFF(req.body.pertanyaan16),
+          keterangan: req.body.pertanyaan16ket || " ",
+        },
+        pertanyaan17: {
+          status: checkOnOFF(req.body.pertanyaan17),
+          keterangan: req.body.pertanyaan17ket || " ",
+        },
+        pertanyaan18: {
+          status: checkOnOFF(req.body.pertanyaan18),
+          keterangan: req.body.pertanyaan18ket || " ",
+        },
+        pertanyaan19: {
+          status: checkOnOFF(req.body.pertanyaan19),
+          keterangan: req.body.pertanyaan19ket || " ",
+        },
+        pertanyaan20: {
+          status: checkOnOFF(req.body.pertanyaan20),
+          keterangan: req.body.pertanyaan20ket || " ",
+        },
+        pertanyaan21: {
+          status: checkOnOFF(req.body.pertanyaan21),
+          keterangan: req.body.pertanyaan21ket || " ",
+        },
+        pertanyaan22: {
+          status: checkOnOFF(req.body.pertanyaan22),
+          keterangan: req.body.pertanyaan22ket || " ",
+        },
+        pertanyaan23: {
+          status: checkOnOFF(req.body.pertanyaan23),
+          keterangan: req.body.pertanyaan23ket || " ",
+        },
+        pertanyaan24: {
+          status: checkOnOFF(req.body.pertanyaan24),
+          keterangan: req.body.pertanyaan24ket || " ",
+        },
+        pertanyaan25: {
+          status: checkOnOFF(req.body.pertanyaan25),
+          keterangan: req.body.pertanyaan25ket || " ",
+        },
+        pertanyaan26: {
+          status: checkOnOFF(req.body.pertanyaan26),
+          keterangan: req.body.pertanyaan26ket || " ",
+        },
+      };
+      foundTempat.inspeksi.hydrant.push(object);
+      foundTempat.save();
+      req.flash(
+        "success",
+        `Inspeksi HYDRANT di ${foundTempat.nama} berhasil ditambahkan`
+      );
+      return res.redirect(
+        `/maintenance/${jenisTempatQuery}/${alamatTempat}/inspeksi/${jenisInspeksi}`
+      );
+    } else if (jenisInspeksi === "apd") {
+      const object = {
+        pekerja: foundUser,
+        pertanyaan1: {
+          status: checkOnOFF(req.body.pertanyaan1),
+          keterangan: req.body.pertanyaan1ket || " ",
+        },
+        pertanyaan2: {
+          status: checkOnOFF(req.body.pertanyaan2),
+          keterangan: req.body.pertanyaan2ket || " ",
+        },
+        pertanyaan3: {
+          status: checkOnOFF(req.body.pertanyaan3),
+          keterangan: req.body.pertanyaan3ket || " ",
+        },
+        pertanyaan4: {
+          status: checkOnOFF(req.body.pertanyaan4),
+          keterangan: req.body.pertanyaan4ket || " ",
+        },
+        pertanyaan5: {
+          status: checkOnOFF(req.body.pertanyaan5),
+          keterangan: req.body.pertanyaan5ket || " ",
+        },
+        pertanyaan6: {
+          status: checkOnOFF(req.body.pertanyaan6),
+          keterangan: req.body.pertanyaan6ket || " ",
+        },
+        pertanyaan7: {
+          status: checkOnOFF(req.body.pertanyaan7),
+          keterangan: req.body.pertanyaan7ket || " ",
+        },
+        pertanyaan8: {
+          status: checkOnOFF(req.body.pertanyaan8),
+          keterangan: req.body.pertanyaan8ket || " ",
+        },
+        pertanyaan9: {
+          status: checkOnOFF(req.body.pertanyaan9),
+          keterangan: req.body.pertanyaan9ket || " ",
+        },
+        pertanyaan10: {
+          status: checkOnOFF(req.body.pertanyaan10),
+          keterangan: req.body.pertanyaan10ket || " ",
+        },
+        pertanyaan11: {
+          status: checkOnOFF(req.body.pertanyaan11),
+          keterangan: req.body.pertanyaan11ket || " ",
+        },
+        pertanyaan12: {
+          status: checkOnOFF(req.body.pertanyaan12),
+          keterangan: req.body.pertanyaan12ket || " ",
+        },
+        pertanyaan13: {
+          status: checkOnOFF(req.body.pertanyaan13),
+          keterangan: req.body.pertanyaan13ket || " ",
+        },
+        pertanyaan14: {
+          status: checkOnOFF(req.body.pertanyaan14),
+          keterangan: req.body.pertanyaan14ket || " ",
+        },
+        pertanyaan15: {
+          status: checkOnOFF(req.body.pertanyaan15),
+          keterangan: req.body.pertanyaan15ket || " ",
+        },
+        pertanyaan16: {
+          status: checkOnOFF(req.body.pertanyaan16),
+          keterangan: req.body.pertanyaan16ket || " ",
+        },
+        pertanyaan17: {
+          status: checkOnOFF(req.body.pertanyaan17),
+          keterangan: req.body.pertanyaan17ket || " ",
+        },
+      };
+      foundTempat.inspeksi.apd.push(object);
+      foundTempat.save();
+      req.flash(
+        "success",
+        `Inspeksi APD di ${foundTempat.nama} berhasil ditambahkan`
+      );
+      return res.redirect(
+        `/maintenance/${jenisTempatQuery}/${alamatTempat}/inspeksi/${jenisInspeksi}`
+      );
+    } else if (jenisInspeksi === "housekeeping") {
+      const object = {
+        pekerja: foundUser,
+        pertanyaan1: {
+          status: checkOnOFF(req.body.pertanyaan1),
+          keterangan: req.body.pertanyaan1ket || " ",
+        },
+        pertanyaan2: {
+          status: checkOnOFF(req.body.pertanyaan2),
+          keterangan: req.body.pertanyaan2ket || " ",
+        },
+        pertanyaan3: {
+          status: checkOnOFF(req.body.pertanyaan3),
+          keterangan: req.body.pertanyaan3ket || " ",
+        },
+        pertanyaan4: {
+          status: checkOnOFF(req.body.pertanyaan4),
+          keterangan: req.body.pertanyaan4ket || " ",
+        },
+        pertanyaan5: {
+          status: checkOnOFF(req.body.pertanyaan5),
+          keterangan: req.body.pertanyaan5ket || " ",
+        },
+        pertanyaan6: {
+          status: checkOnOFF(req.body.pertanyaan6),
+          keterangan: req.body.pertanyaan6ket || " ",
+        },
+        pertanyaan7: {
+          status: checkOnOFF(req.body.pertanyaan7),
+          keterangan: req.body.pertanyaan7ket || " ",
+        },
+        pertanyaan8: {
+          status: checkOnOFF(req.body.pertanyaan8),
+          keterangan: req.body.pertanyaan8ket || " ",
+        },
+        pertanyaan9: {
+          status: checkOnOFF(req.body.pertanyaan9),
+          keterangan: req.body.pertanyaan9ket || " ",
+        },
+        pertanyaan10: {
+          status: checkOnOFF(req.body.pertanyaan10),
+          keterangan: req.body.pertanyaan10ket || " ",
+        },
+        pertanyaan11: {
+          status: checkOnOFF(req.body.pertanyaan11),
+          keterangan: req.body.pertanyaan11ket || " ",
+        },
+        pertanyaan12: {
+          status: checkOnOFF(req.body.pertanyaan12),
+          keterangan: req.body.pertanyaan12ket || " ",
+        },
+        pertanyaan13: {
+          status: checkOnOFF(req.body.pertanyaan13),
+          keterangan: req.body.pertanyaan13ket || " ",
+        },
+        pertanyaan14: {
+          status: checkOnOFF(req.body.pertanyaan14),
+          keterangan: req.body.pertanyaan14ket || " ",
+        },
+        pertanyaan15: {
+          status: checkOnOFF(req.body.pertanyaan15),
+          keterangan: req.body.pertanyaan15ket || " ",
+        },
+        pertanyaan16: {
+          status: checkOnOFF(req.body.pertanyaan16),
+          keterangan: req.body.pertanyaan16ket || " ",
+        },
+        pertanyaan17: {
+          status: checkOnOFF(req.body.pertanyaan17),
+          keterangan: req.body.pertanyaan17ket || " ",
+        },
+        pertanyaan18: {
+          status: checkOnOFF(req.body.pertanyaan17),
+          keterangan: req.body.pertanyaan17ket || " ",
+        },
+        pertanyaan19: {
+          status: checkOnOFF(req.body.pertanyaan17),
+          keterangan: req.body.pertanyaan17ket || " ",
+        },
+      };
+      foundTempat.inspeksi.housekeeping.push(object);
+      foundTempat.save();
+      req.flash(
+        "success",
+        `Inspeksi HOUSEKEEPING di ${foundTempat.nama} berhasil ditambahkan`
+      );
+      return res.redirect(
+        `/maintenance/${jenisTempatQuery}/${alamatTempat}/inspeksi/${jenisInspeksi}`
+      );
+    }
+  }
+);
+
+router.put(
+  "/:jenisTempatQuery/:alamatTempat/inspeksi/:jenisInspeksi/:idInspeksi",
+  isLoggedIn,
+  async (req, res) => {
+    const { jenisTempatQuery, alamatTempat, jenisInspeksi, idInspeksi } =
+      req.params;
+    const tempatFound = await Tempat.findOne({
+      jenis: jenisTempatQuery,
+      alamat: alamatTempat,
+    });
+    if (jenisInspeksi === "apar") {
+      const foundInspeksi = tempatFound.inspeksi.apar.findIndex(
+        (obj) => obj._id.toString() === idInspeksi.toString()
+      );
+      if (req.user.status === "kalab" || req.user.status === "kabeng") {
+        const foundUser = await User.findById(req.user._id);
+        tempatFound.inspeksi.apar[
+          foundInspeksi
+        ].validasi.kepalaTempat.status = true;
+        tempatFound.inspeksi.apar[foundInspeksi].validasi.kepalaTempat.user =
+          foundUser;
+      } else if (req.user.status === "bauk") {
+        const foundUser = await User.findById(req.user._id);
+        tempatFound.inspeksi.apar[foundInspeksi].validasi.bauk.status = true;
+        tempatFound.inspeksi.apar[foundInspeksi].validasi.bauk.user = foundUser;
+      } else if (req.user.status === "upik3") {
+        const foundUser = await User.findById(req.user._id);
+        tempatFound.inspeksi.apar[foundInspeksi].validasi.upik3.status = true;
+        tempatFound.inspeksi.apar[foundInspeksi].validasi.upik3.user =
+          foundUser;
+      }
+      const updated = await tempatFound.save();
+      req.flash(
+        "success",
+        `Approval oleh ${req.user.nama}-${req.user.status} berhasil`
+      );
+      res.redirect(
+        `/maintenance/${jenisTempatQuery}/${alamatTempat}/inspeksi/${jenisInspeksi}`
+      );
+    } else if (jenisInspeksi === "hydrant") {
+      const foundInspeksi = tempatFound.inspeksi.hydrant.findIndex(
+        (obj) => obj._id.toString() === idInspeksi.toString()
+      );
+      if (req.user.status === "kalab" || req.user.status === "kabeng") {
+        const foundUser = await User.findById(req.user._id);
+        tempatFound.inspeksi.hydrant[
+          foundInspeksi
+        ].validasi.kepalaTempat.status = true;
+        tempatFound.inspeksi.hydrant[foundInspeksi].validasi.kepalaTempat.user =
+          foundUser;
+      } else if (req.user.status === "bauk") {
+        const foundUser = await User.findById(req.user._id);
+        tempatFound.inspeksi.hydrant[foundInspeksi].validasi.bauk.status = true;
+        tempatFound.inspeksi.hydrant[foundInspeksi].validasi.bauk.user =
+          foundUser;
+      } else if (req.user.status === "upik3") {
+        const foundUser = await User.findById(req.user._id);
+        tempatFound.inspeksi.hydrant[
+          foundInspeksi
+        ].validasi.upik3.status = true;
+        tempatFound.inspeksi.hydrant[foundInspeksi].validasi.upik3.user =
+          foundUser;
+      }
+      const updated = await tempatFound.save();
+      req.flash(
+        "success",
+        `Approval oleh ${req.user.nama}-${req.user.status} berhasil`
+      );
+      res.redirect(
+        `/maintenance/${jenisTempatQuery}/${alamatTempat}/inspeksi/${jenisInspeksi}`
+      );
+    } else if (jenisInspeksi === "apd") {
+      const foundInspeksi = tempatFound.inspeksi.apd.findIndex(
+        (obj) => obj._id.toString() === idInspeksi.toString()
+      );
+      if (req.user.status === "kalab" || req.user.status === "kabeng") {
+        const foundUser = await User.findById(req.user._id);
+        tempatFound.inspeksi.apd[
+          foundInspeksi
+        ].validasi.kepalaTempat.status = true;
+        tempatFound.inspeksi.apd[foundInspeksi].validasi.kepalaTempat.user =
+          foundUser;
+      } else if (req.user.status === "bauk") {
+        const foundUser = await User.findById(req.user._id);
+        tempatFound.inspeksi.apd[foundInspeksi].validasi.bauk.status = true;
+        tempatFound.inspeksi.apd[foundInspeksi].validasi.bauk.user = foundUser;
+      } else if (req.user.status === "upik3") {
+        const foundUser = await User.findById(req.user._id);
+        tempatFound.inspeksi.apd[foundInspeksi].validasi.upik3.status = true;
+        tempatFound.inspeksi.apd[foundInspeksi].validasi.upik3.user = foundUser;
+      }
+      const updated = await tempatFound.save();
+      req.flash(
+        "success",
+        `Approval oleh ${req.user.nama}-${req.user.status} berhasil`
+      );
+      res.redirect(
+        `/maintenance/${jenisTempatQuery}/${alamatTempat}/inspeksi/${jenisInspeksi}`
+      );
+    } else if (jenisInspeksi === "housekeeping") {
+      const foundInspeksi = tempatFound.inspeksi.housekeeping.findIndex(
+        (obj) => obj._id.toString() === idInspeksi.toString()
+      );
+      if (req.user.status === "kalab" || req.user.status === "kabeng") {
+        const foundUser = await User.findById(req.user._id);
+        tempatFound.inspeksi.housekeeping[
+          foundInspeksi
+        ].validasi.kepalaTempat.status = true;
+        tempatFound.inspeksi.housekeeping[
+          foundInspeksi
+        ].validasi.kepalaTempat.user = foundUser;
+      } else if (req.user.status === "bauk") {
+        const foundUser = await User.findById(req.user._id);
+        tempatFound.inspeksi.housekeeping[
+          foundInspeksi
+        ].validasi.bauk.status = true;
+        tempatFound.inspeksi.housekeeping[foundInspeksi].validasi.bauk.user =
+          foundUser;
+      } else if (req.user.status === "upik3") {
+        const foundUser = await User.findById(req.user._id);
+        tempatFound.inspeksi.housekeeping[
+          foundInspeksi
+        ].validasi.upik3.status = true;
+        tempatFound.inspeksi.housekeeping[foundInspeksi].validasi.upik3.user =
+          foundUser;
+      }
+      const updated = await tempatFound.save();
+      req.flash(
+        "success",
+        `Approval oleh ${req.user.nama}-${req.user.status} berhasil`
+      );
+      res.redirect(
+        `/maintenance/${jenisTempatQuery}/${alamatTempat}/inspeksi/${jenisInspeksi}`
+      );
+    }
   }
 );
 
