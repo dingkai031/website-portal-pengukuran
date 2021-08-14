@@ -142,26 +142,27 @@ function convertDate(tanggal) {
   return isoDate;
 }
 
-function removeSpace(string) {
-  return string.replace(/\s+/g, "");
-}
-
-router.get("/", (req, res) => {
+router.get("/", isLoggedIn, (req, res) => {
   res.render("p2k3/p3k");
 });
 
-router.post("/kuesioner", upload.array("dokumentasi"), (req, res) => {
-  let foto = [];
-  const dataFoto = req.files;
-  for (const obj of dataFoto) {
-    foto.push(obj.filename);
+router.post(
+  "/kuesioner",
+  isLoggedIn,
+  upload.array("dokumentasi"),
+  (req, res) => {
+    let foto = [];
+    const dataFoto = req.files;
+    for (const obj of dataFoto) {
+      foto.push(obj.filename);
+    }
+    const obj = req.body;
+    obj.dokumentasi = foto;
+    const jenis = obj.jenis;
+    const dataForm = JSON.stringify(obj);
+    res.render("p2k3/p3kKuesioner", { dataForm, jenis });
   }
-  const obj = req.body;
-  obj.dokumentasi = foto;
-  const jenis = obj.jenis;
-  const dataForm = JSON.stringify(obj);
-  res.render("p2k3/p3kKuesioner", { dataForm, jenis });
-});
+);
 
 router.get("/pelaporan-kependidikan", isLoggedIn, async (req, res) => {
   const foundTempat = await Tempat.find({});
@@ -192,7 +193,7 @@ router.post("/pelaporan-kependidikan", isLoggedIn, async (req, res) => {
   res.redirect("/upik3/pelaporan-kependidikan");
 });
 
-router.get("/pelaporan-mahasiswa", async (req, res) => {
+router.get("/pelaporan-mahasiswa", isLoggedIn, async (req, res) => {
   const foundTempat = await Tempat.find({});
   res.render("p2k3/p3kLaporMahasiswa", { foundTempat });
 });
@@ -225,7 +226,7 @@ router.get("/kotak-p3k-b", (req, res) => {
   res.render("p2k3/p3kKotakP3kB");
 });
 
-router.post("/kotak-p3k-b", async (req, res) => {
+router.post("/kotak-p3k-b", isLoggedIn, async (req, res) => {
   const { dataInspeksi } = req.body;
   delete req.body.dataInspeksi;
   const data = JSON.parse(dataInspeksi);
@@ -246,11 +247,11 @@ router.post("/kotak-p3k-b", async (req, res) => {
   res.redirect("/upik3/kotak-p3k-b");
 });
 
-router.get("/kotak-p3k-c", (req, res) => {
+router.get("/kotak-p3k-c", isLoggedIn, (req, res) => {
   res.render("p2k3/p3kKotakP3kC");
 });
 
-router.post("/kotak-p3k-c", async (req, res) => {
+router.post("/kotak-p3k-c", isLoggedIn, async (req, res) => {
   const { dataInspeksi } = req.body;
   delete req.body.dataInspeksi;
   const data = JSON.parse(dataInspeksi);
@@ -333,14 +334,14 @@ router.post("/formulir-pemulihan", isLoggedIn, async (req, res) => {
   res.redirect("/upik3/formulir-pemulihan");
 });
 
-router.get("/data-laporan-kecelakaan", async (req, res) => {
+router.get("/data-laporan-kecelakaan", isLoggedIn, async (req, res) => {
   const laporans = await LaporanKecelakaan.find({})
     .populate("saksi")
     .populate("validasi.user");
   res.render("p2k3/p3kDataLaporanKecelakaan", { laporans });
 });
 
-router.delete("/data-laporan-kecelakaan", async (req, res) => {
+router.delete("/data-laporan-kecelakaan", isLoggedIn, async (req, res) => {
   const { idLaporan } = req.body;
   const foundLaporan = await LaporanKecelakaan.findByIdAndDelete(idLaporan)
     .then(() => {
@@ -376,7 +377,7 @@ router.get("/data-laporan-kotak-p3k", isLoggedIn, async (req, res) => {
   res.render("p2k3/p3kDataLaporanKotakP3k", { laporans });
 });
 
-router.delete("/data-laporan-kotak-p3k", async (req, res) => {
+router.delete("/data-laporan-kotak-p3k", isLoggedIn, async (req, res) => {
   await LaporanKotakP3k.findByIdAndDelete(req.body.idLaporan)
     .then(() => {
       return req.flash("success", "Laporan Berhasil Dihapus");
@@ -387,7 +388,7 @@ router.delete("/data-laporan-kotak-p3k", async (req, res) => {
   res.redirect("/upik3/data-laporan-kotak-p3k");
 });
 
-router.put("/data-laporan-kotak-p3k", async (req, res) => {
+router.put("/data-laporan-kotak-p3k", isLoggedIn, async (req, res) => {
   const { idLaporan } = req.body;
   const foundLaporan = await LaporanKotakP3k.findById(idLaporan);
   const foundUser = await User.findById(req.user._id);

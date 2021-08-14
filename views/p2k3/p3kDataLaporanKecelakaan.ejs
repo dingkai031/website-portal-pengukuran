@@ -438,7 +438,9 @@
                                   <% lokasi = "pelaporanMahasiswa/mahasiswaMinor" %> 
                                 <% } else if (laporan.jenisTurunan === "Mahasiswa-Mayor") { %>  
                                   <% lokasi = "pelaporanMahasiswa/mahasiswaMayor" %> 
-                                <% } %> 
+                                <% }else if (laporan.jenisTurunan === "Tenaga Kependidikan-Minor") {%>
+                                  <% lokasi = "pelaporanTenagaKependidikan/minor" %>   
+                                <% } %>  
                                 <img
                                   src="/img/dokumentasiInspeksi/<%= `${lokasi}/${laporan.dokumentasi[0]}` %>"
                                   class="w-100"
