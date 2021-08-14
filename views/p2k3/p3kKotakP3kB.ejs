@@ -1,19 +1,29 @@
 <%- include("templateP3k/head") %>
-<div class="card shadow-sm">
-  <div class="card-body">
-    <h3 class="card-title fw-bolder mb-3">
+<div class="card shadow mx-3 mt-3">
+  <div class="card-header">
+    <h3 class="card-title fw-bolder my-2">
       Pengisian Data Ketersediaan Perlengkapan Kotak P3K - Kotak P3K tipe B
     </h3>
-    <form action="#" method="POST" spellcheck="false" autocomplete="off">
+  </div>
+  <div class="card-body">
+    <form
+      action="/upik3/kuesioner"
+      method="POST"
+      spellcheck="false"
+      autocomplete="off"
+      enctype="multipart/form-data"
+    >
       <div class="mb-3 row">
         <div class="col-sm-6 d-flex flex-column mb-2 mb-sm-1">
-          <label for="tanggal" class="form-label">Tanggal Inspeksi</label>
+          <label for="tanggalInspeksi" class="form-label"
+            >Tanggal Inspeksi</label
+          >
           <div class="input-group border-0 datepicker">
             <input
               type="text"
-              id="tanggal"
+              id="tanggalInspeksi"
               class="form-control border-0"
-              name="tanggal"
+              name="tanggalInspeksi"
               required
               title="Harap isi form ini"
               data-input
@@ -31,47 +41,54 @@
             id="namaInspektor"
             name="namaInspektor"
             title="Harap isi form ini"
+            readonly
+            value="<%= currentUser.nama %>"
             required
           />
+          <div class="invalid-feedback">Silahkan mengisi nama inspektor</div>
         </div>
       </div>
       <div class="mb-3 row">
         <div class="col-sm-6 d-flex flex-column mb-2 mb-sm-1">
-          <label for="nrp" class="form-label">NRP/NIK</label>
+          <label for="nipInspektor" class="form-label">NRP/NIP</label>
           <input
             type="text"
-            id="nrp"
+            id="nipInspektor"
             class="form-control"
-            name="nrp"
+            name="nipInspektor"
             required
+            readonly
+            value="<%= currentUser.nip %>"
             title="Harap isi form ini"
           />
         </div>
         <div class="col-sm-6 d-flex flex-column mb-2 mb-sm-1">
-          <label for="letakKotakP3k" class="form-label">Letak kotak P3K</label>
-          <select name="letakKotakP3k" class="select2" id="letakKotakP3k">
-            <option></option>
-            <option>Lab. Elektronika Daya</option>
-            <option>Lab. Elektronika dan Sistem Kontrol</option>
-            <option>Lab. Kimia</option>
-            <option>Lab. Fisika</option>
-            <option>Lab. Instrumentasi</option>
+          <label for="lokasiP3k" class="form-label"
+            >Letak Kotak P3K yang Sedang Diinspeksi</label
+          >
+          <select name="lokasiP3k" class="select2" id="lokasiP3k">
+            <option value=""></option>
+            <option>Lab Elektronika Daya</option>
+            <option>Lab Elektronika dan Sistem Kontrol</option>
+            <option>Lab Kimia</option>
+            <option>Lab Fisika</option>
+            <option>Lab Instrumentasi</option>
             <option>
-              Lab. Pengembangan Bisnis Maritim dan Galeri Investasi
+              Lab Pengembangan Bisnis Maritim dan Galeri Investasi
             </option>
-            <option>Lab. Navigasi dan Komunikasi</option>
-            <option>Lab. Logistik Maritim</option>
-            <option>Lab. Reparasi Listrik</option>
-            <option>Lab. Mesin Listrik</option>
-            <option>Lab. Otomasi dan Robotik</option>
-            <option>Lab. Plumbing dan Pemodelan Sistem Perpipaan</option>
-            <option>Lab. CNC</option>
-            <option>Lab. Pemadam Kebakaran</option>
-            <option>Lab. Pneumatik dan Hidrolik</option>
-            <option>Lab. Motor Bakar</option>
-            <option>Lab. CADD</option>
-            <option>Lab. Uji Bahan</option>
-            <option>Lab. Pengolahan Limbah</option>
+            <option>Lab Navigasi dan Komunikasi</option>
+            <option>Lab Logistik Maritim</option>
+            <option>Lab Reparasi Listrik</option>
+            <option>Lab Mesin Listrik</option>
+            <option>Lab Otomasi dan Robotik</option>
+            <option>Lab Plumbing dan Pemodelan Sistem Perpipaan</option>
+            <option>Lab CNC</option>
+            <option>Lab Pemadam Kebakaran</option>
+            <option>Lab Pneumatik dan Hidrolik</option>
+            <option>Lab Motor Bakar</option>
+            <option>Lab CADD</option>
+            <option>Lab Uji Bahan</option>
+            <option>Lab Pengolahan Limbah</option>
             <option>Bengkel Reparasi Mesin</option>
           </select>
         </div>
@@ -90,8 +107,9 @@
               name="kasaSteril"
               required
               min="0"
+              max="40"
             />
-            <span class="input-group-text">/40</span>
+            <span class="input-group-text">40</span>
           </div>
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
@@ -104,9 +122,10 @@
               name="perban5Cm"
               title="Harap isi data ini"
               min="0"
+              max="4"
               required
             />
-            <span class="input-group-text">/4</span>
+            <span class="input-group-text">4</span>
           </div>
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
@@ -121,9 +140,10 @@
               name="perban10Cm"
               title="Harap isi data ini"
               min="0"
+              max="4"
               required
             />
-            <span class="input-group-text">/4</span>
+            <span class="input-group-text">4</span>
           </div>
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
@@ -138,9 +158,10 @@
               name="plesterBiasa"
               title="Harap isi data ini"
               min="0"
+              max="4"
               required
             />
-            <span class="input-group-text">/4</span>
+            <span class="input-group-text">4</span>
           </div>
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
@@ -153,9 +174,10 @@
               name="plesterCepat"
               title="Harap isi data ini"
               min="0"
+              max="15"
               required
             />
-            <span class="input-group-text">/15</span>
+            <span class="input-group-text">15</span>
           </div>
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
@@ -168,9 +190,10 @@
               name="kapas"
               title="Harap isi data ini"
               min="0"
+              max="2"
               required
             />
-            <span class="input-group-text">/2</span>
+            <span class="input-group-text">2</span>
           </div>
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
@@ -186,8 +209,9 @@
               title="Harap isi data ini"
               min="0"
               required
+              max="4"
             />
-            <span class="input-group-text">/4</span>
+            <span class="input-group-text">4</span>
           </div>
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
@@ -201,8 +225,9 @@
               title="Harap isi data ini"
               min="0"
               required
+              max="1"
             />
-            <span class="input-group-text">/1</span>
+            <span class="input-group-text">1</span>
           </div>
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
@@ -216,8 +241,9 @@
               title="Harap isi data ini"
               min="0"
               required
+              max="12"
             />
-            <span class="input-group-text">/12</span>
+            <span class="input-group-text">12</span>
           </div>
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
@@ -232,9 +258,10 @@
               name="sarungTangan"
               title="Harap isi data ini"
               min="0"
+              max="3"
               required
             />
-            <span class="input-group-text">/3</span>
+            <span class="input-group-text">3</span>
           </div>
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
@@ -248,8 +275,9 @@
               title="Harap isi data ini"
               min="0"
               required
+              max="1"
             />
-            <span class="input-group-text">/1</span>
+            <span class="input-group-text">1</span>
           </div>
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
@@ -262,9 +290,10 @@
               name="pinset"
               title="Harap isi data ini"
               min="0"
+              max="1"
               required
             />
-            <span class="input-group-text">/1</span>
+            <span class="input-group-text">1</span>
           </div>
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
@@ -277,9 +306,10 @@
               name="lampuSenter"
               title="Harap isi data ini"
               min="0"
+              max="1"
               required
             />
-            <span class="input-group-text">/1</span>
+            <span class="input-group-text">1</span>
           </div>
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
@@ -294,9 +324,10 @@
               name="gelasCuciMata"
               title="Harap isi data ini"
               min="0"
+              max="2"
               required
             />
-            <span class="input-group-text">/2</span>
+            <span class="input-group-text">2</span>
           </div>
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
@@ -311,9 +342,10 @@
               name="kantongPlastik"
               title="Harap isi data ini"
               min="0"
+              max="1"
               required
             />
-            <span class="input-group-text">/1</span>
+            <span class="input-group-text">1</span>
           </div>
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
@@ -328,9 +360,10 @@
               name="aquades"
               title="Harap isi data ini"
               min="0"
+              max="1"
               required
             />
-            <span class="input-group-text">/1</span>
+            <span class="input-group-text">1</span>
           </div>
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
@@ -345,9 +378,10 @@
               name="povidone"
               title="Harap isi data ini"
               min="0"
+              max="1"
               required
             />
-            <span class="input-group-text">/1</span>
+            <span class="input-group-text">1</span>
           </div>
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
@@ -361,8 +395,9 @@
               title="Harap isi data ini"
               min="0"
               required
+              max="1"
             />
-            <span class="input-group-text">/1</span>
+            <span class="input-group-text">1</span>
           </div>
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
@@ -375,10 +410,37 @@
               name="bukuPanduan"
               title="Harap isi data ini"
               min="0"
+              max="1"
               required
             />
-            <span class="input-group-text">/1</span>
+            <span class="input-group-text">1</span>
           </div>
+        </div>
+        <input
+          class="d-none"
+          type="text"
+          readonly
+          required
+          name="jenis"
+          value="kotak-p3k-b"
+        />
+        <input
+          class="d-none"
+          type="text"
+          readonly
+          required
+          name="jenisTurunan"
+          value="Tipe B"
+        />
+        <div class="col-12">
+          <label for="dokumentasi" class="form-label">Dokumentasi</label>
+          <input
+            type="file"
+            name="dokumentasi"
+            id="dokumentasi"
+            class="form-control dokumentasi"
+            multiple
+          />
         </div>
       </div>
       <div class="d-flex flex-column d-lg-block text-start text-lg-center">

@@ -1,10 +1,18 @@
 <%- include("templateP3k/head") %>
-<div class="card shadow-sm pt-3 px-3">
-  <div class="card-body">
-    <h3 class="card-title fw-bolder mb-5">
+<div class="card shadow mt-3 mx-3">
+  <div class="card-header">
+    <h3 class="card-title fw-bolder my-3">
       Pendataan Alat Ketersediaan Alat Evakuasi Korban
     </h3>
-    <form action="#" method="POST" spellcheck="false" autocomplete="off">
+  </div>
+  <div class="card-body">
+    <form
+      action="/upik3/kuesioner"
+      method="POST"
+      spellcheck="false"
+      autocomplete="off"
+      enctype="multipart/form-data"
+    >
       <div class="mb-3 row justify-content-center">
         <div class="col-sm-6 d-flex flex-column">
           <label for="tanggalInspeksi" class="form-label"
@@ -36,19 +44,23 @@
             class="form-control"
             required
             title="Harap isi form ini"
+            readonly
+            value="<%= currentUser.nama %>"
           />
         </div>
       </div>
       <div class="mb-4 row justify-content-center">
         <div class="col-sm-6 d-flex flex-column">
-          <label for="nrp" class="form-label">NRP/NIK</label>
+          <label for="nipInspektor" class="form-label">NRP/NIK</label>
           <input
             type="number"
-            name="nrp"
-            id="nrp"
+            name="nipInspektor"
+            id="nipInspektor"
             title="Harap isi form ini"
             class="form-control"
             required
+            readonly
+            value="<%= currentUser.nip %>"
           />
         </div>
       </div>
@@ -81,8 +93,9 @@
                   required
                   title="Harap isi form ini"
                   min="0"
+                  max="1"
                 />
-                <span class="input-group-text">/1</span>
+                <span class="input-group-text">1</span>
               </div>
             </div>
             <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
@@ -98,8 +111,9 @@
                   required
                   title="Harap isi form ini"
                   min="0"
+                  max="1"
                 />
-                <span class="input-group-text">/1</span>
+                <span class="input-group-text">1</span>
               </div>
             </div>
             <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
@@ -115,8 +129,9 @@
                   required
                   title="Harap isi form ini"
                   min="0"
+                  max="1"
                 />
-                <span class="input-group-text">/1</span>
+                <span class="input-group-text">1</span>
               </div>
             </div>
             <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
@@ -132,8 +147,9 @@
                   required
                   title="Harap isi form ini"
                   min="0"
+                  max="1"
                 />
-                <span class="input-group-text">/1</span>
+                <span class="input-group-text">1</span>
               </div>
             </div>
             <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
@@ -147,25 +163,27 @@
                   required
                   title="Harap isi form ini"
                   min="0"
+                  max="1"
                 />
-                <span class="input-group-text">/1</span>
+                <span class="input-group-text">1</span>
               </div>
             </div>
             <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
-              <label for="Pneumatik" class="form-label"
+              <label for="pneumatik" class="form-label"
                 >Lab Pneumatik dan Hidrolik</label
               >
               <div class="input-group">
                 <input
                   type="number"
-                  name="Pneumatik"
-                  id="Pneumatik"
+                  name="pneumatik"
+                  id="pneumatik"
                   class="form-control"
                   required
                   title="Harap isi form ini"
                   min="0"
+                  max="1"
                 />
-                <span class="input-group-text">/1</span>
+                <span class="input-group-text">1</span>
               </div>
             </div>
             <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
@@ -181,8 +199,9 @@
                   required
                   title="Harap isi form ini"
                   min="0"
+                  max="1"
                 />
-                <span class="input-group-text">/1</span>
+                <span class="input-group-text">1</span>
               </div>
             </div>
             <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
@@ -196,8 +215,9 @@
                   required
                   title="Harap isi form ini"
                   min="0"
+                  max="1"
                 />
-                <span class="input-group-text">/1</span>
+                <span class="input-group-text">1</span>
               </div>
             </div>
             <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
@@ -211,8 +231,9 @@
                   required
                   title="Harap isi form ini"
                   min="0"
+                  max="1"
                 />
-                <span class="input-group-text">/1</span>
+                <span class="input-group-text">1</span>
               </div>
             </div>
             <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
@@ -228,8 +249,9 @@
                   required
                   title="Harap isi form ini"
                   min="0"
+                  max="1"
                 />
-                <span class="input-group-text">/1</span>
+                <span class="input-group-text">1</span>
               </div>
             </div>
             <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
@@ -245,8 +267,9 @@
                   required
                   title="Harap isi form ini"
                   min="0"
+                  max="1"
                 />
-                <span class="input-group-text">/1</span>
+                <span class="input-group-text">1</span>
               </div>
             </div>
             <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
@@ -262,8 +285,9 @@
                   required
                   title="Harap isi form ini"
                   min="0"
+                  max="1"
                 />
-                <span class="input-group-text">/1</span>
+                <span class="input-group-text">1</span>
               </div>
             </div>
             <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
@@ -277,8 +301,9 @@
                   required
                   title="Harap isi form ini"
                   min="0"
+                  max="1"
                 />
-                <span class="input-group-text">/1</span>
+                <span class="input-group-text">1</span>
               </div>
             </div>
             <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
@@ -294,8 +319,9 @@
                   required
                   title="Harap isi form ini"
                   min="0"
+                  max="1"
                 />
-                <span class="input-group-text">/1</span>
+                <span class="input-group-text">1</span>
               </div>
             </div>
             <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
@@ -309,8 +335,9 @@
                   required
                   title="Harap isi form ini"
                   min="0"
+                  max="1"
                 />
-                <span class="input-group-text">/1</span>
+                <span class="input-group-text">1</span>
               </div>
             </div>
           </div>
@@ -343,8 +370,9 @@
                   required
                   title="Harap isi form ini"
                   min="0"
+                  max="1"
                 />
-                <span class="input-group-text">/1</span>
+                <span class="input-group-text">1</span>
               </div>
             </div>
             <div class="col-lg-6 mb-3">
@@ -358,8 +386,9 @@
                   required
                   title="Harap isi form ini"
                   min="0"
+                  max="1"
                 />
-                <span class="input-group-text">/1</span>
+                <span class="input-group-text">1</span>
               </div>
             </div>
             <div class="col-lg-6 mb-3">
@@ -373,8 +402,9 @@
                   required
                   title="Harap isi form ini"
                   min="0"
+                  max="1"
                 />
-                <span class="input-group-text">/1</span>
+                <span class="input-group-text">1</span>
               </div>
             </div>
             <div class="col-lg-6 mb-3">
@@ -388,8 +418,9 @@
                   required
                   title="Harap isi form ini"
                   min="0"
+                  max="1"
                 />
-                <span class="input-group-text">/1</span>
+                <span class="input-group-text">1</span>
               </div>
             </div>
             <div class="col-lg-6 mb-3">
@@ -403,8 +434,9 @@
                   required
                   title="Harap isi form ini"
                   min="0"
+                  max="1"
                 />
-                <span class="input-group-text">/1</span>
+                <span class="input-group-text">1</span>
               </div>
             </div>
             <div class="col-lg-6 mb-3">
@@ -418,8 +450,9 @@
                   required
                   title="Harap isi form ini"
                   min="0"
+                  max="1"
                 />
-                <span class="input-group-text">/1</span>
+                <span class="input-group-text">1</span>
               </div>
             </div>
             <div class="col-lg-6 mb-3">
@@ -433,11 +466,41 @@
                   required
                   title="Harap isi form ini"
                   min="0"
+                  max="1"
                 />
-                <span class="input-group-text">/1</span>
+                <span class="input-group-text">1</span>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="row justify-content-center mb-3">
+        <input
+          class="d-none"
+          type="text"
+          readonly
+          required
+          name="jenis"
+          value="pendataan-ketersediaan-alat-evakuasi-korban"
+        />
+        <input
+          class="d-none"
+          type="text"
+          readonly
+          required
+          name="jenisTurunan"
+          value="Laporan Alat Evakuasi"
+        />
+        <div class="col-sm-6">
+          <label for="dokumentasi" class="form-label">Dokumentasi</label>
+          <input
+            type="file"
+            id="dokumentasi"
+            class="dokumentasi"
+            name="dokumentasi"
+            multiple
+            required
+          />
         </div>
       </div>
       <div class="row d-flex flex-column align-items-center">

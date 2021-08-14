@@ -1,11 +1,8 @@
 <%- include("templateP3k/head") %>
 <div class="modal fade" id="form" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-xl">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title fw-bolder">
-          Pemulihan Perlengkapan P3K dan Alat Evakuasi yang Rusak
-        </h5>
         <button
           type="button"
           class="btn-close"
@@ -14,7 +11,13 @@
         ></button>
       </div>
       <div class="modal-body">
-        <form method="post" spellcheck="false" autocomplete="off">
+        <form
+          action="/upik3/kuesioner"
+          method="post"
+          spellcheck="false"
+          autocomplete="off"
+          enctype="multipart/form-data"
+        >
           <div class="row">
             <div class="col-12">
               <div class="mb-3 row">
@@ -48,32 +51,44 @@
                     name="namaInspektor"
                     title="Harap isi form ini"
                     required
+                    readonly
+                    value="<%= currentUser.nama %>"
                   />
                 </div>
               </div>
               <div class="mb-3 row">
                 <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
-                  <label for="nrp" class="form-label">NRP/NIK</label>
+                  <label for="nipInspektor" class="form-label">NRP/NIK</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="nrp"
-                    name="nrp"
+                    id="nipInspektor"
+                    name="nipInspektor"
                     title="Harap isi form ini"
                     required
+                    readonly
+                    value="<%= currentUser.nip %>"
                   />
                 </div>
                 <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
                   <label for="tempatInspeksi" class="form-label"
                     >Tempat Inspeksi</label
                   >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="tempatInspeksi"
+                  <select
                     name="tempatInspeksi"
-                    title="Harap isi form ini"
-                  />
+                    id="tempatInspeksi"
+                    class="form-select"
+                    required
+                  >
+                    <option value="" class="d-none" selected>
+                      Silahkan pilih tempat
+                    </option>
+                    <% for( const tempat of foundTempat ) { %>
+                    <option value="<%= tempat.nama %>">
+                      <%= tempat.nama %>
+                    </option>
+                    <% } %>
+                  </select>
                 </div>
               </div>
               <div class="mb-3">
@@ -91,24 +106,60 @@
                   />
                 </div>
               </div>
+              <input
+                type="text"
+                class="d-none"
+                readonly
+                required
+                value="formulir-pemulihan"
+                name="jenis"
+              />
+              <input
+                type="text"
+                class="d-none"
+                readonly
+                required
+                value="Laporan Pemulihan"
+                name="jenisTurunan"
+              />
+              <div class="mb-3">
+                <div class="d-flex flex-column">
+                  <label for="dokumentasi" class="form-label"
+                    >Dokumentasi</label
+                  >
+                  <input
+                    type="file"
+                    class="form-control dokumentasi"
+                    id="dokumentasi"
+                    name="dokumentasi"
+                    title="Harap isi form ini"
+                    required
+                    multiple
+                  />
+                </div>
+              </div>
             </div>
           </div>
           <div class="d-flex flex-column d-lg-block text-start text-lg-center">
             <button type="reset" id="reset" class="btn btn-danger mt-3">
               Clear
             </button>
-            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+            <button type="submit" class="btn btn-primary mt-3">
+              Selanjutnya
+            </button>
           </div>
         </form>
       </div>
     </div>
   </div>
 </div>
-<div class="card custom-border-radius bg-white">
-  <div class="card-body py-3">
+<div class="card mt-3 mx-3 shadow">
+  <div class="card-header">
     <h3 class="card-title fw-bolder fs-3 m-0 mb-3 text-center text-md-start">
       Formulir Pemulihan Perlengkapan P3K dan Alat Evakuasi yang Rusak
     </h3>
+  </div>
+  <div class="card-body">
     <p class="text-justify mb-1">
       Sebelum pengisian form Pemulihan Perlengkapan P3K dan Alat Evakuasi yang
       Rusak, akan muncul prosedur Pemulihan Perlengkapan P3K dan Alat Evakuasi

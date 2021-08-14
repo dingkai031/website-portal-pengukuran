@@ -35,9 +35,6 @@ function convertDate(tanggal) {
   return isoDate;
 }
 
-function capitallize(string) {
-  return `${string[0].toUpperCase()}${string.slice(1)}`;
-}
 //=========================================================================================================================
 router.get("/", isLoggedIn, async (req, res) => {
   const jenisTempatQuery = false;

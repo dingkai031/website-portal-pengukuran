@@ -1,0 +1,1686 @@
+<%- include("templateP3k/head") %>
+<div class="card shadow mt-3 mx-3">
+  <div class="card-header">
+    <h3 class="card-title text-uppercase">Kuesioner</h3>
+  </div>
+  <div class="card-body">
+    <p>
+      Lengkapi pernyataan-pernyataan berikut ini dengan memberikan tanda centang
+      (√) pada kotak yang telah tersedia di bawah ini!
+    </p>
+    <table class="table table-bordered my-3" style="width: 100px">
+      <tbody class="text-nowrap">
+        <tr>
+          <td>SS</td>
+          <td class="text-center">:</td>
+          <td>Sangat Setuju</td>
+        </tr>
+        <tr>
+          <td>S</td>
+          <td class="text-center">:</td>
+          <td>Setuju</td>
+        </tr>
+        <tr>
+          <td>RG</td>
+          <td class="text-center">:</td>
+          <td>Ragu-ragu</td>
+        </tr>
+        <tr>
+          <td>TS</td>
+          <td class="text-center">:</td>
+          <td>Tidak Setuju</td>
+        </tr>
+        <tr>
+          <td>STS</td>
+          <td class="text-center">:</td>
+          <td>Sangat Tidak Setuju</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="table-responsive">
+      <table class="table align-middle table-bordered">
+        <thead>
+          <tr class="table-primary">
+            <th class="text-center">No.</th>
+            <th>Pertanyaan</th>
+            <th class="text-center">SS</th>
+            <th class="text-center">S</th>
+            <th class="text-center">RG</th>
+            <th class="text-center">TS</th>
+            <th class="text-center">STS</th>
+          </tr>
+        </thead>
+        <form
+          action="/upik3/<%= jenis %>"
+          method="POST"
+          autocomplete="off"
+          spellcheck="false"
+        >
+          <tbody>
+            <tr>
+              <td colspan="7"><i class="fw-bolder">Usefulness</i></td>
+            </tr>
+            <!-- ========================================================================== -->
+            <tr>
+              <td class="text-center">1</td>
+              <td>
+                Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                Perlengkapan Kotak P3K ini membantu saya menjadi lebih efektif
+                dalam pembuatan laporan Kecelakaan dan Pendataan Ketersediaan
+                Perlengkapan Kotak P3K
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan1"
+                  id="pertanyaan1ss"
+                  autocomplete="off"
+                  value="ss"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan1ss"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan1"
+                  id="pertanyaan1s"
+                  autocomplete="off"
+                  value="s"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan1s"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan1"
+                  id="pertanyaan1rg"
+                  autocomplete="off"
+                  value="rg"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan1rg"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan1"
+                  id="pertanyaan1ts"
+                  autocomplete="off"
+                  value="ts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan1ts"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan1"
+                  id="pertanyaan1sts"
+                  autocomplete="off"
+                  value="sts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan1sts"
+                  >√</label
+                >
+              </td>
+            </tr>
+            <!-- ========================================================================== -->
+            <tr>
+              <td class="text-center">2</td>
+              <td>
+                Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                Perlengkapan Kotak P3K ini membantu saya menjadi lebih produktif
+                pada saat pembuatan laporan Kecelakaan dan Pendataan
+                Ketersediaan Perlengkapan Kotak P3K
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan2"
+                  id="pertanyaan2ss"
+                  autocomplete="off"
+                  value="ss"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan2ss"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan2"
+                  id="pertanyaan2s"
+                  autocomplete="off"
+                  value="s"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan2s"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan2"
+                  id="pertanyaan2rg"
+                  autocomplete="off"
+                  value="rg"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan2rg"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan2"
+                  id="pertanyaan2ts"
+                  autocomplete="off"
+                  value="ts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan2ts"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan2"
+                  id="pertanyaan2sts"
+                  autocomplete="off"
+                  value="sts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan2sts"
+                  >√</label
+                >
+              </td>
+            </tr>
+            <!-- ========================================================================== -->
+            <tr>
+              <td class="text-center">3</td>
+              <td>
+                Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                Perlengkapan Kotak P3K ini berguna sekali dalam penyimpanan
+                laporan Kecelakaan dan Pendataan Ketersediaan Perlengkapan Kotak
+                P3K
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan3"
+                  id="pertanyaan3ss"
+                  autocomplete="off"
+                  value="ss"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan3ss"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan3"
+                  id="pertanyaan3s"
+                  autocomplete="off"
+                  value="s"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan3s"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan3"
+                  id="pertanyaan3rg"
+                  autocomplete="off"
+                  value="rg"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan3rg"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan3"
+                  id="pertanyaan3ts"
+                  autocomplete="off"
+                  value="ts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan3ts"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan3"
+                  id="pertanyaan3sts"
+                  autocomplete="off"
+                  value="sts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan3sts"
+                  >√</label
+                >
+              </td>
+            </tr>
+            <!-- ========================================================================== -->
+            <tr>
+              <td class="text-center">4</td>
+              <td>
+                Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                Perlengkapan Kotak P3K ini membuat pelaporan Kecelakaan dan
+                Pendataan Ketersediaan Perlengkapan Kotak P3K lebih mudah untuk
+                dilakukan
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan4"
+                  id="pertanyaan4ss"
+                  autocomplete="off"
+                  value="ss"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan4ss"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan4"
+                  id="pertanyaan4s"
+                  autocomplete="off"
+                  value="s"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan4s"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan4"
+                  id="pertanyaan4rg"
+                  autocomplete="off"
+                  value="rg"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan4rg"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan4"
+                  id="pertanyaan4ts"
+                  autocomplete="off"
+                  value="ts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan4ts"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan4"
+                  id="pertanyaan4sts"
+                  autocomplete="off"
+                  value="sts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan4sts"
+                  >√</label
+                >
+              </td>
+            </tr>
+            <!-- ========================================================================== -->
+            <tr>
+              <td class="text-center">5</td>
+              <td>
+                Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                Perlengkapan Kotak P3K ini menghemat waktu saya saat melakukan
+                pembuatan laporan Kecelakaan dan Pendataan Ketersediaan
+                Perlengkapan Kotak P3K
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan5"
+                  id="pertanyaan5ss"
+                  autocomplete="off"
+                  value="ss"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan5ss"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan5"
+                  id="pertanyaan5s"
+                  autocomplete="off"
+                  value="s"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan5s"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan5"
+                  id="pertanyaan5rg"
+                  autocomplete="off"
+                  value="rg"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan5rg"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan5"
+                  id="pertanyaan5ts"
+                  autocomplete="off"
+                  value="ts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan5ts"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan5"
+                  id="pertanyaan5sts"
+                  autocomplete="off"
+                  value="sts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan5sts"
+                  >√</label
+                >
+              </td>
+            </tr>
+            <!-- ========================================================================== -->
+            <tr>
+              <td class="text-center">6</td>
+              <td>
+                Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                Perlengkapan Kotak P3K ini dapat memenuhi kebutuhan saya (untuk
+                membuat laporan Kecelakaan dan Pendataan Ketersediaan
+                Perlengkapan Kotak P3K
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan6"
+                  id="pertanyaan6ss"
+                  autocomplete="off"
+                  value="ss"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan6ss"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan6"
+                  id="pertanyaan6s"
+                  autocomplete="off"
+                  value="s"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan6s"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan6"
+                  id="pertanyaan6rg"
+                  autocomplete="off"
+                  value="rg"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan6rg"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan6"
+                  id="pertanyaan6ts"
+                  autocomplete="off"
+                  value="ts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan6ts"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan6"
+                  id="pertanyaan6sts"
+                  autocomplete="off"
+                  value="sts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan6sts"
+                  >√</label
+                >
+              </td>
+            </tr>
+            <!-- ========================================================================== -->
+            <tr>
+              <td class="text-center">7</td>
+              <td>
+                Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                Perlengkapan Kotak P3K ini melakukan semua yang saya harapkan
+                (untuk membuat laporan Kecelakaan dan Pendataan Ketersediaan
+                Perlengkapan Kotak P3K)
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan7"
+                  id="pertanyaan7ss"
+                  autocomplete="off"
+                  value="ss"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan7ss"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan7"
+                  id="pertanyaan7s"
+                  autocomplete="off"
+                  value="s"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan7s"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan7"
+                  id="pertanyaan7rg"
+                  autocomplete="off"
+                  value="rg"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan7rg"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan7"
+                  id="pertanyaan7ts"
+                  autocomplete="off"
+                  value="ts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan7ts"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan7"
+                  id="pertanyaan7sts"
+                  autocomplete="off"
+                  value="sts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan7sts"
+                  >√</label
+                >
+              </td>
+            </tr>
+            <!-- ========================================================================== -->
+            <tr>
+              <td colspan="7"><i class="fw-bolder">Ease of use</i></td>
+            </tr>
+            <tr>
+              <td class="text-center">8</td>
+              <td>
+                Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                Perlengkapan Kotak P3K ini mudah digunakan
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan8"
+                  id="pertanyaan8ss"
+                  autocomplete="off"
+                  value="ss"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan8ss"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan8"
+                  id="pertanyaan8s"
+                  autocomplete="off"
+                  value="s"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan8s"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan8"
+                  id="pertanyaan8rg"
+                  autocomplete="off"
+                  value="rg"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan8rg"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan8"
+                  id="pertanyaan8ts"
+                  autocomplete="off"
+                  value="ts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan8ts"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan8"
+                  id="pertanyaan8sts"
+                  autocomplete="off"
+                  value="sts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan8sts"
+                  >√</label
+                >
+              </td>
+            </tr>
+            <!-- ========================================================================== -->
+            <tr>
+              <td class="text-center">9</td>
+              <td>
+                Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                Perlengkapan Kotak P3K ini cara penggunaannya sederhana.
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan9"
+                  id="pertanyaan9ss"
+                  autocomplete="off"
+                  value="ss"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan9ss"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan9"
+                  id="pertanyaan9s"
+                  autocomplete="off"
+                  value="s"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan9s"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan9"
+                  id="pertanyaan9rg"
+                  autocomplete="off"
+                  value="rg"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan9rg"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan9"
+                  id="pertanyaan9ts"
+                  autocomplete="off"
+                  value="ts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan9ts"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan9"
+                  id="pertanyaan9sts"
+                  autocomplete="off"
+                  value="sts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan9sts"
+                  >√</label
+                >
+              </td>
+            </tr>
+            <!-- ========================================================================== -->
+            <tr>
+              <td class="text-center">10</td>
+              <td>
+                Baik pengguna sesekali ataupun pengguna yang teratur akan
+                menyukai Sistem Informasi Pelaporan Kecelakaan dan Pendataan
+                Ketersediaan Perlengkapan Kotak P3K ini.
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan10"
+                  id="pertanyaan10ss"
+                  autocomplete="off"
+                  value="ss"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan10ss"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan10"
+                  id="pertanyaan10s"
+                  autocomplete="off"
+                  value="s"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan10s"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan10"
+                  id="pertanyaan10rg"
+                  autocomplete="off"
+                  value="rg"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan10rg"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan10"
+                  id="pertanyaan10ts"
+                  autocomplete="off"
+                  value="ts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan10ts"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan10"
+                  id="pertanyaan10sts"
+                  autocomplete="off"
+                  value="sts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan10sts"
+                  >√</label
+                >
+              </td>
+            </tr>
+            <!-- ========================================================================== -->
+            <tr>
+              <td class="text-center">11</td>
+              <td>Saya bisa menggunakannya dengan berhasil setiap saat.</td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan11"
+                  id="pertanyaan11ss"
+                  autocomplete="off"
+                  value="ss"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan11ss"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan11"
+                  id="pertanyaan11s"
+                  autocomplete="off"
+                  value="s"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan11s"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan11"
+                  id="pertanyaan11rg"
+                  autocomplete="off"
+                  value="rg"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan11rg"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan11"
+                  id="pertanyaan11ts"
+                  autocomplete="off"
+                  value="ts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan11ts"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan11"
+                  id="pertanyaan11sts"
+                  autocomplete="off"
+                  value="sts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan11sts"
+                  >√</label
+                >
+              </td>
+            </tr>
+            <!-- ========================================================================== -->
+            <tr>
+              <td colspan="7"><i class="fw-bolder">Ease of Learning</i></td>
+            </tr>
+            <tr>
+              <td class="text-center">12</td>
+              <td>
+                Saya belajar menggunakan Sistem Informasi Pelaporan Kecelakaan
+                dan Pendataan Ketersediaan Perlengkapan Kotak P3K ini dengan
+                cepat.
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan12"
+                  id="pertanyaan12ss"
+                  autocomplete="off"
+                  value="ss"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan12ss"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan12"
+                  id="pertanyaan12s"
+                  autocomplete="off"
+                  value="s"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan12s"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan12"
+                  id="pertanyaan12rg"
+                  autocomplete="off"
+                  value="rg"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan12rg"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan12"
+                  id="pertanyaan12ts"
+                  autocomplete="off"
+                  value="ts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan12ts"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan12"
+                  id="pertanyaan12sts"
+                  autocomplete="off"
+                  value="sts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan12sts"
+                  >√</label
+                >
+              </td>
+            </tr>
+            <!-- ========================================================================== -->
+            <tr>
+              <td class="text-center">13</td>
+              <td>
+                Saya dengan mudah ingat bagaimana menggunakan Sistem Informasi
+                Pelaporan Kecelakaan dan Pendataan Ketersediaan Perlengkapan
+                Kotak P3K ini.
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan13"
+                  id="pertanyaan13ss"
+                  autocomplete="off"
+                  value="ss"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan13ss"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan13"
+                  id="pertanyaan13s"
+                  autocomplete="off"
+                  value="s"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan13s"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan13"
+                  id="pertanyaan13rg"
+                  autocomplete="off"
+                  value="rg"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan13rg"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan13"
+                  id="pertanyaan13ts"
+                  autocomplete="off"
+                  value="ts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan13ts"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan13"
+                  id="pertanyaan13sts"
+                  autocomplete="off"
+                  value="sts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan13sts"
+                  >√</label
+                >
+              </td>
+            </tr>
+            <!-- ========================================================================== -->
+            <tr>
+              <td class="text-center">14</td>
+              <td>
+                Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                Perlengkapan Kotak P3K ini mudah dipelajari cara penggunaannya.
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan14"
+                  id="pertanyaan14ss"
+                  autocomplete="off"
+                  value="ss"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan14ss"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan14"
+                  id="pertanyaan14s"
+                  autocomplete="off"
+                  value="s"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan14s"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan14"
+                  id="pertanyaan14rg"
+                  autocomplete="off"
+                  value="rg"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan14rg"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan14"
+                  id="pertanyaan14ts"
+                  autocomplete="off"
+                  value="ts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan14ts"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan14"
+                  id="pertanyaan14sts"
+                  autocomplete="off"
+                  value="sts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan14sts"
+                  >√</label
+                >
+              </td>
+            </tr>
+            <!-- ========================================================================== -->
+            <tr>
+              <td class="text-center">15</td>
+              <td>
+                Saya dengan mudah menjadi terampil saat meggunakan Sistem
+                Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                Perlengkapan Kotak P3K ini.
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan15"
+                  id="pertanyaan15ss"
+                  autocomplete="off"
+                  value="ss"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan15ss"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan15"
+                  id="pertanyaan15s"
+                  autocomplete="off"
+                  value="s"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan15s"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan15"
+                  id="pertanyaan15rg"
+                  autocomplete="off"
+                  value="rg"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan15rg"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan15"
+                  id="pertanyaan15ts"
+                  autocomplete="off"
+                  value="ts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan15ts"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan15"
+                  id="pertanyaan15sts"
+                  autocomplete="off"
+                  value="sts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan15sts"
+                  >√</label
+                >
+              </td>
+            </tr>
+            <!-- ========================================================================== -->
+            <tr>
+              <td colspan="7"><i class="fw-bolder">Satisfaction</i></td>
+            </tr>
+            <tr>
+              <td class="text-center">16</td>
+              <td>
+                Saya puas dengan Sistem Informasi Pelaporan Kecelakaan dan
+                Pendataan Ketersediaan Perlengkapan Kotak P3K ini
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan16"
+                  id="pertanyaan16ss"
+                  autocomplete="off"
+                  value="ss"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan16ss"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan16"
+                  id="pertanyaan16s"
+                  autocomplete="off"
+                  value="s"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan16s"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan16"
+                  id="pertanyaan16rg"
+                  autocomplete="off"
+                  value="rg"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan16rg"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan16"
+                  id="pertanyaan16ts"
+                  autocomplete="off"
+                  value="ts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan16ts"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan16"
+                  id="pertanyaan16sts"
+                  autocomplete="off"
+                  value="sts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan16sts"
+                  >√</label
+                >
+              </td>
+            </tr>
+            <!-- ========================================================================== -->
+            <tr>
+              <td class="text-center">17</td>
+              <td>
+                Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                Perlengkapan Kotak P3K ini menyenangkan untuk digunakan.
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan17"
+                  id="pertanyaan17ss"
+                  autocomplete="off"
+                  value="ss"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan17ss"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan17"
+                  id="pertanyaan17s"
+                  autocomplete="off"
+                  value="s"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan17s"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan17"
+                  id="pertanyaan17rg"
+                  autocomplete="off"
+                  value="rg"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan17rg"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan17"
+                  id="pertanyaan17ts"
+                  autocomplete="off"
+                  value="ts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan17ts"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan17"
+                  id="pertanyaan17sts"
+                  autocomplete="off"
+                  value="sts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan17sts"
+                  >√</label
+                >
+              </td>
+            </tr>
+            <!-- ========================================================================== -->
+            <tr>
+              <td class="text-center">18</td>
+              <td>
+                Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                Perlengkapan Kotak P3K ini berfungsi seperti yang saya inginkan.
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan18"
+                  id="pertanyaan18ss"
+                  autocomplete="off"
+                  value="ss"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan18ss"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan18"
+                  id="pertanyaan18s"
+                  autocomplete="off"
+                  value="s"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan18s"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan18"
+                  id="pertanyaan18rg"
+                  autocomplete="off"
+                  value="rg"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan18rg"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan18"
+                  id="pertanyaan18ts"
+                  autocomplete="off"
+                  value="ts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan18ts"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan18"
+                  id="pertanyaan18sts"
+                  autocomplete="off"
+                  value="sts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan18sts"
+                  >√</label
+                >
+              </td>
+            </tr>
+            <!-- ========================================================================== -->
+            <tr>
+              <td class="text-center">19</td>
+              <td>
+                Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                Perlengkapan Kotak P3K ini Luar biasa.
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan19"
+                  id="pertanyaan19ss"
+                  autocomplete="off"
+                  value="ss"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan19ss"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan19"
+                  id="pertanyaan19s"
+                  autocomplete="off"
+                  value="s"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan19s"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan19"
+                  id="pertanyaan19rg"
+                  autocomplete="off"
+                  value="rg"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan19rg"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan19"
+                  id="pertanyaan19ts"
+                  autocomplete="off"
+                  value="ts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan19ts"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan19"
+                  id="pertanyaan19sts"
+                  autocomplete="off"
+                  value="sts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan19sts"
+                  >√</label
+                >
+              </td>
+            </tr>
+            <!-- ========================================================================== -->
+            <tr>
+              <td class="text-center">20</td>
+              <td>
+                Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                Perlengkapan Kotak P3K ini nyaman digunakan.
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan20"
+                  id="pertanyaan20ss"
+                  autocomplete="off"
+                  value="ss"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan20ss"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan20"
+                  id="pertanyaan20s"
+                  autocomplete="off"
+                  value="s"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan20s"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan20"
+                  id="pertanyaan20rg"
+                  autocomplete="off"
+                  value="rg"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan20rg"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan20"
+                  id="pertanyaan20ts"
+                  autocomplete="off"
+                  value="ts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan20ts"
+                  >√</label
+                >
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="pertanyaan20"
+                  id="pertanyaan20sts"
+                  autocomplete="off"
+                  value="sts"
+                  required
+                />
+                <label class="btn btn-outline-success" for="pertanyaan20sts"
+                  >√</label
+                >
+              </td>
+            </tr>
+            <!-- ========================================================================== -->
+            <tr class="d-none">
+              <td colspan="7">
+                <textarea class="form-control" name="dataInspeksi" rows="10">
+<%= dataForm %></textarea
+                >
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="7" class="my-3 py-3 text-center">
+                <button
+                  type="reset"
+                  class="
+                    btn btn-secondary
+                    fs-5
+                    px-3
+                    text-uppercase
+                    rounded-pill
+                  "
+                >
+                  Reset
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-primary fs-5 px-3 text-uppercase rounded-pill"
+                >
+                  Submit
+                </button>
+              </td>
+            </tr>
+          </tfoot>
+        </form>
+      </table>
+    </div>
+  </div>
+</div>
+<h5></h5>
+<%- include("templateP3k/footer") %>

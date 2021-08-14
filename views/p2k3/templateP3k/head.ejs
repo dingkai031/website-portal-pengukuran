@@ -20,26 +20,28 @@
 	
 	<!-- ===== select2 - Bootstrap Theme ===== -->
     <link rel="stylesheet" href="/@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css" />
+	
+	<!-- ===== FILEINBUT ===== -->
+	<link rel="stylesheet" href="/bootstrap-fileinput/css/fileinput.min.css" />
+	
+	<!-- ===== DATA TABLE ===== -->
+	<link rel="stylesheet" href="/datatables.net-bs5/css/dataTables.bootstrap5.min.css" />
 
     <!-- ===== STYLE ===== -->
     <link rel="stylesheet" href="/css/p3k.css" />
     <title>P3K PPNS</title>
   </head>
-  <body class="bg-white-custom d-flex justify-content-center align-items-center">
-    <nav class="navbar fixed-top navbar-expand-lg bg-red-custom navbar-dark shadow-sm">
+  <body>
+    <nav class="navbar fixed-top navbar-expand-xl bg-red-custom navbar-dark shadow-sm">
       <div class="container-fluid">
-        <a class="navbar-brand color-white-custom" href="/p3k"
-          ><img src="/img/logo.png" alt="" width="30" class="me-1" /> P2K3
-          PPNS</a
+        <a class="navbar-brand color-white-custom" href="/upik3"
+          ><img src="/img/logo.png" alt="" width="30" class="me-1" />UPIK3</a
         >
         <button
           class="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
         >
           <i class="fas fa-bars"></i>
         </button>
@@ -53,10 +55,10 @@
                 >Pelaporan Kecelakaan</a
               >
               <div class="dropdown-menu">
-                <a href="/p3k/pelaporan-kependidikan" class="dropdown-item"
+                <a href="/upik3/pelaporan-kependidikan" class="dropdown-item"
                   >Tenaga Kependidikan (minor atau mayor)</a
                 >
-                <a href="/p3k/pelaporan-mahasiswa" class="dropdown-item"
+                <a href="/upik3/pelaporan-mahasiswa" class="dropdown-item"
                   >Mahasiswa (minor atau mayor)</a
                 >
               </div>
@@ -69,11 +71,11 @@
                 >Pendataan Ketersediaan Perlengkapan Kotak P3K</a
               >
               <div class="dropdown-menu">
-                <a href="/p3k/kotak-p3k-b" class="dropdown-item">Kotak P3K tipe B</a>
-                <a href="/p3k/kotak-p3k-C" class="dropdown-item">Kotak P3K tipe C</a>
+                <a href="/upik3/kotak-p3k-b" class="dropdown-item">Kotak P3K tipe B</a>
+                <a href="/upik3/kotak-p3k-c" class="dropdown-item">Kotak P3K tipe C</a>
               </div>
             </div>
-            <div class="nav-item dropdown ms-2">
+            <div class="nav-item dropdown mx-2">
               <a
                 class="nav-link dropdown-toggle active"
                 href="javascript:void(0)"
@@ -81,18 +83,42 @@
                 >Lain-lain</a
               >
               <div class="dropdown-menu">
-                <a href="/p3k/pendataan-ketersediaan-alat-evakuasi-korban" class="dropdown-item"
+                <a href="/upik3/pendataan-ketersediaan-alat-evakuasi-korban" class="dropdown-item"
                   >Pendataan ketersediaan alat evakuasi korban</a
                 >
-                <a href="/p3k/formulir-pemulihan" class="dropdown-item"
+                <a href="/upik3/formulir-pemulihan" class="dropdown-item"
                   >Formulir Pemulihan Perlengkapan P3K dan Alat Evakuasi yang
                   Rusak</a
                 >
               </div>
             </div>
+			
+			<div class="nav-item dropdown ms-2">
+              <a
+                class="nav-link dropdown-toggle active"
+                href="javascript:void(0)"
+                data-bs-toggle="dropdown"
+                >Olah Data</a
+              >
+              <div class="dropdown-menu">
+                <a href="/upik3/data-laporan-kecelakaan" class="dropdown-item"
+                  >Data Pelaporan Kecelakaan</a
+                >
+				<a href="/upik3/data-laporan-kotak-p3k" class="dropdown-item"
+                  >Data Pendataan Ketersediaan Perlengkapan Kotak P3K</a
+                >
+				<a href="/upik3/data-laporan-alat-evakuasi" class="dropdown-item"
+                  >Data Inspeksi Ketersediaan Alat Evakuasi Yang Rusak</a
+                >
+				<a href="/upik3/data-laporan-pemulihan-alat-evakuasi" class="dropdown-item"
+                  >Data Inspeksi Perlengkapan P3K Dan Alat Evakuasi Yang Rusak</a
+                >
+
+              </div>
+            </div>
           </div>
-		  <button class="btn btn-primary letterSpacing-2">KELUAR</button>
+		  <a href="/" class="btn btn-primary letterSpacing-2">Kembali</a>
         </div>
       </div>
     </nav>
-    <div class="container">
+	<%- include("../../flash") %>

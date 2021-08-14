@@ -6,7 +6,7 @@ const Tempat = require("./models/tempat");
 
 //==========Definisi Routes===============
 const maintenanceRoutes = require("./routes/maintenance");
-const p3k2Routes = require("./routes/p3k2");
+const upik3Routes = require("./routes/upik3");
 const inspeksiRoutes = require("./routes/inspeksi");
 
 //========Global Setting===============
@@ -122,7 +122,7 @@ app.use("/inspeksi", inspeksiRoutes);
 //===================================================================
 app.use("/maintenance", maintenanceRoutes);
 //===================================================================
-app.use("/p3k", p3k2Routes);
+app.use("/upik3", upik3Routes);
 // ========Error Handling===============
 app.all("*", (req, res) => {
   res.status(404).send("<h1>TIDAK DITEMUKAN </h1>");

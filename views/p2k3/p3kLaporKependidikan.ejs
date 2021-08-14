@@ -12,20 +12,20 @@
         ></button>
       </div>
       <div class="modal-body">
-        <form method="post" spellcheck="false" autocomplete="off">
+        <form action="/upik3/kuesioner" method="POST" spellcheck="false" autocomplete="off" enctype="multipart/form-data">
           <div class="row">
             <div class="col-12">
               <div class="mb-3 row">
                 <div class="col-sm-6 d-flex flex-column mb-2 mb-sm-1">
-                  <label for="tanggal" class="form-label"
-                    >Tanggal</label
+                  <label for="tanggalKejadian" class="form-label"
+                    >Tanggal Kejadian Korban</label
                   >
                   <div class="input-group border-0 datepicker">
                     <input
                       type="text"
-                      id="tanggal"
+                      id="tanggalKejadian"
                       class="form-control border-0"
-                      name="tanggal"
+                      name="tanggalKejadian"
                       required
                       title="Harap isi form ini"
                       data-input
@@ -36,12 +36,12 @@
                   </div>
                 </div>
                 <div class="col-sm-6 d-flex flex-column mb-2 mb-sm-1">
-                  <label for="namakorban" class="form-label">Nama Korban</label>
+                  <label for="namaKorban" class="form-label">Nama Korban</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="namakorban"
-                    name="namakorban"
+                    id="namaKorban"
+                    name="namaKorban"
                     title="Harap isi form ini"
                     required
                   />
@@ -49,52 +49,63 @@
               </div>
               <div class="mb-3 row">
                 <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
-                  <label for="alamatkorban" class="form-label">Alamat</label>
+                  <label for="alamatKorban" class="form-label">Alamat Korban</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="alamatkorban"
-                    name="alamatkorban"
+                    id="alamatKorban"
+                    name="alamatKorban"
                     title="Harap isi form ini"
                     required
                   />
                 </div>
                 <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
-                  <label for="notelp" class="form-label">Nomor Telepon</label>
+                  <label for="noTelp" class="form-label">Nomor Telepon</label>
                   <input
                     type="tel"
                     class="form-control"
-                    id="notelp"
-                    name="notelp"
+                    id="noTelp"
+                    name="noTelp"
                     pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}"
                     required
-                    placeholder="0811-2233-4455"
+                    placeholder="XXXX-XXXX-XXXX"
                     title="Harap isi form ini"
                   />
                 </div>
               </div>
               <div class="mb-3 row">
                 <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
-                  <label for="jabatan" class="form-label">Jabatan</label>
+                  <label for="jabatanKorban" class="form-label">Jabatan</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="jabatan"
-                    name="jabatan"
+                    id="jabatanKorban"
+                    name="jabatanKorban"
                     title="Harap isi form ini"
                     required
                   />
                 </div>
                 <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
-                  <label for="nip" class="form-label">NIP</label>
+                  <label for="nipKorban" class="form-label">NIP</label>
                   <input
                     type="number"
                     class="form-control"
-                    id="nip"
-                    name="nip"
+                    id="nipKorban"
+                    name="nipKorban"
                     title="Harap isi form ini"
                     required
                   />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <div class="col-12 d-flex flex-column mb-3 mb-sm-1">
+                  <label for="tempatKecelakaan" class="form-label">Tempat Kecelakaan</label>
+                  <select class="form-select" name="tempatKecelakaan" id="tempatKecelakaan" title="Harap isi form ini" required>
+                    <option class="d-none">Silahkan dipilih</option>
+                    <% for( const tempat of foundTempat ) { %>
+                      <option value="<%= tempat.nama %>"><%= tempat.nama %></option>
+                    <% } %>
+                  </select>
                 </div>
               </div>
               <div class="mb-3 row">
@@ -103,7 +114,7 @@
                     >Bagaimana terjadinya kecelakaan</label
                   >
                   <textarea
-                    name="bagaimana"
+                    name="bagaimanaKecelakaanTerjadi"
                     id="bagaimana"
                     rows="2"
                     class="form-control"
@@ -118,7 +129,7 @@
                     >Jenis pekerjaan waktu kecelakaan</label
                   >
                   <textarea
-                    name="jenispekerjaan"
+                    name="jenisPekerjaanWaktuKecelakaan"
                     id="jenispekerjaan"
                     rows="2"
                     class="form-control"
@@ -129,12 +140,12 @@
               </div>
               <div class="mb-3 row">
                 <div class="d-flex flex-column mb-3 mb-sm-1">
-                  <label for="saksi" class="form-label"
+                  <label for="saksiYangMelihatKecelakaan" class="form-label"
                     >Siapa saksi yang melihat kecelakaan?</label
                   >
                   <textarea
-                    name="saksi"
-                    id="saksi"
+                    name="saksiYangMelihatKecelakaan"
+                    id="saksiYangMelihatKecelakaan"
                     rows="2"
                     class="form-control"
                     required
@@ -144,16 +155,17 @@
               </div>
               <div class="mb-3 row">
                 <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
-                  <label for="penyebabKecelakaanMesin" class="form-label"
-                    >Sebutkan yang menyebabkan kecelakaan mesin</label
+                  <label for="penyebabKecelakaan" class="form-label"
+                    >Sebutkan yang menyebabkan kecelakaan</label
                   >
                   <select
-                    name="penyebabKecelakaanMesin"
-                    id="penyebabKecelakaanMesin"
+                    name="penyebabKecelakaan"
+                    id="penyebabKecelakaan"
                     class="form-select"
                     required
+                    title="Harap isi form ini"
                   >
-                    <option selected class="d-none">Silahkan pilih</option>
+                    <option class="d-none" selected>Silahkan Pilih</option>
                     <option value="mesin">Mesin</option>
                     <option value="pesawatInstalasi">Pesawat Instalasi</option>
                     <option value="alatProses">Alat Proses</option>
@@ -163,13 +175,14 @@
                   </select>
                 </div>
                 <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
-                  <label for="penyebabPenyakitMesin" class="form-label"
+                  <label for="penyakitAkibatKerja" class="form-label"
                     >Sebutkan yang menyebabkan penyakit akibat kerja</label
                   >
                   <select
-                    name="penyebabPenyakitMesin"
-                    id="penyebabPenyakitMesin"
+                    name="penyakitAkibatKerja"
+                    id="penyakitAkibatKerja"
                     class="form-select"
+                    title="Harap isi form ini"
                     required
                   >
                     <option selected class="d-none">Silahkan pilih</option>
@@ -182,23 +195,7 @@
                 </div>
               </div>
               <div class="mb-3 row">
-                <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
-                  <label for="akibat" class="form-label"
-                    >Akibat yang diderita korban</label
-                  >
-                  <select
-                    name="akibat"
-                    id="akibat"
-                    class="form-select"
-                    required
-                  >
-                    <option selected class="d-none">Silahkan pilih</option>
-                    <option value="meninggal">Meninggal</option>
-                    <option value="sakit">Sakit</option>
-                    <option value="luka">Luka luka</option>
-                  </select>
-                </div>
-                <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
+                <div class="col-12 d-flex flex-column mb-3 mb-sm-1">
                   <label for="berobatJalan" class="form-label"
                     >Berobat jalan</label
                   >
@@ -207,6 +204,7 @@
                     id="berobatJalan"
                     class="form-select"
                     required
+                    title="Harap isi form ini"
                   >
                     <option selected class="d-none">Silahkan pilih</option>
                     <option value="bekerja">Sambil Bekerja</option>
@@ -226,9 +224,10 @@
                           type="number"
                           min="0"
                           class="form-control"
-                          name="perkiraanKerugian"
+                          name="kerugianWaktu"
                           required
                           title="Harap isi form ini"
+                          placeholder="waktu"
                         />
                         <span class="input-group-text">Jam</span>
                       </div>
@@ -239,7 +238,7 @@
                         class="form-control"
                         required
                         placeholder="Material"
-                        name="material"
+                        name="kerugianMaterial"
                         title="Harap isi form ini"
                       />
                     </div>
@@ -260,8 +259,8 @@
                     >
                     <div class="row mb-3">
                       <div class="col-sm-4">
-                        <select class="form-select mb-1">
-                          <option selected class="d-none">Jenis tempat</option>
+                        <select class="form-select mb-1" name="jenisLokasiRawat" title="Harap isi form ini">
+                          <option selected class="d-none">Pilih jenis tempat</option>
                           <option value="rumahSakit">Rumah Sakit</option>
                           <option value="puskesmas">Puskesmas</option>
                           <option value="poliklinik">Poliklinik</option>
@@ -270,24 +269,25 @@
                       <div class="col-sm-4">
                         <input
                           type="text"
-                          name="namaTempat"
+                          name="namaLokasiRawat"
                           class="form-control mb-1"
                           required
                           placeholder="nama tempat"
+                          title="Harap isi form ini"
                         />
                       </div>
                       <div class="col-sm-4">
                         <input
                           type="text"
-                          name="alamatRawat"
+                          name="alamatLokasiRawat"
                           class="form-control"
                           required
                           placeholder="alamat perawatan"
+                          title="Harap isi form ini"
                         />
                       </div>
                     </div>
                   </div>
-
                   <div>
                     <label  class="form-label"
                       >Nama dan alamat dokter/tenaga medik yang memberikan
@@ -323,20 +323,23 @@
               <div class="mb-3 row">
                 <div class="col-sm-4 mb-2">
                   <label for="namaSaksi" class="form-label">Nama saksi yang mengisi form kecelakaan</label>
-                  <input type="text" name="namaSaksi" id="namaSaksi" class="form-control" required>
+                  <input type="text" value="<%= currentUser.nama %>" readonly name="namaSaksi" id="namaSaksi" class="form-control" required>
                 </div>
                 <div class="col-sm-4 mb-2">
                   <label for="jabatanSaksi" class="form-label">Jabatan</label>          
-                  <select name="jabatanSaksi" id="jabatanSaksi" class="form-select" required>
-                    <option selected class="d-none">Pilih Jabatan</option>
-                    <option value="jabatanSaksiDosen">Dosen</option>
-                    <option value="jabatanSaksiMahasiswa">Mahasiswa</option>
-                    <option value="jabatanSaksiTeknisi">Teknisi</option>
-                  </select>
+                  <input type="text" value="<%= currentUser.status %>" readonly name="jabatanSaksi" id="jabatanSaksi" class="form-control" required>
                 </div>
                 <div class="col-sm-4">
                   <label for="nikSaksi" class="form-label">NRP/NIK</label>
-                  <input type="text" name="nikSaksi" id="nikSaksi" class="form-control">
+                  <input type="number"readonly value="<%= currentUser.nip %>" name="nikSaksi" id="nikSaksi" class="form-control" required>
+                </div>
+              </div>
+              <input class="d-none"type="text" readonly required name="jenis" value="pelaporan-kependidikan">
+              <input class="d-none"type="text" readonly required name="jenisTurunan" value="Tenaga Kependidikan-Minor">
+              <div class="mb-3 row">
+                <div class="col-12">
+                  <label for="dokumentasi" class="form-label">Dokumentasi</label>
+                  <input type="file" id="dokumentasi" class="dokumentasi" name="dokumentasi" multiple required>
                 </div>
               </div>
             </div>
@@ -345,13 +348,16 @@
             <button type="reset" id="reset" class="btn btn-danger mt-3">
               Clear
             </button>
-            <button type="submit" class="btn btn-success mt-3">Submit</button>
+            <button type="submit" class="btn btn-success mt-3">Selanjutnya</button>
           </div>
         </form>
       </div>
     </div>
   </div>
 </div>
+
+<!-- ======================================================================================== -->
+<!-- ======================================================================================== -->
 <div class="modal fade" id="mayor" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-xl">
     <div class="modal-content">
@@ -365,20 +371,20 @@
         ></button>
       </div>
       <div class="modal-body">
-        <form method="post" spellcheck="false" autocomplete="off">
+        <form action="/upik3/kuesioner" method="POST" spellcheck="false" autocomplete="off" enctype="multipart/form-data">
           <div class="row">
             <div class="col-12">
               <div class="mb-3 row">
                 <div class="col-sm-6 d-flex flex-column mb-2 mb-sm-1">
-                  <label for="tanggal" class="form-label"
-                    >Tanggal</label
+                  <label for="tanggalKejadian" class="form-label"
+                    >Tanggal Kejadian Korban</label
                   >
                   <div class="input-group border-0 datepicker">
                     <input
                       type="text"
-                      id="tanggal"
+                      id="tanggalKejadian"
                       class="form-control border-0"
-                      name="tanggal"
+                      name="tanggalKejadian"
                       required
                       title="Harap isi form ini"
                       data-input
@@ -389,12 +395,12 @@
                   </div>
                 </div>
                 <div class="col-sm-6 d-flex flex-column mb-2 mb-sm-1">
-                  <label for="namakorban" class="form-label">Nama Korban</label>
+                  <label for="namaKorban" class="form-label">Nama Korban</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="namakorban"
-                    name="namakorban"
+                    id="namaKorban"
+                    name="namaKorban"
                     title="Harap isi form ini"
                     required
                   />
@@ -402,52 +408,63 @@
               </div>
               <div class="mb-3 row">
                 <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
-                  <label for="alamatkorban" class="form-label">Alamat</label>
+                  <label for="alamatKorban" class="form-label">Alamat Korban</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="alamatkorban"
-                    name="alamatkorban"
+                    id="alamatKorban"
+                    name="alamatKorban"
                     title="Harap isi form ini"
                     required
                   />
                 </div>
                 <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
-                  <label for="notelp" class="form-label">Nomor Telepon</label>
+                  <label for="noTelp" class="form-label">Nomor Telepon</label>
                   <input
                     type="tel"
                     class="form-control"
-                    id="notelp"
-                    name="notelp"
+                    id="noTelp"
+                    name="noTelp"
                     pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}"
                     required
-                    placeholder="0811-2233-4455"
+                    placeholder="XXXX-XXXX-XXXX"
                     title="Harap isi form ini"
                   />
                 </div>
               </div>
               <div class="mb-3 row">
                 <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
-                  <label for="jabatan" class="form-label">Jabatan</label>
+                  <label for="jabatanKorban" class="form-label">Jabatan</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="jabatan"
-                    name="jabatan"
+                    id="jabatanKorban"
+                    name="jabatanKorban"
                     title="Harap isi form ini"
                     required
                   />
                 </div>
                 <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
-                  <label for="nip" class="form-label">NIP</label>
+                  <label for="nipKorban" class="form-label">NIP</label>
                   <input
                     type="number"
                     class="form-control"
-                    id="nip"
-                    name="nip"
+                    id="nipKorban"
+                    name="nipKorban"
                     title="Harap isi form ini"
                     required
                   />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <div class="col-12 d-flex flex-column mb-3 mb-sm-1">
+                  <label for="tempatKecelakaan" class="form-label">Tempat Kecelakaan</label>
+                  <select class="form-select" name="tempatKecelakaan" id="tempatKecelakaan" title="Harap isi form ini" required>
+                    <option class="d-none">Silahkan dipilih</option>
+                    <% for( const tempat of foundTempat ) { %>
+                      <option value="<%= tempat.nama %>"><%= tempat.nama %></option>
+                    <% } %>
+                  </select>
                 </div>
               </div>
               <div class="mb-3 row">
@@ -456,7 +473,7 @@
                     >Bagaimana terjadinya kecelakaan</label
                   >
                   <textarea
-                    name="bagaimana"
+                    name="bagaimanaKecelakaanTerjadi"
                     id="bagaimana"
                     rows="2"
                     class="form-control"
@@ -471,7 +488,7 @@
                     >Jenis pekerjaan waktu kecelakaan</label
                   >
                   <textarea
-                    name="jenispekerjaan"
+                    name="jenisPekerjaanWaktuKecelakaan"
                     id="jenispekerjaan"
                     rows="2"
                     class="form-control"
@@ -482,12 +499,12 @@
               </div>
               <div class="mb-3 row">
                 <div class="d-flex flex-column mb-3 mb-sm-1">
-                  <label for="saksi" class="form-label"
+                  <label for="saksiYangMelihatKecelakaan" class="form-label"
                     >Siapa saksi yang melihat kecelakaan?</label
                   >
                   <textarea
-                    name="saksi"
-                    id="saksi"
+                    name="saksiYangMelihatKecelakaan"
+                    id="saksiYangMelihatKecelakaan"
                     rows="2"
                     class="form-control"
                     required
@@ -497,16 +514,17 @@
               </div>
               <div class="mb-3 row">
                 <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
-                  <label for="penyebabKecelakaanMesin" class="form-label"
-                    >Sebutkan yang menyebabkan kecelakaan mesin</label
+                  <label for="penyebabKecelakaan" class="form-label"
+                    >Sebutkan yang menyebabkan kecelakaan</label
                   >
                   <select
-                    name="penyebabKecelakaanMesin"
-                    id="penyebabKecelakaanMesin"
+                    name="penyebabKecelakaan"
+                    id="penyebabKecelakaan"
                     class="form-select"
                     required
+                    title="Harap isi form ini"
                   >
-                    <option selected class="d-none">Silahkan pilih</option>
+                    <option class="d-none" selected>Silahkan Pilih</option>
                     <option value="mesin">Mesin</option>
                     <option value="pesawatInstalasi">Pesawat Instalasi</option>
                     <option value="alatProses">Alat Proses</option>
@@ -516,13 +534,14 @@
                   </select>
                 </div>
                 <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
-                  <label for="penyebabPenyakitMesin" class="form-label"
+                  <label for="penyakitAkibatKerja" class="form-label"
                     >Sebutkan yang menyebabkan penyakit akibat kerja</label
                   >
                   <select
-                    name="penyebabPenyakitMesin"
-                    id="penyebabPenyakitMesin"
+                    name="penyakitAkibatKerja"
+                    id="penyakitAkibatKerja"
                     class="form-select"
+                    title="Harap isi form ini"
                     required
                   >
                     <option selected class="d-none">Silahkan pilih</option>
@@ -535,23 +554,7 @@
                 </div>
               </div>
               <div class="mb-3 row">
-                <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
-                  <label for="akibat" class="form-label"
-                    >Akibat yang diderita korban</label
-                  >
-                  <select
-                    name="akibat"
-                    id="akibat"
-                    class="form-select"
-                    required
-                  >
-                    <option selected class="d-none">Silahkan pilih</option>
-                    <option value="meninggal">Meninggal</option>
-                    <option value="sakit">Sakit</option>
-                    <option value="luka">Luka luka</option>
-                  </select>
-                </div>
-                <div class="col-sm-6 d-flex flex-column mb-3 mb-sm-1">
+                <div class="col-12 d-flex flex-column mb-3 mb-sm-1">
                   <label for="berobatJalan" class="form-label"
                     >Berobat jalan</label
                   >
@@ -560,6 +563,7 @@
                     id="berobatJalan"
                     class="form-select"
                     required
+                    title="Harap isi form ini"
                   >
                     <option selected class="d-none">Silahkan pilih</option>
                     <option value="bekerja">Sambil Bekerja</option>
@@ -579,9 +583,10 @@
                           type="number"
                           min="0"
                           class="form-control"
-                          name="perkiraanKerugian"
+                          name="kerugianWaktu"
                           required
                           title="Harap isi form ini"
+                          placeholder="waktu"
                         />
                         <span class="input-group-text">Jam</span>
                       </div>
@@ -592,7 +597,7 @@
                         class="form-control"
                         required
                         placeholder="Material"
-                        name="material"
+                        name="kerugianMaterial"
                         title="Harap isi form ini"
                       />
                     </div>
@@ -613,8 +618,8 @@
                     >
                     <div class="row mb-3">
                       <div class="col-sm-4">
-                        <select class="form-select mb-1">
-                          <option selected class="d-none">Jenis tempat</option>
+                        <select class="form-select mb-1" name="jenisLokasiRawat" title="Harap isi form ini">
+                          <option selected class="d-none">Pilih jenis tempat</option>
                           <option value="rumahSakit">Rumah Sakit</option>
                           <option value="puskesmas">Puskesmas</option>
                           <option value="poliklinik">Poliklinik</option>
@@ -623,24 +628,25 @@
                       <div class="col-sm-4">
                         <input
                           type="text"
-                          name="namaTempat"
+                          name="namaLokasiRawat"
                           class="form-control mb-1"
                           required
                           placeholder="nama tempat"
+                          title="Harap isi form ini"
                         />
                       </div>
                       <div class="col-sm-4">
                         <input
                           type="text"
-                          name="alamatRawat"
+                          name="alamatLokasiRawat"
                           class="form-control"
                           required
                           placeholder="alamat perawatan"
+                          title="Harap isi form ini"
                         />
                       </div>
                     </div>
                   </div>
-
                   <div>
                     <label  class="form-label"
                       >Nama dan alamat dokter/tenaga medik yang memberikan
@@ -674,30 +680,38 @@
                 </div>
               </div>
               <div class="mb-3">
-                <label for="alatEvakuasi" class="form-label">Alat evakuasi apa saja yang digunakan</label>
-                <select name="alatEvakuasi" class="form-select" id="alatEvakuasi" required>
+                <label for="alatEvakuasi1" class="form-label">Alat evakuasi apa saja yang digunakan</label>
+                <select name="alatEvakuasi1" class="form-select mb-2" id="alatEvakuasi1" required>
                   <option class="d-none" selected>Pilih alat</option>
-                  <option value="tandu">Tandu</option>
-                  <option value="kursiRoda">Kursi Roda</option>
+                  <option value="Tandu">Tandu</option>
+                  <option value="Kursi Roda">Kursi Roda</option>
+                </select>
+                <select name="alatEvakuasi2" class="form-select" id="alatEvakuasi2">
+                  <option class="d-none" selected>Pilih alat</option>
+                  <option value="Tandu">Tandu</option>
+                  <option value="Kursi Roda">Kursi Roda</option>
                 </select>
               </div>
               <div class="mb-3 row">
                 <div class="col-sm-4 mb-2">
                   <label for="namaSaksi" class="form-label">Nama saksi yang mengisi form kecelakaan</label>
-                  <input type="text" name="namaSaksi" id="namaSaksi" class="form-control" required>
+                  <input type="text" value="<%= currentUser.nama %>" readonly name="namaSaksi" id="namaSaksi" class="form-control" required>
                 </div>
                 <div class="col-sm-4 mb-2">
                   <label for="jabatanSaksi" class="form-label">Jabatan</label>          
-                  <select name="jabatanSaksi" id="jabatanSaksi" class="form-select" required>
-                    <option selected class="d-none">Pilih Jabatan</option>
-                    <option value="jabatanSaksiDosen">Dosen</option>
-                    <option value="jabatanSaksiMahasiswa">Mahasiswa</option>
-                    <option value="jabatanSaksiTeknisi">Teknisi</option>
-                  </select>
+                  <input type="text" value="<%= currentUser.status %>" readonly name="jabatanSaksi" id="jabatanSaksi" class="form-control" required>
                 </div>
                 <div class="col-sm-4">
                   <label for="nikSaksi" class="form-label">NRP/NIK</label>
-                  <input type="text" name="nikSaksi" id="nikSaksi" class="form-control">
+                  <input type="number"readonly value="<%= currentUser.nip %>" name="nikSaksi" id="nikSaksi" class="form-control" required>
+                </div>
+              </div>
+              <input class="d-none"type="text" readonly required name="jenis" value="pelaporan-kependidikan">
+              <input class="d-none"type="text" readonly required name="jenisTurunan" value="Tenaga Kependidikan-Mayor">
+              <div class="mb-3 row">
+                <div class="col-12">
+                  <label for="dokumentasi" class="form-label">Dokumentasi</label>
+                  <input type="file" id="dokumentasi" class="dokumentasi" name="dokumentasi" multiple required>
                 </div>
               </div>
             </div>
@@ -706,14 +720,17 @@
             <button type="reset" id="reset" class="btn btn-danger mt-3">
               Clear
             </button>
-            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+            <button type="submit" class="btn btn-success mt-3">Selanjutnya</button>
           </div>
         </form>
       </div>
     </div>
   </div>
 </div>
-<div class="card custom-border-radius bg-white">
+<!-- ======================================================================================== -->
+<!-- ======================================================================================== -->
+
+<div class="card custom-border-radius bg-white shadow mx-3 mt-3">
   <div class="card-body py-3">
     <h3 class="card-title fw-bolder fs-3 m-0 mb-3 text-center text-md-start">
       Pelaporan Kecelakaan - Tenaga Kependidikan

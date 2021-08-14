@@ -1,0 +1,573 @@
+<%- include("templateP3k/head") %>
+<div class="card shadow mt-3 mx-3">
+  <div class="card-header">
+    <h3 class="card-title fw-bolder text-capitalize m-0">
+      Data Laporan Kecelakaan
+    </h3>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table
+        class="table table-bordered hover align-middle"
+        id="tableLaporanKecelakaan"
+      >
+        <thead>
+          <tr>
+            <th class="text-center">No</th>
+            <th>Tanggal</th>
+            <th class="text-center">Data</th>
+            <th>Lokasi Kecelakaan</th>
+            <th>Jenis Kecelakaan</th>
+            <th>Pelapor</th>
+            <th class="text-center">Action</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for( const laporan of laporans) { %>
+          <tr class="text-nowrap">
+            <td class="text-center"></td>
+            <td>
+              <%=
+              `${("0"+laporan.tanggalKejadian.getDate()).slice(-2)}-${("0"+(laporan.tanggalKejadian.getMonth()+1)).slice(-2)}-${laporan.tanggalKejadian.getFullYear()}`
+              %>
+            </td>
+            <td class="text-center">
+              <div class="modal fade" id="data<%= laporan._id %>" tabindex="-1">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Data Laporan Kecelakaan</h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="table-responsive">
+                        <table
+                          class="table table-bordered shadow text-start p-3"
+                        >
+                          <tbody>
+                            <tr>
+                              <td
+                                colspan="2"
+                                class="text-start text-uppercase fw-bolder fs-5"
+                              >
+                                identitas korban :
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="w-50">
+                                <label for="tanggal" class="form-label"
+                                  >1. Tanggal Kejadian Korban :</label
+                                >
+                                <input type="text" readonly class="form-control"
+                                id="tanggal" value="<%=
+                                `${("0"+laporan.tanggalKejadian.getDate()).slice(-2)}-${("0"+(laporan.tanggalKejadian.getMonth()+1)).slice(-2)}-${laporan.tanggalKejadian.getFullYear()}`
+                                %>">
+                              </td>
+                              <td class="w-50">
+                                <label for="namaKorban" class="form-label"
+                                  >2. Nama Korban :</label
+                                >
+                                <input
+                                  type="text"
+                                  readonly
+                                  class="form-control"
+                                  id="namaKorban"
+                                  value="<%= laporan.namaKorban %>"
+                                />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <label for="alamatKorban" class="form-label"
+                                  >3. Alamat Korban :</label
+                                >
+                                <input
+                                  type="text"
+                                  readonly
+                                  class="form-control"
+                                  id="alamatKorban"
+                                  value="<%= laporan.alamatKorban %>"
+                                />
+                              </td>
+                              <td>
+                                <label for="noTelp" class="form-label"
+                                  >4. Nomor Telepon</label
+                                >
+                                <input
+                                  type="text"
+                                  readonly
+                                  class="form-control"
+                                  id="noTelp"
+                                  value="<%= laporan.noTelp %>"
+                                />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <label for="jabatanKorban" class="form-label"
+                                  >5. <%= laporan.jenisTurunan === "Tenaga Kependidikan-Mayor" || laporan.jenisTurunan === "Tenaga Kependidikan-Minor" ? "Jabatan" : "Program Studi" %> :</label
+                                >
+                                <input
+                                  type="text"
+                                  readonly
+                                  class="form-control"
+                                  id="jabatanKorban"
+                                  value="<%= laporan.jabatanKorban %>"
+                                />
+                              </td>
+                              <td>
+                                <label for="nipKorban" class="form-label"
+                                  >6. <%= laporan.jenisTurunan === "Tenaga Kependidikan-Mayor" || laporan.jenisTurunan === "Tenaga Kependidikan-Minor" ? "NIP" : "NRP" %> :</label
+                                >
+                                <input
+                                  type="text"
+                                  readonly
+                                  class="form-control"
+                                  id="nipKorban"
+                                  value="<%= laporan.nipKorban %>"
+                                />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td colspan="2">
+                                <label for="tempatKecelakaan" class="form-label"
+                                  >7. Tempat Kecelakaan :</label
+                                >
+                                <input
+                                  type="text"
+                                  readonly
+                                  class="form-control"
+                                  id="tempatKecelakaan"
+                                  value="<%= laporan.tempatKecelakaan %>"
+                                />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td
+                                colspan="2"
+                                class="
+                                  text-start text-uppercase
+                                  fw-bolder
+                                  fs-5
+                                  w-50
+                                "
+                              >
+                                informasi kecelakaan :
+                              </td>
+                            </tr>
+                            <tr>
+                              <td rowspan="4">
+                                <label class="form-label"
+                                  >1. Uraian Kecelakaan :</label
+                                >
+                                <ol type="a">
+                                  <li class="mb-3">
+                                    <label for="terjadi" class="form-label"
+                                      >Bagaimana Terjadinya Kecelakaan?</label
+                                    >
+                                    <textarea
+                                      class="form-control"
+                                      id="terjadi"
+                                      rows="4"
+                                      style="resize: none"
+                                      readonly
+                                    >
+<%= laporan.bagaimanaKecelakaanTerjadi %></textarea
+                                    >
+                                  </li>
+                                  <li class="mb-3">
+                                    <label
+                                      for="jenisPekerjaanWaktuKecelakaan"
+                                      class="form-label"
+                                      >Jenis Pekerjaan Waktu Terjadinya
+                                      Kecelakaan?</label
+                                    >
+                                    <textarea
+                                      class="form-control"
+                                      id="jenisPekerjaanWaktuKecelakaan"
+                                      rows="4"
+                                      style="resize: none"
+                                      readonly
+                                    >
+<%= laporan.jenisPekerjaanWaktuKecelakaan %></textarea
+                                    >
+                                  </li>
+                                  <li>
+                                    <label
+                                      for="saksiYangMelihatKecelakaan"
+                                      class="form-label"
+                                      >Siapa Saksi yang melihat
+                                      kecelakaan?</label
+                                    >
+                                    <textarea
+                                      class="form-control"
+                                      id="saksiYangMelihatKecelakaan"
+                                      rows="4"
+                                      style="resize: none"
+                                      readonly
+                                    >
+<%= laporan.saksiYangMelihatKecelakaan %></textarea
+                                    >
+                                  </li>
+                                </ol>
+                              </td>
+                              <td>
+                                <label for="berobatJalan" class="form-label"
+                                  >2. Berobat Jalan :</label
+                                >
+                                <input
+                                  type="text"
+                                  readonly
+                                  class="form-control"
+                                  id="berobatJalan"
+                                  value="<%= laporan.berobatJalan %>"
+                                />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <label for="penyebab" class="form-label"
+                                  >3. Sebuatkan Yang Menyebabkan Kecelakaan
+                                  :</label
+                                >
+                                <input
+                                  type="text"
+                                  readonly
+                                  class="form-control"
+                                  id="penyebab"
+                                  value="<%= laporan.penyebabKecelakaan %>"
+                                />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <label
+                                  for="penyakitAkibatKerja"
+                                  class="form-label"
+                                  >4. Sebutkan yang menyebabkan penyakit akibat
+                                  kerja :</label
+                                >
+                                <input
+                                  type="text"
+                                  readonly
+                                  class="form-control"
+                                  id="penyakitAkibatKerja"
+                                  value="<%= laporan.penyakitAkibatKerja %>"
+                                />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <label class="form-label"
+                                  >5. Perkiraan Kerugian :</label
+                                >
+                                <ol type="a">
+                                  <li class="mb-3">
+                                    <label
+                                      for="kerugianWaktu"
+                                      class="form-label"
+                                      >Waktu :</label
+                                    >
+                                    <input
+                                      type="text"
+                                      readonly
+                                      class="form-control"
+                                      id="kerugianWaktu"
+                                      value="<%= laporan.kerugianWaktu %>"
+                                    />
+                                  </li>
+                                  <li class="mb-3">
+                                    <label
+                                      for="kerugianMaterial"
+                                      class="form-label"
+                                      >Material :</label
+                                    >
+                                    <input
+                                      type="text"
+                                      readonly
+                                      class="form-control"
+                                      id="kerugianMaterial"
+                                      value="<%= laporan.kerugianMaterial %>"
+                                    />
+                                  </li>
+                                </ol>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td
+                                colspan="2"
+                                class="
+                                  text-start text-uppercase
+                                  fw-bolder
+                                  fs-5
+                                  w-50
+                                  text-wrap
+                                "
+                              >
+                                PEMULIHAN TENAGA KEPENDIDIKAN YANG SAKIT (diisi
+                                di tempat pemeriksaan atas kordinasi dengan
+                                petugas pemeriksa setempat)
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <label for="alatRawat" class="form-label"
+                                  >1. Korban Dirawat Dimana, Beserta Alamatnya
+                                  ?</label
+                                >
+                                <textarea
+                                  id="alatRawat"
+                                  rows="6"
+                                  class="form-control text-capitalize"
+                                  readonly
+                                >
+<%= `${laporan.jenisLokasiRawat}, ${laporan.namaLokasiRawat}, ${laporan.alamatLokasiRawat}` %></textarea
+                                >
+                              </td>
+                              <td>
+                                <label
+                                  for="dataDokter"
+                                  class="form-label text-wrap"
+                                  >2. Nama dan Alamat Dokter/Tenaga Medik? (yang
+                                  Memberikan Pertolongan Pertama atau yang
+                                  Memberikan Diagnosa Awal)</label
+                                >
+                                <textarea
+                                  id="label"
+                                  rows="6"
+                                  class="form-control text-capitalize"
+                                  readonly
+                                >
+<%= `${laporan.namaDokter}, ${laporan.alamatDokter}` %></textarea
+                                >
+                              </td>
+                            </tr>
+                            <% if (laporan.alatEvakuasi1 !== "-") { %>
+                            <tr>
+                              <td
+                                colspan="2"
+                                class="
+                                  text-start text-uppercase
+                                  fw-bolder
+                                  fs-5
+                                  w-50
+                                "
+                              >
+                                Alat Evakuasi
+                              </td>
+                            </tr>
+                            <tr>
+                              <td colspan="2">
+                                <label for="alatEvakuasi1" class="form-label"
+                                  >1. Alat Evakuasi Apa Saja yang
+                                  Digunakan?</label
+                                >
+                                <input
+                                  type="text"
+                                  readonly
+                                  class="form-control mb-2"
+                                  id="alatEvakuasi1"
+                                  value="<%= laporan.alatEvakuasi1 %>"
+                                />
+                                <% if (laporan.alatEvakuasi2 !== "-") { %>
+                                <input
+                                  type="text"
+                                  readonly
+                                  class="form-control"
+                                  id="alatEvakuasi2"
+                                  value="<%= laporan.alatEvakuasi2 %>"
+                                />
+                                <% } %>
+                              </td>
+                            </tr>
+                            <% } %>
+                            <tr>
+                              <td
+                                class="
+                                  text-start text-uppercase
+                                  fw-bolder
+                                  fs-5
+                                  w-50
+                                "
+                              >
+                                identitas saksi
+                              </td>
+                              <td
+                                class="
+                                  text-start text-uppercase
+                                  fw-bolder
+                                  fs-5
+                                  w-50
+                                "
+                              >
+                                dokumentasi i
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <label for="namaSaksi" class="form-label"
+                                  >1. Nama Saksi (yang mengisi Form Kecelakaan)
+                                  :</label
+                                >
+                                <input
+                                  type="text"
+                                  readonly
+                                  class="form-control"
+                                  id="namaSaksi"
+                                  value="<%= laporan.saksi.nama %>"
+                                />
+                              </td>
+                              <td rowspan="3">
+                                <% let lokasi %> 
+                                <% if (laporan.jenisTurunan === "Mahasiswa-Minor") { %>
+                                  <% lokasi = "pelaporanMahasiswa/mahasiswaMinor" %> 
+                                <% } else if (laporan.jenisTurunan === "Mahasiswa-Mayor") { %>  
+                                  <% lokasi = "pelaporanMahasiswa/mahasiswaMayor" %> 
+                                <% } %> 
+                                <img
+                                  src="/img/dokumentasiInspeksi/<%= `${lokasi}/${laporan.dokumentasi[0]}` %>"
+                                  class="w-100"
+                                  alt=""
+                                />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <label for="jabatanSaksi" class="form-label"
+                                  >2. Jabatan :</label
+                                >
+                                <input
+                                  type="text"
+                                  readonly
+                                  class="form-control"
+                                  id="jabatanSaksi"
+                                  value="<%= laporan.saksi.status %>"
+                                />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <label for="nipSaksi" class="form-label"
+                                  >3. NRP/NIK :</label
+                                >
+                                <input
+                                  type="text"
+                                  readonly
+                                  class="form-control"
+                                  id="nipSaksi"
+                                  value="<%= laporan.saksi.nip %>"
+                                />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td
+                                class="
+                                  text-start text-uppercase
+                                  fw-bolder
+                                  fs-5
+                                  w-50
+                                "
+                              >
+                                dokumentasi ii
+                              </td>
+                              <td
+                                class="
+                                  text-start text-uppercase
+                                  fw-bolder
+                                  fs-5
+                                  w-50
+                                "
+                              >
+                                dokumentasi iii
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <img
+                                  src="/img/dokumentasiInspeksi/<%= `${lokasi}/${laporan.dokumentasi[1]}` %>"
+                                  class="w-100"
+                                  alt=""
+                                />
+                              </td>
+                              <td>
+                                <img
+                                  src="/img/dokumentasiInspeksi/<%= `${lokasi}/${laporan.dokumentasi[2]}` %>"
+                                  class="w-100"
+                                  alt=""
+                                />
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button
+                data-bs-toggle="modal"
+                data-bs-target="#data<%= laporan._id %>"
+                class="btn btn-primary"
+              >
+                Data
+              </button>
+            </td>
+            <td><%= laporan.tempatKecelakaan %></td>
+            <td><%= laporan.jenisTurunan %></td>
+            <td><%= laporan.saksi.nama %></td>
+            <td class="text-center">
+              <button class="btn btn-primary py-2 px-3">
+                <i class="far fa-edit fs-5"></i>
+              </button>
+              <form
+                action="/upik3/data-laporan-kecelakaan?_method=DELETE"
+                method="POST"
+                class="d-inline-block"
+              >
+                <input
+                  class="d-none"
+                  type="text"
+                  name="idLaporan"
+                  readonly
+                  value="<%= laporan._id %>"
+                />
+                <button type="submit" class="btn btn-danger py-2 px-3">
+                  <i class="far fa-trash-alt fs-5"></i>
+                </button>
+              </form>
+              <button class="btn btn-secondary py-2 px-3">
+                <i class="fas fa-file-download fs-5"></i>
+              </button>
+            </td>
+            <td class="text-center">
+              <form action="/upik3/data-laporan-kecelakaan?_method=PUT"
+              method="POST"
+              class="d-inline-block"
+              >
+                <input
+                  class="d-none"
+                  type="text"
+                  readonly
+                  name="idLaporan"
+                  value="<%= laporan._id %>"
+                />
+                
+                <button type="<%= !laporan.validasi.status && (currentUser.lokasi === laporan.tempatKecelakaan || currentUser.lokasi === "semua") ? "submit" : "button" %>" class="btn <%= laporan.validasi.status ? "btn-success" : "btn-danger" %>">
+                  <%= laporan.validasi.status ? `Approved By ${laporan.validasi.user.nama}` : "Not Approved" %> 
+                </button>
+              </form>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<%- include("templateP3k/footer") %>
