@@ -211,7 +211,7 @@ router.put("/riwayat", isLoggedIn, async (req, res) => {
       return res.redirect("/inspeksi/riwayat");
     }
     req.flash("error", `Gagal menemukan riwayat`);
-    res.redirect("/inspeksi/riwayat");
+    return res.redirect("/inspeksi/riwayat");
   }
   req.flash("error", `Anda tidak memiliki izin!`);
   res.redirect("/inspeksi/riwayat");
@@ -240,9 +240,9 @@ router.put("/riwayat/edit", isLoggedIn, async (req, res) => {
     for (let i = 0; i < parseInt(riwayatTarget.bagianKebisingan.length); i++) {
       const obj = {
         lokasiPengukuran: submittedData[`lokasiPengukuranKebisingan${i}`],
-        intensitasBising1: parseInt(submittedData[`intensitasBising1-${i}`]),
-        intensitasBising2: parseInt(submittedData[`intensitasBising2-${i}`]),
-        intensitasBising3: parseInt(submittedData[`intensitasBising3-${i}`]),
+        intensitasBising1: parseFloat(submittedData[`intensitasBising1-${i}`]),
+        intensitasBising2: parseFloat(submittedData[`intensitasBising2-${i}`]),
+        intensitasBising3: parseFloat(submittedData[`intensitasBising3-${i}`]),
         ratarataBising: parseFloat(
           submittedData[`ratarataBising-${i}`]
         ).toFixed(2),
@@ -255,19 +255,19 @@ router.put("/riwayat/edit", isLoggedIn, async (req, res) => {
     for (let i = 0; i < parseInt(riwayatTarget.bagianGetaran.length); i++) {
       const obj = {
         lokasiPengukuran: submittedData[`lokasiPengukuranGetaran${i}`],
-        percepatan1: parseInt(submittedData[`percepatan1-${i}`]),
-        percepatan2: parseInt(submittedData[`percepatan2-${i}`]),
-        percepatan3: parseInt(submittedData[`percepatan3-${i}`]),
-        percepatanMax: parseInt(submittedData[`percepatanMax${i}`]),
-        kecepatan1: parseInt(submittedData[`kecepatan1-${i}`]),
-        kecepatan2: parseInt(submittedData[`kecepatan2-${i}`]),
-        kecepatan3: parseInt(submittedData[`kecepatan3-${i}`]),
-        kecepatanMax: parseInt(submittedData[`kecepatanMax${i}`]),
-        perpindahan1: parseInt(submittedData[`perpindahan1-${i}`]),
-        perpindahan2: parseInt(submittedData[`perpindahan2-${i}`]),
-        perpindahan3: parseInt(submittedData[`perpindahan3-${i}`]),
-        perpindahanMax: parseInt(submittedData[`perpindahanMax${i}`]),
-        frekuensi: parseInt(submittedData[`frekuensi${i}`]),
+        percepatan1: parseFloat(submittedData[`percepatan1-${i}`]),
+        percepatan2: parseFloat(submittedData[`percepatan2-${i}`]),
+        percepatan3: parseFloat(submittedData[`percepatan3-${i}`]),
+        percepatanMax: parseFloat(submittedData[`percepatanMax${i}`]),
+        kecepatan1: parseFloat(submittedData[`kecepatan1-${i}`]),
+        kecepatan2: parseFloat(submittedData[`kecepatan2-${i}`]),
+        kecepatan3: parseFloat(submittedData[`kecepatan3-${i}`]),
+        kecepatanMax: parseFloat(submittedData[`kecepatanMax${i}`]),
+        perpindahan1: parseFloat(submittedData[`perpindahan1-${i}`]),
+        perpindahan2: parseFloat(submittedData[`perpindahan2-${i}`]),
+        perpindahan3: parseFloat(submittedData[`perpindahan3-${i}`]),
+        perpindahanMax: parseFloat(submittedData[`perpindahanMax${i}`]),
+        frekuensi: parseFloat(submittedData[`frekuensi${i}`]),
       };
       getaran.push(obj);
     }
@@ -277,14 +277,14 @@ router.put("/riwayat/edit", isLoggedIn, async (req, res) => {
     for (let i = 0; i < parseInt(riwayatTarget.bagianIklimKerja.length); i++) {
       const obj = {
         lokasiPengukuran: submittedData[`lokasiPengukuranIklimKerja${i}`],
-        usia: submittedData[`usia${i}`],
-        bb: submittedData[`bb${i}`],
-        suhuBasah: submittedData[`suhuBasah${i}`],
-        suhuKering: submittedData[`suhuKering${i}`],
-        suhuBola: submittedData[`suhuBola${i}`],
-        isbb: submittedData[`isbb${i}`],
-        rh: submittedData[`rh${i}`],
-        bebankerja: submittedData[`bebanKerja${i}`],
+        usia: parseInt(submittedData[`usia${i}`]),
+        bb: parseFloat(submittedData[`bb${i}`]),
+        suhuBasah: parseFloat(submittedData[`suhuBasah${i}`]),
+        suhuKering: parseFloat(submittedData[`suhuKering${i}`]),
+        suhuBola: parseFloat(submittedData[`suhuBola${i}`]),
+        isbb: parseFloat(submittedData[`isbb${i}`]),
+        rh: parseFloat(submittedData[`rh${i}`]),
+        bebankerja: parseFloat(submittedData[`bebanKerja${i}`]),
       };
       iklimKerja.push(obj);
     }
@@ -298,9 +298,9 @@ router.put("/riwayat/edit", isLoggedIn, async (req, res) => {
     ) {
       const obj = {
         lokasiPengukuran: submittedData[`lokasiPengukuranPencahayaan${i}`],
-        pengukuran1: parseInt(submittedData[`pengukuranPencahayaan1-${i}`]),
-        pengukuran2: parseInt(submittedData[`pengukuranPencahayaan2-${i}`]),
-        pengukuran3: parseInt(submittedData[`pengukuranPencahayaan3-${i}`]),
+        pengukuran1: parseFloat(submittedData[`pengukuranPencahayaan1-${i}`]),
+        pengukuran2: parseFloat(submittedData[`pengukuranPencahayaan2-${i}`]),
+        pengukuran3: parseFloat(submittedData[`pengukuranPencahayaan3-${i}`]),
         ratarata: parseFloat(submittedData[`ratarataPencahayaan${i}`]),
       };
       pencahayaan.push(obj);
