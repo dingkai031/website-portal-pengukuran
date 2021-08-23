@@ -1,5 +1,70 @@
 <%- include("templateP3k/head") %>
-<div class="card custom-border-radius">
-  <h1>Hello World</h1>
+<div class="card shadow mx-3 mt-3">
+  <div class="card-body">
+    <div class="row justify-content-center mb-3">
+      <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
+        <div class="text-center">
+          <label for="tahun" class="form-label fs-5 text-uppercase"
+            >Tahun</label
+          >
+          <select name="tahun" id="tahun" class="form-select">
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <canvas id="dataKecelakaan" class="w-100" height="500px">
+      <p>tsest</p>
+    </canvas>
+  </div>
 </div>
 <%- include("templateP3k/footer") %>
+
+<script>
+  const ctx = document.querySelector("#dataKecelakaan");
+  const myChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: [
+        "Januari",
+        "Februari",
+        "Maret",
+        "April",
+        "Mei",
+        "Juni",
+        "Juli",
+        "Agustus",
+        "September",
+        "Oktober",
+        "November",
+        "Desember",
+      ],
+      datasets: [
+        {
+          label: "Jumlah Kecelakaan",
+          data: [12, 2, 3, 5, 2, 3, 3, 5, 6, 7, 8, 9],
+          backgroundColor: ["rgba(255, 99, 132, 0.2)"],
+          borderColor: ["rgba(255, 99, 132, 1)"],
+          borderWidth: 2,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+      responsive: true,
+      plugins: {
+        title: {
+          display: true,
+          text: "Data Kecelakaan di Bengkel dan Laboratorium Politeknik Perkapalan Negeri Surabaya",
+        },
+      },
+    },
+  });
+</script>

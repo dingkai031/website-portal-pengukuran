@@ -12,7 +12,7 @@ mongoose
     console.log("koneksi sukses ke Database port 27017 Sukses");
   })
   .catch((e) => {
-    console.log(`koneksike data base tidak berhasil : ${e}`);
+    console.log(`koneksi ke data base tidak berhasil : ${e}`);
   });
 
 const tempTempat = [
@@ -507,6 +507,22 @@ const tempUser = [
     status: "bauk",
     lokasi: "semua",
   },
+  {
+    nama: "dummy dosen",
+    nip: "8888888888881",
+    email: "dummyDosen@ppns.ac.id",
+    username: "dummyDosen@ppns.ac.id",
+    status: "dosen",
+    lokasi: "semua",
+  },
+  {
+    nama: "dummy mahasiswa",
+    nip: "77777777771",
+    email: "dummyMahasiswa@ppns.ac.id",
+    username: "dummyMahasiswa@ppns.ac.id",
+    status: "mahasiswa",
+    lokasi: "semua",
+  },
 ];
 const tempAlat = [
   {
@@ -694,18 +710,18 @@ const seedDb = async (model, arrOfObj) => {
     });
 };
 
-seedDb(Tempat, tempTempat).then(() => {
-  mongoose.connection.close();
-});
-
-// const newUser = async function (model, arrObj, pass) {
-//   const terhapus = await model.deleteMany({});
-//   for (obj of arrObj) {
-//     const registeredUser = await User.register(obj, pass);
-//     console.log(registeredUser);
-//   }
-// };
-
-// newUser(User, tempUser, "111111111111").then(() => {
+// seedDb(Tempat, tempTempat).then(() => {
 //   mongoose.connection.close();
 // });
+
+const newUser = async function (model, arrObj, pass) {
+  const terhapus = await model.deleteMany({});
+  for (obj of arrObj) {
+    const registeredUser = await User.register(obj, pass);
+    console.log(registeredUser);
+  }
+};
+
+newUser(User, tempUser, "111111111111").then(() => {
+  mongoose.connection.close();
+});

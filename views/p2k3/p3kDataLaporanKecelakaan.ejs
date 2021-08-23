@@ -24,8 +24,9 @@
           </tr>
         </thead>
         <tbody>
-          <% for( const laporan of laporans) { %>
-          <tr class="text-nowrap">
+          <% if (laporans.length > 0) {%> 
+            <% for( const laporan of laporans) { %>
+            <tr class="text-nowrap">
             <td class="text-center"></td>
             <td>
               <%=
@@ -574,7 +575,8 @@
                 </button>
               </form>
             </td>
-          </tr>
+            </tr>
+            <% } %>
           <% } %>
         </tbody>
       </table>

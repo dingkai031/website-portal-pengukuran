@@ -103,7 +103,7 @@ app.post(
     failureRedirect: "/",
   }),
   (req, res) => {
-    const redirectUrl = "/portal";
+    const redirectUrl = req.session.returnTo || "/portal";
     res.redirect(redirectUrl);
   }
 );
