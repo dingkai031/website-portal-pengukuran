@@ -710,18 +710,18 @@ const seedDb = async (model, arrOfObj) => {
     });
 };
 
-// seedDb(Tempat, tempTempat).then(() => {
-//   mongoose.connection.close();
-// });
-
-const newUser = async function (model, arrObj, pass) {
-  const terhapus = await model.deleteMany({});
-  for (obj of arrObj) {
-    const registeredUser = await User.register(obj, pass);
-    console.log(registeredUser);
-  }
-};
-
-newUser(User, tempUser, "111111111111").then(() => {
+seedDb(Tempat, tempTempat).then(() => {
   mongoose.connection.close();
 });
+
+// const newUser = async function (model, arrObj, pass) {
+//   const terhapus = await model.deleteMany({});
+//   for (obj of arrObj) {
+//     const registeredUser = await User.register(obj, pass);
+//     console.log(registeredUser);
+//   }
+// };
+
+// newUser(User, tempUser, "111111111111").then(() => {
+//   mongoose.connection.close();
+// });

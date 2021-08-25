@@ -1,12 +1,12 @@
 node_modules
-public/img/dokumentasi
-public/img/dokumentasiMaintenance
-public/img/dokumentasiInspeksi/pelaporanPemulihan
-public/img/dokumentasiInspeksi/pelaporanKetersediaanKotaP3k
-public/img/dokumentasiInspeksi/pelaporanKotakP3kC
-public/img/dokumentasiInspeksi/pelaporanKotakP3kB
-public/img/dokumentasiInspeksi/pelaporanTenagaKependidikan
-public/img/dokumentasiInspeksi/pelaporanMahasiswa
+public/img/dokumentasi/*
+public/img/dokumentasiMaintenance/*
+public/img/dokumentasiInspeksi/pelaporanPemulihan/*
+public/img/dokumentasiInspeksi/pelaporanKetersediaanKotaP3k/*
+public/img/dokumentasiInspeksi/pelaporanKotakP3kC/*
+public/img/dokumentasiInspeksi/pelaporanKotakP3kB/*
+public/img/dokumentasiInspeksi/pelaporanTenagaKependidikan/*
+public/img/dokumentasiInspeksi/pelaporanMahasiswa/*
 
 !public/img/dokumentasi/.ignoreme.txt
 !public/img/dokumentasiMaintenance/.ignoreme.txt

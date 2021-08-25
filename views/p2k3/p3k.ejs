@@ -1,5 +1,8 @@
 <%- include("templateP3k/head") %>
 <div class="card shadow mx-3 mt-3">
+  <div class="card-header">
+    <h4 class="card-title my-3">Data Kecelakaan di Bengkel dan Laboratorium Politeknik Perkapalan Negeri Surabaya</h4>
+  </div>
   <div class="card-body">
     <div class="row justify-content-center mb-3">
       <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
@@ -8,25 +11,30 @@
             >Tahun</label
           >
           <select name="tahun" id="tahun" class="form-select">
-            <option value="2018">2018</option>
-            <option value="2019">2019</option>
-            <option value="2020">2020</option>
-            <option value="2021">2021</option>
+            <% let currentYear %> 
+            <% if (!tahun) {%>
+              <% currentYear = arrayOfYear.slice(-1) %>  
+            <% }else {%>
+              <% currentYear = tahun %>   
+            <% } %> 
+            <% for (const year of arrayOfYear) { %>
+              <option value="<%= year %>" <%=  parseInt(year) === parseInt(currentYear) ? "selected" : "" %> ><%= year %></option>
+            <% } %>
           </select>
         </div>
       </div>
     </div>
-    <canvas id="dataKecelakaan" class="w-100" height="500px">
-      <p>tsest</p>
-    </canvas>
+    <canvas id="dataKecelakaan" class="w-100" height="500px"></canvas>
   </div>
 </div>
 <%- include("templateP3k/footer") %>
 
 <script>
+  const temp = `<%- JSON.stringify(jumlahLaporan) %>`;
+  const jumlahLaporan = JSON.parse(temp);
   const ctx = document.querySelector("#dataKecelakaan");
   const myChart = new Chart(ctx, {
-    type: "line",
+    type: "bar",
     data: {
       labels: [
         "Januari",
@@ -44,11 +52,24 @@
       ],
       datasets: [
         {
-          label: "Jumlah Kecelakaan",
-          data: [12, 2, 3, 5, 2, 3, 3, 5, 6, 7, 8, 9],
+          label: "Jumlah Laporan Kecelakaan",
+          data: [
+            jumlahLaporan.jan,
+            jumlahLaporan.feb,
+            jumlahLaporan.mar,
+            jumlahLaporan.apr,
+            jumlahLaporan.mei,
+            jumlahLaporan.jun,
+            jumlahLaporan.jul,
+            jumlahLaporan.agu,
+            jumlahLaporan.sep,
+            jumlahLaporan.okt,
+            jumlahLaporan.nov,
+            jumlahLaporan.des,
+          ],
           backgroundColor: ["rgba(255, 99, 132, 0.2)"],
           borderColor: ["rgba(255, 99, 132, 1)"],
-          borderWidth: 2,
+          borderWidth: 4,
         },
       ],
     },
@@ -59,12 +80,13 @@
         },
       },
       responsive: true,
-      plugins: {
-        title: {
-          display: true,
-          text: "Data Kecelakaan di Bengkel dan Laboratorium Politeknik Perkapalan Negeri Surabaya",
-        },
-      },
     },
+  });
+</script>
+
+<script>
+  const tahun = document.querySelector("#tahun");
+  tahun.addEventListener("change", (e) => {
+    window.location.replace(`/upik3?tahun=${e.target.value}`);
   });
 </script>

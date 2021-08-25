@@ -571,6 +571,7 @@ router.get(
     } else {
       return res.status(404).send("<h1>TIDAK DITEMUKAN </h1>");
     }
+    console.log(inspeksiPilihan);
     res.render("maintenance/maintenanceFormInspeksi", {
       alamatTempat,
       foundJenisTempat,

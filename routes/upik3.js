@@ -142,8 +142,61 @@ function convertDate(tanggal) {
   return isoDate;
 }
 
-router.get("/", isLoggedIn, (req, res) => {
-  res.render("p2k3/p3k");
+function unique(arr) {
+  const newArr = [];
+  for (let year of arr) {
+    year = parseInt(year);
+    if (newArr.indexOf(year) === -1) {
+      newArr.push(year);
+    }
+  }
+  return newArr;
+}
+
+router.get("/", async (req, res) => {
+  const { tahun } = req.query;
+  async function ambilDataBulan(month, lastDate, year) {
+    return await LaporanKecelakaan.find({
+      tanggalKejadian: {
+        $gte: convertDate(`1-${month}-${year}`),
+        $lte: convertDate(`${lastDate}-${month}-${year}`),
+      },
+    });
+  }
+  const semuaData = await LaporanKecelakaan.find({});
+  let arrayOfYear = [];
+  for (const data of semuaData) {
+    arrayOfYear.push(parseInt(data.tanggalKejadian.getFullYear()));
+  }
+  arrayOfYear = unique(arrayOfYear).sort();
+  lastOfYear = tahun || parseInt(arrayOfYear.slice(-1));
+  const dataKecelakaanJanuari = await ambilDataBulan(1, 31, lastOfYear);
+  const dataKecelakaanFebruari = await ambilDataBulan(2, 28, lastOfYear);
+  const dataKecelakaanMaret = await ambilDataBulan(3, 31, lastOfYear);
+  const dataKecelakaanApril = await ambilDataBulan(4, 30, lastOfYear);
+  const dataKecelakaanMei = await ambilDataBulan(5, 31, lastOfYear);
+  const dataKecelakaanJuni = await ambilDataBulan(6, 30, lastOfYear);
+  const dataKecelakaanJuli = await ambilDataBulan(7, 31, lastOfYear);
+  const dataKecelakaanAgustus = await ambilDataBulan(8, 31, lastOfYear);
+  const dataKecelakaanSeptember = await ambilDataBulan(9, 30, lastOfYear);
+  const dataKecelakaanOktober = await ambilDataBulan(10, 31, lastOfYear);
+  const dataKecelakaanNovember = await ambilDataBulan(11, 30, lastOfYear);
+  const dataKecelakaanDesember = await ambilDataBulan(12, 31, lastOfYear);
+  const jumlahLaporan = {
+    jan: parseInt(dataKecelakaanJanuari.length) || null,
+    feb: parseInt(dataKecelakaanFebruari.length) || null,
+    mar: parseInt(dataKecelakaanMaret.length) || null,
+    apr: parseInt(dataKecelakaanApril.length) || null,
+    mei: parseInt(dataKecelakaanMei.length) || null,
+    jun: parseInt(dataKecelakaanJuni.length) || null,
+    jul: parseInt(dataKecelakaanJuli.length) || null,
+    agu: parseInt(dataKecelakaanAgustus.length) || null,
+    sep: parseInt(dataKecelakaanSeptember.length) || null,
+    okt: parseInt(dataKecelakaanOktober.length) || null,
+    nov: parseInt(dataKecelakaanNovember.length) || null,
+    des: parseInt(dataKecelakaanDesember.length) || null,
+  };
+  res.render("p2k3/p3k", { arrayOfYear, jumlahLaporan, tahun });
 });
 
 router.post(
