@@ -37,6 +37,10 @@ const laporanPemulihanPerlengkapanSchema = new Schema({
     type: String,
     required: true,
   },
+  namaPerlengkapanYangRusak: {
+    type: String,
+    required: true,
+  },
   pertanyaan1: {
     type: String,
     required: true,

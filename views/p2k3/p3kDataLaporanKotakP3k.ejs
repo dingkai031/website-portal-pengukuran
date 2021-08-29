@@ -24,6 +24,7 @@
           </tr>
         </thead>
         <tbody>
+          <% const select = [] %> 
           <% for( const laporan of laporans) { %>
           <tr class="text-nowrap">
             <td class="text-center"></td>
@@ -46,244 +47,963 @@
                       ></button>
                     </div>
                     <div class="modal-body">
-                        <div class="table-responsive">
-                            <table
-                            class="table table-bordered text-start mb-0"
-                            >
-                            <tbody>
-                                <tr>
-                                    <td class="w-50">
-                                    <label for="tanggal" class="form-label fw-bolder"
-                                        >1. Tanggal Inspeksi :</label
-                                    >
-                                    <input type="text" readonly class="form-control fw-bolder"
-                                    id="tanggal" value="<%=
-                                    `${("0"+laporan.tanggalInspeksi.getDate()).slice(-2)}-${("0"+(laporan.tanggalInspeksi.getMonth()+1)).slice(-2)}-${laporan.tanggalInspeksi.getFullYear()}`
-                                    %>">
-                                    </td>
-                                    <td class="w-50">
-                                    <label for="namaKorban" class="form-label fw-bolder"
-                                        >2. Nama Inspektor :</label
-                                    >
-                                    <input
-                                        type="text"
-                                        readonly
-                                        class="form-control"
-                                        id="namaKorban"
-                                        value="<%= laporan.inspektor.nama %>"
-                                    />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                    <label for="nip" class="form-label fw-bolder"
-                                        >3. NRP/NIP :</label
-                                    >
-                                    <input
-                                        type="text"
-                                        readonly
-                                        class="form-control"
-                                        id="nip"
-                                        value="<%= laporan.inspektor.nip %>"
-                                    />
-                                    </td>
-                                    <td>
-                                    <label for="lokasiP3k" class="form-label fw-bolder text-wrap"
-                                        >4. Letak Kotak P3K yang Sedang Diinspeksi :</label
-                                    >
-                                    <input
-                                        type="text"
-                                        readonly
-                                        class="form-control"
-                                        id="lokasiP3k"
-                                        value="<%= laporan.lokasiP3k %>"
-                                    />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td
-                                    colspan="2"
-                                    class="
-                                        text-start text-uppercase
-                                        fw-bolder
-                                        fs-5
-                                        w-50
-                                    "
-                                    >
-                                    ISI KOTAK P3K
-                                    </td>
-                                </tr>
-                            </tbody>
-                            </table>
+                        <div class="card shadow">
+                          <div class="card-body">
+                            <div class="table-responsive">
+                              <table
+                              class="table table-bordered text-start mb-0"
+                              >
+                              <tbody>
+                                  <tr>
+                                      <td class="w-50">
+                                      <label for="tanggal" class="form-label fw-bolder"
+                                          >1. Tanggal Inspeksi :</label
+                                      >
+                                      <input type="text" readonly class="form-control fw-bolder"
+                                      id="tanggal" value="<%=
+                                      `${("0"+laporan.tanggalInspeksi.getDate()).slice(-2)}-${("0"+(laporan.tanggalInspeksi.getMonth()+1)).slice(-2)}-${laporan.tanggalInspeksi.getFullYear()}`
+                                      %>">
+                                      </td>
+                                      <td class="w-50">
+                                      <label for="namaKorban" class="form-label fw-bolder"
+                                          >2. Nama Inspektor :</label
+                                      >
+                                      <input
+                                          type="text"
+                                          readonly
+                                          class="form-control"
+                                          id="namaKorban"
+                                          value="<%= laporan.inspektor.nama %>"
+                                      />
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                      <label for="nip" class="form-label fw-bolder"
+                                          >3. NRP/NIP :</label
+                                      >
+                                      <input
+                                          type="text"
+                                          readonly
+                                          class="form-control"
+                                          id="nip"
+                                          value="<%= laporan.inspektor.nip %>"
+                                      />
+                                      </td>
+                                      <td>
+                                      <label for="lokasiP3k" class="form-label fw-bolder text-wrap"
+                                          >4. Letak Kotak P3K yang Sedang Diinspeksi :</label
+                                      >
+                                      <input
+                                          type="text"
+                                          readonly
+                                          class="form-control"
+                                          id="lokasiP3k"
+                                          value="<%= laporan.lokasiP3k %>"
+                                      />
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td
+                                      colspan="2"
+                                      class="
+                                          text-start text-uppercase
+                                          fw-bolder
+                                          fs-5
+                                          w-50
+                                      "
+                                      >
+                                      ISI KOTAK P3K
+                                      </td>
+                                  </tr>
+                              </tbody>
+                              </table>
+                          </div>
+                          <div class="table-responsive">
+                              <table class="table table-bordered  w-100 mb-0">
+                                  <thead  class="align-middle">
+                                      <tr>
+                                          <th rowspan="2">No</th>
+                                          <th rowspan="2">Nama</th>
+                                          <th colspan="2">Jumlah</th>
+                                      </tr>
+                                      <tr>
+                                          <th>Jumlah yang Tersedia</th>
+                                          <th>Jumlah Maksimal</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody  class="align-middle">
+                                      <tr>
+                                          <td class="text-center">1</td>
+                                          <td>Kasa Steril Terbungkus</td>
+                                          <td><%= laporan.kasaSteril %></td>
+                                          <td>40</td>
+                                      </tr>
+                                      <tr>
+                                          <td class="text-center">2</td>
+                                          <td>Perban (lebar 5 cm)</td>
+                                          <td><%= laporan.perban5Cm %></td>
+                                          <td>4</td>
+                                      </tr>
+                                      <tr>
+                                          <td class="text-center">3</td>
+                                          <td>Perban (lebar 10 cm)</td>
+                                          <td><%= laporan.perban10Cm %></td>
+                                          <td>4</td>
+                                      </tr>
+                                      <tr>
+                                          <td class="text-center">4</td>
+                                          <td>Plester (lebar 1,25 cm)</td>
+                                          <td><%= laporan.plesterBiasa %></td>
+                                          <td>4</td>
+                                      </tr>
+                                      <tr>
+                                          <td class="text-center">5</td>
+                                          <td>Plester Cepat</td>
+                                          <td><%= laporan.plesterCepat %></td>
+                                          <td>15</td>
+                                      </tr>
+                                      <tr>
+                                          <td class="text-center">6</td>
+                                          <td>Kapas (25 gram)</td>
+                                          <td><%= laporan.kapas %></td>
+                                          <td>2</td>
+                                      </tr>
+                                      <tr>
+                                          <td class="text-center">7</td>
+                                          <td>Kain segitiga/mittela</td>
+                                          <td><%= laporan.kainSegitiga %></td>
+                                          <td>4</td>
+                                      </tr>
+                                      <tr>
+                                          <td class="text-center">8</td>
+                                          <td>Gunting</td>
+                                          <td><%= laporan.gunting %></td>
+                                          <td>1</td>
+                                      </tr>
+                                      <tr>
+                                          <td class="text-center">9</td>
+                                          <td>Peniti</td>
+                                          <td><%= laporan.peniti %></td>
+                                          <td>12</td>
+                                      </tr>
+                                      <tr>
+                                          <td class="text-center">10</td>
+                                          <td>Sarung tangan sekali pakai</td>
+                                          <td><%= laporan.sarungTangan %></td>
+                                          <td>3</td>
+                                      </tr>
+                                      <tr>
+                                          <td class="text-center">11</td>
+                                          <td>Masker</td>
+                                          <td><%= laporan.masker %></td>
+                                          <td>1</td>
+                                      </tr>
+                                      <tr>
+                                          <td class="text-center">12</td>
+                                          <td>Pinset</td>
+                                          <td><%= laporan.pinset %></td>
+                                          <td>1</td>
+                                      </tr>
+                                      <tr>
+                                          <td class="text-center">13</td>
+                                          <td>Lampu Senter</td>
+                                          <td><%= laporan.lampuSenter %></td>
+                                          <td>2</td>
+                                      </tr>
+                                      <tr>
+                                          <td class="text-center">14</td>
+                                          <td>Gelas untuk cuci mata</td>
+                                          <td><%= laporan.gelasCuciMata %></td>
+                                          <td>2</td>
+                                      </tr>
+                                      <tr>
+                                          <td class="text-center">15</td>
+                                          <td>Kantong Plastik Bersih</td>
+                                          <td><%= laporan.kantongPlastik %></td>
+                                          <td>1</td>
+                                      </tr>
+                                      <tr>
+                                          <td class="text-center">16</td>
+                                          <td>Aquades (100 ml Iar. Saline)</td>
+                                          <td><%= laporan.aquades %></td>
+                                          <td>1</td>
+                                      </tr>
+                                      <tr>
+                                          <td class="text-center">17</td>
+                                          <td>Povidone iodin (60 ml)</td>
+                                          <td><%= laporan.povidone %></td>
+                                          <td>1</td>
+                                      </tr>
+                                      <tr>
+                                          <td class="text-center">18</td>
+                                          <td>Alkohol 70%</td>
+                                          <td><%= laporan.alkohol %></td>
+                                          <td>1</td>
+                                      </tr>
+                                      <tr>
+                                          <td class="text-center">19</td>
+                                          <td>Buku panduan P3K</td>
+                                          <td><%= laporan.bukuPanduan %></td>
+                                          <td>1</td>
+                                      </tr>
+                                      
+                                  </tbody>
+                              </table>
+                          </div>
+                          <div class="table-responsive">
+                              <table class="table table-bordered">
+                                  <thead>
+                                      <tr>
+                                          <th
+                                          colspan="3"
+                                          class="
+                                              text-start text-uppercase
+                                              fw-bolder
+                                              fs-5
+                                          "
+                                          >
+                                              Dokumentasi saat Inspeksi
+                                          </th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <tr class="align-middle">
+                                          <% let lokasi %> 
+                                          <% if (laporan.jenisTurunan === "Tipe C") { %>
+                                              <% lokasi = "pelaporanKotakP3kC" %> 
+                                          <% } else { %>  
+                                              <% lokasi = "pelaporanKotakP3kB" %> 
+                                          <% } %> 
+                                          <td style="width: 33%;">
+                                              <img src="/img/dokumentasiInspeksi/<%= lokasi %>/<%= laporan.dokumentasi[0] %>" alt="" class="img-fluid">
+                                          </td>
+                                          <td style="width: 33%;">
+                                              <img src="/img/dokumentasiInspeksi/<%= lokasi %>/<%= laporan.dokumentasi[1] %>" alt="" class="img-fluid">
+                                          </td>
+                                          <td style="width: 33%;">
+                                              <img src="/img/dokumentasiInspeksi/<%= lokasi %>/<%= laporan.dokumentasi[2] %>" alt="" class="img-fluid">
+                                          </td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                          </div>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered  w-100 mb-0">
-                                <thead  class="align-middle">
-                                    <tr>
-                                        <th rowspan="2">No</th>
-                                        <th rowspan="2">Nama</th>
-                                        <th colspan="2">Jumlah</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Jumlah yang Tersedia</th>
-                                        <th>Jumlah Maksimal</th>
-                                    </tr>
-                                </thead>
-                                <tbody  class="align-middle">
-                                    <tr>
-                                        <td class="text-center">1</td>
-                                        <td>Kasa Steril Terbungkus</td>
-                                        <td><%= laporan.kasaSteril %></td>
-                                        <td>40</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">2</td>
-                                        <td>Perban (lebar 5 cm)</td>
-                                        <td><%= laporan.perban5Cm %></td>
-                                        <td>4</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">3</td>
-                                        <td>Perban (lebar 10 cm)</td>
-                                        <td><%= laporan.perban10Cm %></td>
-                                        <td>4</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">4</td>
-                                        <td>Plester (lebar 1,25 cm)</td>
-                                        <td><%= laporan.plesterBiasa %></td>
-                                        <td>4</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">5</td>
-                                        <td>Plester Cepat</td>
-                                        <td><%= laporan.plesterCepat %></td>
-                                        <td>15</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">6</td>
-                                        <td>Kapas (25 gram)</td>
-                                        <td><%= laporan.kapas %></td>
-                                        <td>2</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">7</td>
-                                        <td>Kain segitiga/mittela</td>
-                                        <td><%= laporan.kainSegitiga %></td>
-                                        <td>4</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">8</td>
-                                        <td>Gunting</td>
-                                        <td><%= laporan.gunting %></td>
-                                        <td>1</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">9</td>
-                                        <td>Peniti</td>
-                                        <td><%= laporan.peniti %></td>
-                                        <td>12</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">10</td>
-                                        <td>Sarung tangan sekali pakai</td>
-                                        <td><%= laporan.sarungTangan %></td>
-                                        <td>3</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">11</td>
-                                        <td>Masker</td>
-                                        <td><%= laporan.masker %></td>
-                                        <td>1</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">12</td>
-                                        <td>Pinset</td>
-                                        <td><%= laporan.pinset %></td>
-                                        <td>1</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">13</td>
-                                        <td>Lampu Senter</td>
-                                        <td><%= laporan.lampuSenter %></td>
-                                        <td>2</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">14</td>
-                                        <td>Gelas untuk cuci mata</td>
-                                        <td><%= laporan.gelasCuciMata %></td>
-                                        <td>2</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">15</td>
-                                        <td>Kantong Plastik Bersih</td>
-                                        <td><%= laporan.kantongPlastik %></td>
-                                        <td>1</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">16</td>
-                                        <td>Aquades (100 ml Iar. Saline)</td>
-                                        <td><%= laporan.aquades %></td>
-                                        <td>1</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">17</td>
-                                        <td>Povidone iodin (60 ml)</td>
-                                        <td><%= laporan.povidone %></td>
-                                        <td>1</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">18</td>
-                                        <td>Alkohol 70%</td>
-                                        <td><%= laporan.alkohol %></td>
-                                        <td>1</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">19</td>
-                                        <td>Buku panduan P3K</td>
-                                        <td><%= laporan.bukuPanduan %></td>
-                                        <td>1</td>
-                                    </tr>
-                                    
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered">
+                        <div class="card shadow">
+                          <div class="card-header">
+                            <h3 class="card-title my-3">Hasil Kuesioner</h3>
+                          </div>
+                          <div class="card-body">
+                            <div class="table-responsive text-start text-wrap">
+                              <table class="table align-middle table-bordered">
                                 <thead>
-                                    <tr>
-                                        <th
-                                        colspan="3"
-                                        class="
-                                            text-start text-uppercase
-                                            fw-bolder
-                                            fs-5
-                                        "
-                                        >
-                                            Dokumentasi saat Inspeksi
-                                        </th>
-                                    </tr>
+                                  <tr class="table-primary">
+                                    <th class="text-center">No.</th>
+                                    <th>Pertanyaan</th>
+                                    <th class="text-center">SS</th>
+                                    <th class="text-center">S</th>
+                                    <th class="text-center">RG</th>
+                                    <th class="text-center">TS</th>
+                                    <th class="text-center">STS</th>
+                                  </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="align-middle">
-                                        <% let lokasi %> 
-                                        <% if (laporan.jenisTurunan === "Tipe C") { %>
-                                            <% lokasi = "pelaporanKotakP3kC" %> 
-                                        <% } else { %>  
-                                            <% lokasi = "pelaporanKotakP3kB" %> 
-                                        <% } %> 
-                                        <td style="width: 33%;">
-                                            <img src="/img/dokumentasiInspeksi/<%= lokasi %>/<%= laporan.dokumentasi[0] %>" alt="" class="img-fluid">
-                                        </td>
-                                        <td style="width: 33%;">
-                                            <img src="/img/dokumentasiInspeksi/<%= lokasi %>/<%= laporan.dokumentasi[1] %>" alt="" class="img-fluid">
-                                        </td>
-                                        <td style="width: 33%;">
-                                            <img src="/img/dokumentasiInspeksi/<%= lokasi %>/<%= laporan.dokumentasi[2] %>" alt="" class="img-fluid">
-                                        </td>
-                                    </tr>
+                                  <tr>
+                                    <td colspan="7"><i class="fw-bolder">Usefulness</i></td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">1</td>
+                                    <td>
+                                      Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini membantu saya menjadi lebih efektif
+                                      dalam pembuatan laporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan1 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan1 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan1 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan1 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan1 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">2</td>
+                                    <td>
+                                      Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini membantu saya menjadi lebih produktif
+                                      pada saat pembuatan laporan Kecelakaan dan Pendataan
+                                      Ketersediaan Perlengkapan Kotak P3K
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan2 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan2 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan2 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan2 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan2 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">3</td>
+                                    <td>
+                                      Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini berguna sekali dalam penyimpanan
+                                      laporan Kecelakaan dan Pendataan Ketersediaan Perlengkapan Kotak
+                                      P3K
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan3 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan3 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan3 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan3 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan3 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">4</td>
+                                    <td>
+                                      Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini membuat pelaporan Kecelakaan dan
+                                      Pendataan Ketersediaan Perlengkapan Kotak P3K lebih mudah untuk
+                                      dilakukan
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan4 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan4 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan4 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan4 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan4 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">5</td>
+                                    <td>
+                                      Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini menghemat waktu saya saat melakukan
+                                      pembuatan laporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan5 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan5 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan5 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan5 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan5 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">6</td>
+                                    <td>
+                                      Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini dapat memenuhi kebutuhan saya (untuk
+                                      membuat laporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan6 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan6 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan6 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan6 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan6 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">7</td>
+                                    <td>
+                                      Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini melakukan semua yang saya harapkan
+                                      (untuk membuat laporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K)
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan7 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan7 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan7 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan7 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan7 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td colspan="7"><i class="fw-bolder">Ease of use</i></td>
+                                  </tr>
+                                  <tr>
+                                    <td class="text-center">8</td>
+                                    <td>
+                                      Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini mudah digunakan
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan8 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan8 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan8 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan8 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan8 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">9</td>
+                                    <td>
+                                      Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini cara penggunaannya sederhana.
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan9 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan9 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan9 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan9 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan9 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">10</td>
+                                    <td>
+                                      Baik pengguna sesekali ataupun pengguna yang teratur akan
+                                      menyukai Sistem Informasi Pelaporan Kecelakaan dan Pendataan
+                                      Ketersediaan Perlengkapan Kotak P3K ini.
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan10 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan10 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan10 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan10 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan10 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">11</td>
+                                    <td>Saya bisa menggunakannya dengan berhasil setiap saat.</td>
+                                    <td>
+                                      <% if (laporan.pertanyaan11 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan11 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan11 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan11 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan11 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td colspan="7"><i class="fw-bolder">Ease of Learning</i></td>
+                                  </tr>
+                                  <tr>
+                                    <td class="text-center">12</td>
+                                    <td>
+                                      Saya belajar menggunakan Sistem Informasi Pelaporan Kecelakaan
+                                      dan Pendataan Ketersediaan Perlengkapan Kotak P3K ini dengan
+                                      cepat.
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan12 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan12 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan12 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan12 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan12 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">13</td>
+                                    <td>
+                                      Saya dengan mudah ingat bagaimana menggunakan Sistem Informasi
+                                      Pelaporan Kecelakaan dan Pendataan Ketersediaan Perlengkapan
+                                      Kotak P3K ini.
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan13 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan13 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan13 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan13 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan13 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">14</td>
+                                    <td>
+                                      Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini mudah dipelajari cara penggunaannya.
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan14 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan14 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan14 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan14 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan14 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">15</td>
+                                    <td>
+                                      Saya dengan mudah menjadi terampil saat meggunakan Sistem
+                                      Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini.
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan15 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan15 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan15 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan15 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan15 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td colspan="7"><i class="fw-bolder">Satisfaction</i></td>
+                                  </tr>
+                                  <tr>
+                                    <td class="text-center">16</td>
+                                    <td>
+                                      Saya puas dengan Sistem Informasi Pelaporan Kecelakaan dan
+                                      Pendataan Ketersediaan Perlengkapan Kotak P3K ini
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan16 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan16 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan16 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan16 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan16 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">17</td>
+                                    <td>
+                                      Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini menyenangkan untuk digunakan.
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan17 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan17 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan17 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan17 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan17 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">18</td>
+                                    <td>
+                                      Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini berfungsi seperti yang saya inginkan.
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan18 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan18 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan18 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan18 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan18 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">19</td>
+                                    <td>
+                                      Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini Luar biasa.
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan19 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan19 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan19 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan19 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan19 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">20</td>
+                                    <td>
+                                      Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini nyaman digunakan.
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan20 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan20 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan20 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan20 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan20 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
                                 </tbody>
-                            </table>
+                              
+                              </table>
+                            </div>
+                          </div>
                         </div>
                     </div>
                   </div>
@@ -300,8 +1020,459 @@
             <td><%= laporan.lokasiP3k %></td>
             <td><%= laporan.jenisTurunan %></td>
             <td><%= laporan.inspektor.nama %></td>
-            <td class="text-center">
-              <button class="btn btn-primary py-2 px-3">
+            <td>
+              <div class="modal fade" id="edit<%= laporan._id %>" tabindex="-1">
+                <div class="modal-dialog modal-xl modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Edit Laporan Kota P3k</h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card shadow">
+                          <div class="card-body text-start">
+                            <form
+                              action="/upik3/data-laporan-kotak-p3k?_method=PUT"
+                              method="POST"
+                              spellcheck="false"
+                              autocomplete="off"
+                            >
+                              <div class="mb-3 row">
+                                <div class="col-sm-6 d-flex flex-column mb-2 mb-sm-1">
+                                  <label for="tanggalInspeksi<%= laporan._id%>" class="form-label"
+                                    >Tanggal Inspeksi</label
+                                  >
+                                  <div class="input-group border-0 datepicker">
+                                    <input
+                                      type="text"
+                                      id="tanggalInspeksi<%= laporan._id%>"
+                                      class="form-control border-0"
+                                      name="tanggalInspeksi"
+                                      required
+                                      title="Harap isi form ini"
+                                      data-input
+                                      value="<%=`${("0"+laporan.tanggalInspeksi.getDate()).slice(-2)}-${("0"+(laporan.tanggalInspeksi.getMonth()+1)).slice(-2)}-${laporan.tanggalInspeksi.getFullYear()}`%>"
+                                    />
+                                    <span class="input-group-text border-0" data-toggle>
+                                      <i class="far fa-calendar"></i>
+                                    </span>
+                                  </div>
+                                </div>
+                                <div class="col-sm-6 d-flex flex-column mb-2 mb-sm-1">
+                                  <label for="namaInspektor<%= laporan._id%>" class="form-label">Nama Inspektor</label>
+                                  <select name="namaInspektor" id="namaInspektor<%= laporan._id%>" title="Harap isi form ini" required>
+                                    <% for (const user of users) {%>
+                                      <option value="<%= user._id %>" <%= user.nama === laporan.inspektor.nama ? "selected" : "" %>><%= user.nama %></option>
+                                    <% } %> 
+                                  </select>
+                                  <% select.push(`#namaInspektor${laporan._id}`) %> 
+                                  <% select.push(`#edit${laporan._id}`) %> 
+                                  <div class="invalid-feedback">Silahkan mengisi nama inspektor</div>
+                                </div>
+                              </div>
+                              <div class="mb-3 row">
+                                <div class="col-12 d-flex flex-column mb-2 mb-sm-1">
+                                  <label for="lokasiP3k" class="form-label"
+                                    >Letak Kotak P3K yang Sedang Diinspeksi <%= laporan.jenisTurunan %></label
+                                  >
+                                  <select name="lokasiP3k" id="lokasiP3k<%= laporan._id %>">
+                                    <option></option>
+                                    <% if (laporan.jenisTurunan === "Tipe B") { %>
+                                      <option value="Lab Elektronika Daya" <%= laporan.lokasiP3k === "Lab Elektronika Daya" ? "selected" : "" %> >Lab Elektronika Daya</option>
+                                      <option value="Lab Elektronika dan Sistem Kontrol" <%= laporan.lokasiP3k === "Lab Elektronika dan Sistem Kontrol" ? "selected" : "" %> >Lab Elektronika dan Sistem Kontrol</option>
+                                      <option value="Lab Kimia" <%= laporan.lokasiP3k === "Lab Kimia" ? "selected" : "" %>>Lab Kimia</option>
+                                      <option value="Lab Fisika" <%= laporan.lokasiP3k === "Lab Fisika" ? "selected" : "" %>>Lab Fisika</option>
+                                      <option value="Lab Instrumentasi" <%= laporan.lokasiP3k === "Lab Instrumentasi" ? "selected" : "" %>>Lab Instrumentasi</option>
+                                      <option value="Lab Pengembangan Bisnis Maritim dan Galeri Investasi" <%= laporan.lokasiP3k === "Lab Pengembangan Bisnis Maritim dan Galeri Investasi" ? "selected" : "" %>>
+                                        Lab Pengembangan Bisnis Maritim dan Galeri Investasi
+                                      </option>
+                                      <option value="Lab Navigasi dan Komunikasi" <%= laporan.lokasiP3k === "Lab Navigasi dan Komunikasi" ? "selected" : "" %>>Lab Navigasi dan Komunikasi</option>
+                                      <option value="Lab Logistik Maritim" <%= laporan.lokasiP3k === "Lab Logistik Maritim" ? "selected" : "" %>>Lab Logistik Maritim</option>
+                                      <option value="Lab Reparasi Listrik" <%= laporan.lokasiP3k === "Lab Reparasi Listrik" ? "selected" : "" %>>Lab Reparasi Listrik</option>
+                                      <option value="Lab Mesin Listrik" <%= laporan.lokasiP3k === "Lab Mesin Listrik" ? "selected" : "" %>>Lab Mesin Listrik</option>
+                                      <option value="Lab Otomasi dan Robotik" <%= laporan.lokasiP3k === "Lab Otomasi dan Robotik" ? "selected" : "" %>>Lab Otomasi dan Robotik</option>
+                                      <option value="Lab Plumbing dan Pemodelan Sistem Perpipaan" <%= laporan.lokasiP3k === "Lab Plumbing dan Pemodelan Sistem Perpipaan" ? "selected" : "" %>>Lab Plumbing dan Pemodelan Sistem Perpipaan</option>
+                                      <option value="Lab CNC" <%= laporan.lokasiP3k === "Lab CNC" ? "selected" : "" %>>Lab CNC</option>
+                                      <option value="Lab Pemadam Kebakaran" <%= laporan.lokasiP3k === "Lab Pemadam Kebakaran" ? "selected" : "" %>>Lab Pemadam Kebakaran</option>
+                                      <option value="Lab Pneumatik dan Hidrolik" <%= laporan.lokasiP3k === "Lab Pneumatik dan Hidrolik" ? "selected" : "" %>>Lab Pneumatik dan Hidrolik</option>
+                                      <option value="Lab Motor Bakar" <%= laporan.lokasiP3k === "Lab Motor Bakar" ? "selected" : "" %>>Lab Motor Bakar</option>
+                                      <option value="Lab CADD" <%= laporan.lokasiP3k === "Lab CADD" ? "selected" : "" %>>Lab CADD</option>
+                                      <option value="Lab Uji Bahan" <%= laporan.lokasiP3k === "Lab Uji Bahan" ? "selected" : "" %>>Lab Uji Bahan</option>
+                                      <option value="Lab Pengolahan Limbah" <%= laporan.lokasiP3k === "Lab Pengolahan Limbah" ? "selected" : "" %> >Lab Pengolahan Limbah</option>
+                                      <option value="Bengkel Reparasi Mesin" <%= laporan.lokasiP3k === "Bengkel Reparasi Mesin" ? "selected" : "" %> >Bengkel Reparasi Mesin</option>
+                                    <% }else if (laporan.jenisTurunan === "Tipe C") {%>
+                                      <option value="Bengkel Permesinan dan Sheet Metal (Perkakas)" <%= laporan.lokasiP3k === "Bengkel Permesinan dan Sheet Metal (Perkakas)" ? "selected" : "" %>>
+                                        Bengkel Permesinan dan Sheet Metal (Perkakas)
+                                      </option>
+                                      <option value="Bengkel Las" <%= laporan.lokasiP3k === "Bengkel Las" ? "selected" : "" %> >Bengkel Las</option>
+                                      <option value="Bengkel Kontruksi" <%= laporan.lokasiP3k === "Bengkel Kontruksi" ? "selected" : "" %> >Bengkel Kontruksi</option>
+                                      <option value="Bengkel Non Metal" <%= laporan.lokasiP3k === "Bengkel Non Metal" ? "selected" : "" %>>Bengkel Non Metal</option>
+                                    <% } %> 
+                                  </select>
+                                  <% select.push(`#lokasiP3k${laporan._id}`) %> 
+                                </div>
+                              </div>
+                              <h5>Isi kotak P3K :</h5>
+                              <div class="mb-3 row justify-content-evenly">
+                                <div class="col-sm-6 col-md-4 col-lg-3">
+                                  <label for="kasaSteril" class="form-label"
+                                    >Kasa Steril Terbungkus</label
+                                  >
+                                  <div class="mb-2 input-group">
+                                    <input
+                                      type="number"
+                                      class="form-control"
+                                      id="kasaSteril"
+                                      name="kasaSteril"
+                                      required
+                                      min="0"
+                                      max="40"
+                                      value="<%= laporan.kasaSteril %>"
+                                    />
+                                    <span class="input-group-text">40</span>
+                                  </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-3">
+                                  <label for="perban5Cm" class="form-label">Perban (lebar 5 cm)</label>
+                                  <div class="mb-2 input-group">
+                                    <input
+                                      type="number"
+                                      class="form-control"
+                                      id="perban5Cm"
+                                      name="perban5Cm"
+                                      title="Harap isi data ini"
+                                      min="0"
+                                      max="4"
+                                      value="<%= laporan.perban5Cm %>"
+                                      required
+                                    />
+                                    <span class="input-group-text">4</span>
+                                  </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-3">
+                                  <label for="perban10Cm" class="form-label"
+                                    >Perban (lebar 10 cm)</label
+                                  >
+                                  <div class="mb-2 input-group">
+                                    <input
+                                      type="number"
+                                      class="form-control"
+                                      id="perban10Cm"
+                                      name="perban10Cm"
+                                      title="Harap isi data ini"
+                                      min="0"
+                                      max="4"
+                                      value="<%= laporan.perban10Cm %>"
+                                      required
+                                    />
+                                    <span class="input-group-text">4</span>
+                                  </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-3">
+                                  <label for="plesterBiasa" class="form-label"
+                                    >Plester (lebar 1,25 cm)</label
+                                  >
+                                  <div class="mb-2 input-group">
+                                    <input
+                                      type="number"
+                                      class="form-control"
+                                      id="plesterBiasa"
+                                      name="plesterBiasa"
+                                      title="Harap isi data ini"
+                                      min="0"
+                                      max="4"
+                                      value="<%= laporan.plesterBiasa %>"
+                                      required
+                                    />
+                                    <span class="input-group-text">4</span>
+                                  </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-3">
+                                  <label for="plesterCepat" class="form-label">Plester Cepat</label>
+                                  <div class="mb-2 input-group">
+                                    <input
+                                      type="number"
+                                      class="form-control"
+                                      id="plesterCepat"
+                                      name="plesterCepat"
+                                      title="Harap isi data ini"
+                                      min="0"
+                                      max="15"
+                                      value="<%= laporan.plesterCepat %>"
+                                      required
+                                    />
+                                    <span class="input-group-text">15</span>
+                                  </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-3">
+                                  <label for="kapas" class="form-label">Kapas (25 gram)</label>
+                                  <div class="mb-2 input-group">
+                                    <input
+                                      type="number"
+                                      class="form-control"
+                                      id="kapas"
+                                      name="kapas"
+                                      title="Harap isi data ini"
+                                      min="0"
+                                      max="2"
+                                      value="<%= laporan.kapas %>"
+                                      required
+                                    />
+                                    <span class="input-group-text">2</span>
+                                  </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-3">
+                                  <label for="kainSegitiga" class="form-label"
+                                    >Kain segitiga/mittela</label
+                                  >
+                                  <div class="mb-2 input-group">
+                                    <input
+                                      type="number"
+                                      class="form-control"
+                                      id="kainSegitiga"
+                                      name="kainSegitiga"
+                                      title="Harap isi data ini"
+                                      min="0"
+                                      value="<%= laporan.kainSegitiga %>"
+                                      required
+                                      max="4"
+                                    />
+                                    <span class="input-group-text">4</span>
+                                  </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-3">
+                                  <label for="gunting" class="form-label">Gunting</label>
+                                  <div class="mb-2 input-group">
+                                    <input
+                                      type="number"
+                                      class="form-control"
+                                      id="gunting"
+                                      name="gunting"
+                                      title="Harap isi data ini"
+                                      min="0"
+                                      required
+                                      value="<%= laporan.gunting %>"
+                                      max="1"
+                                    />
+                                    <span class="input-group-text">1</span>
+                                  </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-3">
+                                  <label for="peniti" class="form-label">Peniti</label>
+                                  <div class="mb-2 input-group">
+                                    <input
+                                      type="number"
+                                      class="form-control"
+                                      id="peniti"
+                                      name="peniti"
+                                      title="Harap isi data ini"
+                                      min="0"
+                                      required
+                                      value="<%= laporan.peniti %>"
+                                      max="12"
+                                    />
+                                    <span class="input-group-text">12</span>
+                                  </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-3">
+                                  <label for="sarungTangan" class="form-label"
+                                    >Sarung tangan sekali pakai</label
+                                  >
+                                  <div class="mb-2 input-group">
+                                    <input
+                                      type="number"
+                                      class="form-control"
+                                      id="sarungTangan"
+                                      name="sarungTangan"
+                                      title="Harap isi data ini"
+                                      min="0"
+                                      max="3"
+                                      value="<%= laporan.sarungTangan %>"
+                                      required
+                                    />
+                                    <span class="input-group-text">3</span>
+                                  </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-3">
+                                  <label for="masker" class="form-label">Masker</label>
+                                  <div class="mb-2 input-group">
+                                    <input
+                                      type="number"
+                                      class="form-control"
+                                      id="masker"
+                                      name="masker"
+                                      title="Harap isi data ini"
+                                      min="0"
+                                      value="<%= laporan.masker %>"
+                                      required
+                                      max="1"
+                                    />
+                                    <span class="input-group-text">1</span>
+                                  </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-3">
+                                  <label for="pinset" class="form-label">Pinset</label>
+                                  <div class="mb-2 input-group">
+                                    <input
+                                      type="number"
+                                      class="form-control"
+                                      id="pinset"
+                                      name="pinset"
+                                      title="Harap isi data ini"
+                                      min="0"
+                                      value="<%= laporan.pinset %>"
+                                      max="1"
+                                      required
+                                    />
+                                    <span class="input-group-text">1</span>
+                                  </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-3">
+                                  <label for="lampuSenter" class="form-label">Lampu senter</label>
+                                  <div class="mb-2 input-group">
+                                    <input
+                                      type="number"
+                                      class="form-control"
+                                      id="lampuSenter"
+                                      name="lampuSenter"
+                                      title="Harap isi data ini"
+                                      min="0"
+                                      max="1"
+                                      value="<%= laporan.lampuSenter %>"
+                                      required
+                                    />
+                                    <span class="input-group-text">1</span>
+                                  </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-3">
+                                  <label for="gelasCuciMata" class="form-label"
+                                    >Gelas untuk cuci mata</label
+                                  >
+                                  <div class="mb-2 input-group">
+                                    <input
+                                      type="number"
+                                      class="form-control"
+                                      id="gelasCuciMata"
+                                      name="gelasCuciMata"
+                                      title="Harap isi data ini"
+                                      min="0"
+                                      max="2"
+                                      value="<%= laporan.gelasCuciMata %>"
+                                      required
+                                    />
+                                    <span class="input-group-text">2</span>
+                                  </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-3">
+                                  <label for="kantongPlastik" class="form-label"
+                                    >Kantong plastik bersih</label
+                                  >
+                                  <div class="mb-2 input-group">
+                                    <input
+                                      type="number"
+                                      class="form-control"
+                                      id="kantongPlastik"
+                                      name="kantongPlastik"
+                                      title="Harap isi data ini"
+                                      min="0"
+                                      value="<%= laporan.kantongPlastik %>"
+                                      max="1"
+                                      required
+                                    />
+                                    <span class="input-group-text">1</span>
+                                  </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-3">
+                                  <label for="aquades" class="form-label"
+                                    >Aquades (100 ml Iar. Saline)</label
+                                  >
+                                  <div class="mb-2 input-group">
+                                    <input
+                                      type="number"
+                                      class="form-control"
+                                      id="aquades"
+                                      name="aquades"
+                                      title="Harap isi data ini"
+                                      min="0"
+                                      max="1"
+                                      value="<%= laporan.aquades %>"
+                                      required
+                                    />
+                                    <span class="input-group-text">1</span>
+                                  </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-3">
+                                  <label for="povidone" class="form-label"
+                                    >Povidone iodin (60 ml)</label
+                                  >
+                                  <div class="mb-2 input-group">
+                                    <input
+                                      type="number"
+                                      class="form-control"
+                                      id="povidone"
+                                      name="povidone"
+                                      title="Harap isi data ini"
+                                      min="0"
+                                      max="1"
+                                      value="<%= laporan.povidone %>"
+                                      required
+                                    />
+                                    <span class="input-group-text">1</span>
+                                  </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-3">
+                                  <label for="alkohol" class="form-label">Alkohol 70%</label>
+                                  <div class="mb-2 input-group">
+                                    <input
+                                      type="number"
+                                      class="form-control"
+                                      id="alkohol"
+                                      name="alkohol"
+                                      title="Harap isi data ini"
+                                      min="0"
+                                      value="<%= laporan.alkohol %>"
+                                      required
+                                      max="1"
+                                    />
+                                    <span class="input-group-text">1</span>
+                                  </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-3">
+                                  <label for="bukuPanduan" class="form-label">Buku panduan P3K</label>
+                                  <div class="mb-2 input-group">
+                                    <input
+                                      type="number"
+                                      class="form-control"
+                                      id="bukuPanduan"
+                                      name="bukuPanduan"
+                                      title="Harap isi data ini"
+                                      min="0"
+                                      value="<%= laporan.bukuPanduan %>"
+                                      max="1"
+                                      required
+                                    />
+                                    <span class="input-group-text">1</span>
+                                  </div>
+                                </div>
+                                <input type="text" name="idLaporan" class="d-none" required readonly value="<%= laporan._id %>">
+                              </div>
+                              <div class="d-flex flex-column d-lg-block text-start text-lg-center">
+                                <button type="reset" class="btn btn-danger mt-3">Reset</button>
+                                <button type="submit" class="btn btn-success mt-3">Edit</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-primary py-2 px-3" data-bs-toggle="modal" data-bs-target="#edit<%= laporan._id %>">
                 <i class="far fa-edit fs-5"></i>
               </button>
               <form
@@ -325,7 +1496,7 @@
               </button>
             </td>
             <td class="text-center">
-              <form action="/upik3/data-laporan-kotak-p3k?_method=PUT"
+              <form action="/upik3/data-laporan-kotak-p3k/approve?_method=PUT"
               method="POST"
               class="d-inline-block"
               >
@@ -350,3 +1521,27 @@
   </div>
 </div>
 <%- include("templateP3k/footer") %>
+
+<script>
+$(document).ready(function () {
+  const temp = "<%= select %>";
+  console.log(temp)
+  const select = temp.split(",");
+  console.log(select)
+
+  for (let i = 0; i < select.length; i+=3) {
+    $(select[i]).select2({
+      placeholder: "Silahkan pilih",
+      theme: "bootstrap4",
+      width: "100%",
+      dropdownParent: $(select[i+1]),
+    });
+    $(select[i+2]).select2({
+      placeholder: "Silahkan pilih",
+      theme: "bootstrap4",
+      width: "100%",
+      dropdownParent: $(select[i+1]),
+    });
+  }
+});
+</script>

@@ -1,4 +1,5 @@
 const express = require("express");
+const moment = require("moment");
 const router = express.Router({ mergeParams: true });
 const { isLoggedIn } = require("../middleware");
 
@@ -368,10 +369,7 @@ router.post("/formulir-pemulihan", isLoggedIn, async (req, res) => {
   delete req.body.dataInspeksi;
   const data = JSON.parse(dataInspeksi);
   data.tanggalInspeksi = convertDate(data.tanggalInspeksi);
-  const { alatEvakuasi1, alatEvakuasi2 } = data;
   delete data.jenis;
-  data.alatEvakuasi1 = alatEvakuasi1 || "-";
-  data.alatEvakuasi2 = alatEvakuasi2 || "-";
   const dataMerged = { ...data, ...req.body };
   const foundUser = await User.findById(req.user._id);
   dataMerged.inspektor = foundUser;
@@ -388,10 +386,15 @@ router.post("/formulir-pemulihan", isLoggedIn, async (req, res) => {
 });
 
 router.get("/data-laporan-kecelakaan", isLoggedIn, async (req, res) => {
+  const foundTempat = await Tempat.find({});
   const laporans = await LaporanKecelakaan.find({})
     .populate("saksi")
     .populate("validasi.user");
-  res.render("p2k3/p3kDataLaporanKecelakaan", { laporans });
+  res.render("p2k3/p3kDataLaporanKecelakaan", {
+    laporans,
+    foundTempat,
+    moment,
+  });
 });
 
 router.delete("/data-laporan-kecelakaan", isLoggedIn, async (req, res) => {
@@ -406,7 +409,20 @@ router.delete("/data-laporan-kecelakaan", isLoggedIn, async (req, res) => {
   res.redirect("/upik3/data-laporan-kecelakaan");
 });
 
-router.put("/data-laporan-kecelakaan", isLoggedIn, async (req, res) => {
+router.put("/data-laporan-kecelakaan", async (req, res) => {
+  const data = req.body;
+  const tanggalValid = convertDate(data.tanggalKejadian);
+  data.tanggalKejadian = tanggalValid;
+  const laporan = await LaporanKecelakaan.findByIdAndUpdate(
+    req.body.idLaporan,
+    data
+  )
+    .then(() => req.flash("success", "Laporan Berhasil Diedit"))
+    .catch((e) => req.flash("error", `Error : ${e}`));
+  res.redirect("/upik3/data-laporan-kecelakaan");
+});
+
+router.put("/data-laporan-kecelakaan/approve", isLoggedIn, async (req, res) => {
   const { idLaporan } = req.body;
   const foundLaporan = await LaporanKecelakaan.findById(idLaporan);
   const foundUser = await User.findById(req.user._id);
@@ -424,10 +440,11 @@ router.put("/data-laporan-kecelakaan", isLoggedIn, async (req, res) => {
 });
 
 router.get("/data-laporan-kotak-p3k", isLoggedIn, async (req, res) => {
+  const users = await User.find({});
   const laporans = await LaporanKotakP3k.find({})
     .populate("inspektor")
     .populate("validasi.user");
-  res.render("p2k3/p3kDataLaporanKotakP3k", { laporans });
+  res.render("p2k3/p3kDataLaporanKotakP3k", { laporans, users });
 });
 
 router.delete("/data-laporan-kotak-p3k", isLoggedIn, async (req, res) => {
@@ -442,6 +459,23 @@ router.delete("/data-laporan-kotak-p3k", isLoggedIn, async (req, res) => {
 });
 
 router.put("/data-laporan-kotak-p3k", isLoggedIn, async (req, res) => {
+  const data = req.body;
+  const user = await User.findById(data.namaInspektor);
+  const laporan = await LaporanKotakP3k.findById(data.idLaporan);
+  const validDate = convertDate(data.tanggalInspeksi);
+  data.inspektor = user;
+  data.tanggalInspeksi = validDate;
+  await LaporanKotakP3k.findByIdAndUpdate(data.idLaporan, data)
+    .then(() => {
+      return req.flash("success", "Laporan Berhasil Diedit");
+    })
+    .catch((e) => {
+      return req.flash("error", `Error : ${e}`);
+    });
+  res.redirect("/upik3/data-laporan-kotak-p3k");
+});
+
+router.put("/data-laporan-kotak-p3k/approve", isLoggedIn, async (req, res) => {
   const { idLaporan } = req.body;
   const foundLaporan = await LaporanKotakP3k.findById(idLaporan);
   const foundUser = await User.findById(req.user._id);
@@ -459,10 +493,11 @@ router.put("/data-laporan-kotak-p3k", isLoggedIn, async (req, res) => {
 });
 
 router.get("/data-laporan-alat-evakuasi", isLoggedIn, async (req, res) => {
+  const users = await User.find({});
   const laporans = await LaporanAlatEvakuasi.find({})
     .populate("inspektor")
     .populate("validasi.user");
-  res.render("p2k3/p3kDataLaporanAlatEvakuasi", { laporans });
+  res.render("p2k3/p3kDataLaporanAlatEvakuasi", { laporans, users });
 });
 
 router.delete("/data-laporan-alat-evakuasi", isLoggedIn, async (req, res) => {
@@ -477,29 +512,53 @@ router.delete("/data-laporan-alat-evakuasi", isLoggedIn, async (req, res) => {
 });
 
 router.put("/data-laporan-alat-evakuasi", isLoggedIn, async (req, res) => {
-  const foundLaporan = await LaporanAlatEvakuasi.findById(req.body.idLaporan);
-  const foundUser = await User.findById(req.user._id);
-  foundLaporan.validasi.status = true;
-  foundLaporan.validasi.user = foundUser;
-  foundLaporan
-    .save()
+  const data = req.body;
+  const user = await User.findById(data.namaInspektor);
+  data.inspektor = user;
+  await LaporanAlatEvakuasi.findByIdAndUpdate(data.idLaporan, data)
     .then(() => {
-      return req.flash("success", "Laporan Berhasil Divalidasi");
+      return req.flash("success", "Laporan Berhasil Diedit");
     })
     .catch((e) => {
       return req.flash("error", `Error : ${e}`);
     });
-  res.redirect("/upik3/data-laporan-kotak-p3k");
+  res.redirect("/upik3/data-laporan-alat-evakuasi");
 });
+
+router.put(
+  "/data-laporan-alat-evakuasi/approve",
+  isLoggedIn,
+  async (req, res) => {
+    const foundLaporan = await LaporanAlatEvakuasi.findById(req.body.idLaporan);
+    const foundUser = await User.findById(req.user._id);
+    foundLaporan.validasi.status = true;
+    foundLaporan.validasi.user = foundUser;
+    foundLaporan
+      .save()
+      .then(() => {
+        return req.flash("success", "Laporan Berhasil Divalidasi");
+      })
+      .catch((e) => {
+        return req.flash("error", `Error : ${e}`);
+      });
+    res.redirect("/upik3/data-laporan-alat-evakuasi");
+  }
+);
 
 router.get(
   "/data-laporan-pemulihan-alat-evakuasi",
   isLoggedIn,
   async (req, res) => {
+    const foundTempat = await Tempat.find({});
+    const users = await User.find({});
     const laporans = await LaporanPemulihanAlat.find({})
       .populate("inspektor")
       .populate("validasi.user");
-    res.render("p2k3/p3kDataLaporanPemulihanAlatEvakuasi", { laporans });
+    res.render("p2k3/p3kDataLaporanPemulihanAlatEvakuasi", {
+      laporans,
+      foundTempat,
+      users,
+    });
   }
 );
 
@@ -520,6 +579,26 @@ router.delete(
 
 router.put(
   "/data-laporan-pemulihan-alat-evakuasi",
+  isLoggedIn,
+  async (req, res) => {
+    const data = req.body;
+    const user = await User.findById(data.namaInspektor);
+    data.inspektor = user;
+    data.tanggalInspeksi = convertDate(data.tanggalInspeksi);
+
+    await LaporanPemulihanAlat.findByIdAndUpdate(data.idLaporan, data)
+      .then(() => {
+        return req.flash("success", "Laporan Berhasil Diedit");
+      })
+      .catch((e) => {
+        return req.flash("error", `Error : ${e}`);
+      });
+    res.redirect("/upik3/data-laporan-pemulihan-alat-evakuasi");
+  }
+);
+
+router.put(
+  "/data-laporan-pemulihan-alat-evakuasi/approve",
   isLoggedIn,
   async (req, res) => {
     const foundLaporan = await LaporanPemulihanAlat.findById(

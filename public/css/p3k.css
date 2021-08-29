@@ -138,3 +138,7 @@ input::-webkit-inner-spin-button {
 .dropdown-item {
   white-space: normal;
 }
+
+.select2-results__option {
+  text-align: start;
+}

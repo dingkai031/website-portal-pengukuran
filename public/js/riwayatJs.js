@@ -15,7 +15,7 @@ for (const tombolDownload of arrOfTombolDownload) {
 
     const ruangan = tombolDownload.getAttribute("dataRuangan");
 
-    var doc = new jspdf.jsPDF();
+    const doc = new jspdf.jsPDF();
     if (panjang && lebar && tinggi) {
       if (jenis && jumlah && rusak) {
         doc.autoTable({

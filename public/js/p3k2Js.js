@@ -11,6 +11,14 @@ $(document).ready(function () {
         targets: 0,
       },
       {
+        render: $.fn.dataTable.render.moment(
+          "DD-MM-YYYY",
+          "DD MMMM YYYY",
+          "id"
+        ),
+        targets: 1,
+      },
+      {
         searchable: false,
         orderable: false,
         targets: 2,
@@ -21,7 +29,7 @@ $(document).ready(function () {
         targets: 6,
       },
     ],
-    order: [[1, "asc"]],
+    order: [[1, "des"]],
   });
   dataTable
     .on("order.dt search.dt", function () {
@@ -44,6 +52,14 @@ $(document).ready(function () {
         searchable: false,
         orderable: false,
         targets: 0,
+      },
+      {
+        render: $.fn.dataTable.render.moment(
+          "DD-MM-YYYY",
+          "DD MMMM YYYY",
+          "id"
+        ),
+        targets: 1,
       },
       {
         searchable: false,

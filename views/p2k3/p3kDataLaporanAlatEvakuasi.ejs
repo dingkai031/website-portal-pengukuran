@@ -22,6 +22,7 @@
           </tr>
         </thead>
         <tbody>
+          <% const select = [] %> 
           <% for( const laporan of laporans) { %>
           <tr class="text-nowrap">
             <td class="text-center"></td>
@@ -44,7 +45,8 @@
                       ></button>
                     </div>
                     <div class="modal-body">
-                        <div class="table-responsive">
+                        <div class="card shadow mb-3">
+                          <div class="table-responsive">
                             <table
                             class="table table-bordered text-start mb-0"
                             >
@@ -285,6 +287,722 @@
                                 </tbody>
                             </table>
                         </div>
+                        </div>
+                        <div class="card shadow">
+                          <div class="card-header">
+                            <h3 class="card-title my-3">Hasil Kuesioner</h3>
+                          </div>
+                          <div class="card-body">
+                            <div class="table-responsive text-start text-wrap">
+                              <table class="table align-middle table-bordered">
+                                <thead>
+                                  <tr class="table-primary">
+                                    <th class="text-center">No.</th>
+                                    <th>Pertanyaan</th>
+                                    <th class="text-center">SS</th>
+                                    <th class="text-center">S</th>
+                                    <th class="text-center">RG</th>
+                                    <th class="text-center">TS</th>
+                                    <th class="text-center">STS</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td colspan="7"><i class="fw-bolder">Usefulness</i></td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">1</td>
+                                    <td>
+                                      Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini membantu saya menjadi lebih efektif
+                                      dalam pembuatan laporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan1 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan1 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan1 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan1 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan1 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">2</td>
+                                    <td>
+                                      Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini membantu saya menjadi lebih produktif
+                                      pada saat pembuatan laporan Kecelakaan dan Pendataan
+                                      Ketersediaan Perlengkapan Kotak P3K
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan2 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan2 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan2 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan2 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan2 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">3</td>
+                                    <td>
+                                      Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini berguna sekali dalam penyimpanan
+                                      laporan Kecelakaan dan Pendataan Ketersediaan Perlengkapan Kotak
+                                      P3K
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan3 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan3 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan3 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan3 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan3 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">4</td>
+                                    <td>
+                                      Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini membuat pelaporan Kecelakaan dan
+                                      Pendataan Ketersediaan Perlengkapan Kotak P3K lebih mudah untuk
+                                      dilakukan
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan4 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan4 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan4 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan4 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan4 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">5</td>
+                                    <td>
+                                      Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini menghemat waktu saya saat melakukan
+                                      pembuatan laporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan5 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan5 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan5 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan5 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan5 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">6</td>
+                                    <td>
+                                      Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini dapat memenuhi kebutuhan saya (untuk
+                                      membuat laporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan6 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan6 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan6 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan6 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan6 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">7</td>
+                                    <td>
+                                      Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini melakukan semua yang saya harapkan
+                                      (untuk membuat laporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K)
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan7 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan7 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan7 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan7 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan7 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td colspan="7"><i class="fw-bolder">Ease of use</i></td>
+                                  </tr>
+                                  <tr>
+                                    <td class="text-center">8</td>
+                                    <td>
+                                      Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini mudah digunakan
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan8 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan8 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan8 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan8 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan8 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">9</td>
+                                    <td>
+                                      Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini cara penggunaannya sederhana.
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan9 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan9 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan9 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan9 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan9 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">10</td>
+                                    <td>
+                                      Baik pengguna sesekali ataupun pengguna yang teratur akan
+                                      menyukai Sistem Informasi Pelaporan Kecelakaan dan Pendataan
+                                      Ketersediaan Perlengkapan Kotak P3K ini.
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan10 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan10 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan10 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan10 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan10 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">11</td>
+                                    <td>Saya bisa menggunakannya dengan berhasil setiap saat.</td>
+                                    <td>
+                                      <% if (laporan.pertanyaan11 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan11 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan11 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan11 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan11 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td colspan="7"><i class="fw-bolder">Ease of Learning</i></td>
+                                  </tr>
+                                  <tr>
+                                    <td class="text-center">12</td>
+                                    <td>
+                                      Saya belajar menggunakan Sistem Informasi Pelaporan Kecelakaan
+                                      dan Pendataan Ketersediaan Perlengkapan Kotak P3K ini dengan
+                                      cepat.
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan12 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan12 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan12 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan12 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan12 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">13</td>
+                                    <td>
+                                      Saya dengan mudah ingat bagaimana menggunakan Sistem Informasi
+                                      Pelaporan Kecelakaan dan Pendataan Ketersediaan Perlengkapan
+                                      Kotak P3K ini.
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan13 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan13 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan13 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan13 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan13 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">14</td>
+                                    <td>
+                                      Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini mudah dipelajari cara penggunaannya.
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan14 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan14 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan14 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan14 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan14 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">15</td>
+                                    <td>
+                                      Saya dengan mudah menjadi terampil saat meggunakan Sistem
+                                      Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini.
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan15 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan15 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan15 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan15 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan15 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td colspan="7"><i class="fw-bolder">Satisfaction</i></td>
+                                  </tr>
+                                  <tr>
+                                    <td class="text-center">16</td>
+                                    <td>
+                                      Saya puas dengan Sistem Informasi Pelaporan Kecelakaan dan
+                                      Pendataan Ketersediaan Perlengkapan Kotak P3K ini
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan16 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan16 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan16 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan16 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan16 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">17</td>
+                                    <td>
+                                      Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini menyenangkan untuk digunakan.
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan17 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan17 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan17 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan17 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan17 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">18</td>
+                                    <td>
+                                      Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini berfungsi seperti yang saya inginkan.
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan18 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan18 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan18 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan18 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan18 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">19</td>
+                                    <td>
+                                      Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini Luar biasa.
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan19 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan19 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan19 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan19 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan19 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                  <tr>
+                                    <td class="text-center">20</td>
+                                    <td>
+                                      Sistem Informasi Pelaporan Kecelakaan dan Pendataan Ketersediaan
+                                      Perlengkapan Kotak P3K ini nyaman digunakan.
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan20 === "ss") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan20 === "s") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan20 === "rg") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan20 === "ts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                    <td>
+                                      <% if (laporan.pertanyaan20 === "sts") { %>
+                                        <button class="btn btn-success">√</button>
+                                      <% } %>  
+                                    </td>
+                                  </tr>
+                                  <!-- ========================================================================== -->
+                                </tbody>
+                              
+                              </table>
+                            </div>
+                          </div>
+                        </div>
                     </div>
                   </div>
                 </div>
@@ -299,7 +1017,513 @@
             </td>
             <td><%= laporan.inspektor.nama %></td>
             <td class="text-center">
-              <button class="btn btn-primary py-2 px-3">
+              <div class="modal fade" id="edit<%= laporan._id %>" tabindex="-1">
+                <div class="modal-dialog modal-xl modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title fw-bolder">Edit Laporan Alat Evakuasi Korban</h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card shadow mb-3">
+                          <div class="card-body py-5">
+                            <form
+                            action="/upik3/data-laporan-alat-evakuasi?_method=PUT"
+                            method="POST"
+                            spellcheck="false"
+                            autocomplete="off"
+                            class="text-start text-wrap"
+                          >
+                            <div class="mb-3 row justify-content-center">
+                              <div class="col-sm-8 d-flex flex-column">
+                                <label for="tanggalInspeksi" class="form-label"
+                                  >Tanggal Inspeksi</label
+                                >
+                                <div class="input-group datepicker">
+                                  <input
+                                    type="text"
+                                    id="tanggalInspeksi"
+                                    class="form-control"
+                                    name="tanggalInspeksi"
+                                    required
+                                    title="Harap isi form ini"
+                                    data-input
+                                    value="<%=`${("0"+laporan.tanggalInspeksi.getDate()).slice(-2)}-${("0"+(laporan.tanggalInspeksi.getMonth()+1)).slice(-2)}-${laporan.tanggalInspeksi.getFullYear()}`%>"
+                                  />
+                                  <span class="input-group-text" data-toggle>
+                                    <i class="far fa-calendar"></i>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="mb-3 row justify-content-center">
+                              <div class="col-sm-8 d-flex flex-column">
+                                <label for="namaInspektor" class="form-label">Nama Inspektor</label>
+                                <select name="namaInspektor" id="namaInspektor<%= laporan._id%>" title="Harap isi form ini" required>
+                                  <% for (const user of users) {%>
+                                    <option class="text-start" value="<%= user._id %>" <%= user.nama === laporan.inspektor.nama ? "selected" : "" %>><%= user.nama %></option>
+                                  <% } %> 
+                                </select>
+                                <% select.push(`#namaInspektor${laporan._id}`) %> 
+                                <% select.push(`#edit${laporan._id}`) %> 
+                              </div>
+                            </div>
+                            <div class="mb-1 row justify-content-center">
+                              <div class="col-sm-auto">
+                                <h5 class="text-center">Jenis alat evakuasi - Tandu</h5>
+                              </div>
+                            </div>
+                            <div
+                              class="
+                                mb-3
+                                row
+                                flex-column flex-lg-row
+                                align-items-center
+                                justify-content-center
+                              "
+                            >
+                              <div class="col-sm-8">
+                                <div class="row">
+                                  <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+                                    <label for="elektronikaDaya" class="form-label"
+                                      >Lab. Elektronika Daya</label
+                                    >
+                                    <div class="input-group">
+                                      <input
+                                        type="number"
+                                        name="elektronikaDaya"
+                                        id="elektronikaDaya"
+                                        class="form-control"
+                                        required
+                                        title="Harap isi form ini"
+                                        value="<%= laporan.elektronikaDaya %>"
+                                        min="0"
+                                        max="1"
+                                      />
+                                      <span class="input-group-text">1</span>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+                                    <label for="pengbisMaritimDanInvestasi" class="form-label"
+                                      >Lab. Pengembangan Bisnis Maritim dan Galeri Investasi</label
+                                    >
+                                    <div class="input-group">
+                                      <input
+                                        type="number"
+                                        name="pengbisMaritimDanInvestasi"
+                                        id="pengbisMaritimDanInvestasi"
+                                        class="form-control"
+                                        required
+                                        title="Harap isi form ini"
+                                        value="<%= laporan.pengbisMaritimDanInvestasi %>"
+                                        min="0"
+                                        max="1"
+                                      />
+                                      <span class="input-group-text">1</span>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+                                    <label for="navKom" class="form-label"
+                                      >Lab. Navigasi dan Komunikasi</label
+                                    >
+                                    <div class="input-group">
+                                      <input
+                                        type="number"
+                                        name="navKom"
+                                        id="navKom"
+                                        class="form-control"
+                                        value="<%= laporan.navKom %>"
+                                        required
+                                        title="Harap isi form ini"
+                                        min="0"
+                                        max="1"
+                                      />
+                                      <span class="input-group-text">1</span>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+                                    <label for="logistikMaritim" class="form-label"
+                                      >Lab. Logistik Maritim</label
+                                    >
+                                    <div class="input-group">
+                                      <input
+                                        type="number"
+                                        name="logistikMaritim"
+                                        id="logistikMaritim"
+                                        class="form-control"
+                                        required
+                                        title="Harap isi form ini"
+                                        min="0"
+                                        max="1"
+                                        value="<%= laporan.logistikMaritim %>"
+                                      />
+                                      <span class="input-group-text">1</span>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+                                    <label for="cnc" class="form-label">Lab. CNC</label>
+                                    <div class="input-group">
+                                      <input
+                                        type="number"
+                                        name="cnc"
+                                        id="cnc"
+                                        class="form-control"
+                                        required
+                                        title="Harap isi form ini"
+                                        min="0"
+                                        max="1"
+                                        value="<%= laporan.cnc %>"
+                                      />
+                                      <span class="input-group-text">1</span>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+                                    <label for="pneumatik" class="form-label"
+                                      >Lab Pneumatik dan Hidrolik</label
+                                    >
+                                    <div class="input-group">
+                                      <input
+                                        type="number"
+                                        name="pneumatik"
+                                        id="pneumatik"
+                                        class="form-control"
+                                        required
+                                        title="Harap isi form ini"
+                                        min="0"
+                                        max="1"
+                                        value="<%= laporan.pneumatik %>"
+                                      />
+                                      <span class="input-group-text">1</span>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+                                    <label for="motorBakar" class="form-label"
+                                      >Lab. Motor Bakar</label
+                                    >
+                                    <div class="input-group">
+                                      <input
+                                        type="number"
+                                        name="motorBakar"
+                                        id="motorBakar"
+                                        class="form-control"
+                                        required
+                                        title="Harap isi form ini"
+                                        min="0"
+                                        max="1"
+                                        value="<%= laporan.motorBakar %>"
+                                      />
+                                      <span class="input-group-text">1</span>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+                                    <label for="cadd" class="form-label">Lab. CADD</label>
+                                    <div class="input-group">
+                                      <input
+                                        type="number"
+                                        name="cadd"
+                                        id="cadd"
+                                        class="form-control"
+                                        required
+                                        title="Harap isi form ini"
+                                        min="0"
+                                        max="1"
+                                        value="<%= laporan.cadd %>"
+                                      />
+                                      <span class="input-group-text">1</span>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+                                    <label for="ujiBahan" class="form-label">Lab. Uji Bahan</label>
+                                    <div class="input-group">
+                                      <input
+                                        type="number"
+                                        name="ujiBahan"
+                                        id="ujiBahan"
+                                        class="form-control"
+                                        required
+                                        title="Harap isi form ini"
+                                        min="0"
+                                        max="1"
+                                        value="<%= laporan.ujiBahan %>"
+                                      />
+                                      <span class="input-group-text">1</span>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+                                    <label for="pengolahanLimbah" class="form-label"
+                                      >Lab. Pengolahan Limbah</label
+                                    >
+                                    <div class="input-group">
+                                      <input
+                                        type="number"
+                                        name="pengolahanLimbah"
+                                        id="pengolahanLimbah"
+                                        class="form-control"
+                                        required
+                                        title="Harap isi form ini"
+                                        min="0"
+                                        max="1"
+                                        value="<%= laporan.pengolahanLimbah %>"
+                                      />
+                                      <span class="input-group-text">1</span>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+                                    <label for="reparasiMesin" class="form-label"
+                                      >Bengkel Reparasi Mesin</label
+                                    >
+                                    <div class="input-group">
+                                      <input
+                                        type="number"
+                                        name="reparasiMesin"
+                                        id="reparasiMesin"
+                                        class="form-control"
+                                        required
+                                        title="Harap isi form ini"
+                                        min="0"
+                                        max="1"
+                                        value="<%= laporan.reparasiMesin %>"
+                                      />
+                                      <span class="input-group-text">1</span>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+                                    <label for="permesinanSheetMetal" class="form-label">
+                                      Bengkel Permesinan dan Sheet Metal (perkakas)</label
+                                    >
+                                    <div class="input-group">
+                                      <input
+                                        type="number"
+                                        name="permesinanSheetMetal"
+                                        id="permesinanSheetMetal"
+                                        class="form-control"
+                                        required
+                                        title="Harap isi form ini"
+                                        min="0"
+                                        max="1"
+                                        value="<%= laporan.permesinanSheetMetal %>"
+                                      />
+                                      <span class="input-group-text">1</span>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+                                    <label for="las" class="form-label">Bengkel Las</label>
+                                    <div class="input-group">
+                                      <input
+                                        type="number"
+                                        name="las"
+                                        id="las"
+                                        class="form-control"
+                                        required
+                                        title="Harap isi form ini"
+                                        min="0"
+                                        max="1"
+                                        value="<%= laporan.las %>"
+                                      />
+                                      <span class="input-group-text">1</span>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+                                    <label for="kontruksi" class="form-label"
+                                      >Bengkel Kontruksi</label
+                                    >
+                                    <div class="input-group">
+                                      <input
+                                        type="number"
+                                        name="kontruksi"
+                                        id="kontruksi"
+                                        class="form-control"
+                                        required
+                                        title="Harap isi form ini"
+                                        min="0"
+                                        max="1"
+                                        value="<%= laporan.kontruksi %>"
+                                      />
+                                      <span class="input-group-text">1</span>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6 mb-3 d-flex flex-column justify-content-end">
+                                    <label for="nonMetal" class="form-label">Bengkel Non Metal</label>
+                                    <div class="input-group">
+                                      <input
+                                        type="number"
+                                        name="nonMetal"
+                                        id="nonMetal"
+                                        class="form-control"
+                                        required
+                                        title="Harap isi form ini"
+                                        min="0"
+                                        max="1"
+                                        value="<%= laporan.nonMetal %>"
+                                      />
+                                      <span class="input-group-text">1</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="mb-1 row justify-content-center">
+                              <div class="col-sm-auto">
+                                <h5 class="text-center">Jenis alat evakuasi - Kursi Roda</h5>
+                              </div>
+                            </div>
+                            <div
+                              class="
+                                mb-3
+                                row
+                                flex-column flex-lg-row
+                                align-items-center
+                                justify-content-center
+                              "
+                            >
+                              <div class="col-sm-8">
+                                <div class="row justify-content-center">
+                                  <div class="col-lg-6 mb-3">
+                                    <label for="gedungJ1" class="form-label">Gedung J lantai 1</label>
+                                    <div class="input-group">
+                                      <input
+                                        type="number"
+                                        name="gedungJ1"
+                                        id="gedungJ1"
+                                        class="form-control"
+                                        required
+                                        title="Harap isi form ini"
+                                        min="0"
+                                        max="1"
+                                        value="<%= laporan.gedungJ1 %>"
+                                      />
+                                      <span class="input-group-text">1</span>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6 mb-3">
+                                    <label for="gedungJ2" class="form-label">Gedung J lantai 2</label>
+                                    <div class="input-group">
+                                      <input
+                                        type="number"
+                                        name="gedungJ2"
+                                        id="gedungJ2"
+                                        class="form-control"
+                                        required
+                                        title="Harap isi form ini"
+                                        min="0"
+                                        max="1"
+                                        value="<%= laporan.gedungJ2 %>"
+                                      />
+                                      <span class="input-group-text">1</span>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6 mb-3">
+                                    <label for="gedungJ3" class="form-label">Gedung J lantai 3</label>
+                                    <div class="input-group">
+                                      <input
+                                        type="number"
+                                        name="gedungJ3"
+                                        id="gedungJ3"
+                                        class="form-control"
+                                        required
+                                        title="Harap isi form ini"
+                                        min="0"
+                                        max="1"
+                                        value="<%= laporan.gedungJ3 %>"
+                                      />
+                                      <span class="input-group-text">1</span>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6 mb-3">
+                                    <label for="gedungJ4" class="form-label">Gedung J lantai 4</label>
+                                    <div class="input-group">
+                                      <input
+                                        type="number"
+                                        name="gedungJ4"
+                                        id="gedungJ4"
+                                        class="form-control"
+                                        required
+                                        title="Harap isi form ini"
+                                        min="0"
+                                        max="1"
+                                        value="<%= laporan.gedungJ4 %>"
+                                      />
+                                      <span class="input-group-text">1</span>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6 mb-3">
+                                    <label for="gedungJ5" class="form-label">Gedung J lantai 5</label>
+                                    <div class="input-group">
+                                      <input
+                                        type="number"
+                                        name="gedungJ5"
+                                        id="gedungJ5"
+                                        class="form-control"
+                                        required
+                                        title="Harap isi form ini"
+                                        min="0"
+                                        max="1"
+                                        value="<%= laporan.gedungJ5 %>"
+                                      />
+                                      <span class="input-group-text">1</span>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6 mb-3">
+                                    <label for="gedungJ6" class="form-label">Gedung J lantai 6</label>
+                                    <div class="input-group">
+                                      <input
+                                        type="number"
+                                        name="gedungJ6"
+                                        id="gedungJ6"
+                                        class="form-control"
+                                        required
+                                        title="Harap isi form ini"
+                                        min="0"
+                                        max="1"
+                                        value="<%= laporan.gedungJ6 %>"
+                                      />
+                                      <span class="input-group-text">1</span>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6 mb-3">
+                                    <label for="gedungJ7" class="form-label">Gedung J lantai 7</label>
+                                    <div class="input-group">
+                                      <input
+                                        type="number"
+                                        name="gedungJ7"
+                                        id="gedungJ7"
+                                        class="form-control"
+                                        required
+                                        title="Harap isi form ini"
+                                        min="0"
+                                        max="1"
+                                        value="<%= laporan.gedungJ7 %>"
+                                      />
+                                      <span class="input-group-text">1</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <input type="text" class="d-none" name="idLaporan" readonly required value="<%= laporan._id %>">
+                            <div class="row d-flex flex-column align-items-center">
+                              <div class="col-sm-6">
+                                <button type="reset" class="btn btn-danger mt-3 w-100">Reset</button>
+                              </div>
+                              <div class="col-sm-6">
+                                <button type="submit" class="btn btn-success mt-3 w-100">
+                                  Edit
+                                </button>
+                              </div>
+                            </div>
+                          </form>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-primary py-2 px-3" data-bs-toggle="modal" data-bs-target="#edit<%= laporan._id %>">
                 <i class="far fa-edit fs-5"></i>
               </button>
               <form
@@ -323,7 +1547,7 @@
               </button>
             </td>
             <td class="text-center">
-              <form action="/upik3/data-laporan-alat-evakuasi?_method=PUT"
+              <form action="/upik3/data-laporan-alat-evakuasi/approve?_method=PUT"
               method="POST"
               class="d-inline-block"
               >
@@ -345,6 +1569,22 @@
         </tbody>
       </table>
     </div>
+    
   </div>
 </div>
 <%- include("templateP3k/footer") %>
+
+<script>
+  $(document).ready(function () {
+    const temp = "<%= select %>";
+    const select = temp.split(",");
+    for (let i = 0; i < select.length; i+=2) {
+      $(select[i]).select2({
+        placeholder: "Silahkan pilih",
+        theme: "bootstrap4",
+        width: "100%",
+        dropdownParent: $(select[i+1]),
+      });
+    }
+  });
+  </script>
