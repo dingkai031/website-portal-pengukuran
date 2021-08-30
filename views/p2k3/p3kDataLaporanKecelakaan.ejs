@@ -30,13 +30,11 @@
             <tr class="text-nowrap">
             <td class="text-center"></td>
             <td>
-              <%=
-              `${("0"+laporan.tanggalKejadian.getDate()).slice(-2)}-${("0"+(laporan.tanggalKejadian.getMonth()+1)).slice(-2)}-${laporan.tanggalKejadian.getFullYear()}`
-              %>
+              <%= converDate.regularLokal(laporan.createdAt) %>
             </td>
             <td class="text-center">
               <div class="modal fade" id="data<%= laporan._id %>" tabindex="-1">
-                <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-dialog modal-xl modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title">Data Laporan Kecelakaan</h5>
@@ -47,7 +45,7 @@
                         aria-label="Close"
                       ></button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body text-wrap">
                       <div class="table-responsive">
                         <table
                           class="table table-bordered shadow text-start p-3"
@@ -55,100 +53,70 @@
                         >
                           <tbody>
                             <tr>
+                              <td class="title">LAPORAN KECELAKAAN DI BENGKEL / LABORATORIUM POLITEKNIK PERKAPALAN NEGERI SURABAYA</td>
+                              <td>
+                                Tanggal Inspeksi Form : <br>
+                                <%= converDate.regularLokalMoment(laporan.createdAt) %> <br><br>
+                                Jenis Form : <br>
+                                <%= laporan.jenisTurunan %> 
+                              </td>
+                            </tr>
+                            <tr>
                               <td
                                 colspan="2"
-                                class="text-start text-uppercase fw-bolder fs-5"
+                                class="text-start text-uppercase fw-bolder fs-5 title"
                               >
-                                identitas korban :
+                                Identitas Korban :
                               </td>
                             </tr>
                             <tr>
                               <td class="w-50">
                                 <label for="tanggal<%= laporan._id %>2" class="form-label"
                                   >1. Tanggal Kejadian Korban :</label
-                                >
-                                <input type="text" readonly class="form-control"
-                                id="tanggal<%= laporan._id %>2" value="<%=
-                                `${("0"+laporan.tanggalKejadian.getDate()).slice(-2)}-${("0"+(laporan.tanggalKejadian.getMonth()+1)).slice(-2)}-${laporan.tanggalKejadian.getFullYear()}`
-                                %>">
+                                > <br>
+                                <%= converDate.regularLokalMoment(laporan.tanggalKejadian) %>
                               </td>
                               <td class="w-50">
                                 <label for="namaKorban<%= laporan._id %>2" class="form-label"
                                   >2. Nama Korban :</label
-                                >
-                                <input
-                                  type="text"
-                                  readonly
-                                  class="form-control"
-                                  id="namaKorban<%= laporan._id %>2"
-                                  value="<%= laporan.namaKorban %>"
-                                />
+                                > <br>
+                                <%= laporan.namaKorban %>
                               </td>
                             </tr>
                             <tr>
                               <td>
                                 <label for="alamatKorban<%= laporan._id %>2" class="form-label"
                                   >3. Alamat Korban :</label
-                                >
-                                <input
-                                  type="text"
-                                  readonly
-                                  class="form-control"
-                                  id="alamatKorban<%= laporan._id %>2"
-                                  value="<%= laporan.alamatKorban %>"
-                                />
+                                > <br>
+                                <%= laporan.alamatKorban %>
                               </td>
                               <td>
                                 <label for="noTelp<%= laporan._id %>2" class="form-label"
                                   >4. Nomor Telepon</label
-                                >
-                                <input
-                                  type="text"
-                                  readonly
-                                  class="form-control"
-                                  id="noTelp<%= laporan._id %>2"
-                                  value="<%= laporan.noTelp %>"
-                                />
+                                > <br>
+                                <%= laporan.noTelp %>
                               </td>
                             </tr>
                             <tr>
                               <td>
                                 <label for="jabatanKorban<%= laporan._id %>2" class="form-label"
                                   >5. <%= laporan.jenisTurunan === "Tenaga Kependidikan-Mayor" || laporan.jenisTurunan === "Tenaga Kependidikan-Minor" ? "Jabatan" : "Program Studi" %> :</label
-                                >
-                                <input
-                                  type="text"
-                                  readonly
-                                  class="form-control"
-                                  id="jabatanKorban<%= laporan._id %>2"
-                                  value="<%= laporan.jabatanKorban %>"
-                                />
+                                ><br>
+                                <%= laporan.jabatanKorban %>
                               </td>
                               <td>
                                 <label for="nipKorban<%= laporan._id %>2" class="form-label"
                                   >6. <%= laporan.jenisTurunan === "Tenaga Kependidikan-Mayor" || laporan.jenisTurunan === "Tenaga Kependidikan-Minor" ? "NIP" : "NRP" %> :</label
-                                >
-                                <input
-                                  type="text"
-                                  readonly
-                                  class="form-control"
-                                  id="nipKorban<%= laporan._id %>2"
-                                  value="<%= laporan.nipKorban %>"
-                                />
+                                > <br>
+                                <%= laporan.nipKorban %>
                               </td>
                             </tr>
                             <tr>
                               <td colspan="2">
                                 <label for="tempatKecelakaan<%= laporan._id %>2" class="form-label"
                                   >7. Tempat Kecelakaan :</label
-                                >
-                                <input
-                                  type="text"
-                                  readonly
-                                  class="form-control"
-                                  id="tempatKecelakaan<%= laporan._id %>2"
-                                  value="<%= laporan.tempatKecelakaan %>"
-                                />
+                                > <br>
+                                <%= laporan.tempatKecelakaan %>
                               </td>
                             </tr>
                             <tr>
@@ -159,6 +127,7 @@
                                   fw-bolder
                                   fs-5
                                   w-50
+                                  title
                                 "
                               >
                                 informasi kecelakaan :
@@ -167,70 +136,32 @@
                             <tr>
                               <td rowspan="4">
                                 <label class="form-label"
-                                  >1. Uraian Kecelakaan :</label
-                                >
-                                <ol type="a">
-                                  <li class="mb-3">
-                                    <label for="terjadi<%= laporan._id %>2" class="form-label"
-                                      >Bagaimana Terjadinya Kecelakaan?</label
-                                    >
-                                    <textarea
-                                      class="form-control"
-                                      id="terjadi<%= laporan._id %>2"
-                                      rows="4"
-                                      style="resize: none"
-                                      readonly
-                                    >
-<%= laporan.bagaimanaKecelakaanTerjadi %></textarea
-                                    >
-                                  </li>
-                                  <li class="mb-3">
-                                    <label
-                                      for="jenisPekerjaanWaktuKecelakaan<%= laporan._id %>2"
-                                      class="form-label"
-                                      >Jenis Pekerjaan Waktu Terjadinya
-                                      Kecelakaan?</label
-                                    >
-                                    <textarea
-                                      class="form-control"
-                                      id="jenisPekerjaanWaktuKecelakaan<%= laporan._id %>2"
-                                      rows="4"
-                                      style="resize: none"
-                                      readonly
-                                    >
-<%= laporan.jenisPekerjaanWaktuKecelakaan %></textarea
-                                    >
-                                  </li>
-                                  <li>
-                                    <label
-                                      for="saksiYangMelihatKecelakaan<%= laporan._id %>2"
-                                      class="form-label"
-                                      >Siapa Saksi yang melihat
-                                      kecelakaan?</label
-                                    >
-                                    <textarea
-                                      class="form-control"
-                                      id="saksiYangMelihatKecelakaan<%= laporan._id %>2"
-                                      rows="4"
-                                      style="resize: none"
-                                      readonly
-                                    >
-<%= laporan.saksiYangMelihatKecelakaan %></textarea
-                                    >
-                                  </li>
-                                </ol>
+                                  >Uraian Kecelakaan :</label
+                                > <br>
+                                <label for="terjadi<%= laporan._id %>2" class="form-label"
+                                  >1. Bagaimana Terjadinya Kecelakaan?</label
+                                > <br>
+                                <%= laporan.bagaimanaKecelakaanTerjadi %> <br> <br>
+                                <label
+                                  for="jenisPekerjaanWaktuKecelakaan<%= laporan._id %>2"
+                                  class="form-label"
+                                  >2. Jenis Pekerjaan Waktu Terjadinya
+                                  Kecelakaan?</label
+                                ><br>
+                                <%= laporan.jenisPekerjaanWaktuKecelakaan %> <br> <br>
+                                <label
+                                  for="saksiYangMelihatKecelakaan<%= laporan._id %>2"
+                                  class="form-label"
+                                  >3. Siapa Saksi yang melihat
+                                  kecelakaan?</label
+                                ><br>
+                                <%= laporan.saksiYangMelihatKecelakaan %>
                               </td>
                               <td>
                                 <label for="berobatJalan<%= laporan._id %>2" class="form-label"
                                   >2. Berobat Jalan :</label
-                                >
-                                <input
-                                  type="text"
-                                  readonly
-                                  class="form-control"
-                                  id="berobatJalan<%= laporan._id %>2"
-                                  value="<%= laporan.berobatJalan %>"
-                                />
+                                > <br>
+                                <%= laporan.berobatJalan %>
                               </td>
                             </tr>
                             <tr>
@@ -238,14 +169,8 @@
                                 <label for="penyebab<%= laporan._id %>2" class="form-label"
                                   >3. Sebuatkan Yang Menyebabkan Kecelakaan
                                   :</label
-                                >
-                                <input
-                                  type="text"
-                                  readonly
-                                  class="form-control"
-                                  id="penyebab<%= laporan._id %>2"
-                                  value="<%= laporan.penyebabKecelakaan %>"
-                                />
+                                > <br>
+                                <%= laporan.penyebabKecelakaan %>
                               </td>
                             </tr>
                             <tr>
@@ -255,21 +180,15 @@
                                   class="form-label"
                                   >4. Sebutkan yang menyebabkan penyakit akibat
                                   kerja :</label
-                                >
-                                <input
-                                  type="text"
-                                  readonly
-                                  class="form-control"
-                                  id="penyakitAkibatKerja<%= laporan._id %>2"
-                                  value="<%= laporan.penyakitAkibatKerja %>"
-                                />
+                                > <br>
+                                <%= laporan.penyakitAkibatKerja %>
                               </td>
                             </tr>
                             <tr>
                               <td>
                                 <label class="form-label"
                                   >5. Perkiraan Kerugian :</label
-                                >
+                                > <br class="d-none">
                                 <ol type="a">
                                   <li class="mb-3">
                                     <label
@@ -277,13 +196,7 @@
                                       class="form-label"
                                       >Waktu :</label
                                     >
-                                    <input
-                                      type="text"
-                                      readonly
-                                      class="form-control"
-                                      id="kerugianWaktu<%= laporan._id %>2"
-                                      value="<%= laporan.kerugianWaktu %>"
-                                    />
+                                    <%= laporan.kerugianWaktu %> Jam<br class="d-none">
                                   </li>
                                   <li class="mb-3">
                                     <label
@@ -291,13 +204,7 @@
                                       class="form-label"
                                       >Material :</label
                                     >
-                                    <input
-                                      type="text"
-                                      readonly
-                                      class="form-control"
-                                      id="kerugianMaterial<%= laporan._id %>2"
-                                      value="<%= laporan.kerugianMaterial %>"
-                                    />
+                                    <%= laporan.kerugianMaterial %>
                                   </li>
                                 </ol>
                               </td>
@@ -311,6 +218,7 @@
                                   fs-5
                                   w-50
                                   text-wrap
+                                  title
                                 "
                               >
                                 PEMULIHAN TENAGA KEPENDIDIKAN YANG SAKIT (diisi
@@ -323,41 +231,28 @@
                                 <label for="alatRawat<%= laporan._id %>2" class="form-label"
                                   >1. Korban Dirawat Dimana, Beserta Alamatnya
                                   ?</label
-                                >
-                                <textarea
-                                  id="alatRawat<%= laporan._id %>2"
-                                  rows="6"
-                                  class="form-control text-capitalize"
-                                  readonly
-                                >
-<%= `${laporan.jenisLokasiRawat}, ${laporan.namaLokasiRawat}, ${laporan.alamatLokasiRawat}` %></textarea
-                                >
+                                ><br>
+                                <%= `${laporan.jenisLokasiRawat}, ${laporan.namaLokasiRawat}, ${laporan.alamatLokasiRawat}` %>
                               </td>
                               <td>
-                                <label
-                                  for="dataDokter<%= laporan._id %>2"
-                                  class="form-label text-wrap"
-                                  >2. Nama dan Alamat Dokter/Tenaga Medik? (yang
-                                  Memberikan Pertolongan Pertama atau yang
-                                  Memberikan Diagnosa Awal)</label
-                                >
-                                <textarea
-                                  id="label<%= laporan._id %>2"
-                                  rows="6"
-                                  class="form-control text-capitalize"
-                                  readonly
-                                >
-<%= `${laporan.namaDokter}, ${laporan.alamatDokter}` %></textarea
-                                >
+                                <label for="jenisObat<%= laporan._id %>2" class="form-label"
+                                  >2. Jenis/merek obat apa saja yang digunakan
+                                  ?</label
+                                ><br>
+                                <%= laporan.jenisObat %>
                               </td>
                             </tr>
                             <tr>
-                              <td>
-                                <label for="jenisObat<%= laporan._id %>2" class="form-label"
-                                  >1. Jenis/merek obat apa saja yang digunakan
-                                  ?</label
-                                >
-                                <input id="jenisObat<%= laporan._id %>2" type="text" class="form-control" readonly value="<%= laporan.jenisObat %>">
+                              <td colspan="2">
+                                
+                                <label
+                                  for="dataDokter<%= laporan._id %>2"
+                                  class="form-label text-wrap"
+                                  >3. Nama dan Alamat Dokter/Tenaga Medik? (yang
+                                  Memberikan Pertolongan Pertama atau yang
+                                  Memberikan Diagnosa Awal)</label
+                                ><br>
+                                <%= `${laporan.namaDokter}, ${laporan.alamatDokter}` %>
                               </td>
                             </tr>
                             <% if (laporan.alatEvakuasi1 !== "-") { %>
@@ -369,6 +264,7 @@
                                   fw-bolder
                                   fs-5
                                   w-50
+                                  title
                                 "
                               >
                                 Alat Evakuasi
@@ -377,64 +273,68 @@
                             <tr>
                               <td colspan="2">
                                 <label for="alatEvakuasi1<%= laporan._id %>2" class="form-label"
-                                  >1. Alat Evakuasi Apa Saja yang
+                                  >Alat Evakuasi Apa Saja yang
                                   Digunakan?</label
-                                >
-                                <input
-                                  type="text"
-                                  readonly
-                                  class="form-control mb-2"
-                                  id="alatEvakuasi1<%= laporan._id %>2"
-                                  value="<%= laporan.alatEvakuasi1 %>"
-                                />
-                                <% if (laporan.alatEvakuasi2 !== "-") { %>
-                                <input
-                                  type="text"
-                                  readonly
-                                  class="form-control"
-                                  value="<%= laporan.alatEvakuasi2 %>"
-                                />
-                                <% } %>
+                                ><br class="d-none">
+                                <ol>
+                                  <li><%= laporan.alatEvakuasi1 %> <br class="d-none"></li>
+                                  <% if (laporan.alatEvakuasi2 !== "-") { %>
+                                   <li> <%= laporan.alatEvakuasi2 %></li>
+                                  <% } %>
+                                </ol>
                               </td>
                             </tr>
                             <% } %>
                             <tr>
                               <td
+                              colspan="2"
                                 class="
                                   text-start text-uppercase
                                   fw-bolder
                                   fs-5
                                   w-50
+                                  title
                                 "
                               >
                                 identitas saksi
                               </td>
-                              <td
-                                class="
-                                  text-start text-uppercase
-                                  fw-bolder
-                                  fs-5
-                                  w-50
-                                "
-                              >
-                                dokumentasi i
-                              </td>
                             </tr>
                             <tr>
-                              <td>
+                              <td colspan="2">
                                 <label for="namaSaksi<%= laporan._id %>2" class="form-label"
                                   >1. Nama Saksi (yang mengisi Form Kecelakaan)
                                   :</label
-                                >
-                                <input
-                                  type="text"
-                                  readonly
-                                  class="form-control"
-                                  id="namaSaksi<%= laporan._id %>2"
-                                  value="<%= laporan.saksi.nama %>"
-                                />
+                                ><br class="d-none">
+                                <%= laporan.saksi.nama %>
                               </td>
-                              <td rowspan="3">
+                            </tr>
+                            <tr>
+                              <td colspan="2">
+                                <label for="jabatanSaksi<%= laporan._id %>2" class="form-label"
+                                  >2. Jabatan :</label
+                                ><br class="d-none">
+                                <%= laporan.saksi.status %>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td colspan="2">
+                                <label for="nipSaksi<%= laporan._id %>2" class="form-label"
+                                  >3. NRP/NIK :</label
+                                ><br class="d-none">
+                                <%= laporan.saksi.nip %>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <table class="table shadow">
+                          <thead>
+                            <tr>
+                              <th colspan="3" class="fw-bolder">Dokumentasi</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>
                                 <% let lokasi %> 
                                 <% if (laporan.jenisTurunan === "Mahasiswa-Minor") { %>
                                   <% lokasi = "pelaporanMahasiswa/mahasiswaMinor" %> 
@@ -451,58 +351,6 @@
                                   alt=""
                                 />
                               </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <label for="jabatanSaksi<%= laporan._id %>2" class="form-label"
-                                  >2. Jabatan :</label
-                                >
-                                <input
-                                  type="text"
-                                  readonly
-                                  class="form-control"
-                                  id="jabatanSaksi<%= laporan._id %>2"
-                                  value="<%= laporan.saksi.status %>"
-                                />
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <label for="nipSaksi<%= laporan._id %>2" class="form-label"
-                                  >3. NRP/NIK :</label
-                                >
-                                <input
-                                  type="text"
-                                  readonly
-                                  class="form-control"
-                                  id="nipSaksi<%= laporan._id %>2"
-                                  value="<%= laporan.saksi.nip %>"
-                                />
-                              </td>
-                            </tr>
-                            <tr>
-                              <td
-                                class="
-                                  text-start text-uppercase
-                                  fw-bolder
-                                  fs-5
-                                  w-50
-                                "
-                              >
-                                dokumentasi ii
-                              </td>
-                              <td
-                                class="
-                                  text-start text-uppercase
-                                  fw-bolder
-                                  fs-5
-                                  w-50
-                                "
-                              >
-                                dokumentasi iii
-                              </td>
-                            </tr>
-                            <tr>
                               <td>
                                 <img
                                   src="/img/dokumentasiInspeksi/<%= `${lokasi}/${laporan.dokumentasi[1]}` %>"
@@ -1252,6 +1100,7 @@
             <td><%= laporan.jenisTurunan %></td>
             <td><%= laporan.saksi.nama %></td>
             <td class="text-center">
+              <!-- EDITTT ========================================================================================== -->
               <div class="modal fade" id="dataEdit<%= laporan._id %>" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-xl">
                   <div class="modal-content">
@@ -1613,6 +1462,8 @@
               <button class="btn btn-primary py-2 px-3" data-bs-toggle="modal" data-bs-target="#dataEdit<%= laporan._id %>">
                 <i class="far fa-edit fs-5"></i>
               </button>
+              <!-- EDITTT ========================================================================================== -->
+              <!-- DELETE ========================================================================================== -->
               <form
                 action="/upik3/data-laporan-kecelakaan?_method=DELETE"
                 method="POST"
@@ -1629,6 +1480,7 @@
                   <i class="far fa-trash-alt fs-5"></i>
                 </button>
               </form>
+              <!-- DELETE ========================================================================================== -->
               <button class="btn btn-secondary py-2 px-3 tombolDownload" data-id-table="<%= `#table${laporan._id}` %>">
                 <i class="fas fa-file-download fs-5"></i>
               </button>
@@ -1670,13 +1522,31 @@
         doc.autoTable({
           html: idTable,
           theme: "grid",
-          styles: {
-            halign: "center",
-            valign: "middle",
-            fontStyle: "bold",
+          didParseCell: function(data) {
+            const titleElement = data.cell.raw;
+            if (titleElement && titleElement.classList.contains('title')) {
+              data.cell.styles.fontStyle = 'bold';
+              data.cell.text = data.cell.text.map(e => e.toUpperCase())
+            }
           },
+          includeHiddenHtml : true,
+          tableLineWidth : 0.4,
+          tableLineColor : 0,
+          styles: {
+            font : "times",
+            textColor : "#000",
+            overflow: 'linebreak',
+            cellWidth: 'wrap',
+            lineColor : 0
+          },
+          columnStyles: {
+            0: {cellWidth: 90, valign : "middle"},
+            1: {cellWidth: "auto"}
+          },
+          
         });
-        doc.save("asdasdas")
+        doc.save(`Laporan-Kecelakaan-${idTable}`)
       })
     }
   </script>
+

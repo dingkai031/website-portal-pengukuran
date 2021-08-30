@@ -137,6 +137,30 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+const converDate = {
+  regular: function (tanggal) {
+    const newDate = tanggal.split("-");
+    const isoDate = new Date(`${newDate[2]}-${newDate[1]}-${newDate[0]}`);
+    return isoDate;
+  },
+  regularLokal: function (tanggal) {
+    return `${("0" + tanggal.getDate()).slice(-2)}-${(
+      "0" +
+      (tanggal.getMonth() + 1)
+    ).slice(-2)}-${tanggal.getFullYear()}`;
+  },
+  regularLokalMoment: function (tanggal) {
+    return moment(this.converDateEu(tanggal))
+      .locale("id")
+      .format("DD MMMM YYYY");
+  },
+  converDateEu: function (tanggal) {
+    return `${tanggal.getFullYear()}-${("0" + (tanggal.getMonth() + 1)).slice(
+      -2
+    )}-${("0" + tanggal.getDate()).slice(-2)}`;
+  },
+};
+
 function convertDate(tanggal) {
   const newDate = tanggal.split("-");
   const isoDate = new Date(`${newDate[2]}-${newDate[1]}-${newDate[0]}`);
@@ -394,6 +418,7 @@ router.get("/data-laporan-kecelakaan", isLoggedIn, async (req, res) => {
     laporans,
     foundTempat,
     moment,
+    converDate,
   });
 });
 
