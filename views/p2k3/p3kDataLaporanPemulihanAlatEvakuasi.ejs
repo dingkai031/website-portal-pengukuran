@@ -36,7 +36,7 @@
                 <div class="modal-dialog modal-xl modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title">Data Laporan Alat Evakuasi Korban</h5>
+                      <h5 class="modal-title">Data Pemulihan Alat Evakuasi Korban</h5>
                       <button
                         type="button"
                         class="btn-close"
@@ -49,70 +49,75 @@
                           <div class="card-body">
                             <div class="table-responsive">
                               <table
-                              class="table table-bordered text-start mb-0"
+                              class="table table-bordered text-start mb-0 text-wrap align-middle"
+                              id="table<%= laporan._id %>"
                               >
                                 <tbody>
+                                    <tr>
+                                      <td class="title fw-bolder">
+                                        FORMULIR PEMULIHAN PERLENGKAPAN P3K DAN ALAT EVAKUASI YANG RUSAK DI POLITEKNIK PERKAPALAN NEGERI SURABAYA</td>
+                                      <td>
+                                        <b>Tanggal Inspeksi Form :</b> <br>
+                                        <%= converDate.regularLokalMoment(laporan.createdAt) %> <br><br>
+                                        <b>Jenis Form : </b><br>
+                                        Formulir Pemulihan Perlengkapan P3K dan Alat Evakuasi yang Rusak.
+                                      </td>
+                                    </tr>
                                     <tr>
                                         <td class="w-50">
                                           <label for="tanggalInspeksi" class="form-label fw-bolder"
                                               >1. Tanggal Inspeksi :</label
-                                          >
-                                          <input type="text" readonly class="form-control"
-                                          id="tanggalInspeksi" value="<%=
-                                          `${("0"+laporan.tanggalInspeksi.getDate()).slice(-2)}-${("0"+(laporan.tanggalInspeksi.getMonth()+1)).slice(-2)}-${laporan.tanggalInspeksi.getFullYear()}`
-                                          %>">
+                                          > <br>
+                                          
                                         </td>
-                                        <td class="w-50">
-                                          <label for="namaInspektor" class="form-label fw-bolder"
-                                              >2. Nama Inspektor :</label
-                                          >
-                                          <input
-                                              type="text"
-                                              readonly
-                                              class="form-control"
-                                              id="namaInspektor"
-                                              value="<%= laporan.inspektor.nama %>"
-                                          />
+                                        <td>
+                                          <%= converDate.regularLokalMoment(laporan.tanggalInspeksi) %> 
                                         </td>
+                                        
+                                    </tr>
+                                    <tr>
+                                      <td class="w-50">
+                                        <label for="namaInspektor" class="form-label fw-bolder"
+                                            >2. Nama Inspektor :</label
+                                        > <br>
+                                        
+                                      </td>
+                                      <td>
+                                        <%= laporan.inspektor.nama %>
+                                      </td>
                                     </tr>
                                     <tr>
                                       <td>
                                         <label for="nip" class="form-label fw-bolder"
                                             >3. NRP/NIP :</label
-                                        >
-                                        <input
-                                            type="text"
-                                            readonly
-                                            class="form-control"
-                                            id="nip"
-                                            value="<%= laporan.inspektor.nip %>"
-                                        />
+                                        > <br>
+                                        
                                       </td>
+                                      <td>
+                                        <%= laporan.inspektor.nip %>
+                                      </td>
+                                      
+                                    </tr>
+                                    <tr>
                                       <td>
                                         <label for="tempatInspeksi" class="form-label fw-bolder"
                                             >4. Tempat Inspeksi</label
-                                        >
-                                        <input
-                                            type="text"
-                                            readonly
-                                            class="form-control"
-                                            id="tempatInspeksi"
-                                            value="<%= laporan.tempatInspeksi %>"
-                                        />
+                                        > <br>
+                                        
+                                      </td>
+                                      <td>
+                                        <%= laporan.tempatInspeksi %>
                                       </td>
                                     </tr>
                                     <tr>
-                                      <td colspan="2">
+                                      <td>
                                         <label for="namaPerlengkapanYangRusak" class="form-label fw-bolder"
                                             >4. Nama perlengkapan P3K/Alat evakuasi yang rusak</label
-                                        >
-                                        <input
-                                            type="text"
-                                            readonly
-                                            class="form-control"
-                                            id="namaPerlengkapanYangRusak"
-                                            value="<%= laporan.namaPerlengkapanYangRusak %>"
-                                        />
+                                        > <br>
+                                        
+                                      </td>
+                                      <td>
+                                        <%= laporan.namaPerlengkapanYangRusak %>
                                       </td>
                                     </tr>
                                 </tbody>
@@ -1010,7 +1015,7 @@
                   <i class="far fa-trash-alt fs-5"></i>
                 </button>
               </form>
-              <button class="btn btn-secondary py-2 px-3">
+              <button class="btn btn-secondary py-2 px-3 tombolDownload" data-id-table="#table<%= laporan._id %>">
                 <i class="fas fa-file-download fs-5"></i>
               </button>
             </td>
@@ -1061,3 +1066,40 @@
     }
   });
   </script>
+
+<script>
+  const tombolDownload = document.querySelectorAll(".tombolDownload");
+  for (const download of tombolDownload) {
+    download.addEventListener("click", ()=> {
+      const idTable =  download.getAttribute("data-id-table");
+      const doc = new jspdf.jsPDF();
+      doc.autoTable({
+        html: idTable,
+        theme: "grid",
+        didParseCell: function(data) {
+          const titleElement = data.cell.raw;
+          if (titleElement && titleElement.classList.contains('title')) {
+            data.cell.styles.fontStyle = 'bold';
+            data.cell.text = data.cell.text.map(e => e.toUpperCase())
+          }
+        },
+        includeHiddenHtml : true,
+        tableLineWidth : 0.4,
+        tableLineColor : 0,
+        styles: {
+          font : "times",
+          textColor : "#000",
+          overflow: 'linebreak',
+          cellWidth: 'wrap',
+          lineColor : 0
+        },
+        columnStyles: {
+          0: {cellWidth: 90, valign : "middle"},
+          1: {cellWidth: "auto"}
+        },
+        
+      });
+      doc.save(`Laporan-Pemulihan-Alat-Evakuasi-${moment().format("x")}`)
+    })
+  }
+</script>

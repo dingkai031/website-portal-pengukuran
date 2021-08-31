@@ -52,12 +52,12 @@
                           id="table<%= laporan._id %>"
                         >
                           <tbody>
-                            <tr>
-                              <td class="title">LAPORAN KECELAKAAN DI BENGKEL / LABORATORIUM POLITEKNIK PERKAPALAN NEGERI SURABAYA</td>
+                            <tr class="align-middle">
+                              <td class="title fw-bolder">LAPORAN KECELAKAAN DI BENGKEL / LABORATORIUM POLITEKNIK PERKAPALAN NEGERI SURABAYA</td>
                               <td>
-                                Tanggal Inspeksi Form : <br>
+                                <b>Tanggal Inspeksi Form : </b><br>
                                 <%= converDate.regularLokalMoment(laporan.createdAt) %> <br><br>
-                                Jenis Form : <br>
+                                <b> Jenis Form : </b><br>
                                 <%= laporan.jenisTurunan %> 
                               </td>
                             </tr>
@@ -1545,7 +1545,7 @@
           },
           
         });
-        doc.save(`Laporan-Kecelakaan-${idTable}`)
+        doc.save(`Laporan-Kecelakaan-${moment().format("x")}`)
       })
     }
   </script>

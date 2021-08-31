@@ -469,7 +469,7 @@ router.get("/data-laporan-kotak-p3k", isLoggedIn, async (req, res) => {
   const laporans = await LaporanKotakP3k.find({})
     .populate("inspektor")
     .populate("validasi.user");
-  res.render("p2k3/p3kDataLaporanKotakP3k", { laporans, users });
+  res.render("p2k3/p3kDataLaporanKotakP3k", { laporans, users, converDate });
 });
 
 router.delete("/data-laporan-kotak-p3k", isLoggedIn, async (req, res) => {
@@ -522,7 +522,11 @@ router.get("/data-laporan-alat-evakuasi", isLoggedIn, async (req, res) => {
   const laporans = await LaporanAlatEvakuasi.find({})
     .populate("inspektor")
     .populate("validasi.user");
-  res.render("p2k3/p3kDataLaporanAlatEvakuasi", { laporans, users });
+  res.render("p2k3/p3kDataLaporanAlatEvakuasi", {
+    laporans,
+    users,
+    converDate,
+  });
 });
 
 router.delete("/data-laporan-alat-evakuasi", isLoggedIn, async (req, res) => {
@@ -583,6 +587,7 @@ router.get(
       laporans,
       foundTempat,
       users,
+      converDate,
     });
   }
 );

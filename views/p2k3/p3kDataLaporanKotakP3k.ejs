@@ -29,9 +29,7 @@
           <tr class="text-nowrap">
             <td class="text-center"></td>
             <td>
-              <%=
-              `${("0"+laporan.tanggalInspeksi.getDate()).slice(-2)}-${("0"+(laporan.tanggalInspeksi.getMonth()+1)).slice(-2)}-${laporan.tanggalInspeksi.getFullYear()}`
-              %>
+              <%= converDate.regularLokal(laporan.tanggalInspeksi) %>
             </td>
             <td class="text-center">
               <div class="modal fade" id="data<%= laporan._id %>" tabindex="-1">
@@ -51,88 +49,74 @@
                           <div class="card-body">
                             <div class="table-responsive">
                               <table
-                              class="table table-bordered text-start mb-0"
+                              class="table table-bordered text-start mb-0 text-wrap"
+                              id="table<%= laporan._id %>"
                               >
-                              <tbody>
+                              <tbody class="align-middle">
+                                <tr>
+                                  <td class="title fw-bolder align-middle">
+                                    FORM PENDATAAN KETERSEDIAAN PERLENGKAPAN KOTAK P3K DI BENGKEL / LABORATORIUM POLITEKNIK PERKAPALAN NEGERI SURABAYA
+                                  </td>
+                                  <td>
+                                    <b>Tanggal Inspeksi Form :</b> <br>
+                                    <%= converDate.regularLokalMoment(laporan.createdAt) %> <br><br>
+                                    <b>Jenis Form : </b><br>
+                                    <%= laporan.jenisTurunan %> 
+                                  </td>
+                                </tr>
                                   <tr>
                                       <td class="w-50">
-                                      <label for="tanggal" class="form-label fw-bolder"
-                                          >1. Tanggal Inspeksi :</label
-                                      >
-                                      <input type="text" readonly class="form-control fw-bolder"
-                                      id="tanggal" value="<%=
-                                      `${("0"+laporan.tanggalInspeksi.getDate()).slice(-2)}-${("0"+(laporan.tanggalInspeksi.getMonth()+1)).slice(-2)}-${laporan.tanggalInspeksi.getFullYear()}`
-                                      %>">
-                                      </td>
+                                        <label for="tanggal" class="form-label fw-bolder"
+                                            >1. Tanggal Inspeksi :</label
+                                        > <br class="d-none">
+                                        <%= converDate.regularLokalMoment(laporan.tanggalInspeksi)%>
                                       <td class="w-50">
-                                      <label for="namaKorban" class="form-label fw-bolder"
-                                          >2. Nama Inspektor :</label
-                                      >
-                                      <input
-                                          type="text"
-                                          readonly
-                                          class="form-control"
-                                          id="namaKorban"
-                                          value="<%= laporan.inspektor.nama %>"
-                                      />
+                                        <label for="namaKorban" class="form-label fw-bolder"
+                                            >2. Nama Inspektor :</label
+                                        ><br class="d-none">
+                                        <%= laporan.inspektor.nama %>
                                       </td>
                                   </tr>
                                   <tr>
                                       <td>
                                       <label for="nip" class="form-label fw-bolder"
                                           >3. NRP/NIP :</label
-                                      >
-                                      <input
-                                          type="text"
-                                          readonly
-                                          class="form-control"
-                                          id="nip"
-                                          value="<%= laporan.inspektor.nip %>"
-                                      />
+                                      ><br class="d-none">
+                                      <%= laporan.inspektor.nip %>
                                       </td>
                                       <td>
                                       <label for="lokasiP3k" class="form-label fw-bolder text-wrap"
                                           >4. Letak Kotak P3K yang Sedang Diinspeksi :</label
-                                      >
-                                      <input
-                                          type="text"
-                                          readonly
-                                          class="form-control"
-                                          id="lokasiP3k"
-                                          value="<%= laporan.lokasiP3k %>"
-                                      />
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td
-                                      colspan="2"
-                                      class="
-                                          text-start text-uppercase
-                                          fw-bolder
-                                          fs-5
-                                          w-50
-                                      "
-                                      >
-                                      ISI KOTAK P3K
+                                      ><br>
+                                      <%= laporan.lokasiP3k %>
                                       </td>
                                   </tr>
                               </tbody>
                               </table>
                           </div>
                           <div class="table-responsive">
-                              <table class="table table-bordered  w-100 mb-0">
-                                  <thead  class="align-middle">
-                                      <tr>
-                                          <th rowspan="2">No</th>
-                                          <th rowspan="2">Nama</th>
-                                          <th colspan="2">Jumlah</th>
-                                      </tr>
-                                      <tr>
-                                          <th>Jumlah yang Tersedia</th>
-                                          <th>Jumlah Maksimal</th>
-                                      </tr>
-                                  </thead>
+                              <table class="table table-bordered  w-100 mb-0" id="dataTable<%= laporan._id %>">
                                   <tbody  class="align-middle">
+                                      <tr>
+                                          <td
+                                          colspan="4"
+                                          class="
+                                              text-start text-uppercase
+                                              fw-bolder
+                                              fs-5
+                                              w-50
+                                              title
+                                          "
+                                          >
+                                          ISI KOTAK P3K
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <td>No</td>
+                                          <td>Nama</td>
+                                          <td>Jumlah yang Tersedia</td>
+                                          <td>Jumlah Maksimal</td>
+                                      </tr>
                                       <tr>
                                           <td class="text-center">1</td>
                                           <td>Kasa Steril Terbungkus</td>
@@ -1020,7 +1004,7 @@
             <td><%= laporan.lokasiP3k %></td>
             <td><%= laporan.jenisTurunan %></td>
             <td><%= laporan.inspektor.nama %></td>
-            <td>
+            <td class="text-center">
               <div class="modal fade" id="edit<%= laporan._id %>" tabindex="-1">
                 <div class="modal-dialog modal-xl modal-dialog-centered">
                   <div class="modal-content">
@@ -1491,7 +1475,7 @@
                   <i class="far fa-trash-alt fs-5"></i>
                 </button>
               </form>
-              <button class="btn btn-secondary py-2 px-3">
+              <button class="btn btn-secondary py-2 px-3 tombolDownload" data-id-table="#table<%= laporan._id %>" data-id-table-data="#dataTable<%= laporan._id %>">
                 <i class="fas fa-file-download fs-5"></i>
               </button>
             </td>
@@ -1525,9 +1509,7 @@
 <script>
 $(document).ready(function () {
   const temp = "<%= select %>";
-  console.log(temp)
   const select = temp.split(",");
-  console.log(select)
 
   for (let i = 0; i < select.length; i+=3) {
     $(select[i]).select2({
@@ -1544,4 +1526,72 @@ $(document).ready(function () {
     });
   }
 });
+</script>
+
+<script>
+  const tombolDownload = document.querySelectorAll(".tombolDownload");
+  for (const download of tombolDownload) {
+    download.addEventListener("click", ()=> {
+      const idTable =  download.getAttribute("data-id-table");
+      const idData =  download.getAttribute("data-id-table-data");
+      const doc = new jspdf.jsPDF();
+      doc.autoTable({
+        html: idTable,
+        theme: "grid",
+        didParseCell: function(data) {
+          const titleElement = data.cell.raw;
+          if (titleElement && titleElement.classList.contains('title')) {
+            data.cell.styles.fontStyle = 'bold';
+            data.cell.text = data.cell.text.map(e => e.toUpperCase())
+          }
+        },
+        includeHiddenHtml : true,
+        tableLineWidth : 0.4,
+        tableLineColor : 0,
+        styles: {
+          font : "times",
+          textColor : "#000",
+          overflow: 'linebreak',
+          cellWidth: 'wrap',
+          lineColor : 0
+        },
+        columnStyles: {
+          0: {cellWidth: 90, valign : "middle"},
+          1: {cellWidth: "auto"}
+        },
+        
+      });
+      doc.autoTable({
+        html: idData,
+        theme: "grid",
+        didParseCell: function(data) {
+          const titleElement = data.cell.raw;
+          if (titleElement && titleElement.classList.contains('title')) {
+            data.cell.styles.fontStyle = 'bold';
+            data.cell.text = data.cell.text.map(e => e.toUpperCase())
+          }
+        },
+        includeHiddenHtml : true,
+        tableLineWidth : 0.4,
+        tableLineColor : 0,
+        styles: {
+          font : "times",
+          textColor : "#000",
+          overflow: 'linebreak',
+          cellWidth: 'wrap',
+          lineColor : 0
+        },
+        columnStyles: {
+          0: {cellWidth: 10, halign : "center"},
+          2: {cellWidth: 40, halign : "center"},
+          3: {cellWidth: 40, halign : "center"},
+          
+        },
+      });
+      doc.save(`Laporan-Kecelakaan-${moment().format("x")}`)
+    })
+  }
+</script>
+<script>
+  console.log()
 </script>

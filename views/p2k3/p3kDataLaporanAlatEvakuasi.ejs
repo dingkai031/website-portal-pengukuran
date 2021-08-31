@@ -27,9 +27,7 @@
           <tr class="text-nowrap">
             <td class="text-center"></td>
             <td>
-              <%=
-              `${("0"+laporan.tanggalInspeksi.getDate()).slice(-2)}-${("0"+(laporan.tanggalInspeksi.getMonth()+1)).slice(-2)}-${laporan.tanggalInspeksi.getFullYear()}`
-              %>
+              <%= converDate.regularLokal(laporan.tanggalInspeksi) %> 
             </td>
             <td class="text-center">
               <div class="modal fade" id="data<%= laporan._id %>" tabindex="-1">
@@ -48,72 +46,74 @@
                         <div class="card shadow mb-3">
                           <div class="table-responsive">
                             <table
-                            class="table table-bordered text-start mb-0"
+                            class="table table-bordered text-start mb-0 text-wrap"
+                            id="table<%= laporan._id %>"
                             >
-                            <tbody>
+                            <tbody class="align-middle">
                                 <tr>
-                                    <td class="w-50" colspan="2">
-                                      <label for="tanggal" class="form-label fw-bolder"
+                                  <td class="title fw-bolder">
+                                    FORM PENDATAAN KETERSEDIAAN ALAT EVAKUASI KORBAN DI BENGKEL / LABORATORIUM POLITEKNIK PERKAPALAN NEGERI SURABAYA</td>
+                                  <td>
+                                    <b>Tanggal Inspeksi Form :</b> <br>
+                                    <%= converDate.regularLokalMoment(laporan.createdAt) %> <br><br>
+                                    <b>Jenis Form : </b><br>
+                                    Form Inspeksi Ketersediaan Alat Evakuasi Korban
+                                  </td>
+                                </tr>
+                                <tr>
+                                    <td class="w-50">
+                                      <label for="tanggal" class="form-label fw-bolder mb-0"
                                           >1. Tanggal Inspeksi :</label
                                       >
-                                      <input type="text" readonly class="form-control"
-                                      id="tanggal" value="<%=
-                                      `${("0"+laporan.tanggalInspeksi.getDate()).slice(-2)}-${("0"+(laporan.tanggalInspeksi.getMonth()+1)).slice(-2)}-${laporan.tanggalInspeksi.getFullYear()}`
-                                      %>">
                                     </td>
+                                    <td><%= converDate.regularLokalMoment(laporan.tanggalInspeksi) %></td>
                                 </tr>
                                 <tr>
                                   <td class="w-50">
-                                    <label for="namaKorban" class="form-label fw-bolder"
+                                    <label for="namaKorban" class="form-label fw-bolder mb-0"
                                         >2. Nama Inspektor :</label
                                     >
-                                    <input
-                                        type="text"
-                                        readonly
-                                        class="form-control"
-                                        id="namaKorban"
-                                        value="<%= laporan.inspektor.nama %>"
-                                    />
+                                    
                                   </td>
                                   <td>
-                                    <label for="nip" class="form-label fw-bolder"
-                                        >3. NRP/NIP :</label
-                                    >
-                                    <input
-                                        type="text"
-                                        readonly
-                                        class="form-control"
-                                        id="nip"
-                                        value="<%= laporan.inspektor.nip %>"
-                                    />
+                                    <%= laporan.inspektor.nama %>
                                   </td>
+                                  
                                 </tr>
                                 <tr>
-                                    <td
-                                    colspan="2"
-                                    class="
-                                        text-start text-uppercase
-                                        fw-bolder
-                                        fs-5
-                                        w-50
-                                    "
+                                  <td>
+                                    <label for="nip" class="form-label fw-bolder mb-0"
+                                        >3. NRP/NIP :</label
                                     >
-                                    jenis alat evakuasi korban
-                                    </td>
+                                  
+                                  </td>
+                                  <td><%= laporan.inspektor.nip %></td>
                                 </tr>
+                                
                             </tbody>
                             </table>
                         </div>
                         <div class="table-responsive">
-                            <table class="table table-bordered  w-100 mb-0">
+                            <table class="table table-bordered  w-100 mb-0" id="data2<%= laporan._id %>">
                                 <thead  class="align-middle">
                                     <tr>
-                                        <th rowspan="2">No</th>
-                                        <th rowspan="2">Nama Alat Evakuasi Korban</th>
-                                        <th rowspan="2">Letak Alat Evakuasi Korban</th>
-                                        <th colspan="2">Jumlah</th>
+                                      <th
+                                      colspan="5"
+                                      class="
+                                          text-start text-uppercase
+                                          fw-bolder
+                                          fs-5
+                                          w-50
+                                          title
+                                      "
+                                      >
+                                      jenis alat evakuasi korban
+                                      </td>
                                     </tr>
                                     <tr>
+                                        <th>No</th>
+                                        <th>Nama Alat Evakuasi Korban</th>
+                                        <th>Letak Alat Evakuasi Korban</th>
                                         <th>Jumlah yang Tersedia</th>
                                         <th>Jumlah Maksimal</th>
                                     </tr>
@@ -1542,7 +1542,7 @@
                   <i class="far fa-trash-alt fs-5"></i>
                 </button>
               </form>
-              <button class="btn btn-secondary py-2 px-3">
+              <button class="btn btn-secondary py-2 px-3 tombolDownload" data-id-table="#table<%= laporan._id %>" data-id-table-data="#data2<%= laporan._id %>">
                 <i class="fas fa-file-download fs-5"></i>
               </button>
             </td>
@@ -1588,3 +1588,84 @@
     }
   });
   </script>
+
+<script>
+  const tombolDownload = document.querySelectorAll(".tombolDownload");
+  for (const download of tombolDownload) {
+    download.addEventListener("click", ()=> {
+      const idTable =  download.getAttribute("data-id-table");
+      const idData =  download.getAttribute("data-id-table-data");
+      const doc = new jspdf.jsPDF();
+      console.log(idData)
+      console.log(idTable)
+      doc.autoTable({
+        html: idTable,
+        theme: "grid",
+        didParseCell: function(data) {
+          const titleElement = data.cell.raw;
+          if (titleElement && titleElement.classList.contains('title')) {
+            data.cell.styles.fontStyle = 'bold';
+            data.cell.text = data.cell.text.map(e => e.toUpperCase())
+          }
+        },
+        includeHiddenHtml : true,
+        tableLineWidth : 0.4,
+        tableLineColor : 0,
+        styles: {
+          font : "times",
+          textColor : "#000",
+          overflow: 'linebreak',
+          cellWidth: 'wrap',
+          lineColor : 0
+        },
+        columnStyles: {
+          0: {cellWidth: 90, valign : "middle"},
+          1: {cellWidth: "auto"}
+        },
+        
+      });
+
+      doc.autoTable({
+        html: idData,
+        theme: "plain",
+        didParseCell: function(data) {
+          const titleElement = data.cell.raw;
+          if (titleElement && titleElement.classList.contains('title')) {
+            data.cell.styles.fontStyle = 'bold';
+            data.cell.text = data.cell.text.map(e => e.toUpperCase())
+          }
+        },
+        includeHiddenHtml : true,
+        tableLineWidth : 0.4,
+        tableLineColor : 0,
+        styles: {
+          font : "times",
+          textColor : "#000",
+          overflow: 'linebreak',
+          cellWidth: 'wrap',
+          lineColor : 0
+        },
+        headStyles: {
+          halign: "center",
+          valign : "middle",
+          lineColor : 0,
+          lineWidth: 0.2
+        },
+        bodyStyles : {
+          lineColor : 0,
+          lineWidth: 0.2
+        },
+        columnStyles: {
+          0: {cellWidth: 10, halign : "center", valign : "middle"},
+          1: {cellWidth: 20, halign : "center", valign : "middle"},
+          2: {cellWidth: "auto", halign : "center", valign : "middle"},
+          3: {cellWidth: 40, halign : "center", valign : "middle"},
+          4: {cellWidth: 40, halign : "center", valign : "middle"},
+          
+        },
+      });
+      
+      doc.save(`Laporan-Inspeksi-Ketersediaan-Alat-Evakuasi-Korban-${moment().format("x")}`)
+    })
+  }
+</script>
