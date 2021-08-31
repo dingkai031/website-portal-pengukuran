@@ -710,18 +710,34 @@ const seedDb = async (model, arrOfObj) => {
     });
 };
 
-seedDb(Tempat, tempTempat).then(() => {
-  mongoose.connection.close();
-});
+const newUserOne = async function (obj, pass) {
+  await User.register(obj, pass);
+};
 
-// const newUser = async function (model, arrObj, pass) {
-//   const terhapus = await model.deleteMany({});
-//   for (obj of arrObj) {
-//     const registeredUser = await User.register(obj, pass);
-//     console.log(registeredUser);
-//   }
-// };
+const newUser = async function (model, arrObj, pass) {
+  const terhapus = await model.deleteMany({});
+  for (obj of arrObj) {
+    const registeredUser = await User.register(obj, pass);
+    console.log(registeredUser);
+  }
+};
+
+// seedDb(Tempat, tempTempat).then(() => {
+//   mongoose.connection.close();
+// });
 
 // newUser(User, tempUser, "111111111111").then(() => {
 //   mongoose.connection.close();
 // });
+
+newUserOne(
+  {
+    nama: "dummy kabeng",
+    nip: "1111111111111",
+    email: "dummyKabeng@ppns.ac.id",
+    username: "dummyKabeng@ppns.ac.id",
+    status: "kabeng",
+    lokasi: "Bengkel Reparasi Mesin",
+  },
+  "passwordhere"
+);
