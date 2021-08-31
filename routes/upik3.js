@@ -178,7 +178,7 @@ function unique(arr) {
   return newArr;
 }
 
-router.get("/", async (req, res) => {
+router.get("/", isLoggedIn, async (req, res) => {
   const { tahun } = req.query;
   async function ambilDataBulan(month, lastDate, year) {
     return await LaporanKecelakaan.find({
@@ -300,7 +300,7 @@ router.post("/pelaporan-mahasiswa", isLoggedIn, async (req, res) => {
   res.redirect("/upik3/pelaporan-mahasiswa");
 });
 
-router.get("/kotak-p3k-b", (req, res) => {
+router.get("/kotak-p3k-b", isLoggedIn, (req, res) => {
   res.render("p2k3/p3kKotakP3kB");
 });
 
@@ -434,7 +434,7 @@ router.delete("/data-laporan-kecelakaan", isLoggedIn, async (req, res) => {
   res.redirect("/upik3/data-laporan-kecelakaan");
 });
 
-router.put("/data-laporan-kecelakaan", async (req, res) => {
+router.put("/data-laporan-kecelakaan", isLoggedIn, async (req, res) => {
   const data = req.body;
   const tanggalValid = convertDate(data.tanggalKejadian);
   data.tanggalKejadian = tanggalValid;
