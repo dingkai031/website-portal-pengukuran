@@ -712,6 +712,7 @@ const seedDb = async (model, arrOfObj) => {
 
 const newUserOne = async function (obj, pass) {
   await User.register(obj, pass);
+  console.log(registeredUser);
 };
 
 const newUser = async function (model, arrObj, pass) {
@@ -740,4 +741,6 @@ newUserOne(
     lokasi: "Bengkel Reparasi Mesin",
   },
   "passwordhere"
-);
+).then(() => {
+  mongoose.connection.close();
+});
