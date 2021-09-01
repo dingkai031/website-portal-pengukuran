@@ -733,14 +733,14 @@ const newUser = async function (model, arrObj, pass) {
 
 newUserOne(
   {
-    nama: "dummy kabeng",
-    nip: "1111111111111",
-    email: "dummyKabeng@ppns.ac.id",
-    username: "dummyKabeng@ppns.ac.id",
-    status: "kabeng",
-    lokasi: "Bengkel Reparasi Mesin",
+    nama: "dummy bauk",
+    nip: "867213868273",
+    email: "dummyBauk@ppns.ac.id",
+    username: "dummyBauk@ppns.ac.id",
+    status: "bauk",
+    lokasi: "semua",
   },
-  "passwordhere"
+  "111111111111"
 ).then(() => {
   mongoose.connection.close();
 });
