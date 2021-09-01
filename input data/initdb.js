@@ -711,7 +711,7 @@ const seedDb = async (model, arrOfObj) => {
 };
 
 const newUserOne = async function (obj, pass) {
-  await User.register(obj, pass);
+  registeredUser = await User.register(obj, pass);
   console.log(registeredUser);
 };
 
