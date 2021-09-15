@@ -200,72 +200,82 @@ router.post(
   }
 );
 
-router.get("/kelola-tempat", async (req, res) => {
+router.get("/kelola-tempat", isLoggedIn, async (req, res) => {
   const menu = "kelola-tempat";
   const tempats = await Tempat.find({});
   res.render("inspeksi/kelolaTempat", { menu, tempats });
 });
 
-router.post("/kelola-tempat", upload.single("denah"), async (req, res) => {
-  const namaTempat = req.body.namaTempat;
-  const dataTempat = {
-    nama: namaTempat,
-    alamat: req.body.namaTempat.toLowerCase().replace(/\s/g, "-"),
-    jenis: req.body.jenisTempat,
-    jumlahTitikPengukuran: {
+router.post(
+  "/kelola-tempat",
+  isLoggedIn,
+  upload.single("denah"),
+  async (req, res) => {
+    const namaTempat = req.body.namaTempat;
+    const dataTempat = {
+      nama: namaTempat,
+      alamat: req.body.namaTempat.toLowerCase().replace(/\s/g, "-"),
+      jenis: req.body.jenisTempat,
+      jumlahTitikPengukuran: {
+        ventilasi: req.body.titikVentilasi,
+        getaran: req.body.titikGetaran,
+        penerangan: req.body.titikPenerangan,
+        kebisingan: req.body.titikKebisingan,
+        iklimKerja: req.body.titikIklimKerja,
+      },
+    };
+    const newTempat = new Tempat(dataTempat);
+    const simpanTempat = newTempat
+      .save()
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((e) => {
+        console.log(e);
+        req.flash("error", e._message);
+        return res.redirect("/inspeksi/kelola-tempat");
+      });
+    req.flash("success", `Tempat Berhasil Disimpan`);
+    res.redirect("/inspeksi/kelola-tempat");
+  }
+);
+
+router.put(
+  "/kelola-tempat",
+  isLoggedIn,
+  upload.single("denah"),
+  async (req, res) => {
+    const foundTempat = await Tempat.findById(req.body.idTempat);
+    if (!req.files) {
+      fs.rename(
+        `./public/img/denah/${foundTempat.nama}.jpg`,
+        `./public/img/denah/${req.body.namaTempat}.jpg`,
+        function (err) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log("renamed");
+          }
+        }
+      );
+    }
+    const alamat = req.body.namaTempat.toLowerCase().replace(/\s/g, "-");
+    const titikPengukuran = {
       ventilasi: req.body.titikVentilasi,
       getaran: req.body.titikGetaran,
       penerangan: req.body.titikPenerangan,
       kebisingan: req.body.titikKebisingan,
       iklimKerja: req.body.titikIklimKerja,
-    },
-  };
-  const newTempat = new Tempat(dataTempat);
-  const simpanTempat = newTempat
-    .save()
-    .then((data) => {
-      console.log(data);
-    })
-    .catch((e) => {
-      console.log(e);
-      req.flash("error", e._message);
-      return res.redirect("/inspeksi/kelola-tempat");
-    });
-  req.flash("success", `Tempat Berhasil Disimpan`);
-  res.redirect("/inspeksi/kelola-tempat");
-});
-
-router.put("/kelola-tempat", upload.single("denah"), async (req, res) => {
-  const foundTempat = await Tempat.findById(req.body.idTempat);
-  if (!req.files) {
-    fs.rename(
-      `./public/img/denah/${foundTempat.nama}.jpg`,
-      `./public/img/denah/${req.body.namaTempat}.jpg`,
-      function (err) {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("renamed");
-        }
-      }
-    );
+    };
+    foundTempat.nama = req.body.namaTempat;
+    foundTempat.alamat = alamat;
+    foundTempat.jenis = req.body.jenisTempat;
+    foundTempat.jumlahTitikPengukuran = titikPengukuran;
+    foundTempat.save();
+    req.flash("success", `Data ${req.body.namaTempat} Berhasil diubah`);
+    res.redirect("/inspeksi/kelola-tempat");
   }
-  const alamat = req.body.namaTempat.toLowerCase().replace(/\s/g, "-");
-  const titikPengukuran = {
-    ventilasi: req.body.titikVentilasi,
-    getaran: req.body.titikGetaran,
-    penerangan: req.body.titikPenerangan,
-    kebisingan: req.body.titikKebisingan,
-    iklimKerja: req.body.titikIklimKerja,
-  };
-  foundTempat.nama = req.body.namaTempat;
-  foundTempat.alamat = alamat;
-  foundTempat.jenis = req.body.jenisTempat;
-  foundTempat.jumlahTitikPengukuran = titikPengukuran;
-  foundTempat.save();
-  req.flash("success", `Data ${req.body.namaTempat} Berhasil diubah`);
-  res.redirect("/inspeksi/kelola-tempat");
-});
+);
 
 router.get("/riwayat", isLoggedIn, async (req, res) => {
   const menu = "riwayat";
