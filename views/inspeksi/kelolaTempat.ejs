@@ -1,0 +1,414 @@
+<%- include("templateInspeksi/head") %>
+<style>
+  .kv-file-content {
+    height: auto !important;
+    width: auto !important;
+  }
+</style>
+<div class="modal fade" id="tambahTempat" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Tambah Tempat</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form
+          action="/inspeksi/kelola-tempat"
+          method="POST"
+          spellcheck="false"
+          autocomplete="off"
+          enctype="multipart/form-data"
+        >
+          <div class="mb-3">
+            <label
+              for="namaTempat"
+              class="form-label"
+              >Nama Tempat</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="namaTempat"
+              name="namaTempat"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="jenisTempat"
+              class="form-label"
+              >Jenis Tempat</label
+            >
+            <select
+              name="jenisTempat"
+              id="jenisTempat"
+              class="form-select"
+              required
+            >
+              <option class="d-none" selected> Silahkan Pilih...</option>
+              <option value="maintenancebengkel" >Bengkel</option>    
+              <option value="maintenancelab" >Lab</option>    
+              <option value="maintenancestudio" >Studio</option>    
+            </select>
+          </div>
+          <div class="mb-3">
+            <div class="row">
+              <div class="col-sm-6">
+                <label
+                  for="titikVentilasi"
+                  class="form-label"
+                >
+                  Titik Ventilasi</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="titikVentilasi"
+                  name="titikVentilasi"
+                  required
+                />
+              </div>
+              <div class="col-sm-6">
+                <label
+                  for="titikGetaran"
+                  class="form-label"
+                >
+                  Titik Getaran</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="titikGetaran"
+                  name="titikGetaran"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="row">
+              <div class="col-sm-6">
+                <label
+                  for="titikPenerangan"
+                  class="form-label"
+                >
+                  Titik Penerangan</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="titikPenerangan"
+                  name="titikPenerangan"
+                  required
+                />
+              </div>
+              <div class="col-sm-6">
+                <label
+                  for="titikKebisingan"
+                  class="form-label"
+                >
+                  Titik Kebisingan</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="titikKebisingan"
+                  name="titikKebisingan"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+                <label
+                  for="titikIklimKerja"
+                  class="form-label"
+                >
+                  Titik Iklim Kerja</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="titikIklimKerja"
+                  name="titikIklimKerja"
+                  required
+                />
+          </div>
+          <div class="mb-3">
+            <label for="file-input" class="form-label"
+              >Denah</label
+            >
+            <input
+              class="form-control file-input"
+              type="file"
+              name="denah"
+              required
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="reset"
+              class="btn btn-secondary"
+            >
+              Clear
+            </button>
+            <button type="submit" class="btn btn-primary">
+              Tambah
+            </button>
+          </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="card shadow">
+  <div
+    class="
+      card-header
+      pt-3
+      px-4
+      bg-white
+      d-flex
+      border-0
+      justify-content-between
+    "
+  >
+    <h3 class="card-title fw-bolder fs-3 m-0 d-flex align-items-center">
+      Kelola Tempat
+    </h3>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahTempat">Tambah Tempat</button>
+  </div>
+  <%- include("../flash") %>
+  <div class="card-body py-3 my-3">
+    <div class="table-responsive">
+      <table class="table data-table table-bordered w-100">
+        <thead class="align-middle text-center">
+          <tr class="text-wrap">
+            <th>No</th>
+            <th>Denah</th>
+            <th class="text-start">Nama Tempat</th>
+            <th>Jenis</th>
+            <th>Jumlah Titik Ventilasi</th>
+            <th>Jumlah Titik Getaran</th>
+            <th>Jumlah Titik Penerangan</th>
+            <th>Jumlah Titik Kebisingan</th>
+            <th>Jumlah Titik Iklim Kerja</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody class="align-middle text-center">
+          <% let fileInput = [] %> 
+          <% for (const tempat of tempats) { %>
+          <tr>
+            <td></td>
+            <td>
+              <img
+                src="/img/denah/<%= tempat.nama %>.jpg"
+                class="img-fluid"
+                alt=""
+              />
+            </td>
+            <td class="text-start"><%= tempat.nama %></td>
+            <% const jenis = function(){ if (tempat.jenis ===
+            "maintenancebengkel") {return "Bengkel"} else if (tempat.jenis ===
+            "maintenancelab") {return "Lab"}else {return "Studio"} } %>
+            <td><%= jenis() %></td>
+            <td><%= tempat.jumlahTitikPengukuran.ventilasi %></td>
+            <td><%= tempat.jumlahTitikPengukuran.getaran %></td>
+            <td><%= tempat.jumlahTitikPengukuran.penerangan %></td>
+            <td><%= tempat.jumlahTitikPengukuran.kebisingan %></td>
+            <td><%= tempat.jumlahTitikPengukuran.iklimKerja %></td>
+            <div class="modal fade" id="edit<%= tempat._id %>" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Edit - <%= tempat.nama %></h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <form
+                      action="/inspeksi/kelola-tempat?_method=PUT"
+                      method="POST"
+                      spellcheck="false"
+                      autocomplete="off"
+                      enctype="multipart/form-data"
+                    >
+                    <input name="idTempat" type="text" class="d-none" required readonly value="<%= tempat._id %>">
+                      <div class="mb-3">
+                        <label
+                          for="namaTempat<%= tempat._id %>"
+                          class="form-label"
+                          >Nama Tempat</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="namaTempat<%= tempat._id %>"
+                          name="namaTempat"
+                          value="<%= tempat.nama %>"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label
+                          for="jenisTempat<%= tempat._id %>"
+                          class="form-label"
+                          >Jenis Tempat</label
+                        >
+                        <select
+                          name="jenisTempat"
+                          id="jenisTempat<%= tempat._id %>"
+                          class="form-select"
+                          required
+                        >
+                          <option value="maintenancebengkel" <%= tempat.jenis === "maintenancebengkel" ? "selected" : "" %> >Bengkel</option>    
+                          <option value="maintenancelab" <%= tempat.jenis === "maintenancelab" ? "selected" : "" %> >Lab</option>    
+                          <option value="maintenancestudio" <%= tempat.jenis === "maintenancestudio" ? "selected" : "" %> >Studio</option>    
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <label
+                              for="titikVentilasi<%= tempat._id %>"
+                              class="form-label"
+                            >
+                              Titik Ventilasi</label
+                            >
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="titikVentilasi<%= tempat._id %>"
+                              name="titikVentilasi"
+                              value="<%= tempat.jumlahTitikPengukuran.ventilasi %>"
+                              required
+                            />
+                          </div>
+                          <div class="col-sm-6">
+                            <label
+                              for="titikGetaran<%= tempat._id %>"
+                              class="form-label"
+                            >
+                              Titik Getaran</label
+                            >
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="titikGetaran<%= tempat._id %>"
+                              name="titikGetaran"
+                              value="<%= tempat.jumlahTitikPengukuran.getaran %>"
+                              required
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <label
+                              for="titikPenerangan<%= tempat._id %>"
+                              class="form-label"
+                            >
+                              Titik Penerangan</label
+                            >
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="titikPenerangan<%= tempat._id %>"
+                              name="titikPenerangan"
+                              value="<%= tempat.jumlahTitikPengukuran.penerangan %>"
+                              required
+                            />
+                          </div>
+                          <div class="col-sm-6">
+                            <label
+                              for="titikKebisingan<%= tempat._id %>"
+                              class="form-label"
+                            >
+                              Titik Kebisingan</label
+                            >
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="titikKebisingan<%= tempat._id %>"
+                              name="titikKebisingan"
+                              value="<%= tempat.jumlahTitikPengukuran.kebisingan %>"
+                              required
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                            <label
+                              for="titikIklimKerja<%= tempat._id %>"
+                              class="form-label"
+                            >
+                              Titik Iklim Kerja</label
+                            >
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="titikIklimKerja<%= tempat._id %>"
+                              name="titikIklimKerja"
+                              value="<%= tempat.jumlahTitikPengukuran.iklimKerja %>"
+                              required
+                            />
+                      </div>
+                      <div class="mb-3">
+                        <label for="file-input<%= tempat._id %>" class="form-label"
+                          >Denah (Opsional jika ingin mengubah denah)</label
+                        >
+                        <input
+                          class="form-control"
+                          type="file"
+                          name="denah"
+                        />
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="reset"
+                          class="btn btn-secondary"
+                        >
+                          Reset
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                          Edit
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+            <td>
+              <button
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#edit<%= tempat._id %>"
+              >
+                Edit
+              </button>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<%- include("templateInspeksi/footer") %>
+

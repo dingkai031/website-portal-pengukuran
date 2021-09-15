@@ -35,7 +35,8 @@
     <link rel="stylesheet" href="/flatpickr/dist/flatpickr.min.css" />
 	
     <!-- ================== data table ==================== -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" />
+    <!-- <link rel="stylesheet" href="/datatables.net-dt/css/jquery.dataTables.min.css" /> -->
+    <link rel="stylesheet" href="/datatables.net-bs5/css/dataTables.bootstrap5.min.css" />
 
     <title>Inspeksi K3 PPNS</title>
   </head>
@@ -55,7 +56,7 @@
     <div class="l-navbar" id="nav-bar">
       <nav class="nav">
         <div>
-          <a href="#" class="nav__logo">
+          <a href="/inspeksi" class="nav__logo">
             <i class="bx bx-briefcase nav__logo-icon"></i>
             <span class="nav__logo-name">Inspeksi K3 PPNS</span>
           </a>
@@ -69,6 +70,12 @@
               <i class="bx bx-history"></i>
               <span class="nav__name">Riwayat Pengukuran</span>
             </a>
+            <% if (currentUser.status === "admin") { %>
+              <a href="/inspeksi/kelola-tempat" class="nav__link <%= menu === "kelola-tempat" ? "active" : "" %>">
+                <i class="bx bx-abacus"></i>
+                <span class="nav__name">Kelola Tempat</span>
+              </a>
+            <% } %>
           </div>
         </div>
 

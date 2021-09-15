@@ -741,6 +741,10 @@ newUserOne(
     lokasi: "semua",
   },
   "111111111111"
-).then(() => {
-  mongoose.connection.close();
-});
+)
+  .then(() => {
+    mongoose.connection.close();
+  })
+  .catch((e) => {
+    console.log(`errror : ${e}`);
+  });

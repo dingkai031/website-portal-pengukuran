@@ -18,8 +18,8 @@
   <%- include("../flash") %>
   <div class="card-body py-3 my-3">
     <div class="table-responsive p-3">
-      <table id="table_id" class="display responsive nowrap">
-        <thead>
+      <table class=" table display responsive nowrap data-table">
+        <thead >
           <tr>
             <th>Tempat</th>
             <th>Pengukur</th>
@@ -33,7 +33,7 @@
         </thead>
         <tbody>
           <% for (const riwayat of riwayats) { %>
-          <tr>
+          <tr class="align-middle">
             <td><%= riwayat.lokasiPengukuran %></td>
             <td><%= riwayat.namaPengukur %></td>
             <td>
