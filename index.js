@@ -1,27 +1,40 @@
 //==========Model Database===============
+//Bagian ini mendefinisikan koleksi-koleksi yang akan digunakan
 
 const User = require("./models/user");
 const Alat = require("./models/alat");
 const Tempat = require("./models/tempat");
 
 //==========Definisi Routes===============
+//Bagian ini mendefinisikan kofigurasi routing dari setiap sistem informasi
 const maintenanceRoutes = require("./routes/maintenance");
 const upik3Routes = require("./routes/upik3");
 const inspeksiRoutes = require("./routes/inspeksi");
 
 //========Global Setting===============
+//bagian ini mendefinisikan module-module yang akan digunakan.
+
+//dibawah ini module mongoose, yang merupakan framework untuk database mongodb
 const mongoose = require("mongoose");
+//dibawah ini module expressJs, yang merupakan framework untuk routing
 const express = require("express");
 const app = express();
+//dibawah ini module path, untuk dengan mudah mengambil alamat direktori
 const path = require("path");
+//dibawah ini module method-override, module ini memungkinkan form html untuk menggunakan request selain get dan post
 const methodOverride = require("method-override");
+//dibawah ini module flash, flash digunakan untuk memunculkan notifikasi sementara
 const flash = require("connect-flash");
+//dibawah ini module passport, module ini digunakan untuk proses login dan pembuatan akun
 const passport = require("passport");
 const LocalStrat = require("passport-local");
 
+//dibawah ini middleware buatan, module ini digunakan untuk proses login dan pembuatan akun
 const { isLoggedIn } = require("./middleware");
 
+//dibawah ini merupakan konfogurasi ejs untuk membaca file dengan format ejs
 app.set("view engine", "ejs");
+//dibawah ini merupakan konfogurasi ejs untuk mengatur direktori frontend website
 app.set("views", path.join(__dirname, "/views"));
 
 //================definisi Session======
@@ -130,5 +143,5 @@ app.all("*", (req, res) => {
 
 //========Port Setting===============
 app.listen(8080, () => {
-  console.log("listening on port 8080");
+  console.log("Website hidup pada port 8080");
 });

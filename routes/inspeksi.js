@@ -1,12 +1,12 @@
 const fs = require("fs");
+const path = require("path");
 
 const Tempat = require("../models/tempat");
 const Riwayat = require("../models/riwayat");
 
 const express = require("express");
 const router = express.Router({ mergeParams: true });
-const { isLoggedIn } = require("../middleware");
-const path = require("path");
+const { isLoggedIn, isAdmin } = require("../middleware");
 
 const multer = require("multer");
 const storage = multer.diskStorage({
@@ -200,7 +200,7 @@ router.post(
   }
 );
 
-router.get("/kelola-tempat", isLoggedIn, async (req, res) => {
+router.get("/kelola-tempat", isLoggedIn, isAdmin, async (req, res) => {
   const menu = "kelola-tempat";
   const tempats = await Tempat.find({});
   res.render("inspeksi/kelolaTempat", { menu, tempats });
@@ -209,6 +209,7 @@ router.get("/kelola-tempat", isLoggedIn, async (req, res) => {
 router.post(
   "/kelola-tempat",
   isLoggedIn,
+  isAdmin,
   upload.single("denah"),
   async (req, res) => {
     const namaTempat = req.body.namaTempat;
@@ -243,13 +244,14 @@ router.post(
 router.put(
   "/kelola-tempat",
   isLoggedIn,
+  isAdmin,
   upload.single("denah"),
   async (req, res) => {
     const foundTempat = await Tempat.findById(req.body.idTempat);
     if (!req.files) {
       fs.rename(
-        `./public/img/denah/${foundTempat.nama}.jpg`,
-        `./public/img/denah/${req.body.namaTempat}.jpg`,
+        path.join(__dirname, `../public/img/denah/${foundTempat.nama}.jpg`),
+        path.join(__dirname, `../public/img/denah/${req.body.namaTempat}.jpg`),
         function (err) {
           if (err) {
             console.log(err);
