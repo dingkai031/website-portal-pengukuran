@@ -130,6 +130,10 @@ app.get("/logout", (req, res) => {
 app.get("/portal", isLoggedIn, (req, res) => {
   res.render("landingPage");
 });
+app.get("/kelola-user", async (req, res) => {
+  const foundUsers = await User.find({});
+  res.render("admin/adminKelolaUser", { foundUsers });
+});
 //===================================================================
 app.use("/inspeksi", inspeksiRoutes);
 //===================================================================

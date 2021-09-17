@@ -24,7 +24,28 @@
             <p class="lead text-white m-0 me-2">
               Halo, <%= currentUser.nama %>
             </p>
-            <a href="/logout" class="btn btn-danger">Keluar</a>
+            <div class="<%= currentUser.status === "admin" ? "dropdown" : "" %>">
+              <a
+                class="btn <%= currentUser.status === "admin" ? "btn-secondary" : "btn-danger" %> <%= currentUser.status === "admin" ? "dropdown-toggle" : "" %>"
+                <%= currentUser.status === "admin" ? 'data-bs-toggle=dropdown' : '' %>
+                href="<%= currentUser.status === 'admin' ? 'javascript:void(0)' : '/logout' %>"
+                type="button"
+              >
+                <%= currentUser.status === "admin" ? "Menu" : "Keluar" %>
+                
+              </a>
+              <% if (currentUser.status === "admin") { %>
+                <ul
+                class="dropdown-menu dropdown-menu-dark"
+                >
+                  <li>
+                    <a class="dropdown-item" href="/kelola-user">Kelola User</a>
+                  </li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li><a class="dropdown-item" href="/logout">Keluar</a></li>
+                </ul>
+              <% } %> 
+            </div>
           </div>
         </div>
       </div>

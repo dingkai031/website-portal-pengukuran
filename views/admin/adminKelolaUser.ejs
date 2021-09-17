@@ -1,0 +1,55 @@
+<%- include("templateAdmin/head") %>
+<div class="card custom-shadow">
+  <div class="card-header pt-3 px-4 d-flex justify-content-between">
+    <h3 class="card-title fw-bolder fs-3 m-0 my-auto">Kelola User</h3>
+    <div class="card-toolbar">
+      <a
+        href="#"
+        class="
+          btn btn-sm btn-light-primary
+          p-2
+          custom-border-radius
+          d-flex
+          align-items-center
+          fs-5
+        "
+        data-bs-toggle="modal"
+        data-bs-target="#newUser"
+      >
+        <i class="bx bx-plus-circle me-2 fs-3"></i>
+        Tambah User
+      </a>
+    </div>
+  </div>
+  <div class="card-body py-3 my-3">
+    <div class="table-responsive">
+      <table class="table table-striped data-table">
+        <thead class="align-middle text-center">
+          <tr>
+            <th>No</th>
+            <th class="text-start">Nama</th>
+            <th class="text-start">NIP/NIM</th>
+            <th class="text-start">Email</th>
+            <th>Status</th>
+            <th class="text-start">Lokasi</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody class="align-middle text-center">
+          <% for( const user of foundUsers) { %>
+          <tr>
+            <td class="p-3"></td>
+            <td class="text-start text-capitalize"><%= user.nama %></td>
+            <td class="text-start"><%= user.nip %></td>
+            <td class="text-start"><%= user.username %></td>
+            <td class="text-uppercase"><%= user.status %></td>
+            <td class="text-start text-capitalize"><%= user.lokasi %></td>
+            <td><button class="btn btn-primary">Edit</button></td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<%- include("templateAdmin/footer") %>
