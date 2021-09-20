@@ -1,5 +1,11 @@
+<script src="/sweetalert/dist/sweetalert.min.js"></script>
+
 <% if (success && success.length) { %>
-<div
+
+<script>
+  swal("<%= success %>", "", "success");
+</script>
+<!-- <div
   class="
     alert alert-success alert-dismissible
     fade
@@ -9,17 +15,21 @@
   "
   role="alert"
 >
-  <div><%= success %></div>
+  <div>%= success %</div>
   <button
     type="button"
     class="btn-close"
     data-bs-dismiss="alert"
     aria-label="Close"
   ></button>
-</div>
+</div> -->
 <% }%> <% if (hapus && hapus.length) { %>
 
-<div
+<script>
+  swal("<%= hapus %>", "", "warning");
+</script>
+
+<!-- <div
   class="
     alert alert-warning alert-dismissible
     fade
@@ -29,17 +39,21 @@
   "
   role="alert"
 >
-  <div><%= hapus %></div>
+  <div>%= hapus %></div>
   <button
     type="button"
     class="btn-close"
     data-bs-dismiss="alert"
     aria-label="Close"
   ></button>
-</div>
+</div> -->
 <% } %> <% if (error && error.length) { %>
 
-<div
+<script>
+  swal("<%= error %>", "", "error");
+</script>
+
+<!-- <div
   class="
     alert alert-danger alert-dismissible
     fade
@@ -49,12 +63,20 @@
   "
   role="alert"
 >
-  <div><%= error %></div>
+  <div>%= error %></div>
   <button
     type="button"
     class="btn-close"
     data-bs-dismiss="alert"
     aria-label="Close"
   ></button>
-</div>
+</div> -->
+<% } %> <% if (adminTempat && adminTempat.length) {%>
+
+<script>
+  swal(
+    "ERROR 403",
+    "Maaf anda tidak memiliki hak yang cukup untuk mengakses halaman ini."
+  );
+</script>
 <% } %>

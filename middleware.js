@@ -8,15 +8,23 @@ module.exports.isLoggedIn = (req, res, next) => {
 };
 
 module.exports.isAdmin = (req, res, next) => {
-  console.log(req.user.status);
   if (req.user.status !== "admin") {
-    console.log("bukan admin");
     req.flash(
       "error",
       "Maaf anda tidak memiliki hak untuk mengakses halaman ini"
     );
-    return res.redirect(req.baseUrl);
+    return res.redirect(req.originalUrl);
   }
-  console.log("next");
+  next();
+};
+
+module.exports.isAdminTempat = (req, res, next) => {
+  if (req.user.status !== "admin") {
+    req.flash(
+      "adminTempat",
+      "Maaf anda tidak memiliki hak untuk mengakses halaman ini"
+    );
+    return res.redirect("/portal");
+  }
   next();
 };

@@ -31,9 +31,12 @@
 
 <script>
   const tempat = JSON.parse(`<%- JSON.stringify(tempats) %>`);
-  const laporan = JSON.parse(`<%- JSON.stringify(laporans) %>`);
-  const arrayOfNamaTempat = tempat.map(x => x.nama)
-  console.log(laporan)
+  const laporans = JSON.parse(`<%- JSON.stringify(laporans) %>`);
+  const maxYear = "<%= maxYear %>"
+  const arrayOfYears = "<%= arrayOfYears %>".split(",")
+  const arrayOfNamaTempat = tempat.map(x => x.nama);
+  let filteredLaporan = laporans.filter(laporan => parseInt(new Date(laporan.tanggalKejadian).getFullYear()) === parseInt(maxYear));
+  
 </script>
 <script src="/js/dashboardP3k.js"></script>
   

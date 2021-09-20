@@ -177,7 +177,7 @@ function unique(arr) {
   return newArr;
 }
 
-router.get("/", isLoggedIn, async (req, res) => {
+router.get("/", async (req, res) => {
   const tempats = await Tempat.find({});
   const laporans = await LaporanKecelakaan.find({});
   const findYears = () => {
