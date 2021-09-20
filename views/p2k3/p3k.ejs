@@ -27,6 +27,35 @@
     </div>
   </div>
 </div>
+
+<div class="card shadow mx-3 mt-3">
+  <div class="card-header">
+    <h4 class="card-title my-3">
+      Data Kecelakaan Bulanan di Bengkel dan Laboratorium Politeknik Perkapalan Negeri
+      Surabaya
+    </h4>
+  </div>
+  <div class="card-body">
+    <div class="row justify-content-center mb-3">
+      <div class="col-sm-5 col-md-4 col-lg-3 col-xl-2">
+        <div class="text-center">
+          <label for="tahun" class="form-label fs-5 text-uppercase"
+            >Tahun</label
+          >
+          <select name="tahun2" id="tahun2" class="form-select">
+            <% for( const year of arrayOfYears ) { %>
+              <option value="<%= year %>" <%= year === maxYear ? "selected" : "" %>  ><%= year %></option>
+            <% } %>
+            <option value="semua">Tampilkan Semua Tahun</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="overflow-auto">
+      <div id="container2" style="width:100%; height:400px;"></div>
+    </div>
+  </div>
+</div>
 <%- include("templateP3k/footer") %>
 
 <script>
