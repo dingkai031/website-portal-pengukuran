@@ -7,32 +7,54 @@
     <!-- ===== BOOTSTRAP 5 ===== -->
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- ===== Font Awesome ===== -->
     <link
       rel="stylesheet"
       href="/@fortawesome/fontawesome-free/css/all.min.css"
     />
-	 <!-- ===== flatpickr ===== -->
+    <!-- ===== flatpickr ===== -->
     <link rel="stylesheet" href="/flatpickr/dist/flatpickr.min.css" />
-	
-	 <!-- ===== select2 ===== -->
+
+    <!-- ===== select2 ===== -->
     <link rel="stylesheet" href="/select2/dist/css/select2.min.css" />
-	
-	<!-- ===== select2 - Bootstrap Theme ===== -->
-    <link rel="stylesheet" href="/@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css" />
-	
-	<!-- ===== FILEINBUT ===== -->
-	<link rel="stylesheet" href="/bootstrap-fileinput/css/fileinput.min.css" />
-	
-	<!-- ===== DATA TABLE ===== -->
-	<link rel="stylesheet" href="/datatables.net-bs5/css/dataTables.bootstrap5.min.css" />
+
+    <!-- ===== select2 - Bootstrap Theme ===== -->
+    <link
+      rel="stylesheet"
+      href="/@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css"
+    />
+
+    <!-- ===== FILEINBUT ===== -->
+    <link rel="stylesheet" href="/bootstrap-fileinput/css/fileinput.min.css" />
+
+    <!-- ===== DATA TABLE ===== -->
+    <link
+      rel="stylesheet"
+      href="/datatables.net-bs5/css/dataTables.bootstrap5.min.css"
+    />
 
     <!-- ===== STYLE ===== -->
     <link rel="stylesheet" href="/css/p3k.css" />
     <title>P3K PPNS</title>
   </head>
   <body>
-    <nav class="navbar fixed-top navbar-expand-xl bg-red-custom navbar-dark shadow-sm">
+    <nav
+      class="
+        navbar
+        fixed-top
+        navbar-expand-xl
+        bg-red-custom
+        navbar-dark
+        shadow-sm
+      "
+    >
       <div class="container-fluid">
         <a class="navbar-brand color-white-custom" href="/upik3"
           ><img src="/img/logo.png" alt="" width="30" class="me-1" />UPIK3</a
@@ -45,7 +67,10 @@
         >
           <i class="fas fa-bars"></i>
         </button>
-        <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
+        <div
+          class="collapse navbar-collapse justify-content-between"
+          id="navbarNavAltMarkup"
+        >
           <div class="navbar-nav color-white-custom">
             <div class="nav-item dropdown mx-2">
               <a
@@ -71,8 +96,12 @@
                 >Form Pendataan Kotak P3K</a
               >
               <div class="dropdown-menu">
-                <a href="/upik3/kotak-p3k-b" class="dropdown-item">Kotak P3K tipe B</a>
-                <a href="/upik3/kotak-p3k-c" class="dropdown-item">Kotak P3K tipe C</a>
+                <a href="/upik3/kotak-p3k-b" class="dropdown-item"
+                  >Kotak P3K tipe B</a
+                >
+                <a href="/upik3/kotak-p3k-c" class="dropdown-item"
+                  >Kotak P3K tipe C</a
+                >
               </div>
             </div>
             <div class="nav-item dropdown mx-2">
@@ -83,18 +112,19 @@
                 >Form Lain-lain</a
               >
               <div class="dropdown-menu">
-                <a href="/upik3/pendataan-ketersediaan-alat-evakuasi-korban" class="dropdown-item"
+                <a
+                  href="/upik3/pendataan-ketersediaan-alat-evakuasi-korban"
+                  class="dropdown-item"
                   >Form Pendataan alat evakuasi korban</a
                 >
                 <a href="/upik3/formulir-pemulihan" class="dropdown-item"
-                  >Form Pemulihan Kotak P3K dan Alat Evakuasi yang
-                  Rusak</a
+                  >Form Pemulihan Kotak P3K dan Alat Evakuasi yang Rusak</a
                 >
               </div>
             </div>
-			
-			<% if (currentUser.status !== "mahasiswa") {%>
-				<div class="nav-item dropdown ms-2">
+
+            <% if (currentUser.status !== "mahasiswa") {%>
+            <div class="nav-item dropdown ms-2">
               <a
                 class="nav-link dropdown-toggle active"
                 href="javascript:void(0)"
@@ -105,22 +135,25 @@
                 <a href="/upik3/data-laporan-kecelakaan" class="dropdown-item"
                   >Data Form Pelaporan Kecelakaan</a
                 >
-				<a href="/upik3/data-laporan-kotak-p3k" class="dropdown-item"
+                <a href="/upik3/data-laporan-kotak-p3k" class="dropdown-item"
                   >Data Form Pendataan Kotak P3K</a
                 >
-				<a href="/upik3/data-laporan-alat-evakuasi" class="dropdown-item"
+                <a
+                  href="/upik3/data-laporan-alat-evakuasi"
+                  class="dropdown-item"
                   >Data Form Pendataan Alat Evakuasi Korban</a
                 >
-				<a href="/upik3/data-laporan-pemulihan-alat-evakuasi" class="dropdown-item"
+                <a
+                  href="/upik3/data-laporan-pemulihan-alat-evakuasi"
+                  class="dropdown-item"
                   >Data Form Pemulihan Kotak P3K dan Alat Evakuasi yang Rusak</a
                 >
-
               </div>
             </div>
-			<% } %>
+            <% } %>
           </div>
-		  <a href="/" class="btn btn-primary letterSpacing-2">Kembali</a>
+          <a href="/" class="btn btn-primary letterSpacing-2">Kembali</a>
         </div>
       </div>
     </nav>
-	<%- include("../../flash") %>
+    <%- include("../../flash") %>

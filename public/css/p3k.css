@@ -1,6 +1,3 @@
-/*===== GOOGLE FONTS =====*/
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
-
 /*===== VARIABLES CSS =====*/
 :root {
   --header-height: 4rem;
@@ -142,3 +139,8 @@ input::-webkit-inner-spin-button {
 .select2-results__option {
   text-align: start;
 }
+
+/* canvas {
+  width: 4000px !important;
+  height: 500px !important;
+} */

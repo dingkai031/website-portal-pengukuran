@@ -731,20 +731,20 @@ const newUser = async function (model, arrObj, pass) {
 //   mongoose.connection.close();
 // });
 
-newUserOne(
-  {
-    nama: "dummy bauk",
-    nip: "867213868273",
-    email: "dummyBauk@ppns.ac.id",
-    username: "dummyBauk@ppns.ac.id",
-    status: "bauk",
-    lokasi: "semua",
-  },
-  "111111111111"
-)
-  .then(() => {
-    mongoose.connection.close();
-  })
-  .catch((e) => {
-    console.log(`errror : ${e}`);
-  });
+// newUserOne(
+//   {
+//     nama: "test",
+//     nip: "tesssssssst",
+//     email: "tessssssssssst",
+//     username: "test",
+//     status: "bauk",
+//     lokasi: "semua",
+//   },
+//   "111111111111"
+// )
+//   .then(() => {
+//     mongoose.connection.close();
+//   })
+//   .catch((e) => {
+//     console.log(`errror : ${e}`);
+//   });

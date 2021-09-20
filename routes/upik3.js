@@ -139,9 +139,8 @@ const upload = multer({ storage });
 
 const converDate = {
   regular: function (tanggal) {
-    const newDate = tanggal.split("-");
-    const isoDate = new Date(`${newDate[2]}-${newDate[1]}-${newDate[0]}`);
-    return isoDate;
+    const arrayOfDate = tanggal.split("-");
+    return new Date(`${arrayOfDate[2]}-${arrayOfDate[1]}-${arrayOfDate[0]}`);
   },
   regularLokal: function (tanggal) {
     return `${("0" + tanggal.getDate()).slice(-2)}-${(
@@ -179,49 +178,20 @@ function unique(arr) {
 }
 
 router.get("/", isLoggedIn, async (req, res) => {
-  const { tahun } = req.query;
-  async function ambilDataBulan(month, lastDate, year) {
-    return await LaporanKecelakaan.find({
-      tanggalKejadian: {
-        $gte: convertDate(`1-${month}-${year}`),
-        $lte: convertDate(`${lastDate}-${month}-${year}`),
-      },
-    });
-  }
-  const semuaData = await LaporanKecelakaan.find({});
-  let arrayOfYear = [];
-  for (const data of semuaData) {
-    arrayOfYear.push(parseInt(data.tanggalKejadian.getFullYear()));
-  }
-  arrayOfYear = unique(arrayOfYear).sort();
-  lastOfYear = tahun || parseInt(arrayOfYear.slice(-1));
-  const dataKecelakaanJanuari = await ambilDataBulan(1, 31, lastOfYear);
-  const dataKecelakaanFebruari = await ambilDataBulan(2, 28, lastOfYear);
-  const dataKecelakaanMaret = await ambilDataBulan(3, 31, lastOfYear);
-  const dataKecelakaanApril = await ambilDataBulan(4, 30, lastOfYear);
-  const dataKecelakaanMei = await ambilDataBulan(5, 31, lastOfYear);
-  const dataKecelakaanJuni = await ambilDataBulan(6, 30, lastOfYear);
-  const dataKecelakaanJuli = await ambilDataBulan(7, 31, lastOfYear);
-  const dataKecelakaanAgustus = await ambilDataBulan(8, 31, lastOfYear);
-  const dataKecelakaanSeptember = await ambilDataBulan(9, 30, lastOfYear);
-  const dataKecelakaanOktober = await ambilDataBulan(10, 31, lastOfYear);
-  const dataKecelakaanNovember = await ambilDataBulan(11, 30, lastOfYear);
-  const dataKecelakaanDesember = await ambilDataBulan(12, 31, lastOfYear);
-  const jumlahLaporan = {
-    jan: parseInt(dataKecelakaanJanuari.length) || null,
-    feb: parseInt(dataKecelakaanFebruari.length) || null,
-    mar: parseInt(dataKecelakaanMaret.length) || null,
-    apr: parseInt(dataKecelakaanApril.length) || null,
-    mei: parseInt(dataKecelakaanMei.length) || null,
-    jun: parseInt(dataKecelakaanJuni.length) || null,
-    jul: parseInt(dataKecelakaanJuli.length) || null,
-    agu: parseInt(dataKecelakaanAgustus.length) || null,
-    sep: parseInt(dataKecelakaanSeptember.length) || null,
-    okt: parseInt(dataKecelakaanOktober.length) || null,
-    nov: parseInt(dataKecelakaanNovember.length) || null,
-    des: parseInt(dataKecelakaanDesember.length) || null,
+  const tempats = await Tempat.find({});
+  const laporans = await LaporanKecelakaan.find({});
+  const findYears = () => {
+    const arrayOfYear = [];
+    for (const laporan of laporans) {
+      arrayOfYear.push(parseInt(laporan.tanggalKejadian.getFullYear()));
+    }
+    return unique(arrayOfYear);
   };
-  res.render("p2k3/p3k", { arrayOfYear, jumlahLaporan, tahun });
+  const arrayOfYears = findYears();
+  const maxYear = arrayOfYears.reduce((prev, current) =>
+    Math.max(prev, current)
+  );
+  res.render("p2k3/p3k", { laporans, tempats, arrayOfYears, maxYear });
 });
 
 router.post(

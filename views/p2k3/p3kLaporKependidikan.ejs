@@ -219,8 +219,10 @@
                   >
                   <div id="perkiraanKerugian" class="row">
                     <div class="col-sm-6">
+                      <label for="kerugianWaktuMinor" class="form-label">A. Waktu</label>
                       <div class="input-group mb-3">
                         <input
+                        id="kerugianWaktuMinor"
                           type="number"
                           min="0"
                           class="form-control"
@@ -233,7 +235,9 @@
                       </div>
                     </div>
                     <div class="col-sm-6">
+                      <label for="kerugianMaterialMinor" class="form-label">B. Material</label>
                       <input
+                      id="kerugianMaterialMinor"
                         type="text"
                         class="form-control"
                         required
@@ -338,7 +342,7 @@
               <input class="d-none"type="text" readonly required name="jenisTurunan" value="Tenaga Kependidikan-Minor">
               <div class="mb-3 row">
                 <div class="col-12">
-                  <label for="dokumentasi" class="form-label">Dokumentasi</label>
+                  <label for="dokumentasi" class="form-label">Dokumentasi <br><small class="fst-italic fw-light">*harus memasukkan 3 foto</small></label>
                   <input type="file" id="dokumentasi" class="dokumentasi" name="dokumentasi" multiple required>
                 </div>
               </div>
@@ -578,8 +582,10 @@
                   >
                   <div id="perkiraanKerugian" class="row">
                     <div class="col-sm-6">
+                      <label for="kerugianWaktuMayor" class="form-label">A. Waktu</label>
                       <div class="input-group mb-3">
                         <input
+                        id="kerugianWaktuMayor"
                           type="number"
                           min="0"
                           class="form-control"
@@ -592,8 +598,10 @@
                       </div>
                     </div>
                     <div class="col-sm-6">
+                      <label for="kerugianMaterialMayor" class="form-label">B. Material</label>
                       <input
                         type="text"
+                        id="kerugianMaterialMayor"
                         class="form-control"
                         required
                         placeholder="Material"
@@ -710,7 +718,7 @@
               <input class="d-none"type="text" readonly required name="jenisTurunan" value="Tenaga Kependidikan-Mayor">
               <div class="mb-3 row">
                 <div class="col-12">
-                  <label for="dokumentasi" class="form-label">Dokumentasi</label>
+                  <label for="dokumentasi" class="form-label">Dokumentasi <br><small class="fst-italic fw-light">*harus memasukkan 3 foto</small></label>
                   <input type="file" id="dokumentasi" class="dokumentasi" name="dokumentasi" multiple required>
                 </div>
               </div>

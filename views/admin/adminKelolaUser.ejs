@@ -1,4 +1,110 @@
 <%- include("templateAdmin/head") %>
+
+<div class="modal fade" id="newUser" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Tambah User</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+      <form action="/kelola-user" method="POST">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="nama" class="form-label fw-bolder">Nama</label>
+            <input
+              type="text"
+              class="form-control"
+              id="nama"
+              name="nama"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="nip" class="form-label fw-bolder">NIP/NIM</label>
+            <input
+              type="text"
+              class="form-control"
+              id="nip"
+              name="nip"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label fw-bolder">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label fw-bolder">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="status" class="form-label fw-bolder">Status</label>
+            <select
+              name="status"
+              id="status"
+              class="form-select select2"
+              required
+            >
+              <option value=""></option>
+              <option value="admin" class="text-capitalize">admin</option>
+              <option value="upik3" class="text-capitalize">upik3</option>
+              <option value="kabeng" class="text-capitalize">kabeng</option>
+              <option value="kalab" class="text-capitalize">kalab</option>
+              <option value="teknisi" class="text-capitalize">teknisi</option>
+              <option value="bauk" class="text-capitalize">bauk</option>
+              <option value="dosen" class="text-capitalize">dosen</option>
+              <option value="mahasiswa" class="text-capitalize">
+                mahasiswa
+              </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="lokasi" class="form-label fw-bolder">Lokasi</label>
+            <select
+              name="lokasi"
+              id="lokasi"
+              class="form-select select2"
+              required
+            >
+              <option value=""></option>
+              <option value="semua">Semua</option>
+              <% for( const tempat of tempats ) { %>
+              <option value="<%= tempat.nama %>"><%= tempat.nama %></option>
+              <% } %>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="reset"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Clear
+          </button>
+          <button type="submit" class="btn btn-primary">Tambah User</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <div class="card custom-shadow">
   <div class="card-header pt-3 px-4 d-flex justify-content-between">
     <h3 class="card-title fw-bolder fs-3 m-0 my-auto">Kelola User</h3>
@@ -21,6 +127,7 @@
       </a>
     </div>
   </div>
+  <%- include("../flash") %>
   <div class="card-body py-3 my-3">
     <div class="table-responsive">
       <table class="table table-striped data-table">
@@ -44,7 +151,171 @@
             <td class="text-start"><%= user.username %></td>
             <td class="text-uppercase"><%= user.status %></td>
             <td class="text-start text-capitalize"><%= user.lokasi %></td>
-            <td><button class="btn btn-primary">Edit</button></td>
+            <td class="text-nowrap">
+              <div class="modal fade text-start" id="editUser<%= user._id %>" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Ubah User</h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                      ></button>
+                    </div>
+                    <form action="/kelola-user?_method=PUT" method="POST">
+                      <input type="text" name="idUser" class="d-none" readonly required value="<%= user._id %>">
+                      <div class="modal-body">
+                        <div class="mb-3">
+                          <label for="nama<%= user._id %>" class="form-label fw-bolder">Nama</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="nama<%= user._id %>"
+                            name="nama"
+                            required
+                            value="<%= user.nama %>"
+                          />
+                        </div>
+                        <div class="mb-3">
+                          <label for="nip<%= user._id %>" class="form-label fw-bolder">NIP/NIM</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="nip<%= user._id %>"
+                            name="nip"
+                            value="<%= user.nip %>"
+                            required
+                          />
+                        </div>
+                        <div class="mb-3">
+                          <label for="email<%= user._id %>" class="form-label fw-bolder">Email</label>
+                          <input
+                            type="email"
+                            class="form-control"
+                            id="email<%= user._id %>"
+                            name="email"
+                            value="<%= user.email %>"
+                            required
+                          />
+                        </div>
+                        <div class="mb-3">
+                          <label for="status<%= user._id %>" class="form-label fw-bolder">Status</label>
+                          <select
+                            name="status"
+                            id="status<%= user._id %>"
+                            class="form-select select2"
+                            required
+                          >
+                            <option value=""></option>
+                            <option value="admin" class="text-capitalize" <%= user.status === "admin" ? "selected" : "" %>  >admin</option>
+                            <option value="upik3" class="text-capitalize" <%= user.status === "upik3" ? "selected" : "" %> >upik3</option>
+                            <option value="kabeng" class="text-capitalize" <%= user.status === "kabeng" ? "selected" : "" %> >kabeng</option>
+                            <option value="kalab" class="text-capitalize" <%= user.status === "kalab" ? "selected" : "" %> >kalab</option>
+                            <option value="teknisi" class="text-capitalize" <%= user.status === "teknisi" ? "selected" : "" %> >teknisi</option>
+                            <option value="bauk" class="text-capitalize" <%= user.status === "bauk" ? "selected" : "" %> >bauk</option>
+                            <option value="dosen" class="text-capitalize" <%= user.status === "dosen" ? "selected" : "" %> >dosen</option>
+                            <option value="mahasiswa" class="text-capitalize" <%= user.status === "mahasiswa" ? "selected" : "" %> >
+                              mahasiswa
+                            </option>
+                          </select>
+                        </div>
+                        <div class="mb-3">
+                          <label for="lokasi<%= user._id %>" class="form-label fw-bolder">Lokasi</label>
+                          <select
+                            name="lokasi"
+                            id="lokasi<%= user._id %>"
+                            class="form-select select2"
+                            required
+                          >
+                            <option value=""></option>
+                            <option value="semua" <%= user.lokasi === "semua" ? "selected" : "" %>>Semua</option>
+                            <% for( const tempat of tempats ) { %>
+                            <option value="<%= tempat.nama %>" <%= user.lokasi === tempat.nama ? "selected" : "" %> ><%= tempat.nama %></option>
+                            <% } %>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="reset"
+                          class="btn btn-secondary"
+                          data-bs-dismiss="modal"
+                        >
+                          Clear
+                        </button>
+                        <button type="submit" class="btn btn-primary">Edit User</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editUser<%= user._id %>">Edit</button>
+              <!-- ============================================================================================================= -->
+              <div class="modal fade text-start" id="editPasswordUser<%= user._id %>" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Ubah User</h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                      ></button>
+                    </div>
+                    <form action="/kelola-user/ubah-password?_method=PUT" method="POST">
+                      <div class="modal-body">
+                        <div class="mb-3">
+                          <label for="namaEditPasswordUser<%= user._id %>" class="form-label fw-bolder">Username</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="namaEditPasswordUser<%= user._id %>"
+                            name="username"
+                            required
+                            readonly
+                            value="<%= user.username %>"
+                          />
+                        </div>
+                        <div class="mb-3">
+                          <label for="oldPassword<%= user._id %>" class="form-label fw-bolder">Password sebelumnya</label>
+                          <input
+                            type="password"
+                            class="form-control"
+                            id="oldPassword<%= user._id %>"
+                            name="oldPassword"
+                            required
+                          />
+                        </div>
+                        <div class="mb-3">
+                          <label for="password<%= user._id %>" class="form-label fw-bolder">Password</label>
+                          <input
+                            type="password"
+                            class="form-control"
+                            id="password<%= user._id %>"
+                            name="password"
+                            required
+                          />
+                        </div>
+                       
+                        </div>
+                      
+                      <div class="modal-footer">
+                        <button
+                          type="reset"
+                          class="btn btn-secondary"
+                          data-bs-dismiss="modal"
+                        >
+                          Reset
+                        </button>
+                        <button type="submit" class="btn btn-primary">Ubah password</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-warning text-dark fw-bolder" data-bs-toggle="modal" data-bs-target="#editPasswordUser<%= user._id %>">Ubah Password</button>
+            </td>
           </tr>
           <% } %>
         </tbody>
@@ -53,3 +324,14 @@
   </div>
 </div>
 <%- include("templateAdmin/footer") %>
+
+<script>
+  $(document).ready(function () {
+    $(".select2").select2({
+      placeholder: "Silahkan pilih",
+      theme: "bootstrap4",
+      width: "100%",
+      dropdownParent: $("#newUser"),
+    });
+  });
+</script>
