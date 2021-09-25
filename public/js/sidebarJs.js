@@ -6,7 +6,7 @@ const showNavbar = (toggleId, navId, bodyId, headerId) => {
     headerpd = document.getElementById(headerId),
     chevron = document.querySelector("#chevron");
 
-  // Validate that all variables exist
+  // Validasi apakah semua variable ada datanya
   if (toggle && nav && bodypd && headerpd) {
     toggle.addEventListener("click", () => {
       for (const toggle2 of toggle2s) {

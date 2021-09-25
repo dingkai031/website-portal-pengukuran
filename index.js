@@ -104,6 +104,7 @@ app.use((req, res, next) => {
 
 //========Routing===============
 
+//HALAMAN LOGIN
 app.get("/", (req, res) => {
   if (!req.isAuthenticated()) {
     return res.render("login");
@@ -111,8 +112,11 @@ app.get("/", (req, res) => {
   res.redirect("/portal");
 });
 
+//PROSES LOGIN
 app.post(
   "/",
+  //Cukup memanggil fungsi dibawah (passport.authenticate(STRATEGINYA, {OPTION})) maka fungsi akan mencari data "username" dan "password"
+  //di "body" halaman ketika user menekan tombol login
   passport.authenticate("local", {
     failureFlash: "Email atau password salah",
     failureRedirect: "/",
@@ -122,7 +126,7 @@ app.post(
     res.redirect(redirectUrl);
   }
 );
-
+//PROSES LOGOUT
 app.get("/logout", (req, res) => {
   req.logout();
   req.flash("success", "Anda berhasil keluar");
@@ -130,7 +134,7 @@ app.get("/logout", (req, res) => {
 });
 
 app.get("/portal", isLoggedIn, (req, res) => {
-  res.render("landingPage");
+  res.render("portal");
 });
 
 // =====================================================================

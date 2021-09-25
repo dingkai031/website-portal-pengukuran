@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  //inisialisasi library select2 beserta konfigurasinya
   $(".select2").select2({
     placeholder: "Silahkan pilih",
     theme: "bootstrap4",
@@ -13,6 +14,7 @@ $(document).ready(function () {
     dropdownParent: $("#newFormMaintenance"),
     minimumResultsForSearch: -1,
   });
+  //inisialisasi library fileinput beserta konfigurasinya
   $("#dokumentasiMaintenance").fileinput({
     language: "id",
     theme: "fas",
