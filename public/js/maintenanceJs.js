@@ -21,6 +21,8 @@ $(document).ready(function () {
   });
 });
 
+//fungsi dibawah ini untuk
+
 const opsiCek = document.querySelector("#opsiCek");
 if (opsiCek) {
   opsiCek.addEventListener("change", (e) => {
