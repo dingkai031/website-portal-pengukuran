@@ -1,3 +1,5 @@
+//function in  hanya utuk memunculkan sidebar dan menyembuyikan sidebar saja
+
 const showNavbar = (toggleId, navId, bodyId, headerId) => {
   const toggle = document.getElementById(toggleId),
     toggle2s = document.querySelectorAll(".toggle2"),

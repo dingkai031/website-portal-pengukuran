@@ -21,7 +21,9 @@ $(document).ready(function () {
   });
 });
 
-//fungsi dibawah ini untuk
+//fungsi dibawah ini untuk bagian notifikasi, pada notifikasi tersebut terdapat element select dengan id...
+//#opsiCek. Jika opsiCek valuenya selain "selesai" maka akan muncul element select baru, jika user memilih...
+//value selesai maka element tersebut tidak muncul
 
 const opsiCek = document.querySelector("#opsiCek");
 if (opsiCek) {
