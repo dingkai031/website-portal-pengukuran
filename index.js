@@ -1,9 +1,10 @@
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 //==========Model Database===============
 //Bagian ini mendefinisikan koleksi-koleksi yang akan digunakan
-
 const User = require("./models/user");
-const Alat = require("./models/alat");
-const Tempat = require("./models/tempat");
 
 //==========Definisi Routes===============
 //Bagian ini mendefinisikan kofigurasi routing dari setiap sistem informasi
@@ -14,7 +15,7 @@ const adminRoutes = require("./routes/admin");
 
 //========Global Setting===============
 //bagian ini mendefinisikan module-module yang akan digunakan.
-
+const MongoStore = require("connect-mongo");
 //dibawah ini module mongoose, yang merupakan framework untuk database mongodb
 const mongoose = require("mongoose");
 //dibawah ini module expressJs, yang merupakan framework untuk routing
@@ -30,6 +31,9 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrat = require("passport-local");
 
+const RandomString = require("randomstring");
+const bcrypt = require("bcrypt");
+
 //dibawah ini middleware buatan, module ini digunakan untuk proses login dan pembuatan akun
 const { isLoggedIn } = require("./middleware");
 
@@ -40,9 +44,14 @@ app.set("views", path.join(__dirname, "/views"));
 
 //================definisi Session======
 const session = require("express-session");
+const randomString = RandomString.generate({ charset: "alphanumeric" });
+const hashedRandomString = bcrypt.hashSync(randomString, 8);
 
 const sessionConfig = {
-  secret: "i34ftyni(&NXCT)MY#(joie(@V*NY",
+  secret: hashedRandomString,
+  store: MongoStore.create({
+    mongoUrl: "mongodb://localhost:27017/pendidikan",
+  }),
   resave: false,
   saveUninitialized: true,
   cookie: {

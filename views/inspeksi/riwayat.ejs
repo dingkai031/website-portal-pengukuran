@@ -18,7 +18,7 @@
   <%- include("../flash") %>
   <div class="card-body py-3 my-3">
     <div class="table-responsive p-3">
-      <table class=" table display responsive nowrap data-table">
+      <table class=" table display responsive nowrap">
         <thead >
           <tr>
             <th>Tempat</th>
@@ -38,7 +38,7 @@
             <td><%= riwayat.namaPengukur %></td>
             <td>
               <%=
-              `${riwayat.createdAt.getDate()}-${riwayat.createdAt.getMonth()+1}-${riwayat.createdAt.getFullYear()}`
+              converDate.regularLokal(riwayat.createdAt)
               %>
             </td>
             <td class="d-flex justify-content-between">
@@ -84,9 +84,7 @@
                       >
                         Tutup
                       </button>
-                      <!-- <button type="button" class="btn btn-primary tombolDownload" name="Inspeksi Kebisingan" dataTarget="#wadahDokumentasi<%=riwayat._id%>" dataTanggal = "<%=`${riwayat.createdAt.getDate()}-${riwayat.createdAt.getMonth()+1}-${riwayat.createdAt.getFullYear()}`%>" dataTempat="<%= riwayat.lokasiPengukuran %>">
-                        Download
-                      </button> -->
+                      
                     </div>
                   </div>
                 </div>
@@ -801,7 +799,7 @@
               data-bs-toggle="modal"
               data-bs-target="#ventilasi<%=riwayat._id%>">
               Ventilasi
-            </a>
+              </a>
             </td>
             <td class="text-center">
               <% if (!riwayat.approve) { %>
@@ -827,3 +825,29 @@
   </div>
 </div>
 <%- include("templateInspeksi/footer") %>
+<script>
+  $(document).ready(function () {
+
+  $("table").DataTable({
+    responsive: true,
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.10.25/i18n/Indonesian.json",
+    },
+    columnDefs: [
+      {
+        searchable: false,
+        orderable: false,
+        targets: 3,
+      },
+      {
+        render: $.fn.dataTable.render.moment(
+          "DD-MM-YYYY",
+          "DD MMMM YYYY",
+          "id"
+        ),
+        targets: 2,
+      },
+    ],
+  });
+});
+</script>

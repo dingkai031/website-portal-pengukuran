@@ -11,6 +11,8 @@ const LaporanAlatEvakuasi = require("../models/laporanAlatEvakuasi");
 const LaporanPemulihanAlat = require("../models/laporanPemulihanAlatEvakuasi");
 const path = require("path");
 
+const upik3 = require("../controllers/upik3");
+
 const multer = require("multer");
 
 const storage = multer.diskStorage({
@@ -166,218 +168,49 @@ function convertDate(tanggal) {
   return isoDate;
 }
 
-function unique(arr) {
-  const newArr = [];
-  for (let year of arr) {
-    year = parseInt(year);
-    if (newArr.indexOf(year) === -1) {
-      newArr.push(year);
-    }
-  }
-  return newArr;
-}
-
-router.get("/", isLoggedIn, async (req, res) => {
-  const tempats = await Tempat.find({});
-  const laporans = await LaporanKecelakaan.find({});
-  const findYears = () => {
-    const arrayOfYear = [];
-    for (const laporan of laporans) {
-      arrayOfYear.push(parseInt(laporan.tanggalKejadian.getFullYear()));
-    }
-    return unique(arrayOfYear);
-  };
-  const arrayOfYears = findYears();
-  const maxYear = arrayOfYears.reduce((prev, current) =>
-    Math.max(prev, current)
-  );
-  res.render("p2k3/p3k", { laporans, tempats, arrayOfYears, maxYear });
-});
+router.get("/", isLoggedIn, upik3.dashboard);
 
 router.post(
   "/kuesioner",
   isLoggedIn,
   upload.array("dokumentasi"),
-  (req, res) => {
-    let foto = [];
-    const dataFoto = req.files;
-    for (const obj of dataFoto) {
-      foto.push(obj.filename);
-    }
-    const obj = req.body;
-    obj.dokumentasi = foto;
-    const jenis = obj.jenis;
-    const dataForm = JSON.stringify(obj);
-    res.render("p2k3/p3kKuesioner", { dataForm, jenis });
-  }
+  upik3.halamanKuesioner
 );
 
-router.get("/pelaporan-kependidikan", isLoggedIn, async (req, res) => {
-  const foundTempat = await Tempat.find({});
-  res.render("p2k3/p3kLaporKependidikan", { foundTempat });
-});
+router
+  .route("/pelaporan-kependidikan")
+  .get(isLoggedIn, upik3.halamanLaporanPendidikan)
+  .post(isLoggedIn, upik3.submitLaporanPendidikan);
 
-router.post("/pelaporan-kependidikan", isLoggedIn, async (req, res) => {
-  const { dataInspeksi } = req.body;
-  delete req.body.dataInspeksi;
-  const data = JSON.parse(dataInspeksi);
-  data.tanggalKejadian = convertDate(data.tanggalKejadian);
-  const { alatEvakuasi1, alatEvakuasi2 } = data;
-  delete data.jenis;
-  data.alatEvakuasi1 = alatEvakuasi1 || "-";
-  data.alatEvakuasi2 = alatEvakuasi2 || "-";
-  const dataMerged = { ...data, ...req.body };
-  const foundUser = await User.findById(req.user._id);
-  dataMerged.saksi = foundUser;
-  const laporanKecelakaan = new LaporanKecelakaan(dataMerged);
-  await laporanKecelakaan
-    .save()
-    .then(() => {
-      return req.flash("success", `Inspeksi berhasil ditambahkan`);
-    })
-    .catch((e) => {
-      return req.flash("error", `error ${e}`);
-    });
-  res.redirect("/upik3/pelaporan-kependidikan");
-});
+router
+  .route("/pelaporan-mahasiswa")
+  .get(isLoggedIn, upik3.halamanLaporanMahasiswa)
+  .post(isLoggedIn, upik3.submitLaporanMahasiswa);
 
-router.get("/pelaporan-mahasiswa", isLoggedIn, async (req, res) => {
-  const foundTempat = await Tempat.find({});
-  res.render("p2k3/p3kLaporMahasiswa", { foundTempat });
-});
+router
+  .route("/kotak-p3k-b")
+  .get(isLoggedIn, upik3.halamanKotakP3kB)
+  .post(isLoggedIn, upik3.submitKotakP3kB);
 
-router.post("/pelaporan-mahasiswa", isLoggedIn, async (req, res) => {
-  const { dataInspeksi } = req.body;
-  delete req.body.dataInspeksi;
-  const data = JSON.parse(dataInspeksi);
-  data.tanggalKejadian = convertDate(data.tanggalKejadian);
-  const { alatEvakuasi1, alatEvakuasi2 } = data;
-  delete data.jenis;
-  data.alatEvakuasi1 = alatEvakuasi1 || "-";
-  data.alatEvakuasi2 = alatEvakuasi2 || "-";
-  const dataMerged = { ...data, ...req.body };
-  const foundUser = await User.findById(req.user._id);
-  dataMerged.saksi = foundUser;
-  const laporanKecelakaan = new LaporanKecelakaan(dataMerged);
-  await laporanKecelakaan
-    .save()
-    .then(() => {
-      return req.flash("success", `Inspeksi berhasil ditambahkan`);
-    })
-    .catch((e) => {
-      return req.flash("error", `error ${e}`);
-    });
-  res.redirect("/upik3/pelaporan-mahasiswa");
-});
+router
+  .route("/kotak-p3k-c")
+  .get(isLoggedIn, upik3.halamanKotakP3kC)
+  .post(isLoggedIn, upik3.submitKotakP3kC);
 
-router.get("/kotak-p3k-b", isLoggedIn, (req, res) => {
-  res.render("p2k3/p3kKotakP3kB");
-});
-
-router.post("/kotak-p3k-b", isLoggedIn, async (req, res) => {
-  const { dataInspeksi } = req.body;
-  delete req.body.dataInspeksi;
-  const data = JSON.parse(dataInspeksi);
-  data.tanggalInspeksi = convertDate(data.tanggalInspeksi);
-  delete data.jenis;
-  const dataMerged = { ...data, ...req.body };
-  const foundUser = await User.findById(req.user._id);
-  dataMerged.inspektor = foundUser;
-  const laporan = new LaporanKotakP3k(dataMerged);
-  await laporan
-    .save()
-    .then(() => {
-      return req.flash("success", `Inspeksi berhasil ditambahkan`);
-    })
-    .catch((e) => {
-      return req.flash("error", `error ${e}`);
-    });
-  res.redirect("/upik3/kotak-p3k-b");
-});
-
-router.get("/kotak-p3k-c", isLoggedIn, (req, res) => {
-  res.render("p2k3/p3kKotakP3kC");
-});
-
-router.post("/kotak-p3k-c", isLoggedIn, async (req, res) => {
-  const { dataInspeksi } = req.body;
-  delete req.body.dataInspeksi;
-  const data = JSON.parse(dataInspeksi);
-  data.tanggalInspeksi = convertDate(data.tanggalInspeksi);
-  delete data.jenis;
-  const dataMerged = { ...data, ...req.body };
-  const foundUser = await User.findById(req.user._id);
-  dataMerged.inspektor = foundUser;
-  const laporan = new LaporanKotakP3k(dataMerged);
-  await laporan
-    .save()
-    .then(() => {
-      return req.flash("success", `Inspeksi berhasil ditambahkan`);
-    })
-    .catch((e) => {
-      return req.flash("error", `error ${e}`);
-    });
-  res.redirect("/upik3/kotak-p3k-c");
-});
-
-router.get(
-  "/pendataan-ketersediaan-alat-evakuasi-korban",
-  isLoggedIn,
-  (req, res) => {
+router
+  .route("/pendataan-ketersediaan-alat-evakuasi-korban")
+  .get(isLoggedIn, (req, res) => {
     res.render("p2k3/pendataanAlatEvakuasiKorban");
-  }
-);
+  })
+  .post(isLoggedIn, upik3.submitKetersediaanAlatEvakuasi);
 
-router.post(
-  "/pendataan-ketersediaan-alat-evakuasi-korban",
-  isLoggedIn,
-  async (req, res) => {
-    const { dataInspeksi } = req.body;
-    delete req.body.dataInspeksi;
-    const data = JSON.parse(dataInspeksi);
-    data.tanggalInspeksi = convertDate(data.tanggalInspeksi);
-    delete data.jenis;
-    const dataMerged = { ...data, ...req.body };
-    const foundUser = await User.findById(req.user._id);
-    dataMerged.inspektor = foundUser;
-    const laporan = new LaporanAlatEvakuasi(dataMerged);
-    await laporan
-      .save()
-      .then(() => {
-        return req.flash("success", `Inspeksi berhasil ditambahkan`);
-      })
-      .catch((e) => {
-        return req.flash("error", `error ${e}`);
-      });
-    res.redirect("/upik3/kotak-p3k-c");
-  }
-);
-
-router.get("/formulir-pemulihan", isLoggedIn, async (req, res) => {
-  const foundTempat = await Tempat.find({});
-  res.render("p2k3/p3kFormulirPemulihan", { foundTempat });
-});
-
-router.post("/formulir-pemulihan", isLoggedIn, async (req, res) => {
-  const { dataInspeksi } = req.body;
-  delete req.body.dataInspeksi;
-  const data = JSON.parse(dataInspeksi);
-  data.tanggalInspeksi = convertDate(data.tanggalInspeksi);
-  delete data.jenis;
-  const dataMerged = { ...data, ...req.body };
-  const foundUser = await User.findById(req.user._id);
-  dataMerged.inspektor = foundUser;
-  const laporanPemulihan = new LaporanPemulihanAlat(dataMerged);
-  await laporanPemulihan
-    .save()
-    .then(() => {
-      return req.flash("success", `Inspeksi berhasil ditambahkan`);
-    })
-    .catch((e) => {
-      return req.flash("error", `error ${e}`);
-    });
-  res.redirect("/upik3/formulir-pemulihan");
-});
+router
+  .route("/formulir-pemulihan")
+  .get(isLoggedIn, async (req, res) => {
+    const foundTempat = await Tempat.find({});
+    res.render("p2k3/p3kFormulirPemulihan", { foundTempat });
+  })
+  .post("/formulir-pemulihan", isLoggedIn, upik3.submitPemulihan);
 
 router.get("/data-laporan-kecelakaan", isLoggedIn, async (req, res) => {
   const foundTempat = await Tempat.find({});

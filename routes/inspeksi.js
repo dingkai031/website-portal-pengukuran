@@ -6,6 +6,7 @@ const Riwayat = require("../models/riwayat");
 
 const express = require("express");
 const router = express.Router({ mergeParams: true });
+const moment = require("moment");
 const { isLoggedIn, isAdmin } = require("../middleware");
 
 const multer = require("multer");
@@ -27,6 +28,29 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage });
+
+const converDate = {
+  regular: function (tanggal) {
+    const arrayOfDate = tanggal.split("-");
+    return new Date(`${arrayOfDate[2]}-${arrayOfDate[1]}-${arrayOfDate[0]}`);
+  },
+  regularLokal: function (tanggal) {
+    return `${("0" + tanggal.getDate()).slice(-2)}-${(
+      "0" +
+      (tanggal.getMonth() + 1)
+    ).slice(-2)}-${tanggal.getFullYear()}`;
+  },
+  regularLokalMoment: function (tanggal) {
+    return moment(this.converDateEu(tanggal))
+      .locale("id")
+      .format("DD MMMM YYYY");
+  },
+  converDateEu: function (tanggal) {
+    return `${tanggal.getFullYear()}-${("0" + (tanggal.getMonth() + 1)).slice(
+      -2
+    )}-${("0" + tanggal.getDate()).slice(-2)}`;
+  },
+};
 // ----------------------------------------------------------------------------------------------------------------------------
 
 router.get("/", isLoggedIn, async (req, res) => {
@@ -282,7 +306,7 @@ router.put(
 router.get("/riwayat", isLoggedIn, async (req, res) => {
   const menu = "riwayat";
   const riwayats = await Riwayat.find({});
-  res.render("inspeksi/riwayat", { tempats: {}, menu, riwayats });
+  res.render("inspeksi/riwayat", { tempats: {}, menu, riwayats, converDate });
 });
 
 router.put("/riwayat", isLoggedIn, async (req, res) => {
